@@ -1,0 +1,140 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Sys - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Release/Sys.res" /d "NDEBUG" /d "_AFXDLL" "E:\User\USB\USB2831\VC\Advanced\Sys.rc"" 
+Creating temporary file "C:\DOCUME~1\LYB\LOCALS~1\Temp\RSP65.tmp" with contents
+[
+/nologo /MD /W3 /GX /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fr"Release/" /Fp"Release/Sys.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"E:\User\USB\USB2831\VC\Advanced\BalloonHelp.cpp"
+"E:\User\USB\USB2831\VC\Advanced\CfgCtrlBar.cpp"
+"E:\User\USB\USB2831\VC\Advanced\CfgTabCtrlBar.cpp"
+"E:\User\USB\USB2831\VC\Advanced\MdiClient.cpp"
+"E:\User\USB\USB2831\VC\Advanced\MTabWnd.cpp"
+"E:\User\USB\USB2831\VC\Advanced\PopupMenu.cpp"
+"E:\User\USB\USB2831\VC\Advanced\TabCtrlBarDoc.cpp"
+"E:\User\USB\USB2831\VC\Advanced\TabCtrlDoc.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADDigitView.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADDoc.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADFrm.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADHistDigitView.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADHistDoc.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADHistFrm.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADHistScope.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADHistWaveView.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADParaCfgView.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADScopeCtrl.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADStatusView.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADThread.cpp"
+"E:\User\USB\USB2831\VC\Advanced\ADWaveView.cpp"
+"E:\User\USB\USB2831\VC\Advanced\DADoc.cpp"
+"E:\User\USB\USB2831\VC\Advanced\DAFrm.cpp"
+"E:\User\USB\USB2831\VC\Advanced\DAView.cpp"
+"E:\User\USB\USB2831\VC\Advanced\DIODoc.cpp"
+"E:\User\USB\USB2831\VC\Advanced\DIOFrm.cpp"
+"E:\User\USB\USB2831\VC\Advanced\DIOView.cpp"
+"E:\User\USB\USB2831\VC\Advanced\GlobalVar.cpp"
+"E:\User\USB\USB2831\VC\Advanced\MainFrm.cpp"
+"E:\User\USB\USB2831\VC\Advanced\QSortData.cpp"
+"E:\User\USB\USB2831\VC\Advanced\Sys.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\LYB\LOCALS~1\Temp\RSP65.tmp" 
+Creating temporary file "C:\DOCUME~1\LYB\LOCALS~1\Temp\RSP66.tmp" with contents
+[
+/nologo /MD /W3 /GX /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Fr"Release/" /Fp"Release/Sys.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"E:\User\USB\USB2831\VC\Advanced\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\LYB\LOCALS~1\Temp\RSP66.tmp" 
+Creating temporary file "C:\DOCUME~1\LYB\LOCALS~1\Temp\RSP67.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:no /pdb:"Sys.pdb" /machine:I386 /out:"Sys.exe" 
+.\Release\BalloonHelp.obj
+.\Release\CfgCtrlBar.obj
+.\Release\CfgTabCtrlBar.obj
+.\Release\MdiClient.obj
+.\Release\MTabWnd.obj
+.\Release\PopupMenu.obj
+.\Release\TabCtrlBarDoc.obj
+.\Release\TabCtrlDoc.obj
+.\Release\ADDigitView.obj
+.\Release\ADDoc.obj
+.\Release\ADFrm.obj
+.\Release\ADHistDigitView.obj
+.\Release\ADHistDoc.obj
+.\Release\ADHistFrm.obj
+.\Release\ADHistScope.obj
+.\Release\ADHistWaveView.obj
+.\Release\ADParaCfgView.obj
+.\Release\ADScopeCtrl.obj
+.\Release\ADStatusView.obj
+.\Release\ADThread.obj
+.\Release\ADWaveView.obj
+.\Release\DADoc.obj
+.\Release\DAFrm.obj
+.\Release\DAView.obj
+.\Release\DIODoc.obj
+.\Release\DIOFrm.obj
+.\Release\DIOView.obj
+.\Release\GlobalVar.obj
+.\Release\MainFrm.obj
+.\Release\QSortData.obj
+.\Release\StdAfx.obj
+.\Release\Sys.obj
+.\Release\Sys.res
+]
+Creating command line "link.exe @C:\DOCUME~1\LYB\LOCALS~1\Temp\RSP67.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+======== Welcome to use our art company product!
+======== Automatically linking with USB2831.dll...
+======== Successfully linked with USB2831.dll
+Compiling...
+BalloonHelp.cpp
+CfgCtrlBar.cpp
+CfgTabCtrlBar.cpp
+MdiClient.cpp
+MTabWnd.cpp
+PopupMenu.cpp
+TabCtrlBarDoc.cpp
+TabCtrlDoc.cpp
+ADDigitView.cpp
+ADDoc.cpp
+ADFrm.cpp
+ADHistDigitView.cpp
+ADHistDoc.cpp
+ADHistFrm.cpp
+ADHistScope.cpp
+ADHistWaveView.cpp
+ADParaCfgView.cpp
+ADScopeCtrl.cpp
+ADStatusView.cpp
+ADThread.cpp
+Generating Code...
+Compiling...
+ADWaveView.cpp
+DADoc.cpp
+DAFrm.cpp
+DAView.cpp
+DIODoc.cpp
+DIOFrm.cpp
+DIOView.cpp
+GlobalVar.cpp
+MainFrm.cpp
+QSortData.cpp
+Sys.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+Sys.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

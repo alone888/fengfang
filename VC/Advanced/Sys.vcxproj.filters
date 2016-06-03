@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{49cb9003-48af-4187-bc73-3073ab93d543}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{87ae0eb1-f339-478e-abb0-381f7324691e}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{c2cb4330-eaeb-45bb-8213-cc7642085f70}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ADDigitView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADDoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADHistDigitView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADHistDoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADHistFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADHistScope.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADHistWaveView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADParaCfgView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADScopeCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADStatusView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ADWaveView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BalloonHelp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CfgCtrlBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CfgTabCtrlBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DADoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DAFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DAView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DIODoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DIOFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DIOView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalVar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MdiClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MTabWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PopupMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QSortData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TabCtrlBarDoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TabCtrlDoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Sys.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ADDigitView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADHistDigitView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADHistDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADHistFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADHistScope.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADHistWaveView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADParaCfgView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADScopeCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADStatusView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADThread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ADWaveView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BalloonHelp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CfgCtrlBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CfgTabCtrlBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DADoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DAFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DAView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DIODoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DIOFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DIOView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalVar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MdiClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MTabWnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QSortData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="STDAFX.H">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TabCtrlBarDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TabCtrlDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Usb2831.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Documents and Settings\LYB\桌面\Advanced\RES\AD.ICO">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Advanced\Res\AD.ICO">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\AD.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\ART1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\ART1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\BG.BMP">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\bitmap6.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\bitmap7.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\bitmap8.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\CNT.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\cursor1.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\DA.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="C:\Documents and Settings\LYB\桌面\Advanced\RES\Hist.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\Hist.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Advanced\Res\Hist.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\ico00001.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\ico00002.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\ico00003.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="C:\Documents and Settings\LYB\桌面\Advanced\RES\icon2.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\icon2.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\idr_ad1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="C:\Documents and Settings\LYB\桌面\Advanced\RES\idr_ad1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\idr_adst.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\idr_dio.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Advanced\Res\IDR_DIO.ICO">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RES\IO.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\litebulb.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\mainfram.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Advanced\Res\MainFrm.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\MainFrm.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="C:\Documents and Settings\LYB\桌面\Advanced\RES\MainFrm.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\pci.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ShowDataDoc.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Sys.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Sys.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\TabImage.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\tabview.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\tabview_.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\test\res\test.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\USB图标(大).bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\设备图标(大).bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\设备图标(小).bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Res\设备图标1(大).bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ReadMe.txt" />
+    <None Include="Sys.reg" />
+  </ItemGroup>
+</Project>

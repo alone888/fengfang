@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<!-- Copyright (c) Microsoft Corporation -->
+<assembly
+    xmlns="urn:schemas-microsoft-com:asm.v1"
+    xmlns:asmv3="urn:schemas-microsoft-com:asm.v3"
+    manifestVersion="1.0"
+    >
+  <assemblyIdentity
+      name="Dcomcnfg"
+      processorArchitecture="X86"
+      type="win32"
+      version="1.0.0.0"
+      />
+  <description>Small utility exe to make it easy to start "mmc.exe %windir%\system32\comexp.msc"</description>
+  <!-- Identify the application security requirements. -->
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+    <security>
+      <requestedPrivileges>
+        <requestedExecutionLevel
+            level="requireAdministrator"
+            uiAccess="false"
+            />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <asmv3:application>
+     <asmv3:windowsSettings xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">
+          <autoElevate>true</autoElevate>
+     </asmv3:windowsSettings>
+  </asmv3:application>
+</assembly>

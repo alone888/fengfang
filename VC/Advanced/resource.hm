@@ -1,0 +1,10 @@
+// Microsoft Developer Studio generated Help ID include file.
+// Used by Sys.rc
+//
+#define HIDC_BUTTON_StartWriteDA0       0x80a1043d    // IDC_DA_View
+#define HIDC_BUTTON_StartWriteDA1       0x80a1043e    // IDC_DA_View
+#define HIDC_BUTTON_StartWriteDA3       0x80a10449    // IDC_DA_View
+#define HIDC_SLIDER_0                   0x80a10419    // IDC_DA_View
+#define HIDC_SLIDER_1                   0x80a1041a    // IDC_DA_View
+#define HIDC_SLIDER_2                   0x80a1041c    // IDC_DA_View
+#define HIDC_SLIDER_3                   0x80a1041b    // IDC_DA_View
