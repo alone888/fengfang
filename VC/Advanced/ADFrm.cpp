@@ -90,7 +90,7 @@ BOOL CADFrm::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 	// 创建第一个格子，在0列中使用默认的视图（由文档模板决定）
 	
 	if (!m_wndSplitter.CreateView(0, 0, 
-		RUNTIME_CLASS(CADDigitView), CSize(365, 50), pContext))
+		RUNTIME_CLASS(CADDigitView), CSize(0, 50), pContext))
 	{
 		TRACE0("Failed to create first pane\n");
 		return FALSE;
@@ -117,12 +117,12 @@ int CADFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CMDIChildWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 	// 创建右侧CControlBar窗体
-	m_wndSTCBar.Create(this, CSize(200, 300), IDW_PROP_BAR);
+	m_wndSTCBar.Create(this, CSize(290, 300), IDW_PROP_BAR);
 	m_wndSTCBar.SetBarStyle(CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
 	
 	m_wndSTCBar.EnableDocking(CBRS_ALIGN_LEFT | CBRS_ALIGN_RIGHT);
 	EnableDocking(CBRS_ALIGN_ANY);
-	DockControlBar(&m_wndSTCBar, AFX_IDW_DOCKBAR_RIGHT);
+	DockControlBar(&m_wndSTCBar, AFX_IDW_DOCKBAR_LEFT);
 	
 	gl_pParaCfgView = (CADParaCfgView*)m_wndSTCBar.AddView(_T("参数配置"), RUNTIME_CLASS(CADParaCfgView)); // CParaCfgView
 	gl_pParaCfgView->m_pADFrm = this;
