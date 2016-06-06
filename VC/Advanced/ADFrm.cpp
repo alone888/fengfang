@@ -117,12 +117,12 @@ int CADFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CMDIChildWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 	// 创建右侧CControlBar窗体
-	m_wndSTCBar.Create(this, CSize(200, 300), IDW_PROP_BAR);
+	m_wndSTCBar.Create(this, CSize(290, 300), IDW_PROP_BAR);
 	m_wndSTCBar.SetBarStyle(CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
 	
 	m_wndSTCBar.EnableDocking(CBRS_ALIGN_LEFT | CBRS_ALIGN_RIGHT);
 	EnableDocking(CBRS_ALIGN_ANY);
-	DockControlBar(&m_wndSTCBar, AFX_IDW_DOCKBAR_RIGHT);
+	DockControlBar(&m_wndSTCBar, AFX_IDW_DOCKBAR_LEFT);
 	
 	gl_pParaCfgView = (CADParaCfgView*)m_wndSTCBar.AddView(_T("参数配置"), RUNTIME_CLASS(CADParaCfgView)); // CParaCfgView
 	gl_pParaCfgView->m_pADFrm = this;
