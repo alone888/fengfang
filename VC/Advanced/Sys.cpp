@@ -178,7 +178,7 @@ BOOL CSysApp::InitInstance()
 	USB2831_GetDeviceCurrentID(m_hDevice, &DeviceLgcID, &DevicePhysID);
 	swprintf_s(str, _T("USB2831-%d-%d "), m_CurrentDeviceID,DevicePhysID);
 	//MainFrmName = pMainFrame->GetTitle();
-	MainFrmName = "汉恒生物"+MainFrmName;
+	MainFrmName = "纽顿科技"+MainFrmName;
 	pMainFrame->SetTitle(MainFrmName);
 	OnOpenAD();		// 打开AD采集模板
 	m_ADFrm->BringWindowToTop();	// 将AD模板置于屏幕顶端

@@ -117,7 +117,7 @@ int CADFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CMDIChildWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 	// ¥¥Ω®”“≤‡CControlBar¥∞ÃÂ
-	m_wndSTCBar.Create(this, CSize(290, 300), IDW_PROP_BAR);
+	m_wndSTCBar.Create(this, CSize(220, 300), IDW_PROP_BAR);
 	m_wndSTCBar.SetBarStyle(CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
 	
 	m_wndSTCBar.EnableDocking(CBRS_ALIGN_LEFT | CBRS_ALIGN_RIGHT);
