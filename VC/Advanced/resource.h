@@ -1,8 +1,7 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by Sys.rc
 //
-//#define CREATEPROCESS_MANIFEST_RESOURCE_ID 1
 #define IDD_ABOUTBOX                    100
 #define IDD_DIALOG_PULSE                101
 #define CG_IDD_PULSE                    101
@@ -274,6 +273,8 @@
 #define IDC_EDIT_Volt0                  1231
 #define IDC_EDIT_ChannelSum             1233
 #define IDC_EDIT_TrigWindow             1236
+#define IDC_SPIN1                       1237
+#define IDC_SCROLLBAR1                  1239
 #define ID_VIEW_FULLSCREEN              32772
 #define ID_WINDOW_NEXT                  32773
 #define ID_WINDOW_PREVIOUS              32774
@@ -313,8 +314,8 @@
 #define IDM_GetDevVersion               32828
 #define ID_SHOWMOUSEVOLT                59142
 #define ID_SHOW_MOUSEVOLT               59142
-#define IDS_NEW_FILE                    61500
 #define IDS_ADHist                      61447
+#define IDS_NEW_FILE                    61500
 
 // Next default values for new objects
 // 
@@ -323,7 +324,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        185
 #define _APS_NEXT_COMMAND_VALUE         32829
-#define _APS_NEXT_CONTROL_VALUE         1237
+#define _APS_NEXT_CONTROL_VALUE         1240
 #define _APS_NEXT_SYMED_VALUE           132
 #endif
 #endif
