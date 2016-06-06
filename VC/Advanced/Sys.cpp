@@ -316,7 +316,7 @@ void CSysApp::OnOpenIo()
 	{
 		BeginWaitCursor();
 		m_pDIODoc = (CDIODoc*)pDIOTemplate->OpenDocumentFile(NULL);
-		m_pDIODoc->SetTitle(_T("开关量测试"));
+		m_pDIODoc->SetTitle(_T("导出excel文件"));
 		EndWaitCursor();
 	}
 	else

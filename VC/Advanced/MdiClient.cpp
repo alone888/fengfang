@@ -130,7 +130,7 @@ BOOL CMdiClient::OnEraseBkgnd(CDC* pDC)
 	}
 
     CRect rcDataBox;
-	CString strLogo = "阿尔泰科技";//szLogoString;
+	CString strLogo = "汉恒生物";//szLogoString;
 	CFont fontLogo;
 	TEXTMETRIC tm;
 	
