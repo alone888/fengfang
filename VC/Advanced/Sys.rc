@@ -297,8 +297,8 @@ CAPTION "关于 Sys"
 FONT 9, "宋体", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,18,26,20,20
-    LTEXT           "Sys V6.01.24 版",IDC_STATIC,53,24,87,8,SS_NOPREFIX
-    LTEXT           "版权所有 (C) 2006",IDC_STATIC,53,40,101,8
+    LTEXT           "Sys V1.00.00 版",IDC_STATIC,53,24,87,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2016",IDC_STATIC,53,40,101,8
     DEFPUSHBUTTON   "确定",IDOK,83,57,61,19,WS_GROUP
 END
 
@@ -585,12 +585,12 @@ BEGIN
             VALUE "Comments", "Hix"
             VALUE "CompanyName", "Art"
             VALUE "FileDescription", "Sys Microsoft 基础类应用程序"
-            VALUE "FileVersion", "6.18"
+            VALUE "FileVersion", "1.00"
             VALUE "InternalName", "Sys"
-            VALUE "LegalCopyright", "版权所有 (C) 1998"
+            VALUE "LegalCopyright", "版权所有 (C) 2016"
             VALUE "OriginalFilename", "Sys.EXE"
             VALUE "ProductName", "Sys 应用程序"
-            VALUE "ProductVersion", "05.12.5"
+            VALUE "ProductVersion", "16.6.6"
         END
     END
     BLOCK "VarFileInfo"
@@ -899,8 +899,8 @@ IDR_MAINFRAME           BITMAP                  "res\\mainfram.bmp"
 
 STRINGTABLE 
 BEGIN
-    IDR_MAINFRAME           "阿尔泰驱动演示asdfasdfasdfasdf系统"
-    IDR_AD                  "\nSys\nSys\n阿尔泰文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_MAINFRAME           "纽顿科技系统"
+    IDR_AD                  "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
     CG_IDS_TIPOFTHEDAYHELP  "&Help"
     IDI_TABCTRLBAR          "标签切换"
     IDC_MDI_TAB_CTRL_BAR    "多文档切换"
@@ -1057,17 +1057,17 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDR_ADHist              "\nSys\nSys\n阿尔泰文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_ADHist              "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
 END
 
 STRINGTABLE 
 BEGIN
-    IDR_DIO                 "\nSys\nSys\n阿尔泰文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_DIO                 "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
 END
 
 STRINGTABLE 
 BEGIN
-    IDR_PLS                 "\nSys\nSys\n阿尔泰文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_PLS                 "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
 END
 
 #endif    // 中文(中华人民共和国) resources

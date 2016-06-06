@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\H5ACpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5ACprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5ACpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5api_adpt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Apkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Aprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Apublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5B2pkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5B2private.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5B2public.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Bpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Bprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Bpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Cpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Cprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Cpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5CSprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\h5diff.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Dpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Dprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Dpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5DSpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Edefin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Einit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Epkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Eprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Epubgen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Epublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Eterm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDcore.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDdirect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDfamily.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDlog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDmpi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDmpio.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDmpiposix.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDmulti.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDsec2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDstdio.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FDwindows.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FLprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FOprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Fpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Fprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Fpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FSpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FSprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5FSpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Gpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Gprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Gpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5HFpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5HFprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5HFpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5HGpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5HGprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5HGpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5HLpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5HLprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5HLpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5HPprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5IMpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Ipkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Iprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Ipublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Lpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Lprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Lpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5LTparse.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5LTpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5MFprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5MMprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5MMpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5MPpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5MPprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Opkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Oprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Opublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Oshared.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5overflow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Ppkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Pprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Ppublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5private.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5PTpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5pubconf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5public.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5RCprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Rpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Rprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Rpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5RSprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5SLprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5SMpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5SMprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Spkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Sprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Spublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5STprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5TBpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\h5tools.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\h5tools_dump.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\h5tools_ref.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\h5tools_str.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\h5tools_utils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Tpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Tprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Tpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\h5trav.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5TSprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Vprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5WBprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5win32defs.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Zpkg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Zprivate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\H5Zpublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hdf5.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hdf5_hl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SZconfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\szip_adpt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\szlib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zconf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\zlib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
