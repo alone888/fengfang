@@ -26,7 +26,8 @@ CADScopeCtrl::CADScopeCtrl()
 	m_nPlotShiftPixels = m_nShiftPixels + m_nHalfShiftPixels;   
 	m_nChannelNum = 0;
 	
-	m_crBackColor  = RGB(0,   0,   0);  
+	m_crBackColor  = RGB(0,  0,   0);  
+//	m_crBackColor  = RGB(0,  0,   0);  
 	m_crGridColor  = RGB(0, 255, 255);  
 	m_crPlotColor  = RGB(255, 128, 0); 
 	m_clPen[0] = RGB(255, 0, 0);
@@ -68,6 +69,8 @@ CADScopeCtrl::CADScopeCtrl()
 	
 	m_penPlot.CreatePen(PS_SOLID, 0, m_crPlotColor);
 	m_brushBack.CreateSolidBrush(m_crBackColor);
+
+	m_brushWhite.CreateSolidBrush(RGB(255,255,255));
 	
 	m_strXUnitsString.Format(_T("Samples"));  
 	m_strYUnitsString.Format(_T("Y units"));  
@@ -95,6 +98,8 @@ CADScopeCtrl::CADScopeCtrl()
 	m_hCursorArrow = (HCURSOR)AfxGetApp()->LoadStandardCursor(IDC_ARROW);
 	m_hCursorAllSize = (HCURSOR)AfxGetApp()->LoadStandardCursor(IDC_SIZEALL);
 	m_nShowCursor = 0; // 显示光标
+	
+
 } // CADScopeCtrl
 
 ///////////////////////////////////////////////////////////////////////////
@@ -202,6 +207,9 @@ void CADScopeCtrl::SetBackgroundColor(COLORREF color)
 	
 	m_brushBack.DeleteObject();
 	m_brushBack.CreateSolidBrush(m_crBackColor);
+
+	m_brushWhite.DeleteObject();
+	m_brushWhite.CreateSolidBrush(RGB(255,255,255));
 	
 	InvalidateCtrl();
 	
@@ -435,6 +443,10 @@ int CADScopeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 			ASSERT(FALSE);
 		}	
 	}
+	
+	//SetBackgroundColor(RGB(255,  255,   255));
+	/*SetGridColor(RGB(0,  0,   255));
+		SetPlotColor(RGB(0,  255,   255));*/
 	return 0;
 }
 
@@ -449,9 +461,9 @@ void CADScopeCtrl::DrawBkGnd()
 	CFont* oldFont;
 	CString strTemp;
 	//---------------------------------------------------------------------------
-	m_dcGrid.SetBkColor (m_crBackColor);	
+	m_dcGrid.SetBkColor (RGB(255,255,255)/*m_crBackColor*/);	
 	// fill the grid background
-	m_dcGrid.FillRect(m_rectClient, &m_brushBack);	
+	m_dcGrid.FillRect(m_rectClient, &m_brushWhite/*m_brushBack*/);	
 	// 计算量程字串所占用的字符宽度
 	nCharacters = abs((int)log10(fabs(m_dUpperLimit[0])));
 	nCharacters = max(nCharacters, abs((int)log10(fabs(m_dLowerLimit[0]))));
@@ -467,7 +479,8 @@ void CADScopeCtrl::DrawBkGnd()
 	m_dcGrid.LineTo (m_rectPlot.left-1, m_rectPlot.bottom+1);
 	m_dcGrid.LineTo (m_rectPlot.left-1, m_rectPlot.top);
 	m_dcGrid.SelectObject (oldPen);  
-	COLORREF m_Grid = RGB(200, 200, 200);
+	//COLORREF m_Grid = RGB(200, 200, 200);
+	COLORREF m_Grid = RGB(255, 192, 255);
 	int HLine = 0, VLine = 0;
 	for (VLine=50; VLine<m_rectPlot.Width(); VLine+= 50) // 相隔50个像素画一条垂直的线
 	{
@@ -706,7 +719,7 @@ void CADScopeCtrl::DrawPoly()
 	int nDrawCount = 0;
 	gl_bDataProcessing = TRUE;
 	CPen* oldPen;
-	m_dcPlot.SetBkColor (m_crBackColor);
+	m_dcPlot.SetBkColor (RGB(255,255,255)/*m_crBackColor*/);
 	m_dcPlot.FillRect(m_rectClient, &m_brushBack);
 	m_dcPlot.SetTextColor(RGB(255, 158, 0));
 	//---------------------------------------------------------------------------------

@@ -144,6 +144,7 @@ protected:
 	CRect   m_rectPlot;
 	CPen    m_penPlot;
 	CBrush  m_brushBack;
+	CBrush  m_brushWhite;
 	
 	CDC     m_dcGrid;
 	CDC     m_dcPlot;

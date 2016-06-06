@@ -82,7 +82,7 @@ BOOL CSysApp::InitInstance()
 			m_hDevice = USB2831_CreateDevice(m_CurrentDeviceID);
 			if (m_hDevice == INVALID_HANDLE_VALUE)
 			{			
-				AfxMessageBox(_T("对不起，没有设备或您的所有设备已被相应程序管理，不能再创建新实例..."), MB_ICONWARNING, 0);
+				//AfxMessageBox(_T("对不起，没有设备或您的所有设备已被相应程序管理，不能再创建新实例..."), MB_ICONWARNING, 0);
 			}
 			break;
 		}
@@ -177,8 +177,8 @@ BOOL CSysApp::InitInstance()
 	LONG DeviceLgcID, DevicePhysID;
 	USB2831_GetDeviceCurrentID(m_hDevice, &DeviceLgcID, &DevicePhysID);
 	swprintf_s(str, _T("USB2831-%d-%d "), m_CurrentDeviceID,DevicePhysID);
-	MainFrmName = pMainFrame->GetTitle();
-	MainFrmName = str+MainFrmName;
+	//MainFrmName = pMainFrame->GetTitle();
+	MainFrmName = "汉恒生物"+MainFrmName;
 	pMainFrame->SetTitle(MainFrmName);
 	OnOpenAD();		// 打开AD采集模板
 	m_ADFrm->BringWindowToTop();	// 将AD模板置于屏幕顶端
@@ -276,7 +276,7 @@ void CSysApp::OnOpenAD(void)
 	// 初始化FRAME子帧窗口，并创建文档实例, 且触发FRAME的OnUpdate函数
   	pADTemplate->InitialUpdateFrame(m_ADFrm, m_pADDoc);
 	// 设置默认的文档标题
-	m_pADDoc->SetTitle(_T("AD数采测试"));
+	m_pADDoc->SetTitle(_T("生物电检测"));
 	if (gl_pADStatusView != NULL)
 	{
 		// 将参数配置视图类加入文档列表，以便跟正常视图一样被文档类管理

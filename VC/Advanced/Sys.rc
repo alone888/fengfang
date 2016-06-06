@@ -899,7 +899,7 @@ IDR_MAINFRAME           BITMAP                  "res\\mainfram.bmp"
 
 STRINGTABLE 
 BEGIN
-    IDR_MAINFRAME           "阿尔泰驱动演示系统"
+    IDR_MAINFRAME           "阿尔泰驱动演示asdfasdfasdfasdf系统"
     IDR_AD                  "\nSys\nSys\n阿尔泰文件 (*.usb)\n.usb\nSys.Document\nSys Document"
     CG_IDS_TIPOFTHEDAYHELP  "&Help"
     IDI_TABCTRLBAR          "标签切换"
