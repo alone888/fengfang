@@ -26,7 +26,7 @@ CADHistScope::CADHistScope()
 	m_nPlotShiftPixels = m_nShiftPixels + m_nHalfShiftPixels;   
 	
 	m_crBackColor  = RGB(0,   0,   0);  
-	m_crGridColor  = RGB(0, 255, 255);  
+	m_crGridColor  = RGB(255, 0, 0);  
 	m_crPlotColor  = RGB(255, 128, 0); 
 	m_clPen[0] = RGB(255, 0, 0);
 	m_clPen[1] = RGB(255, 255, 0);

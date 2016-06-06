@@ -445,8 +445,8 @@ int CADScopeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	}
 	
 	//SetBackgroundColor(RGB(255,  255,   255));
-	/*SetGridColor(RGB(0,  0,   255));
-		SetPlotColor(RGB(0,  255,   255));*/
+	SetGridColor(RGB(0,  0,   255));
+	//SetPlotColor(RGB(0,  255,   255));
 	return 0;
 }
 
@@ -480,7 +480,8 @@ void CADScopeCtrl::DrawBkGnd()
 	m_dcGrid.LineTo (m_rectPlot.left-1, m_rectPlot.top);
 	m_dcGrid.SelectObject (oldPen);  
 	//COLORREF m_Grid = RGB(200, 200, 200);
-	COLORREF m_Grid = RGB(255, 192, 255);
+
+	COLORREF m_Grid = RGB(255, 0, 0);//
 	int HLine = 0, VLine = 0;
 	for (VLine=50; VLine<m_rectPlot.Width(); VLine+= 50) // 相隔50个像素画一条垂直的线
 	{
@@ -924,7 +925,7 @@ void CADScopeCtrl::DrawAllChannelGrid(CDC* pDC)
 	for (Channel=1; Channel<m_nChannelCount; Channel++) // 画m_nChannelCount-1条网格线
 	{
 		nGridPix = m_rectPlot.top + (int)(m_rectPlot.Height() * Channel) / m_nChannelCount;
-		for (int X=m_rectPlot.left; X<m_rectPlot.right; X+=2) // 每隔2个像素画1点
+		for (int X=m_rectPlot.left; X<m_rectPlot.right; X+=1) // 每隔2个像素画1点
 		{
 			pDC->SetPixel(X, nGridPix, m_crGridColor); 
 		}	
@@ -934,7 +935,7 @@ void CADScopeCtrl::DrawAllChannelGrid(CDC* pDC)
 	{
 		for (X=m_rectPlot.left; X<m_rectPlot.right; X+=3) // 每隔3个像素画1点
 		{
-			pDC->SetPixel(X, (int)(m_rectPlot.top + (hight * Channel) + hight/2.0), RGB(255, 255, 255)); 
+			pDC->SetPixel(X, (int)(m_rectPlot.top + (hight * Channel) + hight/2.0), RGB(0, 0, 0)); 
 		}
 		
 	}
@@ -942,10 +943,10 @@ void CADScopeCtrl::DrawAllChannelGrid(CDC* pDC)
 
 void CADScopeCtrl::DrawSingleCHGrid(CDC* pDC)
 {
-	for (int X=m_rectPlot.left; X<m_rectPlot.right; X+=2) // 每隔4个像素画1点
-	{
-		pDC->SetPixel(X, m_rectPlot.top+(int)(m_rectPlot.Height()/2), RGB(255, 255, 255));	
-	}
+	//for (int X=m_rectPlot.left; X<m_rectPlot.right; X+=2) // 每隔4个像素画1点
+	//{
+	//	pDC->SetPixel(X, m_rectPlot.top+(int)(m_rectPlot.Height()/2), RGB(0, 0, 0));	
+	//}
 }
 
 
@@ -955,7 +956,9 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 	float hight = (float)(m_rectPlot.Height() / m_nChannelCount); // 每通道的Y宽度
 	for (int Channel = 0; Channel <gl_nChannelCount; Channel++)
 	{
-		m_dcGrid.SetTextColor(m_clPen[Channel+ADPara.FirstChannel]); // 设置文字的颜色
+		COLORREF tempPen =  RGB(0, 0, 0);
+		//m_dcGrid.SetTextColor(m_clPen[Channel+ADPara.FirstChannel]); // 设置文字的颜色
+		m_dcGrid.SetTextColor(tempPen); // 设置文字的颜色
 		if(m_nChannelCount<=10)
 		{
 			str.Format (_T("%.*lf V"), m_nYDecimals, m_dUpperLimit[Channel]/1000.0); // 正电压值
@@ -965,8 +968,17 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 			str.Format (_T("%.*lf V"), m_nYDecimals, m_dLowerLimit[Channel]/1000.0); // 负电压值
 			m_dcGrid.TextOut (m_rectPlot.left-4, (int)(m_rectPlot.top+hight*(Channel+1)-5), str);
 			
-			str.Format(_T("CH %d"), Channel+ADPara.FirstChannel);
-			m_dcGrid.TextOut(m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+hight/2+5), str);
+			CFont font;
+			CFont *oldfont;
+
+			font.CreatePointFont(100,_T("黑体")); //参数含义1，字体大小，2字体类型，3字
+			oldfont = m_dcGrid.SelectObject(&font);
+			m_dcGrid.SetTextColor(RGB(0,0,255));//字体颜色RGB   
+				str.Format(_T("CH %d"), Channel+ADPara.FirstChannel);
+				m_dcGrid.TextOut(m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+hight/2+5), str);
+			m_dcGrid.SetTextColor(RGB(0,0,0));//字体颜色RGB  
+			m_dcGrid.SelectObject(oldfont);
+			DeleteObject(font);//释放资源
 		}
 		else
 		{

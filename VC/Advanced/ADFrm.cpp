@@ -90,7 +90,7 @@ BOOL CADFrm::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 	// 创建第一个格子，在0列中使用默认的视图（由文档模板决定）
 	
 	if (!m_wndSplitter.CreateView(0, 0, 
-		RUNTIME_CLASS(CADDigitView), CSize(365, 50), pContext))
+		RUNTIME_CLASS(CADDigitView), CSize(0, 50), pContext))
 	{
 		TRACE0("Failed to create first pane\n");
 		return FALSE;
