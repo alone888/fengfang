@@ -18,13 +18,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(中华人民共和国) resources
+// 中文(简体，中国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
-#ifdef _WIN32
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 #pragma code_page(936)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -70,7 +68,7 @@ END
 // Toolbar
 //
 
-IDR_MAINFRAME TOOLBAR  16, 15
+IDR_MAINFRAME TOOLBAR 16, 15
 BEGIN
     BUTTON      ID_FILE_NEW
     BUTTON      ID_FILE_OPEN
@@ -85,7 +83,7 @@ BEGIN
     BUTTON      ID_APP_ABOUT
 END
 
-IDR_TABVIEW_MENU TOOLBAR  16, 16
+IDR_TABVIEW_MENU TOOLBAR 25, 23
 BEGIN
     BUTTON      ID_VIEW_FULLSCREEN
     BUTTON      ID_FILE_CLOSE
@@ -108,7 +106,7 @@ END
 // Menu
 //
 
-IDR_MAINFRAME MENU 
+IDR_MAINFRAME MENU
 BEGIN
     POPUP "文件(&F)"
     BEGIN
@@ -125,7 +123,7 @@ BEGIN
     END
 END
 
-IDR_AD MENU 
+IDR_AD MENU
 BEGIN
     POPUP "文件操作(&F)"
     BEGIN
@@ -135,7 +133,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "最近文件",                        ID_FILE_MRU_FILE1
         MENUITEM SEPARATOR
-        MENUITEM "导出Excel文件",                       IDM_OPEN_IO
+        MENUITEM "导出Excel文件",                   IDM_OPEN_IO
         MENUITEM "检测D/A 输出",                    IDM_Open_DA
         MENUITEM SEPARATOR
         MENUITEM "关闭硬件设备",                      ID_FILE_CLOSE
@@ -180,7 +178,7 @@ BEGIN
     END
 END
 
-IDR_ShowMode MENU 
+IDR_ShowMode MENU
 BEGIN
     POPUP "显示方式"
     BEGIN
@@ -190,7 +188,7 @@ BEGIN
     END
 END
 
-IDR_ADHist MENU 
+IDR_ADHist MENU
 BEGIN
     POPUP "文件操作(&F)"
     BEGIN
@@ -219,7 +217,7 @@ BEGIN
     END
 END
 
-IDR_DIO MENU 
+IDR_DIO MENU
 BEGIN
     POPUP "文件"
     BEGIN
@@ -237,7 +235,7 @@ BEGIN
     END
 END
 
-IDR_DA MENU 
+IDR_DA MENU
 BEGIN
     POPUP "文件操作(&F)"
     BEGIN
@@ -261,7 +259,7 @@ END
 // Accelerator
 //
 
-IDR_MAINFRAME ACCELERATORS 
+IDR_MAINFRAME ACCELERATORS
 BEGIN
     "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
     "J",            IDM_GetDevVersion,      VIRTKEY, CONTROL, ALT, NOINVERT
@@ -297,8 +295,8 @@ CAPTION "关于 Sys"
 FONT 9, "宋体", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,18,26,20,20
-    LTEXT           "Sys V6.01.24 版",IDC_STATIC,53,24,87,8,SS_NOPREFIX
-    LTEXT           "版权所有 (C) 2006",IDC_STATIC,53,40,101,8
+    LTEXT           "Sys V1.00.00 版",IDC_STATIC,53,24,87,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2016",IDC_STATIC,53,40,101,8
     DEFPUSHBUTTON   "确定",IDOK,83,57,61,19,WS_GROUP
 END
 
@@ -308,7 +306,7 @@ FONT 9, "宋体", 0, 0, 0x0
 BEGIN
 END
 
-CG_IDD_AD_STATUS DIALOG  0, 0, 690, 15
+CG_IDD_AD_STATUS DIALOG 0, 0, 690, 15
 STYLE DS_SETFONT | WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -327,56 +325,58 @@ BEGIN
     LTEXT           "div",IDC_STATIC_TimeOfDiv,117,2,70,10,SS_SUNKEN | NOT WS_GROUP
 END
 
-CG_IDD_AD_CFG DIALOGEX 0, 0, 120, 398
+CG_IDD_AD_CFG DIALOGEX 0, 0, 302, 398
 STYLE DS_SETFONT | WS_CHILD
 FONT 9, "宋体", 0, 0, 0x0
 BEGIN
-    COMBOBOX        IDC_COMBO_CheckStsMode,39,7,67,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_COMBO_TriggerDir,41,247,67,61,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CTEXT           "采样频率",IDC_STATIC,4,99,33,8
-    CTEXT           "触发方向",IDC_STATIC,5,251,33,8
-    GROUPBOX        "触发控制",IDC_STATIC,1,205,111,92
-    COMBOBOX        IDC_COMBO_ClockSource,53,310,55,51,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_COMBO_TriggerType,41,231,67,61,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CTEXT           "触发类型",IDC_STATIC,5,233,33,8
-    CONTROL         "时钟输出",IDC_CHECK_ClockOutput,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,310,48,10
-    GROUPBOX        "时钟源",IDC_STATIC,3,300,108,30
-    CTEXT           "触发模式",IDC_STATIC,5,217,33,10,SS_NOTIFY
-    COMBOBOX        IDC_COMBO_Frequency,39,97,67,163,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
-    EDITTEXT        IDC_EDIT_GetDevTrigPosAD,16,375,53,12,ES_AUTOHSCROLL | ES_READONLY | NOT WS_VISIBLE
-    CONTROL         "Spin1",IDC_SPIN_BufferID,"msctls_updown32",UDS_SETBUDDYINT | UDS_ARROWKEYS | UDS_NOTHOUSANDS | WS_DISABLED,91,336,11,15
-    EDITTEXT        IDC_EDIT_BufferID,39,337,46,13,ES_AUTOHSCROLL | WS_DISABLED
-    CONTROL         "Slider1",IDC_SLIDER_Offset,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,4,353,67,15
-    LTEXT           "缓冲ID",IDC_STATIC,7,340,29,11
-    GROUPBOX        "",IDC_STATIC,1,330,110,42
-    LTEXT           "Static",IDC_STATIC_Offset,72,356,26,14,SS_SUNKEN
-    LTEXT           "查询模式",IDC_STATIC,4,9,33,8
-    COMBOBOX        IDC_COMBO_Gains,39,150,67,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CTEXT           "AD 模 式",IDC_STATIC,4,27,33,8,SS_NOTIFY
-    COMBOBOX        IDC_COMBO_ADMode,39,25,67,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CTEXT           "首 通 道",IDC_STATIC,4,45,33,8,SS_NOTIFY
-    COMBOBOX        IDC_COMBO_FirstChannel,39,43,67,317,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CTEXT           "末 通 道",IDC_STATIC,4,63,33,8,SS_NOTIFY
-    COMBOBOX        IDC_COMBO_LastChannel,39,61,67,307,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    CTEXT           "组间间隔",IDC_STATIC,4,117,33,8,SS_NOTIFY
-    CTEXT           "组 循 环",IDC_STATIC,4,135,33,8,SS_NOTIFY
-    CTEXT           "程控增益",IDC_STATIC,3,152,33,8,SS_NOTIFY
-    COMBOBOX        IDC_COMBO_TriggerMode,41,215,67,63,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    EDITTEXT        IDC_EDIT_GroupInterval,39,115,67,12,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT_LoopsOfGroup,39,133,67,12,ES_AUTOHSCROLL
-    LTEXT           "Hz",IDC_STATIC,107,99,11,9
-    CTEXT           "电压量程",IDC_STATIC,3,171,32,10,SS_NOTIFY
-    COMBOBOX        IDC_COMBO_Range,39,169,67,307,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_COMBO_TriggerSource,41,263,67,50,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "触 发 源",IDC_STATIC,5,267,33,8
-    LTEXT           "通道总数",IDC_STATIC,4,81,33,8
-    EDITTEXT        IDC_EDIT_ChannelSum,39,79,67,12,ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "触发灵敏度",IDC_STATIC,5,285,41,8
-    EDITTEXT        IDC_EDIT_TrigWindow,50,281,29,14,ES_AUTOHSCROLL
-    LTEXT           "*0.5uS",IDC_STATIC,81,284,25,8
-    CTEXT           "接地方式",IDC_STATIC,3,190,32,10,SS_NOTIFY
-    COMBOBOX        IDC_COMBO_GroundingMode,39,188,67,307,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "us",IDC_STATIC,107,117,11,9
+    COMBOBOX        IDC_COMBO_CheckStsMode,216,60,67,63,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_TriggerDir,219,226,67,61,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "采样频率",IDC_STATIC,2,59,33,8
+    CTEXT           "触发方向",IDC_STATIC,183,230,33,8,NOT WS_VISIBLE
+    GROUPBOX        "触发控制",IDC_STATIC,179,184,111,92,NOT WS_VISIBLE
+    COMBOBOX        IDC_COMBO_ClockSource,231,289,55,51,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_TriggerType,219,210,67,61,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "触发类型",IDC_STATIC,183,212,33,8,NOT WS_VISIBLE
+    CONTROL         "时钟输出",IDC_CHECK_ClockOutput,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,179,293,48,10
+    GROUPBOX        "时钟源",IDC_STATIC,181,280,108,30,NOT WS_VISIBLE
+    CTEXT           "触发模式",IDC_STATIC,183,196,33,10,SS_NOTIFY | NOT WS_VISIBLE
+    COMBOBOX        IDC_COMBO_Frequency,39,57,67,163,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Spin1",IDC_SPIN_BufferID,"msctls_updown32",UDS_SETBUDDYINT | UDS_ARROWKEYS | UDS_NOTHOUSANDS | NOT WS_VISIBLE | WS_DISABLED,269,316,12,15
+    EDITTEXT        IDC_EDIT_BufferID,217,316,46,13,ES_AUTOHSCROLL | NOT WS_VISIBLE | WS_DISABLED
+    CONTROL         "Slider1",IDC_SLIDER_Offset,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | NOT WS_VISIBLE | WS_TABSTOP,182,332,67,15
+    LTEXT           "缓冲ID",IDC_STATIC,185,320,29,11,NOT WS_VISIBLE
+    GROUPBOX        "",IDC_STATIC,179,309,110,42,NOT WS_VISIBLE
+    LTEXT           "Static",IDC_STATIC_Offset,250,336,26,14,SS_SUNKEN | NOT WS_VISIBLE
+    LTEXT           "查询模式",IDC_STATIC,181,64,33,8,NOT WS_VISIBLE
+    COMBOBOX        IDC_COMBO_Gains,217,129,67,63,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "AD 模 式",IDC_STATIC,182,81,33,8,SS_NOTIFY | NOT WS_VISIBLE
+    COMBOBOX        IDC_COMBO_ADMode,218,77,67,63,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "首 通 道",IDC_STATIC,2,13,33,8,SS_NOTIFY
+    COMBOBOX        IDC_COMBO_FirstChannel,39,8,67,317,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "末 通 道",IDC_STATIC,2,30,33,8,SS_NOTIFY
+    COMBOBOX        IDC_COMBO_LastChannel,39,26,67,307,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CTEXT           "组间间隔",IDC_STATIC,182,96,33,8,SS_NOTIFY | NOT WS_VISIBLE
+    CTEXT           "组 循 环",IDC_STATIC,182,114,33,8,SS_NOTIFY | NOT WS_VISIBLE
+    CTEXT           "程控增益",IDC_STATIC,181,132,33,8,SS_NOTIFY | NOT WS_VISIBLE
+    COMBOBOX        IDC_COMBO_TriggerMode,219,194,67,63,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_GroupInterval,217,94,67,12,ES_AUTOHSCROLL | NOT WS_VISIBLE
+    EDITTEXT        IDC_EDIT_LoopsOfGroup,217,112,67,12,ES_AUTOHSCROLL | NOT WS_VISIBLE
+    LTEXT           "Hz",IDC_STATIC,109,59,11,9
+    CTEXT           "电压量程",IDC_STATIC,181,150,32,10,SS_NOTIFY | NOT WS_VISIBLE
+    COMBOBOX        IDC_COMBO_Range,217,148,67,307,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_TriggerSource,219,242,67,50,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "触 发 源",IDC_STATIC,183,246,33,8,NOT WS_VISIBLE
+    LTEXT           "通道总数",IDC_STATIC,2,44,33,8
+    EDITTEXT        IDC_EDIT_ChannelSum,39,43,67,12,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "触发灵敏度",IDC_STATIC,183,264,41,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDIT_TrigWindow,228,260,29,14,ES_AUTOHSCROLL | NOT WS_VISIBLE
+    LTEXT           "*0.5uS",IDC_STATIC,259,264,25,8,NOT WS_VISIBLE
+    CTEXT           "接地方式",IDC_STATIC,181,169,32,10,SS_NOTIFY | NOT WS_VISIBLE
+    COMBOBOX        IDC_COMBO_GroundingMode,217,168,67,307,CBS_DROPDOWNLIST | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "us",IDC_STATIC,286,96,11,9,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDIT_GetDevTrigPosAD,194,354,53,12,ES_AUTOHSCROLL | ES_READONLY | NOT WS_VISIBLE
+    CTEXT           "采样频率",IDC_STATIC,1,101,33,8
+    CONTROL         "",IDC_SPIN1,"msctls_updown32",UDS_ARROWKEYS,89,99,12,14
 END
 
 CG_IDD_AD_HIST_DLG DIALOGEX 0, 0, 685, 111
@@ -457,7 +457,7 @@ BEGIN
     LTEXT           "",IDC_FileLenght,379,3,84,11,SS_CENTERIMAGE,WS_EX_STATICEDGE
 END
 
-IDD_DIALOG_DIO_View DIALOG  0, 0, 338, 235
+IDD_DIALOG_DIO_View DIALOG 0, 0, 338, 235
 STYLE DS_SETFONT | WS_CHILD
 FONT 10, "System"
 BEGIN
@@ -585,12 +585,12 @@ BEGIN
             VALUE "Comments", "Hix"
             VALUE "CompanyName", "Art"
             VALUE "FileDescription", "Sys Microsoft 基础类应用程序"
-            VALUE "FileVersion", "6.18"
+            VALUE "FileVersion", "1.00"
             VALUE "InternalName", "Sys"
-            VALUE "LegalCopyright", "版权所有 (C) 1998"
+            VALUE "LegalCopyright", "版权所有 (C) 2016"
             VALUE "OriginalFilename", "Sys.EXE"
             VALUE "ProductName", "Sys 应用程序"
-            VALUE "ProductVersion", "05.12.5"
+            VALUE "ProductVersion", "16.6.6"
         END
     END
     BLOCK "VarFileInfo"
@@ -606,7 +606,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -632,7 +632,8 @@ BEGIN
 
     CG_IDD_AD_CFG, DIALOG
     BEGIN
-        RIGHTMARGIN, 118
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 120
         TOPMARGIN, 1
         BOTTOMMARGIN, 393
     END
@@ -897,10 +898,10 @@ IDR_MAINFRAME           BITMAP                  "res\\mainfram.bmp"
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
-    IDR_MAINFRAME           "阿尔泰驱动演示asdfasdfasdfasdf系统"
-    IDR_AD                  "\nSys\nSys\n阿尔泰文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_MAINFRAME           "纽顿科技系统"
+    IDR_AD                  "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
     CG_IDS_TIPOFTHEDAYHELP  "&Help"
     IDI_TABCTRLBAR          "标签切换"
     IDC_MDI_TAB_CTRL_BAR    "多文档切换"
@@ -908,13 +909,13 @@ BEGIN
     IDW_PROP_BAR            "弹出控制条"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "Sys"
     AFX_IDS_IDLEMESSAGE     "就绪"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_INDICATOR_EXT        "扩展名"
     ID_INDICATOR_CAPS       "大写"
@@ -925,7 +926,7 @@ BEGIN
     ID_SHOW_MOUSEVOLT       "               "
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_FILE_NEW             "建立新文档\n新建"
     ID_FILE_OPEN            "打开一个现有文档\n打开"
@@ -938,13 +939,13 @@ BEGIN
     ID_FILE_PRINT_PREVIEW   "显示整页\n打印预览"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_APP_ABOUT            "显示程序信息，版本号和版权\n关于"
     ID_APP_EXIT             "退出应用程序；提示保存文档\n退出"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_FILE_MRU_FILE1       "打开该文档"
     ID_FILE_MRU_FILE2       "打开该文档"
@@ -964,13 +965,13 @@ BEGIN
     ID_FILE_MRU_FILE16      "打开该文档"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_NEXT_PANE            "切换到下一个窗格\n下一窗格"
     ID_PREV_PANE            "切换回前一个窗格\n前一窗格"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_WINDOW_NEW           "为活动文档打开另一个窗口\n新建窗口"
     ID_WINDOW_ARRANGE       "将图标排列在窗口底部\n排列图标"
@@ -980,7 +981,7 @@ BEGIN
     ID_WINDOW_SPLIT         "将活动的窗口分隔成窗格\n分隔"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_EDIT_CLEAR           "删除被选对象\n删除"
     ID_EDIT_CLEAR_ALL       "全部删除\n全部删除"
@@ -995,13 +996,13 @@ BEGIN
     ID_EDIT_REDO            "重新执行先前已撤消的操作\n重新执行"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_VIEW_TOOLBAR         "显示或隐藏工具栏\n显隐工具栏"
     ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n显隐状态栏"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_SCSIZE          "改变窗口大小"
     AFX_IDS_SCMOVE          "改变窗口位置"
@@ -1012,25 +1013,25 @@ BEGIN
     AFX_IDS_SCCLOSE         "关闭活动的窗口并提示保存所有文档"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_SCRESTORE       "把窗口恢复到正常大小"
     AFX_IDS_SCTASKLIST      "激活任务表"
     AFX_IDS_MDICHILD        "激活该窗口"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_PREVIEW_CLOSE   "关闭打印预览模式\n取消预阅"
     IDS_ADHist              "打开磁盘数据文件"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_NEW_FILE            "新建数据文件"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     CG_ID_VIEW_SETUPDLG     "Show or hide SetupDlg\nToggle SetupDlg"
     ID_WINDOW_NEXT_PANE     "Switch to the next window pane\nNext Pane"
@@ -1040,7 +1041,7 @@ BEGIN
     CG_ID_VIEW_DIALOGBAR    "Show or hide DialogBar\nToggle DialogBar"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     CG_ID_VIEW_DLGBAR       "Show or hide 设备管理\nToggle 设备管理"
     CG_IDS_TIPOFTHEDAY      "Displays a Tip of the Day."
@@ -1050,27 +1051,32 @@ BEGIN
     CG_IDP_FILE_CORRUPT     "Trouble reading the tips file"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDM_CloseFile           "关闭文件使用"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
-    IDR_ADHist              "\nSys\nSys\n阿尔泰文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_ADHist              "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
-    IDR_DIO                 "\nSys\nSys\n阿尔泰文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_DIO                 "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
-    IDR_PLS                 "\nSys\nSys\n阿尔泰文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_PLS                 "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
 END
 
-#endif    // 中文(中华人民共和国) resources
+STRINGTABLE
+BEGIN
+    ID_VIEW_FULLSCREEN      "ces"
+END
+
+#endif    // 中文(简体，中国) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -1078,10 +1084,8 @@ END
 // 德语(德国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
-#ifdef _WIN32
 LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
 #pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -276,7 +276,7 @@ void CSysApp::OnOpenAD(void)
 	// 初始化FRAME子帧窗口，并创建文档实例, 且触发FRAME的OnUpdate函数
   	pADTemplate->InitialUpdateFrame(m_ADFrm, m_pADDoc);
 	// 设置默认的文档标题
-	m_pADDoc->SetTitle(_T("生物电检测"));
+	m_pADDoc->SetTitle(_T("SOMA 索玛生物电记录系统"));
 	if (gl_pADStatusView != NULL)
 	{
 		// 将参数配置视图类加入文档列表，以便跟正常视图一样被文档类管理

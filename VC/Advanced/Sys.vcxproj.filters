@@ -366,4 +366,7 @@
     <None Include="ReadMe.txt" />
     <None Include="Sys.reg" />
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="res\XPStyle.manifest" />
+  </ItemGroup>
 </Project>

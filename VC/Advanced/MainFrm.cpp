@@ -46,10 +46,26 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CMDIFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
+	
 
-	if (CreateTabs()==-1)
-		return -1;
 
+	//if (CreateTabs()==-1)
+	//	return -1;
+	
+	// 调用CreateEx函数创建工具栏，并调用LoadToolBar函数加载工具栏资源   
+    if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | /*CBRS_FLOATING|*/CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||   
+        !m_wndToolBar.LoadToolBar(IDR_TABVIEW_MENU))   
+    {   
+        TRACE0("Failed to create toolbar\n");   
+        return -1;      // fail to create   
+    }
+
+         // 为m_wndToolBar启用停靠   
+    m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);   
+         // 为框架窗口启用停靠   
+    EnableDocking(CBRS_ALIGN_ANY);  
+		DockControlBar((CToolBar*)&m_wndToolBar);
+	//DockPane(&m_wndToolBar);
 	return 0;
 }
 

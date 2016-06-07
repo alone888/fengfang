@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0404FE5F-9006-4E3D-ACAB-5DE5E88FB35B}</ProjectGuid>
+    <RootNamespace>HDF5</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\workpath\fengfang\79419137HDF5\HDF5\HDF5\include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\workpath\fengfang\79419137HDF5\HDF5\HDF5;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>F:\备忘\HDF文件\HDF5\HDF5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\H5ACpkg.h" />
+    <ClInclude Include="include\H5ACprivate.h" />
+    <ClInclude Include="include\H5ACpublic.h" />
+    <ClInclude Include="include\H5api_adpt.h" />
+    <ClInclude Include="include\H5Apkg.h" />
+    <ClInclude Include="include\H5Aprivate.h" />
+    <ClInclude Include="include\H5Apublic.h" />
+    <ClInclude Include="include\H5B2pkg.h" />
+    <ClInclude Include="include\H5B2private.h" />
+    <ClInclude Include="include\H5B2public.h" />
+    <ClInclude Include="include\H5Bpkg.h" />
+    <ClInclude Include="include\H5Bprivate.h" />
+    <ClInclude Include="include\H5Bpublic.h" />
+    <ClInclude Include="include\H5Cpkg.h" />
+    <ClInclude Include="include\H5Cprivate.h" />
+    <ClInclude Include="include\H5Cpublic.h" />
+    <ClInclude Include="include\H5CSprivate.h" />
+    <ClInclude Include="include\h5diff.h" />
+    <ClInclude Include="include\H5Dpkg.h" />
+    <ClInclude Include="include\H5Dprivate.h" />
+    <ClInclude Include="include\H5Dpublic.h" />
+    <ClInclude Include="include\H5DSpublic.h" />
+    <ClInclude Include="include\H5Edefin.h" />
+    <ClInclude Include="include\H5Einit.h" />
+    <ClInclude Include="include\H5Epkg.h" />
+    <ClInclude Include="include\H5Eprivate.h" />
+    <ClInclude Include="include\H5Epubgen.h" />
+    <ClInclude Include="include\H5Epublic.h" />
+    <ClInclude Include="include\H5Eterm.h" />
+    <ClInclude Include="include\H5FDcore.h" />
+    <ClInclude Include="include\H5FDdirect.h" />
+    <ClInclude Include="include\H5FDfamily.h" />
+    <ClInclude Include="include\H5FDlog.h" />
+    <ClInclude Include="include\H5FDmpi.h" />
+    <ClInclude Include="include\H5FDmpio.h" />
+    <ClInclude Include="include\H5FDmpiposix.h" />
+    <ClInclude Include="include\H5FDmulti.h" />
+    <ClInclude Include="include\H5FDpkg.h" />
+    <ClInclude Include="include\H5FDprivate.h" />
+    <ClInclude Include="include\H5FDpublic.h" />
+    <ClInclude Include="include\H5FDsec2.h" />
+    <ClInclude Include="include\H5FDstdio.h" />
+    <ClInclude Include="include\H5FDwindows.h" />
+    <ClInclude Include="include\H5FLprivate.h" />
+    <ClInclude Include="include\H5FOprivate.h" />
+    <ClInclude Include="include\H5Fpkg.h" />
+    <ClInclude Include="include\H5Fprivate.h" />
+    <ClInclude Include="include\H5Fpublic.h" />
+    <ClInclude Include="include\H5FSpkg.h" />
+    <ClInclude Include="include\H5FSprivate.h" />
+    <ClInclude Include="include\H5FSpublic.h" />
+    <ClInclude Include="include\H5Gpkg.h" />
+    <ClInclude Include="include\H5Gprivate.h" />
+    <ClInclude Include="include\H5Gpublic.h" />
+    <ClInclude Include="include\H5HFpkg.h" />
+    <ClInclude Include="include\H5HFprivate.h" />
+    <ClInclude Include="include\H5HFpublic.h" />
+    <ClInclude Include="include\H5HGpkg.h" />
+    <ClInclude Include="include\H5HGprivate.h" />
+    <ClInclude Include="include\H5HGpublic.h" />
+    <ClInclude Include="include\H5HLpkg.h" />
+    <ClInclude Include="include\H5HLprivate.h" />
+    <ClInclude Include="include\H5HLpublic.h" />
+    <ClInclude Include="include\H5HPprivate.h" />
+    <ClInclude Include="include\H5IMpublic.h" />
+    <ClInclude Include="include\H5Ipkg.h" />
+    <ClInclude Include="include\H5Iprivate.h" />
+    <ClInclude Include="include\H5Ipublic.h" />
+    <ClInclude Include="include\H5Lpkg.h" />
+    <ClInclude Include="include\H5Lprivate.h" />
+    <ClInclude Include="include\H5Lpublic.h" />
+    <ClInclude Include="include\H5LTparse.h" />
+    <ClInclude Include="include\H5LTpublic.h" />
+    <ClInclude Include="include\H5MFprivate.h" />
+    <ClInclude Include="include\H5MMprivate.h" />
+    <ClInclude Include="include\H5MMpublic.h" />
+    <ClInclude Include="include\H5MPpkg.h" />
+    <ClInclude Include="include\H5MPprivate.h" />
+    <ClInclude Include="include\H5Opkg.h" />
+    <ClInclude Include="include\H5Oprivate.h" />
+    <ClInclude Include="include\H5Opublic.h" />
+    <ClInclude Include="include\H5Oshared.h" />
+    <ClInclude Include="include\H5overflow.h" />
+    <ClInclude Include="include\H5Ppkg.h" />
+    <ClInclude Include="include\H5Pprivate.h" />
+    <ClInclude Include="include\H5Ppublic.h" />
+    <ClInclude Include="include\H5private.h" />
+    <ClInclude Include="include\H5PTpublic.h" />
+    <ClInclude Include="include\H5pubconf.h" />
+    <ClInclude Include="include\H5public.h" />
+    <ClInclude Include="include\H5RCprivate.h" />
+    <ClInclude Include="include\H5Rpkg.h" />
+    <ClInclude Include="include\H5Rprivate.h" />
+    <ClInclude Include="include\H5Rpublic.h" />
+    <ClInclude Include="include\H5RSprivate.h" />
+    <ClInclude Include="include\H5SLprivate.h" />
+    <ClInclude Include="include\H5SMpkg.h" />
+    <ClInclude Include="include\H5SMprivate.h" />
+    <ClInclude Include="include\H5Spkg.h" />
+    <ClInclude Include="include\H5Sprivate.h" />
+    <ClInclude Include="include\H5Spublic.h" />
+    <ClInclude Include="include\H5STprivate.h" />
+    <ClInclude Include="include\H5TBpublic.h" />
+    <ClInclude Include="include\h5tools.h" />
+    <ClInclude Include="include\h5tools_dump.h" />
+    <ClInclude Include="include\h5tools_ref.h" />
+    <ClInclude Include="include\h5tools_str.h" />
+    <ClInclude Include="include\h5tools_utils.h" />
+    <ClInclude Include="include\H5Tpkg.h" />
+    <ClInclude Include="include\H5Tprivate.h" />
+    <ClInclude Include="include\H5Tpublic.h" />
+    <ClInclude Include="include\h5trav.h" />
+    <ClInclude Include="include\H5TSprivate.h" />
+    <ClInclude Include="include\H5version.h" />
+    <ClInclude Include="include\H5Vprivate.h" />
+    <ClInclude Include="include\H5WBprivate.h" />
+    <ClInclude Include="include\H5win32defs.h" />
+    <ClInclude Include="include\H5Zpkg.h" />
+    <ClInclude Include="include\H5Zprivate.h" />
+    <ClInclude Include="include\H5Zpublic.h" />
+    <ClInclude Include="include\hdf5.h" />
+    <ClInclude Include="include\hdf5_hl.h" />
+    <ClInclude Include="include\SZconfig.h" />
+    <ClInclude Include="include\szip_adpt.h" />
+    <ClInclude Include="include\szlib.h" />
+    <ClInclude Include="include\zconf.h" />
+    <ClInclude Include="include\zlib.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
