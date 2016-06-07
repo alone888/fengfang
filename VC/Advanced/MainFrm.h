@@ -41,8 +41,6 @@ public:
 protected:  // control bar embedded memberss
 	
 	CToolBar    m_wndToolBar;
-	CMFCMenuBar       m_wndMenuBar;
-	CMFCToolBarImages m_UserImages;
 	CReBar      m_wndReBar;
 
 // Generated message map functions
