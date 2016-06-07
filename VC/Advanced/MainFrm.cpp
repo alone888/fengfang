@@ -50,6 +50,43 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CreateTabs()==-1)
 		return -1;
 
+	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||   
+		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
+	{   
+		TRACE0("Failed to create toolbar\n");   
+		return -1;      // fail to create   
+	}
+
+
+	CList<UINT, UINT> lstBasicCommands;
+
+	lstBasicCommands.AddTail(ID_FILE_NEW);
+	lstBasicCommands.AddTail(ID_FILE_OPEN);
+	lstBasicCommands.AddTail(ID_FILE_SAVE);
+	lstBasicCommands.AddTail(ID_FILE_PRINT);
+	lstBasicCommands.AddTail(ID_APP_EXIT);
+	lstBasicCommands.AddTail(ID_EDIT_CUT);
+	lstBasicCommands.AddTail(ID_EDIT_PASTE);
+	lstBasicCommands.AddTail(ID_EDIT_UNDO);
+	lstBasicCommands.AddTail(ID_APP_ABOUT);
+	lstBasicCommands.AddTail(ID_VIEW_STATUS_BAR);
+	lstBasicCommands.AddTail(ID_VIEW_TOOLBAR);
+
+
+	CMFCToolBar::SetBasicCommands(lstBasicCommands);
+
+// 	if (CMFCToolBar::GetUserImages() == NULL)
+// 	{
+// 		// 加载用户定义的工具栏图像
+// 		if (m_UserImages.Load(_T(".\\Res\\toolbar_32_32.bmp")))
+// 		{
+// 			m_UserImages.SetImageSize(CSize(32, 32), FALSE);   
+// 			CMFCToolBar::SetSizes(CSize (34, 40), CSize (32, 32));   //设置大图标
+// 			CMFCToolBar::SetUserImages(&m_UserImages); 
+// 
+// 			//CMFCToolBar::SetUserImages(&m_UserImages);
+// 		}
+// 	}
 	return 0;
 }
 
