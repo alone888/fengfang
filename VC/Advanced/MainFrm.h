@@ -38,15 +38,18 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
-protected:  // control bar embedded members
+protected:  // control bar embedded memberss
 	
 	CToolBar    m_wndToolBar;
+	CMFCMenuBar       m_wndMenuBar;
+	CMFCToolBarImages m_UserImages;
 	CReBar      m_wndReBar;
 
 // Generated message map functions
 protected:
 	//{{AFX_MSG(CMainFrame)
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg LRESULT OnToolbarCreateNew(WPARAM wp, LPARAM lp);
 	afx_msg void ClickFunction();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
