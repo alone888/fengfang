@@ -312,6 +312,7 @@
 #define IDM_Half_Mode                   32826
 #define IDM_OPEN_CNT                    32827
 #define IDM_GetDevVersion               32828
+#define ID_FILE_NEW_TEST                32829
 #define ID_SHOWMOUSEVOLT                59142
 #define ID_SHOW_MOUSEVOLT               59142
 #define IDS_ADHist                      61447
@@ -323,7 +324,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        185
-#define _APS_NEXT_COMMAND_VALUE         32829
+#define _APS_NEXT_COMMAND_VALUE         32830
 #define _APS_NEXT_CONTROL_VALUE         1240
 #define _APS_NEXT_SYMED_VALUE           132
 #endif

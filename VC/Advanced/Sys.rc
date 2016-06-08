@@ -70,7 +70,7 @@ END
 
 IDR_MAINFRAME TOOLBAR 16, 15
 BEGIN
-    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_NEW_TEST
     BUTTON      ID_FILE_OPEN
     BUTTON      ID_FILE_SAVE
     SEPARATOR
@@ -83,7 +83,7 @@ BEGIN
     BUTTON      ID_APP_ABOUT
 END
 
-IDR_TABVIEW_MENU TOOLBAR 16, 16
+IDR_TABVIEW_MENU TOOLBAR 25, 23
 BEGIN
     BUTTON      ID_VIEW_FULLSCREEN
     BUTTON      ID_FILE_CLOSE
@@ -133,10 +133,10 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "最近文件",                        ID_FILE_MRU_FILE1
         MENUITEM SEPARATOR
-        MENUITEM "开关量测试",                       IDM_OPEN_IO
+        MENUITEM "导出Excel文件",                   IDM_OPEN_IO
         MENUITEM "检测D/A 输出",                    IDM_Open_DA
         MENUITEM SEPARATOR
-        MENUITEM "关闭数采系统",                      ID_FILE_CLOSE
+        MENUITEM "关闭硬件设备",                      ID_FILE_CLOSE
         MENUITEM "退出应用程序",                      ID_APP_EXIT
     END
     POPUP "设备管理"
@@ -667,6 +667,10 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 231
     END
+
+    IDC_DA_View, DIALOG
+    BEGIN
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -1069,6 +1073,16 @@ END
 STRINGTABLE
 BEGIN
     IDR_PLS                 "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_FULLSCREEN      "ces"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW_TEST        "测试工具条的事件\n测试"
 END
 
 #endif    // 中文(简体，中国) resources

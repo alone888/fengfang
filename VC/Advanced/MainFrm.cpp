@@ -60,7 +60,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	CList<UINT, UINT> lstBasicCommands;
 
-	lstBasicCommands.AddTail(ID_FILE_NEW);
+	lstBasicCommands.AddTail(ID_FILE_NEW_TEST);
 	lstBasicCommands.AddTail(ID_FILE_OPEN);
 	lstBasicCommands.AddTail(ID_FILE_SAVE);
 	lstBasicCommands.AddTail(ID_FILE_PRINT);
@@ -80,7 +80,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 // 		// 加载用户定义的工具栏图像
 // 		if (m_UserImages.Load(_T(".\\Res\\toolbar_32_32.bmp")))
 // 		{
-// 			m_UserImages.SetImageSize(CSize(32, 32), FALSE);   
+// 			m_UserImages.SetImageSize(CSize(32, 32), FALSE);   s
 // 			CMFCToolBar::SetSizes(CSize (34, 40), CSize (32, 32));   //设置大图标
 // 			CMFCToolBar::SetUserImages(&m_UserImages); 
 // 
