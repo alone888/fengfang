@@ -53,6 +53,8 @@ protected:
 	//{{AFX_MSG(CADDigitView)
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	afx_msg void OnShowHex();
+
+	afx_msg void OnShow_test();
 	afx_msg void OnUpdateShowHex(CCmdUI* pCmdUI);
 	afx_msg void OnShowDec();
 	afx_msg void OnUpdateShowDec(CCmdUI* pCmdUI);

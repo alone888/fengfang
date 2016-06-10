@@ -244,7 +244,7 @@ void CADScopeCtrl::InvalidateCtrl()
 	for (Channel=0; Channel<USB2831_MAX_AD_CHANNELS; Channel++)
 	{
 		if (m_penChannel[Channel].m_hObject == NULL)
-			m_penChannel[Channel].CreatePen(PS_SOLID, 1, RGB(0,0,255));
+			m_penChannel[Channel].CreatePen(PS_SOLID, 1, m_clPen[Channel]);
 	}
 	
 
@@ -649,7 +649,6 @@ void CADScopeCtrl::AppendPoly(int BufferID, int  Offset)
 	m_Offset = Offset;     // 段内偏移
 	TransitionData();	// 将原码转化为屏幕绘图Y坐标
 	ProcessData(); // 处理数据
-	DrawBkGnd();  // 画背景
 	DrawPoly(); // 画线
 }
 
@@ -721,9 +720,9 @@ void CADScopeCtrl::DrawPoly()
 	int nDrawCount = 0;
 	gl_bDataProcessing = TRUE;
 	CPen* oldPen;
-	//m_dcPlot.SetBkColor (RGB(255,255,255)/*m_crBackColor*/);
-	//m_dcPlot.FillRect(m_rectClient, &m_brushBack);
-	//m_dcPlot.SetTextColor(RGB(255, 158, 0));
+	m_dcPlot.SetBkColor (RGB(255,255,255)/*m_crBackColor*/);
+	m_dcPlot.FillRect(m_rectClient, &m_brushBack);
+	m_dcPlot.SetTextColor(RGB(255, 158, 0));
 	//---------------------------------------------------------------------------------
 
 	/*if (m_nChannelCount < 6)
@@ -743,13 +742,13 @@ void CADScopeCtrl::DrawPoly()
 	{
 		for (int Channel = 0; Channel<m_nChannelCount; Channel++) // 画所有通道的点
 		{
-			oldPen = m_dcGrid.SelectObject(&m_penChannel[Channel]);
-			m_dcGrid.Polyline(pointxy[Channel], nDrawCount);
+			oldPen = m_dcPlot.SelectObject(&m_penChannel[Channel]);
+			m_dcPlot.Polyline(pointxy[Channel], nDrawCount);
 		}
 	}
 	else // 单通道显示
 	{
-		m_dcGrid.SelectObject(&m_penChannel[m_nChannelNum]);
+		m_dcPlot.SelectObject(&m_penChannel[m_nChannelNum]);
 		int StartX = m_rectPlot.left;
 		Center = (int)(m_nPlotHeight / 2) + m_rectPlot.top;
 		WORD* ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
@@ -758,7 +757,7 @@ void CADScopeCtrl::DrawPoly()
 			pointTemp[Index].x = StartX  + Index;
 			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[(ptOffset[Index * m_nChannelCount + m_nChannelNum-ADPara.FirstChannel]&MASK_MSB)-gl_MiddleLsb[m_nChannelNum]];
 		}
-		m_dcGrid.Polyline(pointTemp, nDrawCount);
+		m_dcPlot.Polyline(pointTemp, nDrawCount);
 	}
 	gl_bDataProcessing = FALSE;
 	Invalidate(FALSE);

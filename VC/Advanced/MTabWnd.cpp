@@ -80,7 +80,6 @@ BOOL CMDITabFrameWnd::CreateTabs(void)
 	ASSERT(m_hWndMDIClient != NULL);
 
 
-
 	// 通过注册m_hWndMDIClient窗口类，便可以使它得到添加和移去TAB控件的消息
 	if (!m_wndMdiClient.SubclassWindow(m_hWndMDIClient))
 	{

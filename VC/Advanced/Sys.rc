@@ -70,7 +70,7 @@ END
 
 IDR_MAINFRAME TOOLBAR 16, 15
 BEGIN
-    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_NEW_TEST
     BUTTON      ID_FILE_OPEN
     BUTTON      ID_FILE_SAVE
     SEPARATOR
@@ -667,6 +667,10 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 231
     END
+
+    IDC_DA_View, DIALOG
+    BEGIN
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -1074,6 +1078,11 @@ END
 STRINGTABLE
 BEGIN
     ID_VIEW_FULLSCREEN      "ces"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW_TEST        "测试工具条的事件\n测试"
 END
 
 #endif    // 中文(简体，中国) resources

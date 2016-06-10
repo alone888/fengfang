@@ -37,6 +37,7 @@ ON_WM_HSCROLL()
 ON_COMMAND(ID_FILE_PRINT, CScrollView::OnFilePrint)
 ON_COMMAND(ID_FILE_PRINT_DIRECT, CScrollView::OnFilePrint)
 ON_COMMAND(ID_FILE_PRINT_PREVIEW, CScrollView::OnFilePrintPreview)
+ON_COMMAND(ID_FILE_NEW_TEST,OnShow_test)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -471,4 +472,11 @@ void CADDigitView::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 	// TODO: Add your message handler code here and/or call default
 	Invalidate();
 	CScrollView::OnHScroll(nSBCode, nPos, pScrollBar);
+}
+
+
+void CADDigitView::OnShow_test() // 数字十六进制显示
+{
+	// TODO: Add your command handler code here
+	MessageBox(_T("这是一个确定 取消的消息框！"),_T("标题"), MB_OKCANCEL );
 }
