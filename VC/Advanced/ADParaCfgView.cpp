@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "math.h"
+#include "ADParaCfgView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -89,6 +90,7 @@ BEGIN_MESSAGE_MAP(CADParaCfgView, CFormView)
 	ON_CBN_SELCHANGE(IDC_COMBO_TriggerDir, OnSelchangeCOMBOTriggerDir)
 	ON_CBN_SELCHANGE(IDC_COMBO_GroundingMode, OnSelchangeCOMBOGroundingMode)
 	//}}AFX_MSG_MAP
+	ON_BN_CLICKED(IDC_CHECK_INPUT1, &CADParaCfgView::OnBnClickedCheckInput1)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -799,4 +801,10 @@ void CADParaCfgView::OnSelchangeCOMBOGroundingMode()
 	pWaveView->m_ADScopeCtrl.InvalidateCtrl();
 
 
+}
+
+
+void CADParaCfgView::OnBnClickedCheckInput1()
+{
+	// TODO: 在此添加控件通知处理程序代码
 }

@@ -127,7 +127,7 @@ int CADFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	gl_pParaCfgView = (CADParaCfgView*)m_wndSTCBar.AddView(_T("参数配置"), RUNTIME_CLASS(CADParaCfgView)); // CParaCfgView
 	gl_pParaCfgView->m_pADFrm = this;
 	
-	gl_pADStatusView = (CADStatusView*)m_wndSTCBar.AddView(_T("性能分析"), RUNTIME_CLASS(CADStatusView)); // CADStatusView
+	gl_pADStatusView = (CADStatusView*)m_wndSTCBar.AddView(_T("滤波设置"), RUNTIME_CLASS(CADStatusView)); // CADStatusView
 	
 	USB2831_LoadParaAD(NULL, &ADPara);  // 读入系统参数
 	gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
