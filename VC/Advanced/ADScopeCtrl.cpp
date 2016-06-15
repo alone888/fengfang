@@ -1293,4 +1293,71 @@ void CADScopeCtrl::UpdateChannelCount()
 // 	}
 
 }
+void CADScopeCtrl::ProcessOrgAdData()
+{
+	double fTimePoint1,fTimePoint2;//
+	int rang = 100*1000;
+	int i,j;
+
+	fTimePoint1 =  rang/10000;  //showData 每个点代表的时间 根据满屏时间值在计算
+	fTimePoint2= 8/ADPara.Frequency;//新读出来的这100点
+
+	static int lastShowDateID;//保存上次存到的位置
+
+
+
+	if(fTimePoint1<fTimePoint2)
+	{
+
+		for(i=lastShowDateID;i<10000;i++)
+		{
+			if( i* rang/10000<j* 8/ADPara.Frequency)
+			{
+				for (int Channel = 0; Channel<8; Channel++) // 画所有通道的点
+				{
+					showData[Channel][i]= AD_OrgData[j*8 + Channel]&MASK_MSB; //先存原始数据，先不管坐标值。
+				}			
+			}
+			else
+			{
+				j++;
+				if(j>=100)
+				{
+					break;
+				}
+				i--;//j变了 所以i这次不算，再来。
+			}
+
+		}
+	
+	
+		//如果到了10000了 j还不等于100，还没用完，我们再从i=0开始
+		//判断这次会不会到达10000个点的结尾
+		if(j<100)
+		{
+			for(i=0;i<10000;i++)
+			{
+				if(i* rang/10000<j* 8/ADPara.Frequency)
+				{
+					for(int Channel = 0; Channel<8; Channel++) // 画所有通道的点
+					{
+						showData[Channel][i]= AD_OrgData[j*8 + Channel]&MASK_MSB; //先存原始数据，先不管坐标值。
+					}			
+				}
+				else
+				{
+					j++;
+					if(j>=100)
+					{
+						lastShowDateID = i;
+						break;
+					}
+					i--;//i这次不算，再来。
+				}
+
+			}
+		
+		}
+	}
+}
 
