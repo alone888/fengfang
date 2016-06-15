@@ -244,8 +244,10 @@ END_MESSAGE_MAP()
 // App command to run the dialog
 void CSysApp::OnAppAbout()
 {
-	CAboutDlg aboutDlg;
-	aboutDlg.DoModal();
+	//CAboutDlg aboutDlg;
+	//aboutDlg.DoModal();
+		    CADWaveView* pWaveView = (CADWaveView*)(CWnd::FromHandle(m_pADDoc->m_hWndWave));
+		pWaveView->StartScopeCtrlTimer();//	Æô¶¯timer ²âÊÔ»­Í¼ÓÃ
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -346,6 +348,8 @@ void CSysApp::OnOpenDA()
 	{
 		m_pDAFrm->BringWindowToTop();	// »Ö¸´ÖØµþ´°
 	}
+
+
 }
 
 void CSysApp::OnUpdateOpenDA(CCmdUI* pCmdUI) 

@@ -134,9 +134,15 @@ LRESULT CADWaveView::ShowWave(WPARAM wParam, LPARAM lParam)
 
 void CADWaveView::OnDrawPolyLine() // 显示波形
 {
-	m_ADScopeCtrl.AppendPoly(gl_BufferID, gl_Offset);
-	if (gl_ProcessMoveVolt == 0)
-	{
-		gl_pADStatusView->AnalyzeAccurate(); // 精度分析
-	}
+	//m_ADScopeCtrl.AppendPoly(gl_BufferID, gl_Offset);
+	//if (gl_ProcessMoveVolt == 0)
+	//{
+	//	gl_pADStatusView->AnalyzeAccurate(); // 精度分析
+	//}
+	//m_ADScopeCtrl.StartTimer();
+}
+
+void CADWaveView::StartScopeCtrlTimer() // 启动timer
+{
+	m_ADScopeCtrl.StartTimer();
 }

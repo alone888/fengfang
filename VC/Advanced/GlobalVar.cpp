@@ -4,6 +4,8 @@
 CADStatusView* gl_pADStatusView = NULL;
 CADParaCfgView* gl_pParaCfgView = NULL;
 WORD ADBuffer[MAX_SEGMENT_COUNT][MAX_SEGMENT_SIZE]; // 缓冲队列1024*64
+WORD newADBuffer[1024][1024]; // 缓冲队列1024*64
+
 ULONG gl_ReadSizeWords;	// 读入的数据长度
 
 BOOL gl_bDeviceADRun = FALSE;

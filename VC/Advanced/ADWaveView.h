@@ -25,6 +25,7 @@ public:
 // Operations
 public:
 	void OnDrawPolyLine();
+	void StartScopeCtrlTimer();
 	LRESULT ShowWave(WPARAM wParam, LPARAM lParam);
 	
 

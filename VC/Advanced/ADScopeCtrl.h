@@ -14,6 +14,8 @@ public:
 	double AppendPoint(double dNewPoint);
 	void SetRange(double dLower, double dUpper, int nChannel);
 	void SetXUnits(CString string);
+	void StartTimer();
+	void OnTimer(UINT_PTR nIDEvent);
 	void SetYUnits(CString string);
 	void SetGridColor(COLORREF color);
 	void SetPlotColor(COLORREF color);
@@ -101,8 +103,11 @@ private:
 	void DrawBkGnd(); // »­Íø¸ñÏß
 	void DrawPoint();
 	void DrawPoly();
+	void DrawPoly2();
 // 	void DrawPolyEx();
 	void ProcessData();
+	void ProcessData2();
+
 // 	void ProcessDataEx();
 	void TransitionData();
 
