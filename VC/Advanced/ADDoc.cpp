@@ -107,7 +107,7 @@ void CADDoc::StartDeviceAD()
 	SYSTEMTIME  time;
 	int nRandNum;
 
-	gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
+	//gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
 
 	if (!gl_bCreateFile) // 如果创建了文件对象，则先写头文件
 	{
@@ -158,7 +158,7 @@ void CADDoc::StartDeviceAD()
 	
 	memset(ADBuffer, 0x00, sizeof(ADBuffer)); // 将用户缓冲区复位清零
 	
-	if (!MyStartDeviceAD(m_hDevice)) // 启动设备, 开始采集数据
+	if (!MyStartDeviceAD(m_hDevice)) // 启动设备, IDM_DataFileNew数据
 	{
 		CADFrm* pADFrm = (CADFrm*)(theApp.m_ADFrm); // 取得子帧窗口指针
 		CButton* pStart = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StartDeviceAD));

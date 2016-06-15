@@ -21,7 +21,7 @@ int  gl_voltVolume = 20000;
 VOLTRANGE  gl_InputRange[USB2831_MAX_AD_CHANNELS]; // 各通道设置的电压量程范围
 int  gl_TriggerVolt;       // 触发电压
 int gl_MiddleLsb[USB2831_MAX_AD_CHANNELS]; // 求平移电压时的中间值
-int  gl_nChannelCount = USB2831_MAX_AD_CHANNELS;
+int  gl_nChannelCount = 1;
 float gl_PerLsbVolt[USB2831_MAX_AD_CHANNELS]; // 单位LSB的电压值
 float gl_AnalyzeAllCount;
 UINT gl_OverLimitCount;
@@ -59,3 +59,5 @@ int  gl_nProcMode = PROC_MODE_DIGIT;
 BOOL gl_bCollected = FALSE;			// 是否已经进行过一次采集
 
 ULONG gl_TrigCnt = 0;
+
+int gl_signal_enable[USB2831_MAX_AD_CHANNELS] ={0};
