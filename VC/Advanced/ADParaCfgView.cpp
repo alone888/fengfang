@@ -63,6 +63,14 @@ void CADParaCfgView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SLIDER_Offset, m_Slider_Offset);
 	DDX_Control(pDX, IDC_EDIT_BufferID, m_Edit_BufferID);
 	//}}AFX_DATA_MAP
+	DDX_Control(pDX, IDC_CHECK_INPUT9, m_singal_1);
+	DDX_Control(pDX, IDC_CHECK_INPUT10, m_singal_2);
+	DDX_Control(pDX, IDC_CHECK_INPUT11, m_singal_3);
+	DDX_Control(pDX, IDC_CHECK_INPUT12, m_singal_4);
+	DDX_Control(pDX, IDC_CHECK_INPUT13, m_input_1);
+	DDX_Control(pDX, IDC_CHECK_INPUT14, m_input_2);
+	DDX_Control(pDX, IDC_CHECK_INPUT15, m_input_3);
+	DDX_Control(pDX, IDC_CHECK_INPUT16, m_input_4);
 }
 
 
@@ -91,6 +99,14 @@ BEGIN_MESSAGE_MAP(CADParaCfgView, CFormView)
 	ON_CBN_SELCHANGE(IDC_COMBO_GroundingMode, OnSelchangeCOMBOGroundingMode)
 	//}}AFX_MSG_MAP
 	//ON_BN_CLICKED(IDC_CHECK_INPUT1, &CADParaCfgView::OnBnClickedCheckInput1)
+	ON_BN_CLICKED(IDC_CHECK_INPUT9, &CADParaCfgView::OnBnClickedCheckInput9)
+	ON_BN_CLICKED(IDC_CHECK_INPUT10, &CADParaCfgView::OnBnClickedCheckInput10)
+	ON_BN_CLICKED(IDC_CHECK_INPUT11, &CADParaCfgView::OnBnClickedCheckInput11)
+	ON_BN_CLICKED(IDC_CHECK_INPUT12, &CADParaCfgView::OnBnClickedCheckInput12)
+	ON_BN_CLICKED(IDC_CHECK_INPUT13, &CADParaCfgView::OnBnClickedCheckInput13)
+	ON_BN_CLICKED(IDC_CHECK_INPUT14, &CADParaCfgView::OnBnClickedCheckInput14)
+	ON_BN_CLICKED(IDC_CHECK_INPUT15, &CADParaCfgView::OnBnClickedCheckInput15)
+	ON_BN_CLICKED(IDC_CHECK_INPUT16, &CADParaCfgView::OnBnClickedCheckInput16)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -144,6 +160,8 @@ void CADParaCfgView::OnInitialUpdate()
 
 	pDoc->m_hWndADCfg = this->m_hWnd;
 	theApp.m_hParaCfgView = this->m_hWnd;
+	((CButton *)GetDlgItem(IDC_CHECK_INPUT9))->SetCheck(1);
+	gl_signal_enable[0] = 1;
 
 	// 初始化用户界面视觉参数		
 	CString str;
@@ -608,7 +626,7 @@ void CADParaCfgView::OnSelchangeCOMBOFirstChannel()
 	else
 	{
 		ADPara.FirstChannel = ntemp;
-		gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
+		//gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
 		CString str;
 		str.Format(_T("%d"), gl_nChannelCount);
 		m_Edit_ChannelSum.SetWindowText(str);
@@ -635,7 +653,7 @@ void CADParaCfgView::OnSelchangeCOMBOLastChannel()
 	else
 	{
 		ADPara.LastChannel = ntemp;
-		gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
+		//gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
 		CString str;
 		str.Format(_T("%d"), gl_nChannelCount);
 		m_Edit_ChannelSum.SetWindowText(str);
@@ -807,4 +825,197 @@ void CADParaCfgView::OnSelchangeCOMBOGroundingMode()
 void CADParaCfgView::OnBnClickedCheckInput1()
 {
 	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CADParaCfgView::OnBnClickedCheckInput9()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(gl_nChannelCount == 1 && !m_singal_1.GetCheck())
+	{
+		m_singal_1.SetCheck(TRUE);
+		return;
+	}
+
+	if(m_singal_1.GetCheck())
+	{
+		gl_nChannelCount += 1;
+		gl_signal_enable[0] = 1;
+	}
+	else
+	{
+		gl_signal_enable[0] = 0;
+		gl_nChannelCount -= 1;
+	}
+	CString str;
+	str.Format(_T("%d"), gl_nChannelCount);
+	m_Edit_ChannelSum.SetWindowText(str);
+}
+
+
+void CADParaCfgView::OnBnClickedCheckInput10()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(gl_nChannelCount == 1 && !m_singal_2.GetCheck())
+	{
+		m_singal_2.SetCheck(TRUE);
+		return;
+	}
+	if(m_singal_2.GetCheck())
+	{
+		gl_nChannelCount += 1;
+		gl_signal_enable[1] = 1;
+	}
+	else
+	{
+		gl_signal_enable[1] = 0;
+		gl_nChannelCount -= 1;
+	}
+	CString str;
+	str.Format(_T("%d"), gl_nChannelCount);
+	m_Edit_ChannelSum.SetWindowText(str);
+}
+
+
+void CADParaCfgView::OnBnClickedCheckInput11()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(gl_nChannelCount == 1 && !m_singal_3.GetCheck())
+	{
+		m_singal_3.SetCheck(TRUE);
+		return;
+	}
+	if(m_singal_3.GetCheck())
+	{
+		gl_nChannelCount += 1;
+		gl_signal_enable[2] = 1;
+	}
+	else
+	{
+		gl_signal_enable[2] = 0;
+		gl_nChannelCount -= 1;
+	}
+	CString str;
+	str.Format(_T("%d"), gl_nChannelCount);
+	m_Edit_ChannelSum.SetWindowText(str);
+}
+
+
+void CADParaCfgView::OnBnClickedCheckInput12()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(gl_nChannelCount == 1 && !m_singal_4.GetCheck())
+	{
+		m_singal_4.SetCheck(TRUE);
+		return;
+	}
+	if(m_singal_4.GetCheck())
+	{
+		gl_nChannelCount += 1;
+		gl_signal_enable[3] = 1;
+	}
+	else
+	{
+		gl_signal_enable[3] = 0;
+		gl_nChannelCount -= 1;
+	}
+	CString str;
+	str.Format(_T("%d"), gl_nChannelCount);
+	m_Edit_ChannelSum.SetWindowText(str);
+}
+
+
+void CADParaCfgView::OnBnClickedCheckInput13()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(gl_nChannelCount == 1 && !m_input_1.GetCheck())
+	{
+		m_input_1.SetCheck(TRUE);
+		return;
+	}
+	if(m_input_1.GetCheck())
+	{
+		gl_nChannelCount += 1;
+		gl_signal_enable[4] = 1;
+	}
+	else
+	{
+		gl_signal_enable[4] = 0;
+		gl_nChannelCount -= 1;
+	}
+	CString str;
+	str.Format(_T("%d"), gl_nChannelCount);
+	m_Edit_ChannelSum.SetWindowText(str);
+}
+
+
+void CADParaCfgView::OnBnClickedCheckInput14()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(gl_nChannelCount == 1 && !m_input_2.GetCheck())
+	{
+		m_input_2.SetCheck(TRUE);
+		return;
+	}
+	if(m_input_2.GetCheck())
+	{
+		gl_nChannelCount += 1;
+		gl_signal_enable[5] = 1;
+	}
+	else
+	{
+		gl_signal_enable[5] = 0;
+		gl_nChannelCount -= 1;
+	}
+	CString str;
+	str.Format(_T("%d"), gl_nChannelCount);
+	m_Edit_ChannelSum.SetWindowText(str);
+}
+
+
+void CADParaCfgView::OnBnClickedCheckInput15()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(gl_nChannelCount == 1 && !m_input_3.GetCheck())
+	{
+		m_input_3.SetCheck(TRUE);
+		return;
+	}
+	if(m_input_3.GetCheck())
+	{
+		gl_nChannelCount += 1;
+		gl_signal_enable[6] = 1;
+	}
+	else
+	{
+		gl_signal_enable[6] = 0;
+		gl_nChannelCount -= 1;
+	}
+	CString str;
+	str.Format(_T("%d"), gl_nChannelCount);
+	m_Edit_ChannelSum.SetWindowText(str);
+}
+
+
+void CADParaCfgView::OnBnClickedCheckInput16()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(gl_nChannelCount == 1 && !m_input_4.GetCheck()) 
+	{
+		m_input_4.SetCheck(TRUE);
+		return;
+	}
+	if(m_input_4.GetCheck())
+	{
+		gl_nChannelCount += 1;
+		gl_signal_enable[7] = 1;
+	}
+	else
+	{
+		gl_signal_enable[7] = 0;
+		gl_nChannelCount -= 1;
+	}
+	CString str;
+	str.Format(_T("%d"), gl_nChannelCount);
+	m_Edit_ChannelSum.SetWindowText(str);
 }

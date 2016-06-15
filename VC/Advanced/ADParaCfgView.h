@@ -14,6 +14,7 @@
 #endif
 
 #include "ADFrm.h"
+#include "afxwin.h"
 
 class CADParaCfgView : public CFormView
 {
@@ -116,6 +117,22 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedCheckInput1();
+	afx_msg void OnBnClickedCheckInput9();
+	CButton m_singal_1;
+	CButton m_singal_2;
+	CButton m_singal_3;
+	CButton m_singal_4;
+	CButton m_input_1;
+	CButton m_input_2;
+	CButton m_input_3;
+	CButton m_input_4;
+	afx_msg void OnBnClickedCheckInput10();
+	afx_msg void OnBnClickedCheckInput11();
+	afx_msg void OnBnClickedCheckInput12();
+	afx_msg void OnBnClickedCheckInput13();
+	afx_msg void OnBnClickedCheckInput14();
+	afx_msg void OnBnClickedCheckInput15();
+	afx_msg void OnBnClickedCheckInput16();
 };
 
 /////////////////////////////////////////////////////////////////////////////

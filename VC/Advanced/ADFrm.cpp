@@ -130,7 +130,7 @@ int CADFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	gl_pADStatusView = (CADStatusView*)m_wndSTCBar.AddView(_T("滤波设置"), RUNTIME_CLASS(CADStatusView)); // CADStatusView
 	
 	USB2831_LoadParaAD(NULL, &ADPara);  // 读入系统参数
-	gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
+	//gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
 	
 	
 	// Initialize dialog bar m_wndShowStatus

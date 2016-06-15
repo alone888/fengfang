@@ -265,7 +265,7 @@ void CADScopeCtrl::InvalidateCtrl()
 	}
 	
 
-		gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
+		//gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
 		m_nChannelCount = gl_nChannelCount;
 
 	//ProcessData(); // 处理数据

@@ -76,3 +76,5 @@ extern BOOL gl_bSyncMode;    // 采集模式（同步或异步）
 extern BOOL gl_FirstScreenStop;
 
 extern ULONG gl_TrigCnt;
+
+extern int gl_signal_enable[USB2831_MAX_AD_CHANNELS];
