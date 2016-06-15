@@ -738,7 +738,7 @@ void CADScopeCtrl::ProcessData2()
 	UpdateChannelCount();
 	Center = (int)(PerY/2.0)+m_rectPlot.top;
 
-	screenWidth = m_rectPlot.Width
+	//screenWidth = m_rectPlot.Width
 
 
 	int Channel, Index, StartX;
