@@ -85,9 +85,10 @@ void CADDoc::Dump(CDumpContext& dc) const
 }
 #endif //_DEBUG
 
+static int device_start_ok = 0;
 void CADDoc::StartDeviceAD() 
 {
-
+	device_start_ok = 0;
 	m_hDevice = theApp.m_hDevice;
 	////////////////////////////////////////////////////////////////////////
 	if (m_hDevice == INVALID_HANDLE_VALUE)
@@ -190,6 +191,7 @@ void CADDoc::StartDeviceAD()
 
 	// 开启定时器取得触发点位置
 	m_hADParaCfgView->SetTimer(1, 1000, NULL);
+	device_start_ok = 1;
 }
 
 //###################  处理数据线程函数 #########################
@@ -270,6 +272,9 @@ void CADDoc::StopDeviceAD()
 // 	Sleep(20);
 
 	CADFrm* pADFrm = ((CSysApp*)AfxGetApp())->m_ADFrm; // 取得子帧窗口句柄
+
+	if(device_start_ok != 1) return;
+
 
 	// 停止定时器取得触发点位置
 	m_hADParaCfgView->KillTimer(1);
