@@ -316,7 +316,10 @@
 #define IDC_EDIT17                      1300
 #define ID_VIEW_FULLSCREEN              32772
 #define ID_WINDOW_NEXT                  32773
+#define ID_TOOLSBAR_STOP                32773
 #define ID_WINDOW_PREVIOUS              32774
+#define ID_NEW_FILE                     32774
+#define ID_TOOLSBAR_SAVE_FILE           32775
 #define IDM_DigitalShow                 32776
 #define ID_WINDOW_SAVE_ALL              32776
 #define IDM_GraphicShow                 32777
@@ -352,6 +355,13 @@
 #define IDM_OPEN_CNT                    32827
 #define IDM_GetDevVersion               32828
 #define ID_FILE_NEW_TEST                32829
+#define ID_TOOLSBAR_NEW_FILE            32830
+#define ID_TOOLSBAR_OPEN_FILE           32831
+#define ID_TOOLSBAR_START               32832
+#define ID_BUTTON32833                  32833
+#define ID_BUTTON32834                  32834
+#define ID_WINDOW_1231                  32835
+#define ID_WINDO1231                    32836
 #define ID_SHOWMOUSEVOLT                59142
 #define ID_SHOW_MOUSEVOLT               59142
 #define IDS_ADHist                      61447
@@ -363,7 +373,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        185
-#define _APS_NEXT_COMMAND_VALUE         32830
+#define _APS_NEXT_COMMAND_VALUE         32837
 #define _APS_NEXT_CONTROL_VALUE         1242
 #define _APS_NEXT_SYMED_VALUE           132
 #endif

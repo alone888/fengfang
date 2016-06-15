@@ -69,33 +69,14 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	CList<UINT, UINT> lstBasicCommands;
 
-	lstBasicCommands.AddTail(ID_FILE_NEW_TEST);
-	lstBasicCommands.AddTail(ID_FILE_OPEN);
-	lstBasicCommands.AddTail(ID_FILE_SAVE);
-	lstBasicCommands.AddTail(ID_FILE_PRINT);
-	lstBasicCommands.AddTail(ID_APP_EXIT);
-	lstBasicCommands.AddTail(ID_EDIT_CUT);
-	lstBasicCommands.AddTail(ID_EDIT_PASTE);
-	lstBasicCommands.AddTail(ID_EDIT_UNDO);
-	lstBasicCommands.AddTail(ID_APP_ABOUT);
-	lstBasicCommands.AddTail(ID_VIEW_STATUS_BAR);
-	lstBasicCommands.AddTail(ID_VIEW_TOOLBAR);
-
+	lstBasicCommands.AddTail(ID_TOOLSBAR_START);
+	lstBasicCommands.AddTail(ID_TOOLSBAR_STOP);
+	lstBasicCommands.AddTail(ID_TOOLSBAR_NEW_FILE);
+	lstBasicCommands.AddTail(ID_TOOLSBAR_OPEN_FILE);
+	lstBasicCommands.AddTail(ID_TOOLSBAR_SAVE_FILE);
 
 	CMFCToolBar::SetBasicCommands(lstBasicCommands);
 
-// 	if (CMFCToolBar::GetUserImages() == NULL)
-// 	{
-// 		// 加载用户定义的工具栏图像
-// 		if (m_UserImages.Load(_T(".\\Res\\toolbar_32_32.bmp")))
-// 		{
-// 			m_UserImages.SetImageSize(CSize(32, 32), FALSE);   s
-// 			CMFCToolBar::SetSizes(CSize (34, 40), CSize (32, 32));   //设置大图标
-// 			CMFCToolBar::SetUserImages(&m_UserImages); 
-// 
-// 			//CMFCToolBar::SetUserImages(&m_UserImages);
-// 		}
-// 	}
 	return 0;
 }
 

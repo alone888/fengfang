@@ -37,8 +37,13 @@ ON_UPDATE_COMMAND_UI(IDM_Open_DA, OnUpdateOpenDA)
 	ON_COMMAND(IDM_GetDevVersion, OnGetDevVersion)
 	//}}AFX_MSG_MAP
 // Standard file based document commands
-ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
-ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
+//ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
+//ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
+
+//ON_COMMAND(ID_TOOLSBAR_SAVE_FILE, CWinApp::OnFileSave)
+ON_COMMAND(ID_TOOLSBAR_OPEN_FILE, CWinApp::OnFileOpen)
+ON_COMMAND(ID_TOOLSBAR_START, CADDoc::StartDeviceAD)
+ON_COMMAND(ID_TOOLSBAR_STOP, CADDoc::StopDeviceAD)
 // Standard print setup command
 ON_COMMAND(ID_FILE_PRINT_SETUP, CWinApp::OnFilePrintSetup)
 END_MESSAGE_MAP()
