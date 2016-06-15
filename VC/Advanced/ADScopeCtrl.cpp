@@ -855,6 +855,18 @@ void CADScopeCtrl::DrawPoly()
 		nDrawCount = 4096/m_nChannelCount - 1;
 	}*/
 	nDrawCount = (4096-4096%m_nChannelCount)/m_nChannelCount - 1;
+
+	for (int Channel = 0; Channel<m_nChannelCount; Channel++) // 画所有通道的点
+	{
+		for(int i= 0;i<nDrawCount;i++)
+		{
+			POINT p;
+			p.x = i;
+			p.y = i%100;
+			pointxy[Channel][i] = p;
+		}
+	}
+
 	if (nDrawCount>m_rectPlot.Width() - 1)
 	{
 		nDrawCount = m_rectPlot.Width() - 1;

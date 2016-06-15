@@ -90,7 +90,7 @@ BEGIN_MESSAGE_MAP(CADParaCfgView, CFormView)
 	ON_CBN_SELCHANGE(IDC_COMBO_TriggerDir, OnSelchangeCOMBOTriggerDir)
 	ON_CBN_SELCHANGE(IDC_COMBO_GroundingMode, OnSelchangeCOMBOGroundingMode)
 	//}}AFX_MSG_MAP
-	ON_BN_CLICKED(IDC_CHECK_INPUT1, &CADParaCfgView::OnBnClickedCheckInput1)
+	//ON_BN_CLICKED(IDC_CHECK_INPUT1, &CADParaCfgView::OnBnClickedCheckInput1)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
