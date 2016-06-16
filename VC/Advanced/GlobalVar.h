@@ -16,7 +16,7 @@ typedef struct _AD_OrgData       /* rcl */
 	unsigned int time; //us
 } AD_ORG_DATA;
 
-extern AD_ORG_DATA AD_OrgData[8]; // WYL 一次读的数据个数
+extern AD_ORG_DATA gt_AD_OrgData[100]; // WYL 一次读的数据个数
 
 
 extern ULONG gl_ReadSizeWords;	// 读入的数据长度

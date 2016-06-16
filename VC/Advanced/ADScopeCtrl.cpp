@@ -173,6 +173,7 @@ void CADScopeCtrl::StartTimer()
 void test_data()
 {
 	static WORD data[8][30000] = {0};
+	static int last_data_id = 0;
 	
 	if(data[0][0] == 0)
 	{
@@ -186,6 +187,15 @@ void test_data()
 	}
 	data[0][0] = 1;
 
+	for (int ch = 0; ch < 8; ch++)
+	{	
+		for (int i = 0; i < 100 ; i++)
+		{
+			if(last_data_id == 30000 - 1)
+				last_data_id = 0;
+			gt_AD_OrgData[i].data[ch] = data[ch][last_data_id++];
+		}
+	}
 }
 
 void CADScopeCtrl::OnTimer(UINT_PTR nIDEvent)
