@@ -9,7 +9,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 #define TIMERID 8
-
+#define TIMERID2 9
 ///////////////////////////////////////////////////////////////////////////
 //CADScopeCtrl
 CADScopeCtrl::CADScopeCtrl()
@@ -167,14 +167,43 @@ void CADScopeCtrl::SetRange(double dLower, double dUpper, int nChannel)
 void CADScopeCtrl::StartTimer()
 {
 	SetTimer(TIMERID,50,0);  //这里就相当于设定了timer,如果要停掉timer就是KillTimer(TIMERID)
-	
+	SetTimer(TIMERID2,100,0);
 }  
+
+void test_data()
+{
+	static WORD data[8][30000] = {0};
+	
+	if(data[0][0] == 0)
+	{
+		for(int i = 0; i < 8; i++)
+		{
+			for (int j = 0; j < 30000; j++)
+			{
+				data[i][j] = j%8192-4096;
+			}
+		}
+	}
+	data[0][0] = 1;
+
+}
 
 void CADScopeCtrl::OnTimer(UINT_PTR nIDEvent)
 
 {
-	DrawBkGnd();  // 画背景
-	DrawPoly(); // 画线
+	if(nIDEvent == TIMERID)
+	{
+		DrawBkGnd();  // 画背景
+
+		TransitionData();
+		ProcessData();
+
+		DrawPoly(); // 画线
+	}
+	else if(nIDEvent == TIMERID2)
+	{
+		test_data();
+	}
 }
 ///////////////////////////////////////////////////////////////////////////
 void CADScopeCtrl::SetXUnits(CString string)
@@ -854,18 +883,18 @@ void CADScopeCtrl::DrawPoly()
 	{
 		nDrawCount = 4096/m_nChannelCount - 1;
 	}*/
-	nDrawCount = (4096-4096%m_nChannelCount)/m_nChannelCount - 1;
+	//nDrawCount = (4096-4096%m_nChannelCount)/m_nChannelCount - 1;
 
-	for (int Channel = 0; Channel<m_nChannelCount; Channel++) // 画所有通道的点
-	{
-		for(int i= 0;i<nDrawCount;i++)
-		{
-			POINT p;
-			p.x = i;
-			p.y = i%100;
-			pointxy[Channel][i] = p;
-		}
-	}
+	//for (int Channel = 0; Channel<m_nChannelCount; Channel++) // 画所有通道的点
+	//{
+	//	for(int i= 0;i<nDrawCount;i++)
+	//	{
+	//		POINT p;
+	//		p.x = i;
+	//		p.y = i%100;
+	//		pointxy[Channel][i] = p;
+	//	}
+	//}
 
 	if (nDrawCount>m_rectPlot.Width() - 1)
 	{
@@ -1360,4 +1389,7 @@ void CADScopeCtrl::ProcessOrgAdData()
 		}
 	}
 }
+
+
+
 
