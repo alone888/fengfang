@@ -195,9 +195,15 @@ void test_data()
 			if(last_data_id == 30000 - 1)
 				last_data_id = 0;
 			gt_AD_OrgData[i].data[ch] = data[ch][last_data_id++];
-			if(time > g_nTimeAxisRange) time = 0;
-			gt_AD_OrgData[i].time = time++;
 		}
+	}
+
+	unsigned int tmp = 8000000/ADPara.Frequency;
+	for (int i = 0; i < 100 ; i++)
+	{
+		if(time > g_nTimeAxisRange) time = 0;
+		gt_AD_OrgData[i].time = time;
+		time += tmp;
 	}
 }
 
