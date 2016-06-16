@@ -174,6 +174,7 @@ void test_data()
 {
 	static WORD data[8][30000] = {0};
 	static int last_data_id = 0;
+	static unsigned int time=0;
 	
 	if(data[0][0] == 0)
 	{
@@ -194,6 +195,8 @@ void test_data()
 			if(last_data_id == 30000 - 1)
 				last_data_id = 0;
 			gt_AD_OrgData[i].data[ch] = data[ch][last_data_id++];
+			if(time > g_nTimeAxisRange) time = 0;
+			gt_AD_OrgData[i].time = time++;
 		}
 	}
 }
