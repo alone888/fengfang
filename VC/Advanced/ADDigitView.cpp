@@ -182,7 +182,7 @@ void CADDigitView::ADDigit(CDC* pDC) // 显示ch值
 	
 	CSize sizeTotal;
 	// TODO: calculate the total size of this view
-	sizeTotal.cx = 64 * gl_nChannelCount; 
+	sizeTotal.cx = 64 * 8;//gl_nChannelCount; 
 	sizeTotal.cy = 1025*16; 
 	SetScrollSizes(MM_TEXT, sizeTotal, sizeDefault, CSize(sizeDefault.cx, 16));
 	
@@ -224,11 +224,11 @@ void CADDigitView::ADDigit(CDC* pDC) // 显示ch值
 			switch(gl_DigitShowMode)
 			{
 			case SHOW_MODE_DEC: // 十进制偏移码				
-				for (Channel=0; Channel<gl_nChannelCount; Channel++)
+				for (Channel=0; Channel<8/*gl_nChannelCount*/; Channel++)
 				{
 					swprintf_s(strIndex, _T("CH%d"), Channel+ADPara.FirstChannel);
 					pDC->TextOut(-rect.left-15+(Channel+1)*70, rect.top+20, strIndex); 
-					ADLsb = (ADBuffer[gl_nDrawIndex][Index * gl_nChannelCount + Channel]& MASK_MSB); // 从缓冲区中获得最终的原始码数据LSB
+					ADLsb = (ADBuffer[gl_nDrawIndex][Index * 8/*gl_nChannelCount*/ + Channel]& MASK_MSB); // 从缓冲区中获得最终的原始码数据LSB
 					//ADData = ADLsb - gl_MiddleLsb[Channel]; // 将原始码数据减去平移电压码值和半幅偏移码值
 					if (gl_ProcessMoveVolt == 0)
 					{
@@ -244,11 +244,11 @@ void CADDigitView::ADDigit(CDC* pDC) // 显示ch值
 				break;
 				
 			case SHOW_MODE_HEX: // 十六进制原码
-				for (Channel=0; Channel<gl_nChannelCount; Channel++)
+				for (Channel=0; Channel<8/*gl_nChannelCount*/; Channel++)
 				{
 					swprintf_s(strIndex, _T("CH%d"), Channel+ADPara.FirstChannel);
 					pDC->TextOut(-rect.left-15+(Channel+1)*70, rect.top+20, strIndex);
-					ADLsb = ADBuffer[gl_nDrawIndex][Index * gl_nChannelCount + Channel]; // 从缓冲区中获得最终的原始码数据LSB(未屏蔽高2位)
+					ADLsb = ADBuffer[gl_nDrawIndex][Index * 8/*gl_nChannelCount*/ + Channel]; // 从缓冲区中获得最终的原始码数据LSB(未屏蔽高2位)
 					ADData = ADLsb ;
 					swprintf_s(str, _T("  %6x"), ADData&MASK_MSB);
 					pDC->TextOut(-rect.left-30+(Channel+1)*70, rect.top+nTextHeight+36, str); // text out hex value every channel
@@ -256,11 +256,11 @@ void CADDigitView::ADDigit(CDC* pDC) // 显示ch值
 				break;
 				
 			case SHOW_MODE_VOLT: // 电压值
-				for (Channel=0; Channel<gl_nChannelCount; Channel++)
+				for (Channel=0; Channel<8/*gl_nChannelCount*/; Channel++)
 				{
 					swprintf_s(strIndex, _T("CH%d"), Channel+ADPara.FirstChannel);
 					pDC->TextOut(-rect.left-15+(Channel+1)*70, rect.top+20, strIndex);
-					ADLsb = (ADBuffer[gl_nDrawIndex][Index * gl_nChannelCount + Channel]&MASK_MSB); // 从缓冲区中获得最终的原始码数据LSB
+					ADLsb = (ADBuffer[gl_nDrawIndex][Index * 8/*gl_nChannelCount*/ + Channel]&MASK_MSB); // 从缓冲区中获得最终的原始码数据LSB
 				//	swprintf_s(str, _T("  %8.2f"), m_fADVolt[Channel][ADLsb]);
 					if (ADPara.InputRange==0
 						||ADPara.InputRange==1

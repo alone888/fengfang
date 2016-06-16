@@ -173,7 +173,7 @@ void CADParaCfgView::OnInitialUpdate()
 	m_Combo_FirstChannel.SetCurSel(ADPara.FirstChannel);
 	m_Combo_LastChannel.SetCurSel(ADPara.LastChannel);	
 	
-	m_Combo_GroundingMode.SetCurSel(ADPara.GroundingMode);
+	m_Combo_GroundingMode.SetCurSel(USB2831_GNDMODE_DI);//ADPara.GroundingMode
 	OnSelchangeCOMBOGroundingMode();
 	
 	

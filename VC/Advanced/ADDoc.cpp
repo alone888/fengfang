@@ -108,7 +108,8 @@ void CADDoc::StartDeviceAD()
 	int nRandNum;
 
 	//gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;
-
+	ADPara.LastChannel = 7;
+	ADPara.FirstChannel = 0;
 	if (!gl_bCreateFile) // 如果创建了文件对象，则先写头文件
 	{
 		::GetSystemTime(&time); 
