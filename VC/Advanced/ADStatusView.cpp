@@ -93,6 +93,7 @@ void CADStatusView::OnInitialUpdate()
 // 	pButtonTile->EnableWindow(FALSE);
 // 	pButtonPose->EnableWindow(FALSE);
 	SetDlgCheck();
+	OnGraphicShow();
 }
 
 void CADStatusView::OnChangeEDITTriggerVolt() // 改变触发电压的值
