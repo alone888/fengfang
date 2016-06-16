@@ -1338,15 +1338,18 @@ void CADScopeCtrl::UpdateChannelCount()
 void CADScopeCtrl::ProcessOrgAdData()
 {
 	double fTimePoint1,fTimePoint2;//
-	int rang = 100*1000;
+	g_nTimeAxisRange = 100*1000*1000;//us
 	int i,j;
 
-	fTimePoint1 =  rang/10000;  //showData 每个点代表的时间 根据满屏时间值在计算
+	fTimePoint1 =  g_nTimeAxisRange/10000;  //showData 每个点代表的时间 根据满屏时间值在计算
 	fTimePoint2= 8/ADPara.Frequency;//新读出来的这100点
 
 	static int lastShowDateID;//保存上次存到的位置
+	
 
 
+
+	//gt_AD_OrgData[1].data
 
 	//if(fTimePoint1<fTimePoint2)
 	//{
