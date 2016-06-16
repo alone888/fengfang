@@ -17,7 +17,6 @@ typedef struct _AD_OrgData       /* rcl */
 } AD_ORG_DATA;
 
 extern AD_ORG_DATA gt_AD_OrgData[100]; // WYL 一次读的数据个数
-extern int g_nTimeAxisRange; // WYL 一以us为单位的，表示满屏幕的时间的量程
 
 
 extern ULONG gl_ReadSizeWords;	// 读入的数据长度
