@@ -7,7 +7,8 @@ WORD ADBuffer[MAX_SEGMENT_COUNT][MAX_SEGMENT_SIZE]; // 缓冲队列1024*64
 WORD showData[8][10000];// WYL 10000个点表示屏幕上要显示的点
 
 
-AD_ORG_DATA gt_AD_OrgData[800]; // WYL 一次读的数据个数
+AD_ORG_DATA gt_AD_OrgData[100]; // WYL 一次读的数据个数
+int g_nTimeAxisRange; // WYL 一以us为单位的，表示满屏幕的时间轴量程
 
 ULONG gl_ReadSizeWords;	// 读入的数据长度
 
