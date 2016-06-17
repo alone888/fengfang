@@ -213,10 +213,8 @@ void CADScopeCtrl::OnTimer(UINT_PTR nIDEvent)
 	if(nIDEvent == TIMERID)
 	{
 		DrawBkGnd();  // 画背景
-
 		TransitionData();
 		ProcessData();
-
 		DrawPoly(); // 画线
 	}
 	else if(nIDEvent == TIMERID2)
@@ -748,14 +746,15 @@ void CADScopeCtrl::ProcessData()
 	{
 		for (Channel=0; Channel<m_nChannelCount; Channel++)
 		{
-			ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
-			pointxy[Channel][0].x = StartX;
-			pointxy[Channel][0].y = m_nCoordinateY[ptOffset[Offset]&MASK_MSB];
-			
-			for (Index=0; Index<=4096/m_nChannelCount; Index++) // 初始化1024个点(创建时，位图的大小) 
+			//ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
+			//pointxy[Channel][0].x = StartX;
+			//pointxy[Channel][0].y = m_nCoordinateY[ptOffset[Offset]&MASK_MSB];
+			//double point_cnt_per_pix = 10000/(m_rectPlot.Width()-2);
+			for (Index=0; Index<=m_nPlotWidth; Index++) // 初始化1024个点(创建时，位图的大小) 
 			{
 				pointxy[Channel][Index].x = StartX + Index;
-				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[ptOffset[(Offset+Index) * m_nChannelCount + Channel]&MASK_MSB];
+				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[showData[Channel][Index*10000/m_nPlotWidth]&MASK_MSB];
+				//pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[ptOffset[(Offset+Index) * m_nChannelCount + Channel]&MASK_MSB];
 			}
 			HeightMid[Channel] = Center; // 保存通道中间位置坐标
 			Center += PerY;
@@ -763,7 +762,7 @@ void CADScopeCtrl::ProcessData()
 	}
 	else // 多通道叠加显示
 	{
-		ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
+		//ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
 		float LsbOfPixel = (float)(AD_LSB_COUNT/m_rectPlot.Height()); // 每像素对应的码值
 		int Center = (int)(m_rectPlot.Height() / 2) + m_rectPlot.top;
 		for (int Channel=0; Channel<m_nChannelCount; Channel++)
