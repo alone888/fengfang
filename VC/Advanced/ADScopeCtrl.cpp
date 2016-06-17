@@ -167,7 +167,7 @@ void CADScopeCtrl::SetRange(double dLower, double dUpper, int nChannel)
 void CADScopeCtrl::StartTimer()
 {
 	SetTimer(TIMERID,50,0);  //这里就相当于设定了timer,如果要停掉timer就是KillTimer(TIMERID)
-	SetTimer(TIMERID2,100,0);
+	SetTimer(TIMERID2,10,0);
 }  
 
 void test_data()
@@ -182,7 +182,7 @@ void test_data()
 		{
 			for (int j = 0; j < 30000; j++)
 			{
-				data[i][j] = j%8192-4096;
+				data[i][j] = j%8192;
 			}
 		}
 	}
@@ -192,11 +192,13 @@ void test_data()
 	{	
 		for (int i = 0; i < 100 ; i++)
 		{
-			if(last_data_id == 30000 - 1)
-				last_data_id = 0;
-			gt_AD_OrgData[i].data[ch] = data[ch][last_data_id++];
+			gt_AD_OrgData[i].data[ch] = data[ch][last_data_id+i];
 		}
 	}
+	last_data_id+=100;
+	if(last_data_id == 30000 - 1)
+		last_data_id = 0;
+	
 
 	unsigned int tmp = 8000000/ADPara.Frequency;
 	for (int i = 0; i < 100 ; i++)
@@ -222,6 +224,7 @@ void CADScopeCtrl::OnTimer(UINT_PTR nIDEvent)
 	else if(nIDEvent == TIMERID2)
 	{
 		test_data();
+		ProcessOrgAdData();
 	}
 }
 ///////////////////////////////////////////////////////////////////////////
@@ -1352,10 +1355,13 @@ void CADScopeCtrl::ProcessOrgAdData()
 	int i,j;
 	double fTimePerPoint;//这10000个点中每个点对应的时间
 
-	g_nTimeAxisRange = 100*1000*1000;//us为单位 也就是100s
+	//g_nTimeAxisRange = 100*1000*1000;//us为单位 也就是100s
 	fTimePerPoint = g_nTimeAxisRange/10000;  //showData 每个点代表的时间 根据时间轴量程计算
 	startID = gt_AD_OrgData[orgDatID].time/fTimePerPoint;
-	startID +=1;
+	if (!startID)
+	{
+		startID +=1;	
+	}
 	for (j=startID;j<10000;j++)
 	{
 		if (j*fTimePerPoint<gt_AD_OrgData[orgDatID+1].time &&
@@ -1376,7 +1382,8 @@ void CADScopeCtrl::ProcessOrgAdData()
 		else if (j*fTimePerPoint<gt_AD_OrgData[orgDatID].time)
 		{
 			//AfxMessageBox("异常情况");
-			break;
+
+			//break;
 		}
 		else if (gt_AD_OrgData[orgDatID+1].time == 0 && j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
 		{
@@ -1393,8 +1400,9 @@ void CADScopeCtrl::ProcessOrgAdData()
 	{
 		for (i=orgDatID;i<orgDatCnt-1;i++)
 		{
-			if (gt_AD_OrgData[orgDatID].time == 0)
+			if (gt_AD_OrgData[i].time == 0)
 			{
+				orgDatID = i;
 				break;
 			}
 		}
@@ -1410,7 +1418,7 @@ void CADScopeCtrl::ProcessOrgAdData()
 			//showdata的这个点的数据时间已经比gt_AD_OrgData这个的点的时间大了，那么gt_AD_OrgData跳到下一个点，showdate的id减1让下一次仍然赋值给这个点
 			else if (j*fTimePerPoint>=gt_AD_OrgData[orgDatID+1].time)
 			{
-				if (orgDatID==orgDatCnt-1)
+				if (orgDatID+1==orgDatCnt-1)
 				{
 					break;//退出循环，新的数据已经全部被填入showdata中
 				}
