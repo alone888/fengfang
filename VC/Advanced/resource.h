@@ -272,6 +272,7 @@
 #define IDC_COMBO_TriggerSource         1230
 #define IDC_EDIT_Volt0                  1231
 #define IDC_EDIT_ChannelSum             1233
+#define IDC_EDIT_ChannelSum2            1234
 #define IDC_EDIT_TrigWindow             1236
 #define IDC_SPIN1                       1237
 #define IDC_SPIN2                       1238

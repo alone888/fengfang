@@ -167,7 +167,7 @@ void CADScopeCtrl::SetRange(double dLower, double dUpper, int nChannel)
 void CADScopeCtrl::StartTimer()
 {
 	SetTimer(TIMERID,50,0);  //这里就相当于设定了timer,如果要停掉timer就是KillTimer(TIMERID)
-	SetTimer(TIMERID2,10,0);
+	SetTimer(TIMERID2,100,0);
 }  
 
 void test_data()
@@ -196,7 +196,7 @@ void test_data()
 		}
 	}
 	last_data_id+=100;
-	if(last_data_id == 30000 - 1)
+	if(last_data_id >= 30000 - 1)
 		last_data_id = 0;
 	
 
@@ -212,17 +212,23 @@ void test_data()
 void CADScopeCtrl::OnTimer(UINT_PTR nIDEvent)
 
 {
+	CString str;
+	static int i=0;
 	if(nIDEvent == TIMERID)
 	{
 		DrawBkGnd();  // 画背景
 		TransitionData();
 		ProcessData();
 		DrawPoly(); // 画线
+		str.Format(_T("%d"),i);
+		gl_pParaCfgView->m_TimerCnt.SetWindowText(str);
 	}
 	else if(nIDEvent == TIMERID2)
 	{
 		test_data();
 		ProcessOrgAdData();
+		i++;
+
 	}
 }
 ///////////////////////////////////////////////////////////////////////////
@@ -917,10 +923,10 @@ void CADScopeCtrl::DrawPoly()
 	//	}
 	//}
 
-	if (nDrawCount>m_rectPlot.Width() - 1)
-	{
+	/*if (nDrawCount>m_rectPlot.Width() - 1)
+	{*/
 		nDrawCount = m_rectPlot.Width() - 1;
-	}
+	//}
 	if (m_bAllChannel || !gl_bTileWave) // 所有通道显示或叠加显示时
 	{
 		for (int Channel = 0; Channel<m_nChannelCount; Channel++) // 画所有通道的点
@@ -938,7 +944,7 @@ void CADScopeCtrl::DrawPoly()
 		for (int Index=0; Index<nDrawCount; Index++)	
 		{
 			pointTemp[Index].x = StartX  + Index;
-			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[(ptOffset[Index * m_nChannelCount + m_nChannelNum-ADPara.FirstChannel]&MASK_MSB)-gl_MiddleLsb[m_nChannelNum]];
+			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[(showData[m_nChannelNum][Index*10000/m_nPlotWidth]&MASK_MSB)-gl_MiddleLsb[m_nChannelNum]];
 		}
 		m_dcGrid.Polyline(pointTemp, nDrawCount);
 	}
@@ -1363,10 +1369,23 @@ void CADScopeCtrl::ProcessOrgAdData()
 	}
 	for (j=startID;j<10000;j++)
 	{
+		
+		if (j==9590)
+		{
+			startID +=1;	
+		}
+		
 		if (j*fTimePerPoint<gt_AD_OrgData[orgDatID+1].time &&
 			j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
 		{
 			showData[0][j] = gt_AD_OrgData[orgDatID].data[0];
+			showData[1][j] = gt_AD_OrgData[orgDatID].data[1];
+			showData[2][j] = gt_AD_OrgData[orgDatID].data[2];
+			showData[3][j] = gt_AD_OrgData[orgDatID].data[3];
+			showData[4][j] = gt_AD_OrgData[orgDatID].data[4];
+			showData[5][j] = gt_AD_OrgData[orgDatID].data[5];
+			showData[6][j] = gt_AD_OrgData[orgDatID].data[6];
+			showData[7][j] = gt_AD_OrgData[orgDatID].data[7];
 		}
 		//showdata的这个点的数据时间已经比gt_AD_OrgData这个的点的时间大了，那么gt_AD_OrgData跳到下一个点，showdate的id减1让下一次仍然赋值给这个点
 		else if (j*fTimePerPoint>=gt_AD_OrgData[orgDatID+1].time)
@@ -1383,6 +1402,14 @@ void CADScopeCtrl::ProcessOrgAdData()
 			//AfxMessageBox("异常情况");
 
 			//break;
+			showData[0][j] = gt_AD_OrgData[orgDatID].data[0];
+			showData[1][j] = gt_AD_OrgData[orgDatID].data[1];
+			showData[2][j] = gt_AD_OrgData[orgDatID].data[2];
+			showData[3][j] = gt_AD_OrgData[orgDatID].data[3];
+			showData[4][j] = gt_AD_OrgData[orgDatID].data[4];
+			showData[5][j] = gt_AD_OrgData[orgDatID].data[5];
+			showData[6][j] = gt_AD_OrgData[orgDatID].data[6];
+			showData[7][j] = gt_AD_OrgData[orgDatID].data[7];
 		}
 		else if (gt_AD_OrgData[orgDatID+1].time == 0 && j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
 		{
@@ -1413,6 +1440,13 @@ void CADScopeCtrl::ProcessOrgAdData()
 				j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
 			{
 				showData[0][j] = gt_AD_OrgData[orgDatID].data[0];
+				showData[1][j] = gt_AD_OrgData[orgDatID].data[1];
+				showData[2][j] = gt_AD_OrgData[orgDatID].data[2];
+				showData[3][j] = gt_AD_OrgData[orgDatID].data[3];
+				showData[4][j] = gt_AD_OrgData[orgDatID].data[4];
+				showData[5][j] = gt_AD_OrgData[orgDatID].data[5];
+				showData[6][j] = gt_AD_OrgData[orgDatID].data[6];
+				showData[7][j] = gt_AD_OrgData[orgDatID].data[7];
 			}
 			//showdata的这个点的数据时间已经比gt_AD_OrgData这个的点的时间大了，那么gt_AD_OrgData跳到下一个点，showdate的id减1让下一次仍然赋值给这个点
 			else if (j*fTimePerPoint>=gt_AD_OrgData[orgDatID+1].time)
@@ -1432,6 +1466,13 @@ void CADScopeCtrl::ProcessOrgAdData()
 			else if (gt_AD_OrgData[orgDatID+1].time == 0 && j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
 			{
 				showData[0][j] = gt_AD_OrgData[orgDatID].data[0];
+				showData[1][j] = gt_AD_OrgData[orgDatID].data[1];
+				showData[2][j] = gt_AD_OrgData[orgDatID].data[2];
+				showData[3][j] = gt_AD_OrgData[orgDatID].data[3];
+				showData[4][j] = gt_AD_OrgData[orgDatID].data[4];
+				showData[5][j] = gt_AD_OrgData[orgDatID].data[5];
+				showData[6][j] = gt_AD_OrgData[orgDatID].data[6];
+				showData[7][j] = gt_AD_OrgData[orgDatID].data[7];
 			}
 			else
 			{

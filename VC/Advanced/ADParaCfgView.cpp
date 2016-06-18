@@ -71,6 +71,7 @@ void CADParaCfgView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK_INPUT14, m_input_2);
 	DDX_Control(pDX, IDC_CHECK_INPUT15, m_input_3);
 	DDX_Control(pDX, IDC_CHECK_INPUT16, m_input_4);
+	DDX_Control(pDX, IDC_EDIT_ChannelSum2, m_TimerCnt);
 }
 
 

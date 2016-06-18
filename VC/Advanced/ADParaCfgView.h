@@ -133,6 +133,7 @@ public:
 	afx_msg void OnBnClickedCheckInput14();
 	afx_msg void OnBnClickedCheckInput15();
 	afx_msg void OnBnClickedCheckInput16();
+	CEdit m_TimerCnt;
 };
 
 /////////////////////////////////////////////////////////////////////////////
