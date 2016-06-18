@@ -165,7 +165,22 @@ void CADParaCfgView::OnInitialUpdate()
 	pDoc->m_hWndADCfg = this->m_hWnd;
 	theApp.m_hParaCfgView = this->m_hWnd;
 	((CButton *)GetDlgItem(IDC_CHECK_INPUT9))->SetCheck(1);
+	((CButton *)GetDlgItem(IDC_CHECK_INPUT10))->SetCheck(1);
+	((CButton *)GetDlgItem(IDC_CHECK_INPUT11))->SetCheck(1);
+	((CButton *)GetDlgItem(IDC_CHECK_INPUT12))->SetCheck(1);
+	((CButton *)GetDlgItem(IDC_CHECK_INPUT13))->SetCheck(1);
+	((CButton *)GetDlgItem(IDC_CHECK_INPUT14))->SetCheck(1);
+	((CButton *)GetDlgItem(IDC_CHECK_INPUT15))->SetCheck(1);
+	((CButton *)GetDlgItem(IDC_CHECK_INPUT16))->SetCheck(1);
 	gl_signal_enable[0] = 1;
+	gl_signal_enable[1] = 1;
+	gl_signal_enable[2] = 1;
+	gl_signal_enable[3] = 1;
+	gl_signal_enable[4] = 1;
+	gl_signal_enable[5] = 1;
+	gl_signal_enable[6] = 1;
+	gl_signal_enable[7] = 1;
+
 
 	// 初始化用户界面视觉参数		
 	CString str;
