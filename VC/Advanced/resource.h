@@ -273,6 +273,8 @@
 #define IDC_EDIT_Volt0                  1231
 #define IDC_EDIT_ChannelSum             1233
 #define IDC_EDIT_ChannelSum2            1234
+#define IDC_EDIT_ChannelSum3            1235
+#define IDC_EDIT_TimeAxisRange          1235
 #define IDC_EDIT_TrigWindow             1236
 #define IDC_SPIN1                       1237
 #define IDC_SPIN2                       1238
@@ -281,7 +283,9 @@
 #define IDC_SPIN4                       1240
 #define IDC_EDIT2                       1241
 #define IDC_EDIT3                       1242
+#define IDC_BUTTON1                     1242
 #define IDC_EDIT4                       1243
+#define IDC_BUTTON3                     1243
 #define IDC_EDIT5                       1244
 #define IDC_SPIN5                       1245
 #define IDC_EDIT6                       1246
@@ -375,7 +379,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        185
 #define _APS_NEXT_COMMAND_VALUE         32837
-#define _APS_NEXT_CONTROL_VALUE         1242
+#define _APS_NEXT_CONTROL_VALUE         1243
 #define _APS_NEXT_SYMED_VALUE           132
 #endif
 #endif
