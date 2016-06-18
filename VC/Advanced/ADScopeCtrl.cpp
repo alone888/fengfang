@@ -220,14 +220,14 @@ void CADScopeCtrl::OnTimer(UINT_PTR nIDEvent)
 		TransitionData();
 		ProcessData();
 		DrawPoly(); // »­Ïß
-		str.Format(_T("%d"),i);
-		gl_pParaCfgView->m_TimerCnt.SetWindowText(str);
+		//str.Format(_T("%d"),i);
+		//gl_pParaCfgView->m_TimerCnt.SetWindowText(str);
 	}
 	else if(nIDEvent == TIMERID2)
 	{
-		test_data();
-		ProcessOrgAdData();
-		i++;
+		//test_data();
+		//ProcessOrgAdData();
+		//i++;
 
 	}
 }

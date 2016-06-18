@@ -38,6 +38,7 @@ UINT ReadDataThread(PVOID hWnd)
 
 	while(gl_bDeviceADRun)  // 循环采集AD数据
 	{	
+		gl_ReadSizeWords = ADPara.Frequency/100;
 		// 读64K数据
 		bRet = USB2831_ReadDeviceAD(hDevice, ADBuffer[gl_nReadIndex], 
 			gl_ReadSizeWords, &lRetReadSizeWords);

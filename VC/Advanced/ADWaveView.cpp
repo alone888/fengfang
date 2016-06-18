@@ -140,6 +140,34 @@ void CADWaveView::OnDrawPolyLine() // 显示波形
 	//	gl_pADStatusView->AnalyzeAccurate(); // 精度分析
 	//}
 	//m_ADScopeCtrl.StartTimer();
+
+	CString str;
+	static int i=0;
+	static unsigned int time=0;
+	PWORD  ptOffset; // 缓存指针
+
+	i++;
+	str.Format(_T("%d"),i);
+	gl_pParaCfgView->m_TimerCnt.SetWindowText(str);
+
+	ptOffset = &ADBuffer[gl_nDrawIndex][gl_Offset];
+	for (int ch = 0; ch < 8; ch++)
+	{	
+		for (int i = 0; i < ADPara.Frequency/100 ; i++)
+		{
+			gt_AD_OrgData[i].data[ch] = ptOffset[i * 8 + ch];
+		}
+	}
+
+	unsigned int tmp = 8000000/ADPara.Frequency;
+	for (int i = 0; i < ADPara.Frequency/100 ; i++)
+	{
+		if(time > g_nTimeAxisRange) time = 0;
+		gt_AD_OrgData[i].time = time;
+		time += tmp;
+	}
+
+	m_ADScopeCtrl.ProcessOrgAdData();
 }
 
 void CADWaveView::StartScopeCtrlTimer() // 启动timer
