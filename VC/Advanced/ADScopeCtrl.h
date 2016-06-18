@@ -41,7 +41,7 @@ public:
 	void SetStatusBar();
 	void AppendPoly(int BufferID, int  Offset);
 	void UpdateChannelCount();
-	void ProcessOrgAdData();
+	void ProcessOrgAdData(int size_buf);
 	int		m_nPtCount;
 	int		m_nChannelCount;
 	int		m_nChannelNum;

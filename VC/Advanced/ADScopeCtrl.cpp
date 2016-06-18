@@ -1349,12 +1349,12 @@ void CADScopeCtrl::UpdateChannelCount()
 // 	}
 
 }
-void CADScopeCtrl::ProcessOrgAdData()
+void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 {
 	//fill the showData with gt_AD_OrgData
 	
 	
-	int orgDatCnt=100;
+	int orgDatCnt=size_buf;
 	int startID;//根据传进来的新数据的第一个点的时间，来确定从showdata的哪个点开始填起。
 	int orgDatID=0;
 	int i,j;
