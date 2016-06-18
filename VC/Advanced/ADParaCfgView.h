@@ -134,6 +134,10 @@ public:
 	afx_msg void OnBnClickedCheckInput15();
 	afx_msg void OnBnClickedCheckInput16();
 	CEdit m_TimerCnt;
+	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedButton3();
+	// 屏幕上显示的时间轴量程
+	CEdit m_TimeAxisRange;
 };
 
 /////////////////////////////////////////////////////////////////////////////
