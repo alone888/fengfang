@@ -182,6 +182,9 @@ void CADParaCfgView::OnInitialUpdate()
 	gl_signal_enable[7] = 1;
 
 
+	OnBnClickedButton1();
+
+
 	// 初始化用户界面视觉参数		
 	CString str;
 //	OldADPara = ADPara; // 保存旧的硬件参数
@@ -1118,3 +1121,5 @@ void CADParaCfgView::OnBnClickedButton3()
 		}
 	}
 }
+
+

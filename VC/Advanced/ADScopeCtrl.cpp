@@ -144,7 +144,7 @@ BOOL CADScopeCtrl::Create(DWORD dwStyle, const RECT& rect,
 		className, NULL, dwStyle, 
 		rect.left, rect.top, rect.right-rect.left, rect.bottom-rect.top, 
 		pParentWnd->GetSafeHwnd(), (HMENU)nID);
-	
+	StartTimer();
 	return result;
 	
 } // Create
@@ -167,7 +167,7 @@ void CADScopeCtrl::SetRange(double dLower, double dUpper, int nChannel)
 void CADScopeCtrl::StartTimer()
 {
 	SetTimer(TIMERID,50,0);  //这里就相当于设定了timer,如果要停掉timer就是KillTimer(TIMERID)
-	SetTimer(TIMERID2,100,0);
+	SetTimer(TIMERID2,100,0);//模拟假数据用
 }  
 
 int Drow_text_find_id(int cur_id)
@@ -1100,7 +1100,7 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 			CFont font;
 			CFont *oldfont;
 
-			font.CreatePointFont(60,_T("黑体")); //参数含义1，字体大小，2字体类型，3字
+			font.CreatePointFont(90,_T("宋体")); //参数含义1，字体大小，2字体类型，3字
 			oldfont = m_dcGrid.SelectObject(&font);
 			m_dcGrid.SetTextColor(RGB(0,0,255));//字体颜色RGB   
 
