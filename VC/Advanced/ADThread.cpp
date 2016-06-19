@@ -41,6 +41,15 @@ UINT ReadDataThread(PVOID hWnd)
 
 		gl_ReadSizeWords =2048;
 
+		if (ADPara.Frequency>100000)
+		{
+			gl_ReadSizeWords = 8192;
+		} 
+		else
+		{
+			gl_ReadSizeWords = 2048;
+		}
+
 
 		// ¶Á64KÊý¾Ý
 		bRet = USB2831_ReadDeviceAD(hDevice, ADBuffer[gl_nReadIndex], 

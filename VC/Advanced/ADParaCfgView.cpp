@@ -1033,18 +1033,33 @@ void CADParaCfgView::OnBnClickedButton1()
 	// TODO: 在此添加控件通知处理程序代码
 	if (TimeAxisRangeID==0)
 	{
-		TimeAxisRangeID=sizeof(TimeAxisRangeVal)/4-1;
+		//TimeAxisRangeID=sizeof(TimeAxisRangeVal)/4-1;
+		return;
 	}
 	else
 	{
 		TimeAxisRangeID--;
 	}
 	
+
 	g_nTimeAxisRange = TimeAxisRangeVal[TimeAxisRangeID]*1000;
 	CString tmp;
 	tmp.Format(_T("%d"),TimeAxisRangeVal[TimeAxisRangeID]);
 	m_TimeAxisRange.SetWindowTextW(tmp);
 
+	//新旧量程的比例
+	int lastRange = TimeAxisRangeVal[TimeAxisRangeID+1];
+	int nowRange =TimeAxisRangeVal[TimeAxisRangeID];
+	int i,j,temp;
+	for (i=SHOW_DATA_CNT-1;i>0;i--)
+	{
+		for (j=0;j<8;j++)
+		{
+			temp=i*nowRange/lastRange;
+			showData[j][i] = showData[j][temp];
+		}
+
+	}
 }
 
 //时间量程增大
@@ -1053,7 +1068,8 @@ void CADParaCfgView::OnBnClickedButton3()
 	// TODO: 在此添加控件通知处理程序代码
 	if (TimeAxisRangeID==sizeof(TimeAxisRangeVal)/4-1)
 	{
-		TimeAxisRangeID=0;
+		//TimeAxisRangeID=0;
+		return;
 	}
 	else
 	{
@@ -1064,4 +1080,26 @@ void CADParaCfgView::OnBnClickedButton3()
 	CString tmp;
 	tmp.Format(_T("%d"),TimeAxisRangeVal[TimeAxisRangeID]);
 	m_TimeAxisRange.SetWindowTextW(tmp);
+
+	//新旧量程的比例
+	int lastRange = TimeAxisRangeVal[TimeAxisRangeID-1];
+	int nowRange =TimeAxisRangeVal[TimeAxisRangeID];
+
+	int i,j,temp;
+	for (i=0;i<SHOW_DATA_CNT*lastRange/nowRange;i++)
+	{
+		for (j=0;j<8;j++)
+		{
+			temp=i*nowRange/lastRange;
+			showData[j][i] = showData[j][temp];
+		}
+
+	}
+	for (i=SHOW_DATA_CNT*lastRange/nowRange;i<SHOW_DATA_CNT;i++)
+	{
+		for (j=0;j<8;j++)
+		{
+			showData[j][i] = 0;
+		}
+	}
 }

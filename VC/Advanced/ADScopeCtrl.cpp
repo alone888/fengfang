@@ -755,15 +755,11 @@ void CADScopeCtrl::ProcessData()
 	{
 		for (Channel=0; Channel<m_nChannelCount; Channel++)
 		{
-			//ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
-			//pointxy[Channel][0].x = StartX;
-			//pointxy[Channel][0].y = m_nCoordinateY[ptOffset[Offset]&MASK_MSB];
-			//double point_cnt_per_pix = 10000/(m_rectPlot.Width()-2);
-			for (Index=0; Index<=m_nPlotWidth; Index++) // 初始化1024个点(创建时，位图的大小) 
+			for (Index=0; Index<=m_nPlotWidth; Index++) // 
 			{
 				pointxy[Channel][Index].x = StartX + Index;
-				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[showData[Channel][Index*10000/m_nPlotWidth]&MASK_MSB];
-				//pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[ptOffset[(Offset+Index) * m_nChannelCount + Channel]&MASK_MSB];
+				//double point_cnt_per_pix = SHOW_DATA_CNT/m_nPlotWidth; 下边这句把原始数据showdata的点映射成屏幕上的像素点
+				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[showData[Channel][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB];
 			}
 			HeightMid[Channel] = Center; // 保存通道中间位置坐标
 			Center += PerY;
@@ -840,57 +836,6 @@ void CADScopeCtrl::ProcessData2()
 
 //##############################################################################
 //画处理完的点
-void CADScopeCtrl::DrawPoly2()
-{
-	int DataY = 0;
-	int nDrawCount = 0;
-	gl_bDataProcessing = TRUE;
-	CPen* oldPen;
-	//m_dcPlot.SetBkColor (RGB(255,255,255)/*m_crBackColor*/);
-	//m_dcPlot.FillRect(m_rectClient, &m_brushBack);
-	//m_dcPlot.SetTextColor(RGB(255, 158, 0));
-	//---------------------------------------------------------------------------------
-
-	/*if (m_nChannelCount < 6)
-	{
-		nDrawCount = m_rectPlot.Width() - 1;
-	}
-	else
-	{
-		nDrawCount = 4096/m_nChannelCount - 1;
-	}*/
-	nDrawCount = (4096-4096%m_nChannelCount)/m_nChannelCount - 1;
-	if (nDrawCount>m_rectPlot.Width() - 1)
-	{
-		nDrawCount = m_rectPlot.Width() - 1;
-	}
-	if (m_bAllChannel || !gl_bTileWave) // 所有通道显示或叠加显示时
-	{
-		for (int Channel = 0; Channel<m_nChannelCount; Channel++) // 画所有通道的点
-		{
-			oldPen = m_dcGrid.SelectObject(&m_penChannel[Channel]);
-			m_dcGrid.Polyline(pointxy[Channel], nDrawCount);
-		}
-	}
-	else // 单通道显示
-	{
-		m_dcGrid.SelectObject(&m_penChannel[m_nChannelNum]);
-		int StartX = m_rectPlot.left;
-		Center = (int)(m_nPlotHeight / 2) + m_rectPlot.top;
-		WORD* ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
-		for (int Index=0; Index<nDrawCount; Index++)	
-		{
-			pointTemp[Index].x = StartX  + Index;
-			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[(ptOffset[Index * m_nChannelCount + m_nChannelNum-ADPara.FirstChannel]&MASK_MSB)-gl_MiddleLsb[m_nChannelNum]];
-		}
-		m_dcGrid.Polyline(pointTemp, nDrawCount);
-	}
-	gl_bDataProcessing = FALSE;
-	Invalidate(FALSE);
-	UpdateWindow();
-}
-//##############################################################################
-//画处理完的点
 void CADScopeCtrl::DrawPoly()
 {
 	int DataY = 0;
@@ -902,31 +847,9 @@ void CADScopeCtrl::DrawPoly()
 	//m_dcPlot.SetTextColor(RGB(255, 158, 0));
 	//---------------------------------------------------------------------------------
 
-	/*if (m_nChannelCount < 6)
-	{
-		nDrawCount = m_rectPlot.Width() - 1;
-	}
-	else
-	{
-		nDrawCount = 4096/m_nChannelCount - 1;
-	}*/
-	//nDrawCount = (4096-4096%m_nChannelCount)/m_nChannelCount - 1;
 
-	//for (int Channel = 0; Channel<m_nChannelCount; Channel++) // 画所有通道的点
-	//{
-	//	for(int i= 0;i<nDrawCount;i++)
-	//	{
-	//		POINT p;
-	//		p.x = i;
-	//		p.y = i%100;
-	//		pointxy[Channel][i] = p;
-	//	}
-	//}
+	nDrawCount = m_rectPlot.Width() - 1;
 
-	/*if (nDrawCount>m_rectPlot.Width() - 1)
-	{*/
-		nDrawCount = m_rectPlot.Width() - 1;
-	//}
 	if (m_bAllChannel || !gl_bTileWave) // 所有通道显示或叠加显示时
 	{
 		for (int Channel = 0; Channel<m_nChannelCount; Channel++) // 画所有通道的点
@@ -944,7 +867,7 @@ void CADScopeCtrl::DrawPoly()
 		for (int Index=0; Index<nDrawCount; Index++)	
 		{
 			pointTemp[Index].x = StartX  + Index;
-			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[(showData[m_nChannelNum][Index*10000/m_nPlotWidth]&MASK_MSB)-gl_MiddleLsb[m_nChannelNum]];
+			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[(showData[m_nChannelNum][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB)-gl_MiddleLsb[m_nChannelNum]];
 		}
 		m_dcGrid.Polyline(pointTemp, nDrawCount);
 	}
@@ -1358,23 +1281,17 @@ void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 	int startID;//根据传进来的新数据的第一个点的时间，来确定从showdata的哪个点开始填起。
 	int orgDatID=0;
 	int i,j;
-	double fTimePerPoint;//这10000个点中每个点对应的时间
+	double fTimePerPoint;//这SHOW_DATA_CNT个点中每个点对应的时间
 
 	//g_nTimeAxisRange = 100*1000*1000;//us为单位 也就是100s
-	fTimePerPoint = g_nTimeAxisRange/10000;  //showData 每个点代表的时间 根据时间轴量程计算
+	fTimePerPoint = g_nTimeAxisRange/SHOW_DATA_CNT;  //showData 每个点代表的时间 根据时间轴量程计算
 	startID = gt_AD_OrgData[orgDatID].time/fTimePerPoint;
-	if (!startID)
+	if (!startID)//第0个数据不填 防止下边变成负数
 	{
 		startID +=1;	
 	}
-	for (j=startID;j<10000;j++)
-	{
-		
-		if (j==9590)
-		{
-			startID +=1;	
-		}
-		
+	for (j=startID;j<SHOW_DATA_CNT;j++)
+	{	
 		if (j*fTimePerPoint<gt_AD_OrgData[orgDatID+1].time &&
 			j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
 		{
@@ -1422,7 +1339,7 @@ void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 		}
 	}
 
-	if (orgDatID<orgDatCnt-2)
+	if (orgDatID<orgDatCnt-2) //新来的数据超过的屏幕右边，从左边开始
 	{
 		for (i=orgDatID;i<orgDatCnt-1;i++)
 		{
@@ -1434,7 +1351,7 @@ void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 		}
 			
 		//从头赋值
-		for (j=0;j<10000;j++)
+		for (j=0;j<SHOW_DATA_CNT;j++)
 		{
 			if (j*fTimePerPoint<gt_AD_OrgData[orgDatID+1].time &&
 				j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
