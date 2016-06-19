@@ -170,6 +170,20 @@ void CADScopeCtrl::StartTimer()
 	SetTimer(TIMERID2,100,0);
 }  
 
+int Drow_text_find_id(int cur_id)
+{
+	int find_cnt = 0;
+	int i;
+	for(i = 0; i < 8; i++)
+	{
+		if(gl_signal_enable[i] == 1)
+			find_cnt++;
+		if(find_cnt ==cur_id)
+			break;
+	}
+	return i+1;
+}
+
 void test_data()
 {
 	static WORD data[8][30000] = {0};
@@ -749,17 +763,23 @@ void CADScopeCtrl::ProcessData()
 	int Channel, Index, StartX;
 	PWORD  ptOffset; // 缓存指针
 	int Offset = 0, DataY = 0;
+	int channe_id_enable = 0;
 	StartX = m_rectPlot.left+1; // X方向的起始位置
 	
 	if (gl_bTileWave) // 多通道平铺显示
 	{
 		for (Channel=0; Channel<m_nChannelCount; Channel++)
 		{
-			for (Index=0; Index<=m_nPlotWidth; Index++) // 
+			//ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
+			//pointxy[Channel][0].x = StartX;
+			//pointxy[Channel][0].y = m_nCoordinateY[ptOffset[Offset]&MASK_MSB];
+			//double point_cnt_per_pix = 10000/(m_rectPlot.Width()-2);
+			channe_id_enable = Drow_text_find_id(Channel+1);
+			for (Index=0; Index<=m_nPlotWidth; Index++) // 初始化1024个点(创建时，位图的大小) 
 			{
 				pointxy[Channel][Index].x = StartX + Index;
-				//double point_cnt_per_pix = SHOW_DATA_CNT/m_nPlotWidth; 下边这句把原始数据showdata的点映射成屏幕上的像素点
-				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[showData[Channel][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB];
+				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[showData[channe_id_enable-1][Index*10000/m_nPlotWidth]&MASK_MSB];
+				//pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[ptOffset[(Offset+Index) * m_nChannelCount + Channel]&MASK_MSB];
 			}
 			HeightMid[Channel] = Center; // 保存通道中间位置坐标
 			Center += PerY;
@@ -842,18 +862,14 @@ void CADScopeCtrl::DrawPoly()
 	int nDrawCount = 0;
 	gl_bDataProcessing = TRUE;
 	CPen* oldPen;
-	//m_dcPlot.SetBkColor (RGB(255,255,255)/*m_crBackColor*/);
-	//m_dcPlot.FillRect(m_rectClient, &m_brushBack);
-	//m_dcPlot.SetTextColor(RGB(255, 158, 0));
-	//---------------------------------------------------------------------------------
-
+	int channe_id_enable = 0;
 
 	nDrawCount = m_rectPlot.Width() - 1;
-
 	if (m_bAllChannel || !gl_bTileWave) // 所有通道显示或叠加显示时
 	{
 		for (int Channel = 0; Channel<m_nChannelCount; Channel++) // 画所有通道的点
 		{
+			//channe_id_enable = Drow_text_find_id(Channel+1);			
 			oldPen = m_dcGrid.SelectObject(&m_penChannel[Channel]);
 			m_dcGrid.Polyline(pointxy[Channel], nDrawCount);
 		}
@@ -867,7 +883,7 @@ void CADScopeCtrl::DrawPoly()
 		for (int Index=0; Index<nDrawCount; Index++)	
 		{
 			pointTemp[Index].x = StartX  + Index;
-			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[(showData[m_nChannelNum][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB)-gl_MiddleLsb[m_nChannelNum]];
+			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[(showData[Drow_text_find_id(m_nChannelNum+1)-1][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB)-gl_MiddleLsb[Drow_text_find_id(m_nChannelNum+1)-1]];
 		}
 		m_dcGrid.Polyline(pointTemp, nDrawCount);
 	}
@@ -1062,10 +1078,10 @@ void CADScopeCtrl::DrawSingleCHGrid(CDC* pDC)
 	//}
 }
 
-
 void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 {
 	CString str;
+	int signe_id = 0;
 	float hight = (float)(m_rectPlot.Height() / m_nChannelCount); // 每通道的Y宽度
 	for (int Channel = 0; Channel <gl_nChannelCount; Channel++)
 	{
@@ -1084,11 +1100,16 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 			CFont font;
 			CFont *oldfont;
 
-			font.CreatePointFont(100,_T("黑体")); //参数含义1，字体大小，2字体类型，3字
+			font.CreatePointFont(60,_T("黑体")); //参数含义1，字体大小，2字体类型，3字
 			oldfont = m_dcGrid.SelectObject(&font);
 			m_dcGrid.SetTextColor(RGB(0,0,255));//字体颜色RGB   
-				str.Format(_T("CH %d"), Channel+ADPara.FirstChannel);
-				m_dcGrid.TextOut(m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+hight/2+5), str);
+
+			signe_id = Drow_text_find_id(Channel+1);
+			if(signe_id > 4)
+				str.Format(_T("channel %d"), signe_id-4);
+			else
+				str.Format(_T("Singal %d"), signe_id);
+			m_dcGrid.TextOut(m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+hight/2+5), str);
 			m_dcGrid.SetTextColor(RGB(0,0,0));//字体颜色RGB  
 			m_dcGrid.SelectObject(oldfont);
 			DeleteObject(font);//释放资源
