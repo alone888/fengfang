@@ -1045,6 +1045,7 @@ void CADParaCfgView::OnBnClickedCheckInput16()
 int TimeAxisRangeVal[]={10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000,200000,500000};//以ms为单位
 int TimeAxisRangeID=6;//初始为1s钟
 
+extern int last_end_id;
 //时间量程减小
 void CADParaCfgView::OnBnClickedButton1()
 {
@@ -1069,6 +1070,8 @@ void CADParaCfgView::OnBnClickedButton1()
 	int lastRange = TimeAxisRangeVal[TimeAxisRangeID+1];
 	int nowRange =TimeAxisRangeVal[TimeAxisRangeID];
 	int i,j,temp;
+	
+
 	for (i=SHOW_DATA_CNT-1;i>0;i--)
 	{
 		for (j=0;j<8;j++)
@@ -1076,8 +1079,9 @@ void CADParaCfgView::OnBnClickedButton1()
 			temp=i*nowRange/lastRange;
 			showData[j][i] = showData[j][temp];
 		}
-
 	}
+	if(last_end_id < 5000)
+		last_end_id = last_end_id*2;
 }
 
 //时间量程增大

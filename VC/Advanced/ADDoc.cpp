@@ -221,7 +221,7 @@ UINT ProcessDataThread(PVOID pThreadPara)
 			gl_bProgress = TRUE; // 使OnDraw函数能更新进度条		
 			break;
 		case PROC_MODE_WAVE:  // 波形处理
-			if (gl_bDataProcessing == FALSE)
+			//if (gl_bDataProcessing == FALSE)
 			{
 				gl_nDrawIndex = gl_nCurrentIndex; // 如果窗口已完成数据刷新，则置新的缓冲区索引号，使之绘制新缓冲区
 				//::SendMessage(pADDoc->m_hWndDigit, WM_SHOW_DIGIT, NULL, NULL);
@@ -247,6 +247,10 @@ UINT ProcessDataThread(PVOID pThreadPara)
 			strFileLenght += " Kb";
 			pADFrm->GetFileLenghtStatic()->SetWindowText(strFileLenght);
 			ShowCount++;
+
+			gl_nDrawIndex = gl_nCurrentIndex; // 如果窗口已完成数据刷新，则置新的缓冲区索引号，使之绘制新缓冲区
+			//::SendMessage(pADDoc->m_hWndDigit, WM_SHOW_DIGIT, NULL, NULL);
+			::SendMessage(pADDoc->m_hWndWave, WM_SHOW_WAVE, NULL, NULL);
 			break;
 // 		default:
 // 			ASSERT(FALSE);

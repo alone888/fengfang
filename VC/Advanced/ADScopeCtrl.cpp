@@ -145,6 +145,12 @@ BOOL CADScopeCtrl::Create(DWORD dwStyle, const RECT& rect,
 		rect.left, rect.top, rect.right-rect.left, rect.bottom-rect.top, 
 		pParentWnd->GetSafeHwnd(), (HMENU)nID);
 	StartTimer();
+
+	//CButton *m_btnadd = new CButton;
+	//m_btnadd->Create(_T("Add"),WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON,CRect(20,20,40,80),
+	//	this,1);
+	//m_btnadd->ShowWindow(SW_SHOW);
+
 	return result;
 	
 } // Create
@@ -234,8 +240,6 @@ void CADScopeCtrl::OnTimer(UINT_PTR nIDEvent)
 		TransitionData();
 		ProcessData();
 		DrawPoly(); // 画线
-		//str.Format(_T("%d"),i);
-		//gl_pParaCfgView->m_TimerCnt.SetWindowText(str);
 	}
 	else if(nIDEvent == TIMERID2)
 	{
@@ -732,11 +736,16 @@ void CADScopeCtrl::OnLButtonDown(UINT nFlags, CPoint point)
 //用原码值来做(buffer里面存放原码), 再处理成可以显示的点数组
 void CADScopeCtrl::AppendPoly(int BufferID, int  Offset)
 {
-	m_BufferID = BufferID; // 段缓冲ID
-	m_Offset = Offset;     // 段内偏移
-	TransitionData();	// 将原码转化为屏幕绘图Y坐标
-	ProcessData(); // 处理数据
+	//m_BufferID = BufferID; // 段缓冲ID
+	//m_Offset = Offset;     // 段内偏移
+	//TransitionData();	// 将原码转化为屏幕绘图Y坐标
+	//ProcessData(); // 处理数据
+	//DrawBkGnd();  // 画背景
+	//DrawPoly(); // 画线
+
 	DrawBkGnd();  // 画背景
+	TransitionData();
+	ProcessData();
 	DrawPoly(); // 画线
 }
 
@@ -778,7 +787,7 @@ void CADScopeCtrl::ProcessData()
 			for (Index=0; Index<=m_nPlotWidth; Index++) // 初始化1024个点(创建时，位图的大小) 
 			{
 				pointxy[Channel][Index].x = StartX + Index;
-				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[showData[channe_id_enable-1][Index*10000/m_nPlotWidth]&MASK_MSB];
+				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[showData[channe_id_enable-1][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB];
 				//pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[ptOffset[(Offset+Index) * m_nChannelCount + Channel]&MASK_MSB];
 			}
 			HeightMid[Channel] = Center; // 保存通道中间位置坐标
@@ -1293,7 +1302,7 @@ void CADScopeCtrl::UpdateChannelCount()
 // 	}
 
 }
-void CADScopeCtrl::ProcessOrgAdData(int size_buf)
+void ProcessOrgAdDataEx(int size_buf)
 {
 	//fill the showData with gt_AD_OrgData
 	
@@ -1313,7 +1322,23 @@ void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 	}
 	for (j=startID;j<SHOW_DATA_CNT;j++)
 	{	
-		if (j*fTimePerPoint<gt_AD_OrgData[orgDatID+1].time &&
+		if (gt_AD_OrgData[orgDatID].time == 0)
+		{
+			startID +=1;	
+			startID -=1;	
+		}
+		if (gt_AD_OrgData[orgDatID+1].time == 0 && j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
+		{
+			showData[0][j] = gt_AD_OrgData[orgDatID].data[0];
+			showData[1][j] = gt_AD_OrgData[orgDatID].data[1];
+			showData[2][j] = gt_AD_OrgData[orgDatID].data[2];
+			showData[3][j] = gt_AD_OrgData[orgDatID].data[3];
+			showData[4][j] = gt_AD_OrgData[orgDatID].data[4];
+			showData[5][j] = gt_AD_OrgData[orgDatID].data[5];
+			showData[6][j] = gt_AD_OrgData[orgDatID].data[6];
+			showData[7][j] = gt_AD_OrgData[orgDatID].data[7];
+		}
+		else if (j*fTimePerPoint<gt_AD_OrgData[orgDatID+1].time &&
 			j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
 		{
 			showData[0][j] = gt_AD_OrgData[orgDatID].data[0];
@@ -1349,10 +1374,7 @@ void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 			showData[6][j] = gt_AD_OrgData[orgDatID].data[6];
 			showData[7][j] = gt_AD_OrgData[orgDatID].data[7];
 		}
-		else if (gt_AD_OrgData[orgDatID+1].time == 0 && j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
-		{
-			showData[0][j] = gt_AD_OrgData[orgDatID].data[0];
-		}
+		
 		else
 		{
 			//AfxMessageBox("异常情况");
@@ -1374,7 +1396,18 @@ void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 		//从头赋值
 		for (j=0;j<SHOW_DATA_CNT;j++)
 		{
-			if (j*fTimePerPoint<gt_AD_OrgData[orgDatID+1].time &&
+			if (gt_AD_OrgData[orgDatID+1].time == 0 && j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
+			{
+				showData[0][j] = gt_AD_OrgData[orgDatID].data[0];
+				showData[1][j] = gt_AD_OrgData[orgDatID].data[1];
+				showData[2][j] = gt_AD_OrgData[orgDatID].data[2];
+				showData[3][j] = gt_AD_OrgData[orgDatID].data[3];
+				showData[4][j] = gt_AD_OrgData[orgDatID].data[4];
+				showData[5][j] = gt_AD_OrgData[orgDatID].data[5];
+				showData[6][j] = gt_AD_OrgData[orgDatID].data[6];
+				showData[7][j] = gt_AD_OrgData[orgDatID].data[7];
+			}			
+			else if (j*fTimePerPoint<gt_AD_OrgData[orgDatID+1].time &&
 				j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
 			{
 				showData[0][j] = gt_AD_OrgData[orgDatID].data[0];
@@ -1401,17 +1434,7 @@ void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 				//AfxMessageBox("异常情况");
 				break;
 			}
-			else if (gt_AD_OrgData[orgDatID+1].time == 0 && j*fTimePerPoint>=gt_AD_OrgData[orgDatID].time)
-			{
-				showData[0][j] = gt_AD_OrgData[orgDatID].data[0];
-				showData[1][j] = gt_AD_OrgData[orgDatID].data[1];
-				showData[2][j] = gt_AD_OrgData[orgDatID].data[2];
-				showData[3][j] = gt_AD_OrgData[orgDatID].data[3];
-				showData[4][j] = gt_AD_OrgData[orgDatID].data[4];
-				showData[5][j] = gt_AD_OrgData[orgDatID].data[5];
-				showData[6][j] = gt_AD_OrgData[orgDatID].data[6];
-				showData[7][j] = gt_AD_OrgData[orgDatID].data[7];
-			}
+			
 			else
 			{
 				//AfxMessageBox("异常情况");
@@ -1419,6 +1442,65 @@ void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 			}
 		}		
 	}		
+}
+int last_end_id = 0;
+void CADScopeCtrl::ProcessOrgAdData(int size_buf)
+{
+	int startID,endID = 0;//根据传进来的新数据的第一个点的时间，来确定从showdata的哪个点开始填起。
+	int i,j,k;
+	double fTimePerPoint;//这SHOW_DATA_CNT个点中每个点对应的时间
+	
+	fTimePerPoint = g_nTimeAxisRange/SHOW_DATA_CNT;  //showData 每个点代表的时间 根据时间轴量程计算
+
+	startID = gt_AD_OrgData[0].time/fTimePerPoint;
+	if(last_end_id+1 < startID)
+	{
+		for (j=last_end_id;j<=startID;j++)
+		{
+			showData[0][j] = gt_AD_OrgData[0].data[0];
+			showData[1][j] = gt_AD_OrgData[0].data[1];
+			showData[2][j] = gt_AD_OrgData[0].data[2];
+			showData[3][j] = gt_AD_OrgData[0].data[3];
+			showData[4][j] = gt_AD_OrgData[0].data[4];
+			showData[5][j] = gt_AD_OrgData[0].data[5];
+			showData[6][j] = gt_AD_OrgData[0].data[6];
+			showData[7][j] = gt_AD_OrgData[0].data[7];			
+		}
+	}
+
+
+	for (i=0;i<size_buf-1;i++)
+	{	
+		if (gt_AD_OrgData[i].time<gt_AD_OrgData[i+1].time)
+		{
+			startID = gt_AD_OrgData[i].time/fTimePerPoint;
+			endID = gt_AD_OrgData[i+1].time/fTimePerPoint;
+
+		} 
+		else
+		{
+			startID = gt_AD_OrgData[i].time/fTimePerPoint;
+			endID = SHOW_DATA_CNT-1;
+		}
+
+		startID = (startID >= SHOW_DATA_CNT) ? SHOW_DATA_CNT-1 : startID;
+		endID = (endID >= SHOW_DATA_CNT) ? SHOW_DATA_CNT-1 : endID;
+
+
+
+		for (j=startID;j<=endID;j++)
+		{
+			showData[0][j] = gt_AD_OrgData[i].data[0];
+			showData[1][j] = gt_AD_OrgData[i].data[1];
+			showData[2][j] = gt_AD_OrgData[i].data[2];
+			showData[3][j] = gt_AD_OrgData[i].data[3];
+			showData[4][j] = gt_AD_OrgData[i].data[4];
+			showData[5][j] = gt_AD_OrgData[i].data[5];
+			showData[6][j] = gt_AD_OrgData[i].data[6];
+			showData[7][j] = gt_AD_OrgData[i].data[7];				
+		}
+	}
+	last_end_id = endID;
 }
 
 

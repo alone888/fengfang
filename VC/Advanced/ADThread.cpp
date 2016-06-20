@@ -47,13 +47,18 @@ UINT ReadDataThread(PVOID hWnd)
 		} 
 		else
 		{
-			gl_ReadSizeWords = 2048;
+			gl_ReadSizeWords = 2048*2;
 		}
 
 
 		// ¶Á64KÊý¾Ý
 		bRet = USB2831_ReadDeviceAD(hDevice, ADBuffer[gl_nReadIndex], 
 			gl_ReadSizeWords, &lRetReadSizeWords);
+		if(lRetReadSizeWords != gl_ReadSizeWords)
+		{
+			lRetReadSizeWords -= 1;
+			lRetReadSizeWords +=1;
+		}
 // 		if (!bRet)
 // 		{
 // 			gl_bDeviceADRun = FALSE;

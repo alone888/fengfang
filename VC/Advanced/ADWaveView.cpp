@@ -134,17 +134,23 @@ LRESULT CADWaveView::ShowWave(WPARAM wParam, LPARAM lParam)
 
 void CADWaveView::OnDrawPolyLine() // 显示波形
 {
-	m_ADScopeCtrl.AppendPoly(gl_BufferID, gl_Offset);
+	//
 	//if (gl_ProcessMoveVolt == 0)
 	//{
 	//	gl_pADStatusView->AnalyzeAccurate(); // 精度分析
 	//}
 	//m_ADScopeCtrl.StartTimer();
+	static int last_gl_nDrawIndex = 0;
 
 	CString str;
 	static int i=0;
-	static unsigned int time=0;
+	static double time=0;
 	PWORD  ptOffset; // 缓存指针
+
+	if(gl_nDrawIndex-1 != last_gl_nDrawIndex && gl_nDrawIndex != 0)
+	{
+		gl_nDrawIndex = gl_nDrawIndex;
+	}
 
 	i++;
 	str.Format(_T("%d"),i);
@@ -159,16 +165,18 @@ void CADWaveView::OnDrawPolyLine() // 显示波形
 		}
 	}
 
-	unsigned int tmp = 8000000/ADPara.Frequency;
+	double tmp = 8000000/ADPara.Frequency;
 	for (int i = 0; i < gl_ReadSizeWords/8 ; i++)
 	{
-		if(time > g_nTimeAxisRange)
-			time = 0;
+		if(time >= g_nTimeAxisRange)
+			time = time-g_nTimeAxisRange;
 		gt_AD_OrgData[i].time = time;
 		time += tmp;
 	}
 
 	m_ADScopeCtrl.ProcessOrgAdData(gl_ReadSizeWords/8);
+	m_ADScopeCtrl.AppendPoly(gl_BufferID, gl_Offset);
+	last_gl_nDrawIndex = gl_nDrawIndex;
 }
 
 void CADWaveView::StartScopeCtrlTimer() // 启动timer

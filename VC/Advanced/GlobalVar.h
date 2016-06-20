@@ -6,7 +6,7 @@ extern CSysApp theApp;
 extern CADStatusView* gl_pADStatusView;
 extern CADParaCfgView* gl_pParaCfgView;
 #define MAX_SEGMENT_COUNT 64
-#define SHOW_DATA_CNT 10000//用于显示的数组大小
+#define SHOW_DATA_CNT (10000)//用于显示的数组大小
 
 
 extern WORD ADBuffer[MAX_SEGMENT_COUNT][MAX_SEGMENT_SIZE]; // 缓冲队列
@@ -16,7 +16,7 @@ extern WORD showData[8][10000];// WYL 10000个点表示屏幕上要显示的点
 typedef struct _AD_OrgData       /* rcl */
 {
 	WORD data[8];
-	unsigned int time; //us
+	double time; //us
 } AD_ORG_DATA;
 
 extern AD_ORG_DATA gt_AD_OrgData[3000]; // WYL 一次读的数据个数
