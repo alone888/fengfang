@@ -20,7 +20,7 @@ typedef struct _AD_OrgData       /* rcl */
 } AD_ORG_DATA;
 
 extern AD_ORG_DATA gt_AD_OrgData[3000]; // WYL 一次读的数据个数
-extern int g_nTimeAxisRange;
+extern unsigned int g_nTimeAxisRange;
 
 
 extern ULONG gl_ReadSizeWords;	// 读入的数据长度
@@ -42,6 +42,11 @@ extern UINT gl_OverLimitCount;
 extern int gl_ProcessMoveVolt;	// 为1时, 平移电压
 extern BOOL gl_bCreateDevice;
 extern BOOL gl_bProgress;  // 是否更新进度条
+
+extern int gl_last_end_id;
+
+
+
 
 extern int gl_nProcMode;  // 数据处理方式 1：数字显示  2：波形显示  3：数据存盘
 // 采样数据处理方式(gl_nProcMode使用的选项)
