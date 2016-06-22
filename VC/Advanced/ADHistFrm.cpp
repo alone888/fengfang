@@ -249,6 +249,7 @@ void CADHistFrm::OnCustomdrawSLIDEROffset(NMHDR* pNMHDR, LRESULT* pResult)
 
 }
 
+
 void CADHistFrm::OnCustomdrawSLIDERScreenCur(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	// TODO: Add your control notification handler code here
