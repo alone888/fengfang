@@ -29,8 +29,10 @@ CADScopeCtrl::CADScopeCtrl()
 	m_nChannelNum = 0;
 	
 	m_crBackColor  = RGB(0,  0,   0);  
-//	m_crBackColor  = RGB(0,  0,   0);  
-	m_crGridColor  = RGB(255, 255, 255);  
+	m_crGridColor  = RGB(255, 255, 255);
+	m_crGridGreyColor  = RGB(192, 192, 192);
+	m_crGridGreyColor2 = RGB(100, 100, 100);
+
 	m_crPlotColor  = RGB(255, 128, 0); 
 	m_clPen[0] = RGB(255, 0, 0);
 	m_clPen[1] = RGB(255, 255, 0);
@@ -469,7 +471,7 @@ void CADScopeCtrl::OnSize(UINT nType, int cx, int cy)
 		m_rectPlot.left   = 60;  
 		m_rectPlot.top    = 10;
 		m_rectPlot.right  = m_rectClient.right -10;
-		m_rectPlot.bottom = m_rectClient.bottom - 10; //-25;
+		m_rectPlot.bottom = m_rectClient.bottom - 30; //-25;
 		
 		m_nPlotHeight = m_rectPlot.Height();
 		m_nPlotWidth  = m_rectPlot.Width();	
@@ -541,7 +543,7 @@ int CADScopeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 }
 
 //########################################################################
-//画背景（网格和外框）
+//画背景（网格和外框和竖线）
 void CADScopeCtrl::DrawBkGnd()
 {
 	int nCharacters = 0;
@@ -571,22 +573,35 @@ void CADScopeCtrl::DrawBkGnd()
 	m_dcGrid.SelectObject (oldPen); //WYL 设置虚线颜色 
 	//COLORREF m_Grid = RGB(200, 200, 200);
 
-	COLORREF m_Grid = RGB(255, 0, 0);//
+	COLORREF m_Grid = RGB(192, 192, 192);//
 	int HLine = 0, VLine = 0;
-	for (VLine=50; VLine<m_rectPlot.Width(); VLine+= 50) // 相隔50个像素画一条垂直的线
+	int VGridNum = 20; 
+	for (int i=1; i<VGridNum; i++) // 相隔50个像素画一条垂直的线
 	{
-		for (int HLine=5; HLine<m_rectPlot.Height(); HLine+=5) // 画垂直方向虚线
+		VLine = m_rectPlot.Width()*i/VGridNum;
+		for (int HLine=1; HLine<m_rectPlot.Height(); HLine+=1) // 画垂直方向虚线
 		{
 			m_dcGrid.SetPixelV(CPoint(m_rectPlot.left + VLine, m_rectPlot.top + HLine), m_Grid);
 		}
 	}
-	for (HLine=30; HLine<m_rectPlot.Height(); HLine+=30) // 相隔30个像素画一条水平方向的线
+
+	for (int i=1; i<VGridNum; i++) // 相隔50个像素画一条垂直的线
 	{
-		for (VLine=0; VLine<m_rectPlot.Width(); VLine+=10) // 画水平方向虚线
+		VLine = m_rectPlot.Width()*i/VGridNum;
+		for (int HLine=1; HLine<m_rectPlot.Height(); HLine+=1) // 画垂直方向虚线
 		{
 			m_dcGrid.SetPixelV(CPoint(m_rectPlot.left + VLine, m_rectPlot.top + HLine), m_Grid);
 		}
 	}
+
+
+	//for (HLine=30; HLine<m_rectPlot.Height(); HLine+=30) // 相隔30个像素画一条水平方向的线
+	//{
+	//	for (VLine=0; VLine<m_rectPlot.Width(); VLine+=10) // 画水平方向虚线
+	//	{
+	//		m_dcGrid.SetPixelV(CPoint(m_rectPlot.left + VLine, m_rectPlot.top + HLine), m_Grid);
+	//	}
+	//}
 	//----------------------------------------------------------------------------
 	// 画每个通道的分界线(水平线)
 
@@ -811,56 +826,6 @@ void CADScopeCtrl::ProcessData()
 	}
 	m_bDrawPoly = TRUE; 
 }
-//处理数据, 把缓存中的数据转换成可以显示的点坐标
-void CADScopeCtrl::ProcessData2()
-{
-	int screenWidth;
-	
-	UpdateChannelCount();
-	Center = (int)(PerY/2.0)+m_rectPlot.top;
-
-	//screenWidth = m_rectPlot.Width
-
-
-	int Channel, Index, StartX;
-	PWORD  ptOffset; // 缓存指针
-	int Offset = 0, DataY = 0;
-	StartX = m_rectPlot.left+1; // X方向的起始位置
-	
-	if (gl_bTileWave) // 多通道平铺显示
-	{
-		for (Channel=0; Channel<m_nChannelCount; Channel++)
-		{
-			ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
-			pointxy[Channel][0].x = StartX;
-			pointxy[Channel][0].y = m_nCoordinateY[ptOffset[Offset]&MASK_MSB];
-			
-			for (Index=0; Index<=screenWidth; Index++) // 初始化1024个点(创建时，位图的大小) 
-			{
-				pointxy[Channel][Index].x = StartX + Index;
-				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[ptOffset[(Offset+Index) * m_nChannelCount + Channel]&MASK_MSB];
-			}
-			HeightMid[Channel] = Center; // 保存通道中间位置坐标
-			Center += PerY;
-		}
-	}
-	else // 多通道叠加显示
-	{
-		ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
-		float LsbOfPixel = (float)(AD_LSB_COUNT/m_rectPlot.Height()); // 每像素对应的码值
-		int Center = (int)(m_rectPlot.Height() / 2) + m_rectPlot.top;
-		for (int Channel=0; Channel<m_nChannelCount; Channel++)
-		{
-			for (int Index=0; Index<=m_nPlotWidth; Index++)
-			{
-				pointxy[Channel][Index].x = StartX + Index;
-				DataY = (int)(((ptOffset[Index*gl_nChannelCount + Channel]&MASK_MSB) - AD_LSB_HALF ) / LsbOfPixel);
-				pointxy[Channel][Index].y = (int)(Center) - DataY;
-			}
-		}
-	}
-	m_bDrawPoly = TRUE; 
-}
 
 
 //##############################################################################
@@ -1064,16 +1029,22 @@ void CADScopeCtrl::DrawAllChannelGrid(CDC* pDC)
 		nGridPix = m_rectPlot.top + (int)(m_rectPlot.Height() * Channel) / m_nChannelCount;
 		for (int X=m_rectPlot.left; X<m_rectPlot.right; X+=1) // 每隔2个像素画1点
 		{
+			pDC->SetPixel(X, nGridPix-1, m_crGridGreyColor);
+			//pDC->SetPixel(X, nGridPix-1, m_crGridGreyColor2);
 			pDC->SetPixel(X, nGridPix, m_crGridColor);
-			//pDC->SetPixel(X, nGridPix+1, m_crGridColor);
+			
 		}	
 	}
 
 	for (Channel=0; Channel<m_nChannelCount; Channel++) // 画每通道的中线
 	{
-		for (X=m_rectPlot.left; X<m_rectPlot.right; X+=3) // 每隔3个像素画1点
+		for (X=m_rectPlot.left; X<m_rectPlot.right; X+=1) // 每隔3个像素画1点
 		{
-			pDC->SetPixel(X, (int)(m_rectPlot.top + (hight * Channel) + hight/2.0), RGB(0, 0, 0)); 
+			pDC->SetPixel(X, (int)(m_rectPlot.top + (hight * Channel) + hight/2.0), RGB(100, 100, 100)); 
+
+			pDC->SetPixel(X, (int)(m_rectPlot.top + (hight * Channel) + hight/4.0), RGB(192, 192, 192)); 
+
+			pDC->SetPixel(X, (int)(m_rectPlot.top + (hight * Channel) + hight*3/4.0), RGB(192, 192, 192)); 
 		}
 		
 	}
@@ -1201,6 +1172,7 @@ void CADScopeCtrl::OnRButtonUp(UINT nFlags, CPoint point)
 	m_nLineIndex = 0xFFFF;
 	ClipCursor(NULL);
 	CWnd::OnRButtonUp(nFlags, point);
+	
 }
 
 void CADScopeCtrl::DrawMoveLine(CDC* pDC, CPoint point)
@@ -1443,19 +1415,25 @@ void ProcessOrgAdDataEx(int size_buf)
 		}		
 	}		
 }
-int last_end_id = 0;
+
 void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 {
+	if (gl_bDeviceADRun == FALSE)
+	{
+		return;
+	}
+	
+	
 	int startID,endID = 0;//根据传进来的新数据的第一个点的时间，来确定从showdata的哪个点开始填起。
-	int i,j,k;
+	int i,j;
 	double fTimePerPoint;//这SHOW_DATA_CNT个点中每个点对应的时间
 	
 	fTimePerPoint = g_nTimeAxisRange/SHOW_DATA_CNT;  //showData 每个点代表的时间 根据时间轴量程计算
 
 	startID = gt_AD_OrgData[0].time/fTimePerPoint;
-	if(last_end_id+1 < startID)
+	if(gl_last_end_id+1 < startID)
 	{
-		for (j=last_end_id;j<=startID;j++)
+		for (j=gl_last_end_id;j<=startID;j++)
 		{
 			showData[0][j] = gt_AD_OrgData[0].data[0];
 			showData[1][j] = gt_AD_OrgData[0].data[1];
@@ -1500,7 +1478,7 @@ void CADScopeCtrl::ProcessOrgAdData(int size_buf)
 			showData[7][j] = gt_AD_OrgData[i].data[7];				
 		}
 	}
-	last_end_id = endID;
+	gl_last_end_id = endID;
 }
 
 

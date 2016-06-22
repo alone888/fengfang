@@ -147,6 +147,14 @@ void CADWaveView::OnDrawPolyLine() // 显示波形
 	static double time=0;
 	PWORD  ptOffset; // 缓存指针
 
+	//设备已经没有再运行
+	if (gl_bDeviceADRun == FALSE)
+	{
+		time = 0;
+		return;
+	}
+
+
 	if(gl_nDrawIndex-1 != last_gl_nDrawIndex && gl_nDrawIndex != 0)
 	{
 		gl_nDrawIndex = gl_nDrawIndex;
@@ -159,14 +167,14 @@ void CADWaveView::OnDrawPolyLine() // 显示波形
 	ptOffset = &ADBuffer[gl_nDrawIndex][gl_Offset];
 	for (int ch = 0; ch < 8; ch++)
 	{	
-		for (int i = 0; i < gl_ReadSizeWords/8 ; i++)
+		for (unsigned int i = 0; i < gl_ReadSizeWords/8 ; i++)
 		{
 			gt_AD_OrgData[i].data[ch] = ptOffset[i * 8 + ch];
 		}
 	}
 
 	double tmp = 8000000/ADPara.Frequency;
-	for (int i = 0; i < gl_ReadSizeWords/8 ; i++)
+	for (unsigned int i = 0; i < gl_ReadSizeWords/8 ; i++)
 	{
 		if(time >= g_nTimeAxisRange)
 			time = time-g_nTimeAxisRange;

@@ -11,10 +11,13 @@ UINT ReadDataThread(PVOID pThreadPara); // ??改变参数名
 // 启动数据采集线程
 BOOL MyStartDeviceAD(HANDLE hDevice)
 {	
+	gl_last_end_id=0;
 	m_ReadThread = AfxBeginThread(ReadDataThread, NULL, THREAD_PRIORITY_NORMAL, 0, CREATE_SUSPENDED);
 	m_ReadThread->m_bAutoDelete = true; // 自动删除线程
 	gl_bDeviceADRun = TRUE;             // 告之采集线程可以工作了
 	m_ReadThread->ResumeThread();       // 启动采集线程
+
+	
 	return TRUE;
 }
 
@@ -59,11 +62,15 @@ UINT ReadDataThread(PVOID hWnd)
 			lRetReadSizeWords -= 1;
 			lRetReadSizeWords +=1;
 		}
-// 		if (!bRet)
-// 		{
-// 			gl_bDeviceADRun = FALSE;
-// 			goto ExitReadThread;
-// 		}
+ 		if (!bRet)
+ 		{
+ 			
+			gl_bDeviceADRun = FALSE;
+			AfxMessageBox(_T("OMG！ 好像采集器的USB线被拔了..."));	
+			memset(showData,0,sizeof(showData));
+			gl_last_end_id = 0;
+ 			goto ExitReadThread;
+ 		}
 		gl_nReadIndex++;
 		if (gl_nReadIndex > MAX_SEGMENT_COUNT-1) gl_nReadIndex = 0;
 		// 发送事件，告诉绘制窗口线程，该批数据已采集完毕
@@ -80,6 +87,7 @@ ExitReadThread:
 	SetEvent(gl_hExitEvent); // 发出设备成功退出消息，让关闭设备的线程得此消息
 	gl_bCollected = TRUE; // 完成了一次采集
 	if (gl_FirstScreenStop)	pDoc->StopDeviceAD();
+
 	return TRUE;  
 } 
 
@@ -90,6 +98,10 @@ BOOL MyStopDeviceAD(HANDLE hDevice)
 	WaitForSingleObject(gl_hExitEvent, 100);
 	USB2831_ReleaseDeviceAD(hDevice); // 释放AD
 	gl_bCreateDevice = FALSE;
+
+	memset(showData,0,sizeof(showData));
+	gl_last_end_id = 0;
+
 	return TRUE;
 }
 

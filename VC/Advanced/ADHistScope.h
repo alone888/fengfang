@@ -98,7 +98,8 @@ public:
 	CString m_strYUnitsString;
 	
 	COLORREF m_crBackColor;        
-	COLORREF m_crGridColor;        
+	COLORREF m_crGridColor; 
+	COLORREF m_crGridGreyColor;
 	COLORREF m_crPlotColor;        
 	
 	double m_dCurrentPosition;   

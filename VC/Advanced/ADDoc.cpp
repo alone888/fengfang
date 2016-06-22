@@ -248,9 +248,11 @@ UINT ProcessDataThread(PVOID pThreadPara)
 			pADFrm->GetFileLenghtStatic()->SetWindowText(strFileLenght);
 			ShowCount++;
 
+			//存盘的时候同时显示曲线
 			gl_nDrawIndex = gl_nCurrentIndex; // 如果窗口已完成数据刷新，则置新的缓冲区索引号，使之绘制新缓冲区
 			//::SendMessage(pADDoc->m_hWndDigit, WM_SHOW_DIGIT, NULL, NULL);
 			::SendMessage(pADDoc->m_hWndWave, WM_SHOW_WAVE, NULL, NULL);
+
 			break;
 // 		default:
 // 			ASSERT(FALSE);
@@ -315,6 +317,14 @@ void CADDoc::StopDeviceAD()
 		CButton* pDataSave = (CButton*)(gl_pADStatusView->GetDlgItem(IDM_DataSave));	
 		pDataSave->EnableWindow(FALSE);  // 使存盘方式单选框有效
 	}
+
+	CADFrm* pADFrm1 = (CADFrm*)(theApp.m_ADFrm); // 取得子帧窗口指针
+	CButton* pStop1 = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StopDeviceAD));
+	CRect rect;
+	pStop1->GetWindowRect(&rect);
+	theApp.MsgWarning("警告", "采集设备异常断开!", rect.CenterPoint(), 10000);
+	memset(showData,0,sizeof(showData));
+	gl_last_end_id = 0;
 }
 
 void CADDoc::OnDataFileNew() 
