@@ -97,7 +97,36 @@ BOOL CADHistDoc::OnOpenDocument(LPCTSTR lpszPathName)
 		m_ChannelCount = 8;
 		// 读出第一批数据，以首屏显示	
 		m_File.Seek(nFileHeaderSize, CFile::begin);  
-		m_File.Read(m_ADBuffer, m_ReadDataSize*2);
+
+		ULONG tmp1;
+		WORD tmp_read[8];
+		ULONG seek_pos = 0;
+		g_nTimeAxisRange = 1000000;
+		tmp1 = g_nTimeAxisRange/10000;
+		int tmp3 = m_Header.ADPara.Frequency/1000;
+		for (ULONG i = 0; i < SHOW_DATA_CNT; i++)
+		{
+			ULONG tmp2 = i*tmp1*tmp3;
+			read_point_offset[i]=tmp2/1000;
+		}
+
+		for (int i = 0; i < 10000; i++)
+		{
+			seek_pos = sizeof(::_FILE_HEADER)+read_point_offset[i]*8*2;
+
+			if(seek_pos+16 < m_FileLength)
+			{
+				m_File.Seek(seek_pos,CFile::begin);
+				m_File.Read((WORD*)&tmp_read, 8*2);
+			}
+			else
+				memset(tmp_read,0x00,sizeof(tmp_read));
+			for(int j = 0; j < 8 ; j++)
+			{
+				showData[j][i] = tmp_read[j];
+			}
+		}
+		//m_File.Read(m_ADBuffer, m_ReadDataSize*2);
 		m_FileLength = (ULONG)((m_File.GetLength()-256)/2); // 文件长度(字)
 		m_bFileOpen = TRUE;
 	}
@@ -138,7 +167,6 @@ void CADHistDoc::ReadData(void)
 				showData[j][i] = tmp_read[j];
 			}
 		}
-		tmp_read[0] = 0;
 	}
 	catch(...)
 	{

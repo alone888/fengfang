@@ -141,7 +141,10 @@ int CADHistFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_channel_enable[6] = 1;
 	m_channel_enable[7] = 1;
 
-	OnBnClickedButton1TimeL();
+	CString tmp;
+	tmp.Format(_T("%d"),1000);
+	CEdit* pEditPos = (CEdit*)(m_wndSetupBar.GetDlgItem(IDC_STATIC_TIME));
+	m_wndSetupBar.GetDlgItem(IDC_STATIC_TIME)->SetWindowText(tmp);
 	return 0;
 }
 
@@ -571,7 +574,7 @@ void CADHistFrm::OnBnClickedButton1TimeL()
 		TimeAxisRangeID--;
 	}
 
-
+	//RedrawDataWindow();
 	g_nTimeAxisRange = TimeAxisRangeVal[TimeAxisRangeID]*1000;
 	CString tmp;
 	tmp.Format(_T("%d"),TimeAxisRangeVal[TimeAxisRangeID]);
