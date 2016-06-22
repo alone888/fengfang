@@ -23,6 +23,17 @@ public:
 	BOOL m_bStart;
 	int  m_ShowMode;
 
+	afx_msg void OnBnClickedCheckInput9();
+	afx_msg void OnBnClickedCheckInput10();
+	afx_msg void OnBnClickedCheckInput11();
+	afx_msg void OnBnClickedCheckInput12();
+	afx_msg void OnBnClickedCheckInput13();
+	afx_msg void OnBnClickedCheckInput14();
+	afx_msg void OnBnClickedCheckInput15();
+	afx_msg void OnBnClickedCheckInput16();
+	afx_msg void OnBnClickedButton1TimeL();
+	afx_msg void OnBnClickedButton1TimeR();
+
 public:
 	void RedrawDataWindow(void);
 // Operations
