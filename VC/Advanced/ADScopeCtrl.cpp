@@ -178,7 +178,7 @@ void CADScopeCtrl::StartTimer()
 	SetTimer(TIMERID2,100,0);//模拟假数据用
 }  
 
-int Drow_text_find_id(int cur_id)
+static int Drow_text_find_id(int cur_id)
 {
 	int find_cnt = 0;
 	int i;

@@ -63,7 +63,13 @@ BOOL gl_bCollected = FALSE;			// 是否已经进行过一次采集
 
 ULONG gl_TrigCnt = 0;
 
+
 int gl_signal_enable[USB2831_MAX_AD_CHANNELS] ={0};
 
 
 int gl_last_end_id = 0;// 上一帧数据填充到的showdata的位置，用于下一帧的开始
+
+// 数据回放
+int m_channel_cnt;//选择的通道总数
+int m_channel_enable[8]; // 通道选择
+ULONG read_point_offset[10000] = {0}; // 读取文件时每个点的文件位置

@@ -93,7 +93,8 @@ BOOL CADHistDoc::OnOpenDocument(LPCTSTR lpszPathName)
 		m_File.Read((WORD*)&m_Header, sizeof(m_Header)); // 读取文件头
 		nFileHeaderSize = sizeof(m_Header);
 		m_ReadDataSize = 8192;
-		m_ChannelCount = m_Header.ADPara.LastChannel - m_Header.ADPara.FirstChannel + 1;
+		//m_ChannelCount = m_Header.ADPara.LastChannel - m_Header.ADPara.FirstChannel + 1;
+		m_ChannelCount = 8;
 		// 读出第一批数据，以首屏显示	
 		m_File.Seek(nFileHeaderSize, CFile::begin);  
 		m_File.Read(m_ADBuffer, m_ReadDataSize*2);
@@ -113,18 +114,38 @@ void CADHistDoc::ReadData(void)
 {
 	m_File.Seek(0,CFile::begin);
 	m_File.Read((WORD*)&m_Header, sizeof(m_Header));
+	//m_File.Seek(sizeof(::_FILE_HEADER)+(m_Offset*2)*8,CFile::begin);
+	WORD tmp_read[8];
+	ULONG seek_pos = 0;
 
-	m_File.Seek(sizeof(::_FILE_HEADER)+(m_Offset*2)*m_ChannelCount,CFile::begin);
+	if(read_point_offset[9999] == 0)
+		return;
 	try
 	{
-		m_nCount = m_File.Read((WORD*)&m_ADBuffer, 8192*2);	// sizeof(m_ADBuffer)
+		for (int i = 0; i < 10000; i++)
+		{
+			seek_pos = sizeof(::_FILE_HEADER)+read_point_offset[i]*8*2+(m_Offset*2)*8;
+
+			if(seek_pos+16 < m_FileLength)
+			{
+				m_File.Seek(seek_pos,CFile::begin);
+				m_File.Read((WORD*)&tmp_read, 8*2);
+			}
+			else
+				memset(tmp_read,0x00,sizeof(tmp_read));
+			for(int j = 0; j < 8 ; j++)
+			{
+				showData[j][i] = tmp_read[j];
+			}
+		}
+		tmp_read[0] = 0;
 	}
 	catch(...)
 	{
 		theApp.MsgWarning("警告", "文件访问过程出现异常错误", CPoint(20, 20), 10000);
 		return;
 	}
-	m_nCount = m_nCount/m_ChannelCount;
+	m_nCount = 10000;
 }
 
 void CADHistDoc::OnCloseDocument() 

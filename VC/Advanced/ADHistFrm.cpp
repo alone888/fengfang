@@ -23,7 +23,6 @@ CADHistFrm::~CADHistFrm()
 {
 }
 
-
 BEGIN_MESSAGE_MAP(CADHistFrm, CMDIChildWnd)
 	ON_WM_CREATE()
 	ON_COMMAND_EX(CG_ID_VIEW_DIALOGBAR, OnBarCheck)
@@ -48,6 +47,17 @@ BEGIN_MESSAGE_MAP(CADHistFrm, CMDIChildWnd)
 	
 	ON_BN_CLICKED(IDC_BUTTON_PositionB, OnBUTTONPositionB)
 	//}}AFX_MSG_MAP
+
+	ON_BN_CLICKED(IDC_CHECK_INPUT9_P, OnBnClickedCheckInput9)
+	ON_BN_CLICKED(IDC_CHECK_INPUT10_P, OnBnClickedCheckInput10)
+	ON_BN_CLICKED(IDC_CHECK_INPUT11_P, OnBnClickedCheckInput11)
+	ON_BN_CLICKED(IDC_CHECK_INPUT12_P, OnBnClickedCheckInput12)
+	ON_BN_CLICKED(IDC_CHECK_INPUT13_P, OnBnClickedCheckInput13)
+	ON_BN_CLICKED(IDC_CHECK_INPUT14_P, OnBnClickedCheckInput14)
+	ON_BN_CLICKED(IDC_CHECK_INPUT15_P, OnBnClickedCheckInput15)
+	ON_BN_CLICKED(IDC_CHECK_INPUT16_P, OnBnClickedCheckInput16)
+	ON_BN_CLICKED(IDC_BUTTON_TIME_L, OnBnClickedButton1TimeL)
+	ON_BN_CLICKED(IDC_BUTTON_TIME_R, OnBnClickedButton1TimeR)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -104,7 +114,34 @@ int CADHistFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CButton* pRadioB = (CButton*)m_wndSetupBar.GetDlgItem(IDC_RADIO_PositionB);
 	pRadioA->SetCheck(1);
 	pRadioB->SetCheck(0);
-	
+
+	CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT9_P);
+	pRadio->SetCheck(1);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT10_P);
+	pRadio->SetCheck(1);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT11_P);
+	pRadio->SetCheck(1);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT12_P);
+	pRadio->SetCheck(1);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT13_P);
+	pRadio->SetCheck(1);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT14_P);
+	pRadio->SetCheck(1);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT15_P);
+	pRadio->SetCheck(1);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT16_P);
+	pRadio->SetCheck(1);
+	m_channel_cnt = 8;
+	m_channel_enable[0] = 1;
+	m_channel_enable[1] = 1;
+	m_channel_enable[2] = 1;
+	m_channel_enable[3] = 1;
+	m_channel_enable[4] = 1;
+	m_channel_enable[5] = 1;
+	m_channel_enable[6] = 1;
+	m_channel_enable[7] = 1;
+
+	OnBnClickedButton1TimeL();
 	return 0;
 }
 
@@ -123,6 +160,7 @@ void CADHistFrm::OnTimer(UINT_PTR nIDEvent)
 	pDoc->m_Offset += pDoc->m_Rate;
 	pSliderOffset->SetPos(pDoc->m_Offset);
 	if (pDoc->m_Offset>=(pDoc->m_FileLength-sizeof(::_FILE_HEADER))/(sizeof(WORD) * pDoc->m_ChannelCount)-pDoc->m_nCount)
+	//if(pDoc->m_Offset+pDoc->m_nCount >= pDoc->m_FileLength-sizeof(::_FILE_HEADER))
 	{
 		KillTimer(1);
 	}
@@ -332,3 +370,282 @@ void CADHistFrm::OnBUTTONPositionB()
 	Invalidate();	
 	
 }
+
+
+void CADHistFrm::OnBnClickedCheckInput9()
+{
+	// TODO: 在此添加控件通知处理程序代码
+
+	if(m_channel_enable[0])
+	{
+		m_channel_cnt -= 1;
+		m_channel_enable[0] = 0;
+	}
+	else
+	{
+		m_channel_enable[0] = 1;
+		m_channel_cnt += 1;
+	}
+	if(m_channel_cnt == 0)
+	{
+		CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT9_P);
+		pRadio->SetCheck(1);
+		m_channel_cnt = 1;
+		m_channel_enable[0] = 1;
+	}
+}
+
+
+void CADHistFrm::OnBnClickedCheckInput10()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(m_channel_enable[1])
+	{
+		m_channel_cnt -= 1;
+		m_channel_enable[1] = 0;
+	}
+	else
+	{
+		m_channel_enable[1] = 1;
+		m_channel_cnt += 1;
+	}
+	if(m_channel_cnt == 0)
+	{
+		CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT10_P);
+		pRadio->SetCheck(1);
+		m_channel_cnt = 1;
+		m_channel_enable[1] = 1;
+	}
+}
+
+
+void CADHistFrm::OnBnClickedCheckInput11()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(m_channel_enable[2])
+	{
+		m_channel_cnt -= 1;
+		m_channel_enable[2] = 0;
+	}
+	else
+	{
+		m_channel_enable[2] = 1;
+		m_channel_cnt += 1;
+	}
+	if(m_channel_cnt == 0)
+	{
+		CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT11_P);
+		pRadio->SetCheck(1);
+		m_channel_cnt = 1;
+		m_channel_enable[2] = 1;
+	}
+}
+
+
+void CADHistFrm::OnBnClickedCheckInput12()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(m_channel_enable[3])
+	{
+		m_channel_cnt -= 1;
+		m_channel_enable[3] = 0;
+	}
+	else
+	{
+		m_channel_enable[3] = 1;
+		m_channel_cnt += 1;
+	}
+	if(m_channel_cnt == 0)
+	{
+		CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT12_P);
+		pRadio->SetCheck(1);
+		m_channel_cnt = 1;
+		m_channel_enable[3] = 1;
+	}
+}
+
+
+void CADHistFrm::OnBnClickedCheckInput13()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(m_channel_enable[4])
+	{
+		m_channel_cnt -= 1;
+		m_channel_enable[4] = 0;
+	}
+	else
+	{
+		m_channel_enable[4] = 1;
+		m_channel_cnt += 1;
+	}
+	if(m_channel_cnt == 0)
+	{
+		CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT13_P);
+		pRadio->SetCheck(1);
+		m_channel_cnt = 1;
+		m_channel_enable[4] = 1;
+	}
+}
+
+
+void CADHistFrm::OnBnClickedCheckInput14()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(m_channel_enable[5])
+	{
+		m_channel_cnt -= 1;
+		m_channel_enable[5] = 0;
+	}
+	else
+	{
+		m_channel_enable[5] = 1;
+		m_channel_cnt += 1;
+	}
+	if(m_channel_cnt == 0)
+	{
+		CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT14_P);
+		pRadio->SetCheck(1);
+		m_channel_cnt = 1;
+		m_channel_enable[5] = 1;
+	}
+}
+
+
+void CADHistFrm::OnBnClickedCheckInput15()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(m_channel_enable[6])
+	{
+		m_channel_cnt -= 1;
+		m_channel_enable[6] = 0;
+	}
+	else
+	{
+		m_channel_enable[6] = 1;
+		m_channel_cnt += 1;
+	}
+	if(m_channel_cnt == 0)
+	{
+		CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT15_P);
+		pRadio->SetCheck(1);
+		m_channel_cnt = 1;
+		m_channel_enable[6] = 1;
+	}
+}
+
+
+void CADHistFrm::OnBnClickedCheckInput16()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(m_channel_enable[7])
+	{
+		m_channel_cnt -= 1;
+		m_channel_enable[7] = 0;
+	}
+	else
+	{
+		m_channel_enable[7] = 1;
+		m_channel_cnt += 1;
+	}
+	if(m_channel_cnt == 0)
+	{
+		CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT16_P);
+		pRadio->SetCheck(1);
+		m_channel_cnt = 1;
+		m_channel_enable[7] = 1;
+	}
+}
+
+static int TimeAxisRangeVal[]={10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000,200000,500000};//以ms为单位
+static int TimeAxisRangeID=6;//初始为1s钟
+//时间量程减小
+void CADHistFrm::OnBnClickedButton1TimeL()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if (TimeAxisRangeID==0)
+	{
+		//TimeAxisRangeID=sizeof(TimeAxisRangeVal)/4-1;
+		return;
+	}
+	else
+	{
+		TimeAxisRangeID--;
+	}
+
+
+	g_nTimeAxisRange = TimeAxisRangeVal[TimeAxisRangeID]*1000;
+	CString tmp;
+	tmp.Format(_T("%d"),TimeAxisRangeVal[TimeAxisRangeID]);
+	CEdit* pEditPos = (CEdit*)(m_wndSetupBar.GetDlgItem(IDC_STATIC_TIME));
+	m_wndSetupBar.GetDlgItem(IDC_STATIC_TIME)->SetWindowText(tmp);
+
+	CADHistDoc* pDoc = (CADHistDoc*)GetActiveDocument();
+	ULONG tmp1;
+	if (g_nTimeAxisRange >= 1000000)
+	{
+		tmp1 = g_nTimeAxisRange/1000000;
+		int tmp3 = pDoc->m_Header.ADPara.Frequency/1000;
+		for (ULONG i = 0; i < SHOW_DATA_CNT; i++)
+		{
+			ULONG tmp2 = i*tmp1*tmp3;
+			read_point_offset[i]=tmp2/10;
+		}
+	}
+	else
+	{
+		tmp1 = g_nTimeAxisRange/10000;
+		int tmp3 = pDoc->m_Header.ADPara.Frequency/1000;
+		for (ULONG i = 0; i < SHOW_DATA_CNT; i++)
+		{
+			ULONG tmp2 = i*tmp1*tmp3;
+			read_point_offset[i]=tmp2/1000;
+		}
+	}
+	RedrawDataWindow();
+}
+
+//时间量程增大
+void CADHistFrm::OnBnClickedButton1TimeR()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if (TimeAxisRangeID==sizeof(TimeAxisRangeVal)/4-1)
+	{
+		//TimeAxisRangeID=0;
+		return;
+	}
+	else
+	{
+		TimeAxisRangeID++;
+	}
+
+	g_nTimeAxisRange = TimeAxisRangeVal[TimeAxisRangeID]*1000;
+	CString tmp;
+	tmp.Format(_T("%d"),TimeAxisRangeVal[TimeAxisRangeID]);
+	CEdit* pEditPos = (CEdit*)(m_wndSetupBar.GetDlgItem(IDC_STATIC_TIME));
+	m_wndSetupBar.GetDlgItem(IDC_STATIC_TIME)->SetWindowText(tmp);
+
+	CADHistDoc* pDoc = (CADHistDoc*)GetActiveDocument();
+	ULONG tmp1;
+	if (g_nTimeAxisRange >= 1000000)
+	{
+		tmp1 = g_nTimeAxisRange/1000000;
+		int tmp3 = pDoc->m_Header.ADPara.Frequency/1000;
+		for (ULONG i = 0; i < SHOW_DATA_CNT; i++)
+		{
+			ULONG tmp2 = i*tmp1*tmp3;
+			read_point_offset[i]=tmp2/10;
+		}
+	}
+	else
+	{
+		tmp1 = g_nTimeAxisRange/10000;
+		int tmp3 = pDoc->m_Header.ADPara.Frequency/1000;
+		for (ULONG i = 0; i < SHOW_DATA_CNT; i++)
+		{
+			ULONG tmp2 = i*tmp1*tmp3;
+			read_point_offset[i]=tmp2/1000;
+		}
+	}
+	RedrawDataWindow();
+}
+

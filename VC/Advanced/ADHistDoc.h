@@ -33,7 +33,7 @@ public:
 	FILE_HEADER m_Header;  // 保存文件头信息
     int  m_ChannelCount;
     ULONG m_Offset;        // 文件偏移(字)
-	WORD m_ADBuffer[65536];
+	WORD m_ADBuffer[80000];
 	int m_Rate;            // 回放速度
     ULONG m_ScreenOffset;  // 屏幕位置
 	int m_nFileNum;        // 文件号

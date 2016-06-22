@@ -210,10 +210,12 @@
 #define IDC_RADIO_PositionA             1155
 #define IDC_RADIO_PositionB             1156
 #define IDC_STATIC_PositionA            1157
+#define IDC_STATIC_TIME                 1157
 #define IDC_STATIC_PositionB            1158
 #define IDC_STATIC_Frequency            1159
 #define IDC_STATIC_DistanceAB           1160
 #define IDM_TileWave                    1161
+#define IDC_STATIC_PositionA2           1161
 #define IDM_SuperPoseWave               1162
 #define IDC_COMBO_ClockSource           1172
 #define IDC_EDIT_FilePath0              1173
@@ -247,6 +249,7 @@
 #define IDC_BUTTON_PositionA            1203
 #define IDC_BUTTON_PositionB            1204
 #define IDC_BUTTON2                     1206
+#define IDC_BUTTON_TIME_R               1206
 #define IDC_CHECK_VoltRange0            1207
 #define IDC_CHECK_VoltRange1            1208
 #define IDC_CHECK_VoltRange2            1209
@@ -287,19 +290,29 @@
 #define IDC_EDIT4                       1243
 #define IDC_BUTTON3                     1243
 #define IDC_EDIT5                       1244
+#define IDC_CHECK_INPUT9_P              1244
 #define IDC_SPIN5                       1245
+#define IDC_CHECK_INPUT10_P             1245
 #define IDC_EDIT6                       1246
+#define IDC_CHECK_INPUT11_P             1246
 #define IDC_SPIN6                       1247
+#define IDC_CHECK_INPUT12_P             1247
 #define IDC_CHECK_INPUT9                1248
 #define IDC_EDIT7                       1248
+#define IDC_CHECK_INPUT13_P             1248
 #define IDC_CHECK_INPUT10               1249
 #define IDC_SPIN7                       1249
+#define IDC_CHECK_INPUT14_P             1249
 #define IDC_CHECK_INPUT11               1250
 #define IDC_EDIT8                       1250
+#define IDC_CHECK_INPUT15_P             1250
 #define IDC_CHECK_INPUT12               1251
 #define IDC_SPIN8                       1251
+#define IDC_CHECK_INPUT16_P             1251
 #define IDC_CHECK_INPUT13               1252
 #define IDC_EDIT9                       1252
+#define IDC_BUTTON_TIME_LEGFT           1252
+#define IDC_BUTTON_TIME_L               1252
 #define IDC_CHECK_INPUT14               1253
 #define IDC_CHECK_INPUT15               1254
 #define IDC_CHECK_INPUT16               1255
@@ -379,7 +392,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        185
 #define _APS_NEXT_COMMAND_VALUE         32837
-#define _APS_NEXT_CONTROL_VALUE         1243
+#define _APS_NEXT_CONTROL_VALUE         1253
 #define _APS_NEXT_SYMED_VALUE           132
 #endif
 #endif

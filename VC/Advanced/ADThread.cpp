@@ -42,16 +42,16 @@ UINT ReadDataThread(PVOID hWnd)
 	while(gl_bDeviceADRun)  // 循环采集AD数据
 	{	
 
-		gl_ReadSizeWords =2048;
+		gl_ReadSizeWords = 8192;
 
-		if (ADPara.Frequency>100000)
-		{
-			gl_ReadSizeWords = 8192;
-		} 
-		else
-		{
-			gl_ReadSizeWords = 2048*2;
-		}
+// 		if (ADPara.Frequency>100000)
+// 		{
+// 			gl_ReadSizeWords = 8192;
+// 		} 
+// 		else
+// 		{
+// 			gl_ReadSizeWords = 2048*2;
+// 		}
 
 
 		// 读64K数据

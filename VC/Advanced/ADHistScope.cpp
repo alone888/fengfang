@@ -59,7 +59,7 @@ CADHistScope::CADHistScope()
 	
 	m_pbitmapOldGrid = NULL;
 	m_pbitmapOldPlot = NULL;
-	m_nChannelCount = 2;
+	m_nChannelCount = 8;
 	m_nChannelNum = 0;
 	m_bDrawPoly = FALSE; 
 	m_bAllChannel = TRUE;
@@ -125,6 +125,21 @@ BOOL CADHistScope::Create(DWORD dwStyle, const RECT& rect,
 	return result;
 	
 } // Create
+
+static int Drow_text_find_id(int cur_id)
+{
+	int find_cnt = 0;
+	int i;
+	for(i = 0; i < 8; i++)
+	{
+		if(m_channel_enable[i] == 1)
+			find_cnt++;
+		if(find_cnt ==cur_id)
+			break;
+	}
+	return i+1;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////
 //设置垂直方向上下量程的大小
@@ -193,6 +208,21 @@ void CADHistScope::SetBackgroundColor(COLORREF color)
 }  // SetBackgroundColor
 
 ///////////////////////////////////////////////////////////////////////////
+double CADHistScope::AppendPoint(double dNewPoint)
+{	
+	double dPrevious;
+	
+	dPrevious = m_dCurrentPosition;
+	m_dCurrentPosition = dNewPoint;
+
+	DrawPoint();
+	Invalidate();
+	
+	return dPrevious;
+	
+} // AppendPoint
+
+///////////////////////////////////////////////////////////////////////////
 void CADHistScope::InvalidateCtrl()
 {
 	CADHistWaveView* pView = (CADHistWaveView*)GetParent();
@@ -237,35 +267,21 @@ void CADHistScope::InvalidateCtrl()
 			m_penChannel[Channel].CreatePen(PS_SOLID, 1, m_clPen[Channel]);
 	}
 	
-	if (!gl_bTileWave) m_nChannelCount = 1; // 如果是叠加显示就用单通道显示的方式
+	//if (!gl_bTileWave) m_channel_cnt = 1; // 如果是叠加显示就用单通道显示的方式
 
 // 	if (gl_bTileWave)  // 如果是平铺显示
 // 	{
-		m_nChannelCount = m_HistLastChannel - m_HistFirstChannel + 1;
+		//m_nChannelCount = m_HistLastChannel - m_HistFirstChannel + 1;
+
+		//m_channel_cnt = m_channel_cnt;
 // 	}
-// 	if (!gl_bTileWave) m_nChannelCount = 1; // 如果是叠加显示就用单通道显示的方式
-	
+// 	if (!gl_bTileWave) m_channel_cnt = 1; // 如果是叠加显示就用单通道显示的方式
 	DrawBkGnd();	// 画背景
 	DrawPoly();
 	TransitionData();
 	m_bInitialed = TRUE;
 	
 } // InvalidateCtrl
-
-///////////////////////////////////////////////////////////////////////////
-double CADHistScope::AppendPoint(double dNewPoint)
-{	
-	double dPrevious;
-	
-	dPrevious = m_dCurrentPosition;
-	m_dCurrentPosition = dNewPoint;
-
-	DrawPoint();
-	Invalidate();
-	
-	return dPrevious;
-	
-} // AppendPoint
 
 //////////////////////////////////////////////////////////////////////////
 void CADHistScope::OnPaint() 
@@ -435,7 +451,7 @@ void CADHistScope::DrawBkGnd()
 	nCharacters = max(nCharacters, abs((int)log10(fabs(m_dLowerLimit[0]))));
 	nCharacters = nCharacters + 4 + m_nYDecimals;  
 	
-	PerY = (int)(m_nPlotHeight / m_nChannelCount); // 每通道的Y宽度
+	PerY = (int)(m_nPlotHeight / m_channel_cnt); // 每通道的Y宽度
 	//----------------------------------------------------------------------------------
 	// 画四周的框架	
 	oldPen = m_dcGrid.SelectObject (&solidPen);  // 画四周的方框
@@ -599,6 +615,7 @@ void CADHistScope::AppendPoly(int BufferID, int  Offset)
 {
 	m_BufferID = BufferID; // 段缓冲ID
 	m_Offset = Offset;     // 段内偏移
+	DrawBkGnd();	// 画背景
 	ProcessData(); // 处理数据
 	DrawPoly(); // 画线
 }
@@ -626,22 +643,24 @@ void CADHistScope::ProcessData()
 	PWORD  ptOffset; // 缓存指针
 	int Offset = 0, DataY = 0;
 	CADHistDoc* pHistDoc = theApp.m_pADHistDoc;
+	int channe_id_enable = 0;
 	
 	StartX = m_rectPlot.left+1; // X方向的起始位置
 	
 	if (gl_bTileWave) // 多通道平铺显示
 	{
-		for (Channel=0; Channel<m_nChannelCount; Channel++)
+		for (Channel=0; Channel<m_channel_cnt; Channel++)
 		{
 			ptOffset = &(pHistDoc->m_ADBuffer[m_Offset]); // 指针的偏移量
-			pointxy[Channel][0].x = StartX;
-			pointxy[Channel][0].y = m_nCoordinateY[ptOffset[Offset]&MASK_MSB];
-			
+			//pointxy[Channel][0].x = StartX;
+			//pointxy[Channel][0].y = m_nCoordinateY[ptOffset[Offset]&MASK_MSB];
+			channe_id_enable = Drow_text_find_id(Channel+1);
 			//for (Index=0; Index<=m_nPlotWidth; Index++) // 初始化1024个点(创建时，位图的大小) 
-			for (Index=0; Index<pHistDoc->m_nCount; Index++) // 初始化1024个点(创建时，位图的大小) 
+			for (Index=0; Index<m_nPlotWidth; Index++) // 初始化1024个点(创建时，位图的大小) 
 			{
 				pointxy[Channel][Index].x = StartX + Index;
-				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[ptOffset[(Offset + Index) * m_nChannelCount + Channel]&MASK_MSB];
+				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[showData[channe_id_enable-1][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB];
+				//pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[ptOffset[(Offset + Index) * m_channel_cnt + Channel]&MASK_MSB];
 			}
 			HeightMid[Channel] = Center; // 保存通道中间位置坐标
 			Center += PerY;
@@ -649,7 +668,7 @@ void CADHistScope::ProcessData()
 	}
 	else // 多通道叠加显示
 	{
-		for (Channel=0; Channel<m_nChannelCount; Channel++)
+		for (Channel=0; Channel<m_channel_cnt; Channel++)
 		{
 			ptOffset = &(pHistDoc->m_ADBuffer[m_Offset]); // 指针的偏移量
 			int StartX = m_rectPlot.left;
@@ -701,7 +720,7 @@ void CADHistScope::ProcessDataEx()
 	}
 	else // 多通道叠加显示
 	{
-		for (Channel=0; Channel<m_nChannelCount; Channel++)
+		for (Channel=0; Channel<m_channel_cnt; Channel++)
 		{
 			ptOffset = &(pHistDoc->m_ADBuffer[m_Offset]); // 指针的偏移量
 			LsbOfPixel = (float)(((gl_ScreenVolume/AD_VOLT_RANGE)*AD_LSB_COUNT)/(m_rectPlot.Height())); // 每像素对应的码值    
@@ -710,7 +729,7 @@ void CADHistScope::ProcessDataEx()
 			for (int Index=0; Index<=m_nPlotWidth; Index++)	
 			{
 				pointxy[Channel][Index].x = StartX + Index;	
-				DataY = (int)(((((ptOffset[(Offset + Index) * m_nChannelCount + Channel])) - AD_LSB_HALF) / LsbOfPixel));
+				DataY = (int)(((((ptOffset[(Offset + Index) * m_channel_cnt + Channel])) - AD_LSB_HALF) / LsbOfPixel));
 				pointxy[Channel][Index].y = (int)(Center) - DataY;
 			}
 		}
@@ -728,18 +747,20 @@ void CADHistScope::DrawPoly()
 	int DataY = 0;
 	gl_bDataProcessing = TRUE;
 	CPen* oldPen;
+	int nDrawCount = m_rectPlot.Width() - 1;
 	m_dcPlot.SetBkColor (m_crBackColor);
 	m_dcPlot.FillRect(m_rectClient, &m_brushBack);
 	m_dcPlot.SetTextColor(RGB(255, 158, 0));
+	
 		
 	//---------------------------------------------------------------------------------
 	if (m_bAllChannel || !gl_bTileWave) // 所有通道显示或叠加显示时
 	{
-		for (int Channel = 0; Channel<m_nChannelCount; Channel++) // 画所有通道的点
+		for (int Channel = 0; Channel<m_channel_cnt; Channel++) // 画所有通道的点
 		{
 			oldPen = m_dcPlot.SelectObject(&m_penChannel[Channel]);
 			//m_dcPlot.Polyline(pointxy[Channel], m_rectPlot.Width());
-			m_dcPlot.Polyline(pointxy[Channel], 8192/m_nChannelCount);
+			m_dcPlot.Polyline(pointxy[Channel], nDrawCount);
 		}
 	}
 	else // 单通道显示
@@ -753,9 +774,9 @@ void CADHistScope::DrawPoly()
 		for (int Index=0; Index<=m_nPlotWidth; Index++)	
 		{
 			pointTemp[Index].x = StartX + Index;
-			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[ptOffset[Index * m_nChannelCount + m_nChannelNum]&MASK_MSB];
+			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[(showData[Drow_text_find_id(m_nChannelNum+1)-1][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB)-gl_MiddleLsb[Drow_text_find_id(m_nChannelNum+1)-1]];
 		}
-		m_dcPlot.Polyline(pointTemp, m_nPlotWidth);
+		m_dcPlot.Polyline(pointTemp, nDrawCount);
 	}
 
 	gl_bDataProcessing = FALSE;
@@ -881,18 +902,18 @@ void CADHistScope::DrawAllChannelGrid(CDC* pDC)
 {
 	int X = 0, Channel = 0;
 	int nGridPix = 0; // Y方向的网格线的刻度
-	float hight = (float)(m_rectPlot.Height() / m_nChannelCount); // 每通道的Y宽度
+	float hight = (float)(m_rectPlot.Height() / m_channel_cnt); // 每通道的Y宽度
 	
-	for (Channel=1; Channel<m_nChannelCount; Channel++) // 画m_nChannelCount-1条网格线
+	for (Channel=1; Channel<m_channel_cnt; Channel++) // 画m_channel_cnt-1条网格线
 	{
-		nGridPix = m_rectPlot.top + (int)(m_rectPlot.Height() * Channel) / m_nChannelCount;
+		nGridPix = m_rectPlot.top + (int)(m_rectPlot.Height() * Channel) / m_channel_cnt;
 		for (int X=m_rectPlot.left; X<m_rectPlot.right; X+=2) // 每隔2个像素画1点
 		{
 			pDC->SetPixel(X, nGridPix, m_crGridColor); 
 		}	
 	}
 
-	for (Channel=0; Channel<m_nChannelCount; Channel++) // 画每通道的中线
+	for (Channel=0; Channel<m_channel_cnt; Channel++) // 画每通道的中线
 	{
 		for (X=m_rectPlot.left; X<m_rectPlot.right; X+=3) // 每隔3个像素画1点
 		{
@@ -916,9 +937,9 @@ void CADHistScope::DrawAllChannelText(CDC* pDC)
 	CADHistWaveView* pView = (CADHistWaveView*)GetParent();
 	CADHistDoc* pDoc =(CADHistDoc*)pView->GetDocument();
 	CString str;
-	float hight = (float)(m_rectPlot.Height() / m_nChannelCount); // 每通道的Y宽度
+	float hight = (float)(m_rectPlot.Height() / m_channel_cnt); // 每通道的Y宽度
 	int Tchannel = 0;
-	for (int Channel=0; Channel<m_nChannelCount; Channel++)
+	for (int Channel=0; Channel<m_channel_cnt; Channel++)
 	{		
 		pDC->SetTextColor(m_clPen[Channel]); // 设置文字的颜色
 
@@ -1118,6 +1139,3 @@ BOOL CADHistScope::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 	
 	return CWnd::OnSetCursor(pWnd, nHitTest, message);
 }
-
-
-
