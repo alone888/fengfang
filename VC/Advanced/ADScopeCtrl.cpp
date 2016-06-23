@@ -827,8 +827,15 @@ void CADScopeCtrl::AppendPoly(int BufferID, int  Offset)
 	//DrawBkGnd();  // »­±³¾°
 	//DrawPoly(); // »­Ïß
 
+	static int last_channel_cnt = 0;
+
+	if(last_channel_cnt != gl_nChannelCount)
+	{
+		TransitionData();
+		last_channel_cnt = gl_nChannelCount;
+	}
+
 	DrawBkGnd();  // »­±³¾°
-	TransitionData();
 	ProcessData();
 	DrawPoly(); // »­Ïß
 }
