@@ -615,6 +615,14 @@ void CADHistScope::AppendPoly(int BufferID, int  Offset)
 {
 	m_BufferID = BufferID; // 段缓冲ID
 	m_Offset = Offset;     // 段内偏移
+	static int last_channel_cnt = 0;
+	
+	if(last_channel_cnt != m_channel_cnt)
+	{
+		TransitionData();
+		last_channel_cnt = m_channel_cnt;
+	}
+	
 	DrawBkGnd();	// 画背景
 	ProcessData(); // 处理数据
 	DrawPoly(); // 画线
@@ -939,6 +947,7 @@ void CADHistScope::DrawAllChannelText(CDC* pDC)
 	CString str;
 	float hight = (float)(m_rectPlot.Height() / m_channel_cnt); // 每通道的Y宽度
 	int Tchannel = 0;
+	int signe_id;
 	for (int Channel=0; Channel<m_channel_cnt; Channel++)
 	{		
 		pDC->SetTextColor(m_clPen[Channel]); // 设置文字的颜色
@@ -951,7 +960,12 @@ void CADHistScope::DrawAllChannelText(CDC* pDC)
 		str.Format (_T("%.*lf V"), m_nYDecimals, m_dLowerLimit[Channel]/1000.0); // 负电压值
 		pDC->TextOut (m_rectPlot.left-4, (int)(m_rectPlot.top+hight*(Channel+1)-5), str);
 		
-		str.Format(_T("CH %d"), Channel + m_HistFirstChannel);
+		signe_id = Drow_text_find_id(Channel+1);
+		if(signe_id > 4)
+			str.Format(_T("channel %d"), signe_id-4);
+		else
+			str.Format(_T("Singal %d"), signe_id);
+		//str.Format(_T("CH %d"), Channel + m_HistFirstChannel);
 		pDC->TextOut(m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+hight/2+5), str);
 		     
 	}	

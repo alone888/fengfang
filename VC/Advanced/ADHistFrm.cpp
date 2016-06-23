@@ -396,6 +396,8 @@ void CADHistFrm::OnBnClickedCheckInput9()
 		m_channel_cnt = 1;
 		m_channel_enable[0] = 1;
 	}
+	LRESULT sta;
+	OnCustomdrawSLIDERScreenCur(NULL,&sta);
 }
 
 
@@ -419,6 +421,8 @@ void CADHistFrm::OnBnClickedCheckInput10()
 		m_channel_cnt = 1;
 		m_channel_enable[1] = 1;
 	}
+	LRESULT sta;
+	OnCustomdrawSLIDERScreenCur(NULL,&sta);
 }
 
 
@@ -442,6 +446,9 @@ void CADHistFrm::OnBnClickedCheckInput11()
 		m_channel_cnt = 1;
 		m_channel_enable[2] = 1;
 	}
+
+	LRESULT sta;
+	OnCustomdrawSLIDERScreenCur(NULL,&sta);
 }
 
 
@@ -465,6 +472,8 @@ void CADHistFrm::OnBnClickedCheckInput12()
 		m_channel_cnt = 1;
 		m_channel_enable[3] = 1;
 	}
+	LRESULT sta;
+	OnCustomdrawSLIDERScreenCur(NULL,&sta);
 }
 
 
@@ -488,6 +497,8 @@ void CADHistFrm::OnBnClickedCheckInput13()
 		m_channel_cnt = 1;
 		m_channel_enable[4] = 1;
 	}
+	LRESULT sta;
+	OnCustomdrawSLIDERScreenCur(NULL,&sta);
 }
 
 
@@ -511,6 +522,8 @@ void CADHistFrm::OnBnClickedCheckInput14()
 		m_channel_cnt = 1;
 		m_channel_enable[5] = 1;
 	}
+	LRESULT sta;
+	OnCustomdrawSLIDERScreenCur(NULL,&sta);
 }
 
 
@@ -534,6 +547,8 @@ void CADHistFrm::OnBnClickedCheckInput15()
 		m_channel_cnt = 1;
 		m_channel_enable[6] = 1;
 	}
+	LRESULT sta;
+	OnCustomdrawSLIDERScreenCur(NULL,&sta);
 }
 
 
@@ -557,6 +572,8 @@ void CADHistFrm::OnBnClickedCheckInput16()
 		m_channel_cnt = 1;
 		m_channel_enable[7] = 1;
 	}
+	LRESULT sta;
+	OnCustomdrawSLIDERScreenCur(NULL,&sta);
 }
 
 static int TimeAxisRangeVal[]={10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000,200000,500000};//以ms为单位
