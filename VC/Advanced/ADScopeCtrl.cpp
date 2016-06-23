@@ -1132,7 +1132,7 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 
 			signe_id = Drow_text_find_id(Channel+1);
 			if(signe_id > 4)
-				str.Format(_T("channel %d"), signe_id-4);
+				str.Format(_T("Input %d"), signe_id-4);
 			else
 				str.Format(_T("Singal %d"), signe_id);
 			m_dcGrid.TextOut(m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+hight/2-5), str);
