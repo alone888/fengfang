@@ -162,7 +162,7 @@ void CADHistFrm::OnTimer(UINT_PTR nIDEvent)
 	CSliderCtrl* pSliderOffset = (CSliderCtrl*)(m_wndSetupBar.GetDlgItem(IDC_SLIDER_Offset));
 	pDoc->m_Offset += pDoc->m_Rate;
 	pSliderOffset->SetPos(pDoc->m_Offset);
-	if (pDoc->m_Offset>=(pDoc->m_FileLength-sizeof(::_FILE_HEADER))/(sizeof(WORD) * pDoc->m_ChannelCount)-pDoc->m_nCount)
+	if (pDoc->m_Offset>=(pDoc->m_FileLength-sizeof(::_FILE_HEADER))/pDoc->m_ChannelCount-pDoc->m_nCount) // m_FileLength WORD
 	//if(pDoc->m_Offset+pDoc->m_nCount >= pDoc->m_FileLength-sizeof(::_FILE_HEADER))
 	{
 		KillTimer(1);

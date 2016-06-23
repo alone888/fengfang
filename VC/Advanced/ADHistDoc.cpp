@@ -157,7 +157,7 @@ void CADHistDoc::ReadData(void)
 		{
 			seek_pos = sizeof(::_FILE_HEADER)+read_point_offset[i]*8*2+(m_Offset*2)*8;
 
-			if(seek_pos+16 < m_FileLength)
+			if(seek_pos+16 < m_FileLength*2)// m_FileLength WORD seek_pos byte
 			{
 				m_File.Seek(seek_pos,CFile::begin);
 				m_File.Read((WORD*)&tmp_read, 8*2);
