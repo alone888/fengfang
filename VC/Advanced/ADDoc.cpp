@@ -151,7 +151,7 @@ void CADDoc::StartDeviceAD()
 		m_File.Write((WORD*)&m_header, 	m_header.HeadSizeBytes);
 	}
 	
-	gl_FileLenghtWords = 256; // 文件长度初始化
+	gl_FileLenghtWords = m_header.HeadSizeBytes; // 文件长度初始化
 	
 	CADFrm* pADFrm = (CADFrm*)(theApp.m_ADFrm); // 取得子帧窗口指针
 	CProgressCtrl* pProgress = (CProgressCtrl*)(pADFrm->m_wndShowStatus.GetDlgItem(IDC_PROGRESS));	
@@ -234,7 +234,7 @@ UINT ProcessDataThread(PVOID pThreadPara)
 			pADDoc->m_File.Write(ADBuffer[gl_nCurrentIndex], gl_ReadSizeWords*2);
 			CString strFileLenght;
 			WroteMB = (WroteMB+16)%1024;
-			gl_FileLenghtWords += 128; // 256Kb
+			gl_FileLenghtWords += gl_ReadSizeWords*2/1024; // 256Kb
 			pADFrm->GetProgressCtrl()->SetPos((int)WroteMB);
 			strFileLenght.Format(_T("%d"), gl_FileLenghtWords);
 			int iDotPos = 0;
@@ -249,9 +249,9 @@ UINT ProcessDataThread(PVOID pThreadPara)
 			ShowCount++;
 
 			//存盘的时候同时显示曲线
-			gl_nDrawIndex = gl_nCurrentIndex; // 如果窗口已完成数据刷新，则置新的缓冲区索引号，使之绘制新缓冲区
-			//::SendMessage(pADDoc->m_hWndDigit, WM_SHOW_DIGIT, NULL, NULL);
-			::SendMessage(pADDoc->m_hWndWave, WM_SHOW_WAVE, NULL, NULL);
+			//gl_nDrawIndex = gl_nCurrentIndex; // 如果窗口已完成数据刷新，则置新的缓冲区索引号，使之绘制新缓冲区
+			////::SendMessage(pADDoc->m_hWndDigit, WM_SHOW_DIGIT, NULL, NULL);
+			//::SendMessage(pADDoc->m_hWndWave, WM_SHOW_WAVE, NULL, NULL);
 
 			break;
 // 		default:
