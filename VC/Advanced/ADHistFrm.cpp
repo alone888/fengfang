@@ -591,7 +591,7 @@ void CADHistFrm::OnBnClickedButton1TimeL()
 		for (ULONG i = 0; i < SHOW_DATA_CNT; i++)
 		{
 			ULONG tmp2 = i*tmp1*tmp3;
-			read_point_offset[i]=tmp2/10;
+			read_point_offset[i]=tmp2/(10*8);
 		}
 	}
 	else
@@ -601,7 +601,7 @@ void CADHistFrm::OnBnClickedButton1TimeL()
 		for (ULONG i = 0; i < SHOW_DATA_CNT; i++)
 		{
 			ULONG tmp2 = i*tmp1*tmp3;
-			read_point_offset[i]=tmp2/1000;
+			read_point_offset[i]=tmp2/(1000*8);
 		}
 	}
 	RedrawDataWindow();
@@ -636,7 +636,7 @@ void CADHistFrm::OnBnClickedButton1TimeR()
 		for (ULONG i = 0; i < SHOW_DATA_CNT; i++)
 		{
 			ULONG tmp2 = i*tmp1*tmp3;
-			read_point_offset[i]=tmp2/10;
+			read_point_offset[i]=tmp2/(10*8);
 		}
 	}
 	else
@@ -646,7 +646,7 @@ void CADHistFrm::OnBnClickedButton1TimeR()
 		for (ULONG i = 0; i < SHOW_DATA_CNT; i++)
 		{
 			ULONG tmp2 = i*tmp1*tmp3;
-			read_point_offset[i]=tmp2/1000;
+			read_point_offset[i]=tmp2/(1000*8);
 		}
 	}
 	RedrawDataWindow();

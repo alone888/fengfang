@@ -102,13 +102,15 @@ BOOL CADHistDoc::OnOpenDocument(LPCTSTR lpszPathName)
 		WORD tmp_read[8];
 		ULONG seek_pos = 0;
 		g_nTimeAxisRange = 1000000;
-		tmp1 = g_nTimeAxisRange/10000;
-		int tmp3 = m_Header.ADPara.Frequency/1000;
+		tmp1 = g_nTimeAxisRange/10000;//showdata中每个点的时间 
+		int tmp3 = m_Header.ADPara.Frequency/1000;// 1个ms有多少个原始数据
 		for (ULONG i = 0; i < SHOW_DATA_CNT; i++)
 		{
 			ULONG tmp2 = i*tmp1*tmp3;
-			read_point_offset[i]=tmp2/1000;
+			read_point_offset[i]=tmp2/(1000*8);
 		}
+		// i*（range/10000)/(1000000/frq) 
+		// i*showdata中每个点的时间/每个原始数据的时间（us为单位）
 
 		for (int i = 0; i < 10000; i++)
 		{

@@ -249,9 +249,9 @@ UINT ProcessDataThread(PVOID pThreadPara)
 			ShowCount++;
 
 			//存盘的时候同时显示曲线
-			//gl_nDrawIndex = gl_nCurrentIndex; // 如果窗口已完成数据刷新，则置新的缓冲区索引号，使之绘制新缓冲区
-			////::SendMessage(pADDoc->m_hWndDigit, WM_SHOW_DIGIT, NULL, NULL);
-			//::SendMessage(pADDoc->m_hWndWave, WM_SHOW_WAVE, NULL, NULL);
+			gl_nDrawIndex = gl_nCurrentIndex; // 如果窗口已完成数据刷新，则置新的缓冲区索引号，使之绘制新缓冲区
+			//::SendMessage(pADDoc->m_hWndDigit, WM_SHOW_DIGIT, NULL, NULL);
+			::SendMessage(pADDoc->m_hWndWave, WM_SHOW_WAVE, NULL, NULL);
 
 			break;
 // 		default:

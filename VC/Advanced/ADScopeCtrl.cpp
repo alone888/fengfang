@@ -238,10 +238,10 @@ void CADScopeCtrl::OnTimer(UINT_PTR nIDEvent)
 	static int i=0;
 	if(nIDEvent == TIMERID)
 	{
-		//DrawBkGnd();  // »­±³¾°
-		//TransitionData();
-		//ProcessData();
-		//DrawPoly(); // »­Ïß
+		DrawBkGnd();  // »­±³¾°
+		TransitionData();
+		ProcessData();
+		DrawPoly(); // »­Ïß
 	}
 	else if(nIDEvent == TIMERID2)
 	{
