@@ -561,7 +561,7 @@ void CADScopeCtrl::DrawBkGnd()
 	nCharacters = max(nCharacters, abs((int)log10(fabs(m_dLowerLimit[0]))));
 	nCharacters = nCharacters + 4 + m_nYDecimals;  
 	
-	PerY = (int)(m_nPlotHeight / m_nChannelCount); // 每通道的Y宽度
+	PerY = ((float)m_nPlotHeight / m_nChannelCount); // 每通道的Y宽度 113
 	//-----------------	-----------------------------------------------------------------
 	// 画四周的框架	
 	oldPen = m_dcGrid.SelectObject (&solidPen);  // 画四周的方框
@@ -765,7 +765,7 @@ void CADScopeCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
 		if (m_bAllChannel) 
 		{
 			//int TChannel = 0;
-			Center = (int)(PerY/2.0)+m_rectPlot.top;
+			Center = (PerY/2.0)+m_rectPlot.top;
 			for (int Channel=0; Channel<m_nChannelCount; Channel++) //判断鼠标双击位置
 			{
 				HeightMid[Channel] = Center; // 保存通道中间位置坐标
@@ -846,7 +846,9 @@ void CADScopeCtrl::TransitionData()
 {
 	float LsbOfPixel, LsbOfPixelOne;
 	float fScreenVolume = AD_VOLT_RANGE; // 多通道显示时，屏幕是量程是和最大电压值一致的
-	LsbOfPixel = (float)(((gl_voltVolume/gl_voltVolume)*AD_LSB_COUNT)/(PerY )); // 每像素对应的码值    
+	//LsbOfPixel = (float)(((gl_voltVolume/gl_voltVolume)*AD_LSB_COUNT)/(PerY )); // 每像素对应的码值
+	LsbOfPixel = ((float)(AD_LSB_COUNT)/(PerY )); // 每像素对应的码值
+
 	LsbOfPixelOne = (float)(((gl_ScreenVolume*1.0/(gl_voltVolume))*AD_LSB_COUNT)/(m_rectPlot.Height())); // 每像素对应的码值
 	for (int Index=0; Index < (AD_LSB_HALF * 2); Index++) // 将原码转化为屏幕绘图Y坐标
 	{
@@ -859,7 +861,7 @@ void CADScopeCtrl::TransitionData()
 void CADScopeCtrl::ProcessData()
 {
 	UpdateChannelCount();
-	Center = (int)(PerY/2.0)+m_rectPlot.top;
+	Center = (PerY/2.0)+m_rectPlot.top;
 	int Channel, Index, StartX;
 	PWORD  ptOffset; // 缓存指针
 	int Offset = 0, DataY = 0;
@@ -870,22 +872,20 @@ void CADScopeCtrl::ProcessData()
 	{
 		for (Channel=0; Channel<m_nChannelCount; Channel++)
 		{
-			//ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
-			//pointxy[Channel][0].x = StartX;
-			//pointxy[Channel][0].y = m_nCoordinateY[ptOffset[Offset]&MASK_MSB];
+			//每个像素对应的showdata中的点数
 			//double point_cnt_per_pix = 10000/(m_rectPlot.Width()-2);
-			channe_id_enable = Drow_text_find_id(Channel+1);
-			for (Index=0; Index<=m_nPlotWidth; Index++) // 初始化1024个点(创建时，位图的大小) 
+			channe_id_enable = Drow_text_find_id(Channel+1);//判断当前通道是否需要显示该通道
+			for (Index=0; Index<=m_nPlotWidth; Index++) // 初始化屏幕上画图宽度的点(创建时，位图的大小) 
 			{
 				pointxy[Channel][Index].x = StartX + Index;
-				pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[showData[channe_id_enable-1][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB];
+				pointxy[Channel][Index].y = Center - m_nCoordinateY[showData[channe_id_enable-1][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB];
 				//pointxy[Channel][Index].y = (int)(Center) - m_nCoordinateY[ptOffset[(Offset+Index) * m_nChannelCount + Channel]&MASK_MSB];
 			}
 			HeightMid[Channel] = Center; // 保存通道中间位置坐标
 			Center += PerY;
 		}
 	}
-	else // 多通道叠加显示
+	else // 多通道叠加显示 先不考虑这种方式
 	{
 		//ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
 		float LsbOfPixel = (float)(AD_LSB_COUNT/m_rectPlot.Height()); // 每像素对应的码值
@@ -928,12 +928,12 @@ void CADScopeCtrl::DrawPoly()
 	{
 		m_dcGrid.SelectObject(&m_penChannel[m_nChannelNum]);
 		int StartX = m_rectPlot.left;
-		Center = (int)(m_nPlotHeight / 2) + m_rectPlot.top;
+		Center = (m_nPlotHeight / 2) + m_rectPlot.top;
 		WORD* ptOffset = &ADBuffer[gl_nDrawIndex][m_Offset]; // 指针的偏移量
 		for (int Index=0; Index<nDrawCount; Index++)	
 		{
 			pointTemp[Index].x = StartX  + Index;
-			pointTemp[Index].y = (int)(Center) - m_nCoordinateOneY[(showData[Drow_text_find_id(m_nChannelNum+1)-1][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB)-gl_MiddleLsb[Drow_text_find_id(m_nChannelNum+1)-1]];
+			pointTemp[Index].y = Center - m_nCoordinateOneY[(showData[Drow_text_find_id(m_nChannelNum+1)-1][Index*SHOW_DATA_CNT/m_nPlotWidth]&MASK_MSB)-gl_MiddleLsb[Drow_text_find_id(m_nChannelNum+1)-1]];
 		}
 		m_dcGrid.Polyline(pointTemp, nDrawCount);
 	}

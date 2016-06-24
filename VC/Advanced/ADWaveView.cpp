@@ -95,7 +95,7 @@ BOOL CADWaveView::OnEraseBkgnd(CDC* pDC)
 	// TODO: Add your message handler code here and/or call default
 	CRect rect;
 	GetClientRect(rect);
-	pDC->FillSolidRect(rect, RGB(0, 0, 0));
+	pDC->FillSolidRect(rect, RGB(255, 255, 255));//WYL °Ñ±³¾°Ë¢³É°×É«
 	return TRUE;
 	// 	return CScrollView::OnEraseBkgnd(pDC);
 }

@@ -45,11 +45,11 @@ public:
 	int		m_nPtCount;
 	int		m_nChannelCount;
 	int		m_nChannelNum;
-	int		PerY;
+	float		PerY;
 	int		m_BufferID;
 	int		m_Offset;
 	float	PixelOfLsb;
-	int		Center;
+	float		Center;
 	POINT	 pointxy[32][8192]; // 所有通道显示的点数据
 	int		 m_nCoordinateY[AD_LSB_HALF * 2];	// 采集的数据对应的绘图区Y坐标值
 	int		 m_nCoordinateOneY[AD_LSB_HALF * 2];	// 单通道显示采集的数据对应的绘图区Y坐标值
