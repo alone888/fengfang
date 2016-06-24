@@ -570,55 +570,54 @@ void CADScopeCtrl::DrawBkGnd()
 	m_dcGrid.LineTo (m_rectPlot.right+1, m_rectPlot.bottom+1);
 	m_dcGrid.LineTo (m_rectPlot.left-1, m_rectPlot.bottom+1);
 	m_dcGrid.LineTo (m_rectPlot.left-1, m_rectPlot.top);
-	m_dcGrid.SelectObject (oldPen); //WYL 设置虚线颜色 
+	m_dcGrid.SelectObject (oldPen);
 	//COLORREF m_Grid = RGB(200, 200, 200);
 
-	COLORREF m_Grid = RGB(192, 192, 192);//
+	
+COLORREF m_Grid = RGB(192, 192, 192);//
+CPen solidPen2(PS_SOLID, 0, m_Grid);
+oldPen = m_dcGrid.SelectObject (&solidPen2);  //垂直的线
+
 	int HLine = 0, VLine = 0;
-	int VGridNum = 20; 
+	int VGridNum = 10; 
 	for (int i=1; i<VGridNum; i++) // 画20条垂直的线
 	{
-		VLine = m_rectPlot.Width()*i/VGridNum;
-		for (int HLine=1; HLine<m_rectPlot.Height(); HLine+=1) // 画垂直方向虚线
-		{
-			m_dcGrid.SetPixelV(CPoint(m_rectPlot.left + VLine, m_rectPlot.top + HLine), m_Grid);
-		}
-	}
+		VLine = m_rectPlot.Width()*i/VGridNum;//横坐标
 
-	//画20个刻度
-	m_Grid = RGB(0, 0, 0);//
+		m_dcGrid.MoveTo (m_rectPlot.left+VLine, m_rectPlot.top);
+		m_dcGrid.LineTo(m_rectPlot.left+VLine,m_rectPlot.top + m_rectPlot.Height());
+	}
+m_dcGrid.SelectObject (oldPen);
+
+
+//画20个刻度，很短的一条竖线
+m_Grid = RGB(0, 0, 0);//
+CPen solidPen3(PS_SOLID, 0, m_Grid);
+oldPen = m_dcGrid.SelectObject (&solidPen3);  //垂直的线
+
 	for (int i=1; i<VGridNum; i++) // 相隔50个像素画一条垂直的线
 	{
 		VLine = m_rectPlot.Width()*i/VGridNum;
-		for (int HLine=m_rectPlot.Height()+1; HLine<m_rectPlot.Height()+5; HLine+=1) // 画垂直方向虚线
-		{
-			m_dcGrid.SetPixelV(CPoint(m_rectPlot.left + VLine, m_rectPlot.top + HLine), m_Grid);
-		}
+
+		m_dcGrid.MoveTo (m_rectPlot.left+VLine, m_rectPlot.top + m_rectPlot.Height()+1);
+		m_dcGrid.LineTo(m_rectPlot.left+VLine,m_rectPlot.top + m_rectPlot.Height()+5);
+
 		if (i<=2)
 		{
-			for (int HLine=m_rectPlot.Height()+6; HLine<m_rectPlot.Height()+13; HLine+=1) // 画垂直方向虚线
-			{
-				m_dcGrid.SetPixelV(CPoint(m_rectPlot.left + VLine, m_rectPlot.top + HLine), m_Grid);
-			}
+			m_dcGrid.MoveTo (m_rectPlot.left+VLine, m_rectPlot.top + m_rectPlot.Height()+6);
+			m_dcGrid.LineTo(m_rectPlot.left+VLine,m_rectPlot.top + m_rectPlot.Height()+13);
 		}
 	}
+m_dcGrid.SelectObject (oldPen);
+
+	//----------------------------------------------------------------------------
+	// 画当前状态每个刻度格表示的时间字符
 
 	//VLine = m_rectPlot.Width()*1/VGridNum;
 	//CString str;
 	//str.Format(_T("CH %d ms"), g_nTimeAxisRange/10);
 	//m_dcGrid.TextOut(m_rectPlot.left + VLine, (int)(m_rectPlot.top+m_rectPlot.Height()+12), str); 
 
-
-
-
-
-	//for (HLine=30; HLine<m_rectPlot.Height(); HLine+=30) // 相隔30个像素画一条水平方向的线
-	//{
-	//	for (VLine=0; VLine<m_rectPlot.Width(); VLine+=10) // 画水平方向虚线
-	//	{
-	//		m_dcGrid.SetPixelV(CPoint(m_rectPlot.left + VLine, m_rectPlot.top + HLine), m_Grid);
-	//	}
-	//}
 	//----------------------------------------------------------------------------
 	// 画每个通道的分界线(水平线)
 
@@ -671,6 +670,59 @@ void CADScopeCtrl::DrawBkGnd()
 		DrawSingleCHText(&m_dcGrid, m_nChannelNum);
 	}
 // 	InvalidateRect(m_rectClient); // 刷新区域
+}
+
+//***********************************
+//画所有通道的横向网格
+//***********************************
+void CADScopeCtrl::DrawAllChannelGrid(CDC* pDC)
+{
+	int X = 0, Channel = 0;
+	int nGridPix = 0; // Y方向的网格线的刻度
+	float hight = ((float)m_rectPlot.Height() / m_nChannelCount); // 每通道的Y宽度
+
+COLORREF GridColor = RGB(192, 192, 192);//
+CPen* oldPen;
+GridColor = RGB(0, 0, 0);//
+CPen solidPen4(PS_SOLID, 0, GridColor);
+oldPen = m_dcGrid.SelectObject (&solidPen4);  //垂直的线
+
+
+	for (Channel=1; Channel<m_nChannelCount; Channel++) // 画m_nChannelCount-1条通道间分隔线
+	{
+		nGridPix = m_rectPlot.top + (int)(m_rectPlot.Height() * Channel) / m_nChannelCount;
+
+		m_dcGrid.MoveTo (m_rectPlot.left+1, nGridPix);
+		m_dcGrid.LineTo(m_rectPlot.right,nGridPix);
+
+	}
+m_dcGrid.SelectObject (oldPen);
+
+GridColor = RGB(192, 192, 192);//
+CPen solidPen5(PS_SOLID, 0, GridColor);
+oldPen = m_dcGrid.SelectObject (&solidPen5);  //垂直的线
+	for (Channel=0; Channel<m_nChannelCount; Channel++) // 画每通道的中线
+	{
+		m_dcGrid.MoveTo (m_rectPlot.left+1, (int)(m_rectPlot.top + (hight * Channel) + hight/2.0));
+		m_dcGrid.LineTo(m_rectPlot.right,(int)(m_rectPlot.top + (hight * Channel) + hight/2.0));
+
+		m_dcGrid.MoveTo (m_rectPlot.left+1, (int)(m_rectPlot.top + (hight * Channel) + hight/4.0));
+		m_dcGrid.LineTo(m_rectPlot.right,(int)(m_rectPlot.top + (hight * Channel) + hight/4.0));
+
+		m_dcGrid.MoveTo (m_rectPlot.left+1, (int)(m_rectPlot.top + (hight * Channel) + hight*3/4.0));
+		m_dcGrid.LineTo(m_rectPlot.right,(int)(m_rectPlot.top + (hight * Channel) + hight*3/4.0));
+
+	}
+m_dcGrid.SelectObject (oldPen);
+
+}
+
+void CADScopeCtrl::DrawSingleCHGrid(CDC* pDC)
+{
+	//for (int X=m_rectPlot.left; X<m_rectPlot.right; X+=2) // 每隔4个像素画1点
+	//{
+	//	pDC->SetPixel(X, m_rectPlot.top+(int)(m_rectPlot.Height()/2), RGB(0, 0, 0));	
+	//}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1061,47 +1113,7 @@ int CADScopeCtrl::FindTrigger(int nChannel, int nValue) // 防止波形抖动
 	return 0;
 }
 
-//画所有通道的网格线
-void CADScopeCtrl::DrawAllChannelGrid(CDC* pDC)
-{
-	int X = 0, Channel = 0;
-	int nGridPix = 0; // Y方向的网格线的刻度
-	float hight = ((float)m_rectPlot.Height() / m_nChannelCount); // 每通道的Y宽度
-	
-	for (Channel=1; Channel<m_nChannelCount; Channel++) // 画m_nChannelCount-1条网格线
-	{
-		nGridPix = m_rectPlot.top + (int)(m_rectPlot.Height() * Channel) / m_nChannelCount;
-		//for (int X=m_rectPlot.left; X<m_rectPlot.right; X+=1) // 每隔2个像素画1点
-		for (int X=0; X<m_rectPlot.right; X+=1) // 每隔2个像素画1点
-		{
-			pDC->SetPixel(X, nGridPix-1, m_crGridGreyColor);
-			//pDC->SetPixel(X, nGridPix-1, m_crGridGreyColor2);
-			pDC->SetPixel(X, nGridPix, m_crGridColor);
-			
-		}	
-	}
 
-	for (Channel=0; Channel<m_nChannelCount; Channel++) // 画每通道的中线
-	{
-		for (X=m_rectPlot.left; X<m_rectPlot.right; X+=1) // 每隔3个像素画1点
-		{
-			pDC->SetPixel(X, (int)(m_rectPlot.top + (hight * Channel) + hight/2.0), RGB(100, 100, 100)); 
-
-			pDC->SetPixel(X, (int)(m_rectPlot.top + (hight * Channel) + hight/4.0), RGB(192, 192, 192)); 
-
-			pDC->SetPixel(X, (int)(m_rectPlot.top + (hight * Channel) + hight*3/4.0), RGB(192, 192, 192)); 
-		}
-		
-	}
-}
-
-void CADScopeCtrl::DrawSingleCHGrid(CDC* pDC)
-{
-	//for (int X=m_rectPlot.left; X<m_rectPlot.right; X+=2) // 每隔4个像素画1点
-	//{
-	//	pDC->SetPixel(X, m_rectPlot.top+(int)(m_rectPlot.Height()/2), RGB(0, 0, 0));	
-	//}
-}
 
 void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 {
@@ -1140,7 +1152,7 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 
 			signe_id = Drow_text_find_id(Channel+1);
 			if(signe_id > 4)
-				str.Format(_T("channel %d"), signe_id-4);
+				str.Format(_T("Input %d"), signe_id-4);
 			else
 				str.Format(_T("Singal %d"), signe_id);
 			m_dcGrid.TextOut(m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+hight/2-5), str);
