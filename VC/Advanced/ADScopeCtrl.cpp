@@ -827,13 +827,8 @@ void CADScopeCtrl::AppendPoly(int BufferID, int  Offset)
 	//DrawBkGnd();  // 画背景
 	//DrawPoly(); // 画线
 
-	static int last_channel_cnt = 0;
 
-	if(last_channel_cnt != gl_nChannelCount)
-	{
-		TransitionData();
-		last_channel_cnt = gl_nChannelCount;
-	}
+	TransitionData();
 
 	DrawBkGnd();  // 画背景
 	ProcessData();
@@ -844,16 +839,35 @@ void CADScopeCtrl::AppendPoly(int BufferID, int  Offset)
 //处理数据, 把缓存中的数据转换成可以显示的点坐标
 void CADScopeCtrl::TransitionData()
 {
+	//float LsbOfPixel, LsbOfPixelOne;
+	//float fScreenVolume = AD_VOLT_RANGE; // 多通道显示时，屏幕是量程是和最大电压值一致的
+	//LsbOfPixel = (float)(((gl_voltVolume/gl_voltVolume)*AD_LSB_COUNT)/(PerY )); // 每像素对应的码值    
+	//LsbOfPixelOne = (float)(((gl_ScreenVolume*1.0/(gl_voltVolume))*AD_LSB_COUNT)/(m_rectPlot.Height())); // 每像素对应的码值
+	//for (int Index=0; Index < (AD_LSB_HALF * 2); Index++) // 将原码转化为屏幕绘图Y坐标
+	//{
+	//	m_nCoordinateY[Index] = (int)((Index - AD_LSB_HALF) / LsbOfPixel);
+	//	m_nCoordinateOneY[Index] = (int)((Index - AD_LSB_HALF) / LsbOfPixelOne);
+	//}
+
 	float LsbOfPixel, LsbOfPixelOne;
 	float fScreenVolume = AD_VOLT_RANGE; // 多通道显示时，屏幕是量程是和最大电压值一致的
-	//LsbOfPixel = (float)(((gl_voltVolume/gl_voltVolume)*AD_LSB_COUNT)/(PerY )); // 每像素对应的码值
-	LsbOfPixel = ((float)(AD_LSB_COUNT)/(PerY )); // 每像素对应的码值
-
-	LsbOfPixelOne = (float)(((gl_ScreenVolume*1.0/(gl_voltVolume))*AD_LSB_COUNT)/(m_rectPlot.Height())); // 每像素对应的码值
-	for (int Index=0; Index < (AD_LSB_HALF * 2); Index++) // 将原码转化为屏幕绘图Y坐标
 	{
-		m_nCoordinateY[Index] = (int)((Index - AD_LSB_HALF) / LsbOfPixel);
-		m_nCoordinateOneY[Index] = (int)((Index - AD_LSB_HALF) / LsbOfPixelOne);
+		if(Index < AD_LSB_HALF+AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE &&
+			Index > AD_LSB_HALF-AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE)
+		{
+			m_nCoordinateY[Index] = (int)((Index - AD_LSB_HALF) / LsbOfPixel);
+			m_nCoordinateOneY[Index] = (int)((Index - AD_LSB_HALF) / LsbOfPixelOne);
+		}
+		else if (Index >= AD_LSB_HALF+AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE)
+		{
+			m_nCoordinateY[Index] =(int)((AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE)/ LsbOfPixel);
+			m_nCoordinateOneY[Index] = (int)((AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE) / LsbOfPixelOne);
+		}
+		else if(Index <= AD_LSB_HALF-AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE)
+		{
+			m_nCoordinateY[Index] =0-(int)((AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE)/ LsbOfPixel);
+			m_nCoordinateOneY[Index] = 0-(int)((AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE) / LsbOfPixelOne);
+		}
 	}
 }
 

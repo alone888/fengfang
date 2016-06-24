@@ -33,6 +33,8 @@ public:
 	afx_msg void OnBnClickedCheckInput16();
 	afx_msg void OnBnClickedButton1TimeL();
 	afx_msg void OnBnClickedButton1TimeR();
+	afx_msg void OnBnClickedCheckInput6();
+	afx_msg void OnBnClickedCheckInput7();
 
 public:
 	void RedrawDataWindow(void);

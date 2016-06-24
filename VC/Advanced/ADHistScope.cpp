@@ -14,17 +14,17 @@ CADHistScope::CADHistScope()
 {
 	m_dPreviousPosition =   0.0;	
 	m_nYDecimals = 3;
-// 	for (int Channel=0; Channel<USB2831_MAX_AD_CHANNELS; Channel++)
-// 	{
-// 		m_dLowerLimit[Channel] = -10000.0;
-// 		m_dUpperLimit[Channel] =  10000.0;
-// 	}
-	
+	// 	for (int Channel=0; Channel<USB2831_MAX_AD_CHANNELS; Channel++)
+	// 	{
+	// 		m_dLowerLimit[Channel] = -10000.0;
+	// 		m_dUpperLimit[Channel] =  10000.0;
+	// 	}
+
 	m_dRange		   =  (double)(m_dUpperLimit - m_dLowerLimit);    
 	m_nShiftPixels     = 4;
 	m_nHalfShiftPixels = m_nShiftPixels/2;                      
 	m_nPlotShiftPixels = m_nShiftPixels + m_nHalfShiftPixels;   
-	
+
 	m_crBackColor  = RGB(0,   0,   0);  
 	m_crGridColor  = RGB(255, 0, 0); 
 	m_crGridGreyColor  = RGB(192, 192, 192);
@@ -46,17 +46,17 @@ CADHistScope::CADHistScope()
 	m_clPen[13] = RGB(255, 255, 0);
 	m_clPen[14] = RGB(0, 255, 0);
 	m_clPen[15] = RGB(255, 0, 255);
-	
+
 	m_crLineAColor = RGB(255, 192, 255);  // A线的颜色
-    m_crLineBColor = RGB(192, 255, 255);  // B线的颜色
-    m_crLineVColor = RGB(255, 255, 128);  // C线的颜色
-	
+	m_crLineBColor = RGB(192, 255, 255);  // B线的颜色
+	m_crLineVColor = RGB(255, 255, 128);  // C线的颜色
+
 	m_penPlot.CreatePen(PS_SOLID, 0, m_crPlotColor);
 	m_brushBack.CreateSolidBrush(m_crBackColor);
-	
+
 	m_strXUnitsString.Format(_T("Samples"));  
 	m_strYUnitsString.Format(_T("Y units"));  
-	
+
 	m_pbitmapOldGrid = NULL;
 	m_pbitmapOldPlot = NULL;
 	m_nChannelCount = 8;
@@ -94,16 +94,16 @@ CADHistScope::~CADHistScope()
 }
 
 BEGIN_MESSAGE_MAP(CADHistScope, CWnd)
-//{{AFX_MSG_MAP(CADHistScope)
-ON_WM_PAINT()
-ON_WM_SIZE()
-ON_WM_CREATE()
-ON_WM_MOUSEMOVE()
-ON_WM_LBUTTONDOWN()
-ON_WM_LBUTTONUP()
-ON_WM_RBUTTONDOWN()
-ON_WM_RBUTTONUP()
-ON_WM_SETCURSOR()
+	//{{AFX_MSG_MAP(CADHistScope)
+	ON_WM_PAINT()
+	ON_WM_SIZE()
+	ON_WM_CREATE()
+	ON_WM_MOUSEMOVE()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
+	ON_WM_RBUTTONDOWN()
+	ON_WM_RBUTTONUP()
+	ON_WM_SETCURSOR()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -112,18 +112,18 @@ END_MESSAGE_MAP()
 //ADScopeCtrl message handlers
 ///////////////////////////////////////////////////////////////////////////
 BOOL CADHistScope::Create(DWORD dwStyle, const RECT& rect, 
-                         CWnd* pParentWnd, HMENU nID) 
+	CWnd* pParentWnd, HMENU nID) 
 {
 	BOOL result;
 	static CString className = AfxRegisterWndClass(CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS);
-	
+
 	result = CWnd::CreateEx(WS_EX_CLIENTEDGE | WS_EX_STATICEDGE, 
 		className, NULL, dwStyle, 
 		rect.left, rect.top, rect.right-rect.left, rect.bottom-rect.top, 
 		pParentWnd->GetSafeHwnd(), (HMENU)nID);
-	
+
 	return result;
-	
+
 } // Create
 
 static int Drow_text_find_id(int cur_id)
@@ -158,27 +158,27 @@ void CADHistScope::SetRange(double dLower, double dUpper, int nChannel)
 void CADHistScope::SetXUnits(CString string)
 {
 	m_strXUnitsString = string;
-	
+
 	InvalidateCtrl();
-	
+
 }  // SetXUnits
 
 ///////////////////////////////////////////////////////////////////////////
 void CADHistScope::SetYUnits(CString string)
 {
 	m_strYUnitsString = string;
-	
+
 	InvalidateCtrl();
-	
+
 }  // SetYUnits
 
 ///////////////////////////////////////////////////////////////////////////
 void CADHistScope::SetGridColor(COLORREF color)
 {
 	m_crGridColor = color;
-	
+
 	InvalidateCtrl();
-	
+
 }  // SetGridColor
 
 
@@ -186,12 +186,12 @@ void CADHistScope::SetGridColor(COLORREF color)
 void CADHistScope::SetPlotColor(COLORREF color)
 {
 	m_crPlotColor = color;
-	
+
 	m_penPlot.DeleteObject();
 	m_penPlot.CreatePen(PS_SOLID, 0, m_crPlotColor);
-	
+
 	InvalidateCtrl();
-	
+
 }  // SetPlotColor
 
 
@@ -199,27 +199,27 @@ void CADHistScope::SetPlotColor(COLORREF color)
 void CADHistScope::SetBackgroundColor(COLORREF color)
 {
 	m_crBackColor = color;
-	
+
 	m_brushBack.DeleteObject();
 	m_brushBack.CreateSolidBrush(m_crBackColor);
-	
+
 	InvalidateCtrl();
-	
+
 }  // SetBackgroundColor
 
 ///////////////////////////////////////////////////////////////////////////
 double CADHistScope::AppendPoint(double dNewPoint)
 {	
 	double dPrevious;
-	
+
 	dPrevious = m_dCurrentPosition;
 	m_dCurrentPosition = dNewPoint;
 
 	DrawPoint();
 	Invalidate();
-	
+
 	return dPrevious;
-	
+
 } // AppendPoint
 
 ///////////////////////////////////////////////////////////////////////////
@@ -266,21 +266,21 @@ void CADHistScope::InvalidateCtrl()
 		if (m_penChannel[Channel].m_hObject == NULL)
 			m_penChannel[Channel].CreatePen(PS_SOLID, 1, m_clPen[Channel]);
 	}
-	
+
 	//if (!gl_bTileWave) m_channel_cnt = 1; // 如果是叠加显示就用单通道显示的方式
 
-// 	if (gl_bTileWave)  // 如果是平铺显示
-// 	{
-		//m_nChannelCount = m_HistLastChannel - m_HistFirstChannel + 1;
+	// 	if (gl_bTileWave)  // 如果是平铺显示
+	// 	{
+	//m_nChannelCount = m_HistLastChannel - m_HistFirstChannel + 1;
 
-		//m_channel_cnt = m_channel_cnt;
-// 	}
-// 	if (!gl_bTileWave) m_channel_cnt = 1; // 如果是叠加显示就用单通道显示的方式
+	//m_channel_cnt = m_channel_cnt;
+	// 	}
+	// 	if (!gl_bTileWave) m_channel_cnt = 1; // 如果是叠加显示就用单通道显示的方式
 	DrawBkGnd();	// 画背景
 	DrawPoly();
 	TransitionData();
 	m_bInitialed = TRUE;
-	
+
 } // InvalidateCtrl
 
 //////////////////////////////////////////////////////////////////////////
@@ -294,7 +294,7 @@ void CADHistScope::OnPaint()
 	memDC.CreateCompatibleDC(&dc);
 	memBitmap.CreateCompatibleBitmap(&dc, m_nClientWidth, m_nClientHeight);
 	oldBitmap = (CBitmap *)memDC.SelectObject(&memBitmap);
-	
+
 	if (memDC.GetSafeHdc() != NULL)
 	{
 		memDC.BitBlt(0, 0, m_nClientWidth, m_nClientHeight, 
@@ -308,11 +308,11 @@ void CADHistScope::OnPaint()
 	}
 
 	memDC.SelectObject(oldBitmap);
-	
+
 	int	nDrawMode;
 	dc.SetBkMode(TRANSPARENT);		                // 设置背景为透明
 	nDrawMode = dc.SetROP2(R2_XORPEN);              // 设置绘制模式
-	
+
 	dc.SelectObject(&m_PenLineA);                   // 选入线A的画笔
 	dc.MoveTo(m_OldMoveX1, m_rectPlot.top);
 	dc.LineTo(m_OldMoveX1, m_rectPlot.Height()+10); // 画线A
@@ -321,7 +321,7 @@ void CADHistScope::OnPaint()
 	swprintf_s(str, _T("%s"), _T("A线"));
 	dc.SetTextColor(RGB(255, 0, 0));
 	dc.TextOut(m_OldMoveX1, m_rectPlot.top, str);
-	
+
 	dc.SelectObject(&m_PenLineB);				    // 选区入线B的画笔
 	dc.MoveTo(m_OldMoveX2, m_rectPlot.top);
 	dc.LineTo(m_OldMoveX2, m_rectPlot.Height()+10); // 画线B
@@ -345,32 +345,32 @@ void CADHistScope::DrawPoint()
 	int currX, prevX, currY, prevY;
 	CPen* oldPen;
 	CRect rectCleanUp;
-	
+
 	if (m_dcPlot.GetSafeHdc() != NULL)
 	{
 		m_dcPlot.BitBlt(m_rectPlot.left, m_rectPlot.top+1, 
 			m_nPlotWidth, m_nPlotHeight, &m_dcPlot, 
 			m_rectPlot.left+1/*2/*m_nShiftPixels*/, m_rectPlot.top+1, 
 			SRCCOPY);		
-		
+
 		rectCleanUp = m_rectPlot;
 		rectCleanUp.left  = rectCleanUp.right - 1;
-		
+
 		m_dcPlot.FillRect(rectCleanUp, &m_brushBack);
 		oldPen = m_dcPlot.SelectObject(&m_penPlot);
-		
+
 		prevX = m_rectPlot.right-2; // m_nPlotShiftPixels;
 		prevY = m_rectPlot.bottom - (long)m_dPreviousPosition-10;
 		m_dcPlot.MoveTo (prevX, prevY);
-		
+
 		currX = m_rectPlot.right-1; // m_nHalfShiftPixels;
 		currY = m_rectPlot.bottom -(long)m_dCurrentPosition-10;
 		m_dcPlot.LineTo (currX, currY);
 		m_dcPlot.SelectObject(oldPen);
-		
+
 		m_dPreviousPosition = m_dCurrentPosition;		
 	}
-	
+
 } // end DrawPoint
 
 ///////////////////////////////////////////////////////////////////////////
@@ -380,21 +380,21 @@ void CADHistScope::OnSize(UINT nType, int cx, int cy)
 	if (m_bInitialed) 
 	{ 
 		GetClientRect(m_rectClient); // 获取当前的客户区大小
-		
+
 		m_nClientHeight = m_rectClient.Height(); 
 		m_nClientWidth  = m_rectClient.Width();
-		
+
 		m_rectPlot.left   = 60;  
 		m_rectPlot.top    = 10;
 		m_rectPlot.right  = m_rectClient.right -10;
 		m_rectPlot.bottom = m_rectClient.bottom - 10; //-25;
-		
+
 		m_nPlotHeight = m_rectPlot.Height();
 		m_nPlotWidth  = m_rectPlot.Width();	
-		
+
 		m_dVerticalFactor = (double)m_nPlotHeight / m_dRange; 	
 		InvalidateCtrl(); // 重新绘制
-		
+
 		m_OldVoltageY = m_CurVoltageY = m_rectPlot.top + 20;
 		m_OldMoveX1   = m_CurMoveX1 = m_rectPlot.left + 20;
 		m_OldMoveX2   = m_CurMoveX2 = m_rectPlot.right - 20;
@@ -417,17 +417,17 @@ int CADHistScope::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_rectClient = CRect(0, 0, 1400, 1000);   
 	m_nClientHeight = m_rectClient.Height();
 	m_nClientWidth  = m_rectClient.Width();
-	
+
 	m_rectPlot.left   = 60;  
 	m_rectPlot.top    = 10;
 	m_rectPlot.right  = m_rectClient.right-10;
 	m_rectPlot.bottom = m_rectClient.bottom-25;
-	
+
 	m_nPlotHeight = m_rectPlot.Height();
 	m_nPlotWidth  = m_rectPlot.Width();
-	
+
 	m_dVerticalFactor = (double)m_nPlotHeight / m_dRange; 
-	
+
 	return 0;
 
 }
@@ -450,7 +450,7 @@ void CADHistScope::DrawBkGnd()
 	nCharacters = abs((int)log10(fabs(m_dUpperLimit[0])));
 	nCharacters = max(nCharacters, abs((int)log10(fabs(m_dLowerLimit[0]))));
 	nCharacters = nCharacters + 4 + m_nYDecimals;  
-	
+
 	PerY = (int)(m_nPlotHeight / m_channel_cnt); // 每通道的Y宽度
 	//----------------------------------------------------------------------------------
 	// 画四周的框架	
@@ -470,7 +470,7 @@ void CADHistScope::DrawBkGnd()
 			m_dcGrid.SetPixelV(CPoint(m_rectPlot.left + VLine, m_rectPlot.top + HLine), m_Grid);
 		}
 	}
-	
+
 	for (HLine=30; HLine<m_rectPlot.Height(); HLine+=30) // 相隔30个像素画一条水平方向的线
 	{
 		for (VLine=0; VLine<m_rectPlot.Width(); VLine+=10) // 画水平方向虚线
@@ -480,7 +480,7 @@ void CADHistScope::DrawBkGnd()
 	}	
 	//----------------------------------------------------------------------------
 	// 画每个通道的分界线(水平线)
-	
+
 	if (m_bAllChannel) // 显示所有通道
 	{
 		if (gl_bTileWave) // 如果是平铺显示
@@ -511,12 +511,12 @@ void CADHistScope::DrawBkGnd()
 		CLIP_DEFAULT_PRECIS, 
 		DEFAULT_QUALITY, 
 		DEFAULT_PITCH|FF_SWISS, _T("Arial"));
-	
+
 	oldFont = m_dcGrid.SelectObject(&axisFont);
 	m_dcGrid.SetTextAlign (TA_RIGHT|TA_TOP); // 对齐方式	
-	
+
 	//----------------------------------------------------------------------
-	
+
 	if (m_bAllChannel)
 	{
 		if (gl_bTileWave) // 平铺显示
@@ -527,7 +527,7 @@ void CADHistScope::DrawBkGnd()
 		{
 			DrawSingleCHText(&m_dcGrid, 0);
 		}
-		
+
 	}
 	else
 	{
@@ -535,14 +535,14 @@ void CADHistScope::DrawBkGnd()
 	}
 
 	InvalidateRect(m_rectClient); // 刷新区域
-	
+
 }
 
 //########################################################################
 //画PolyLine线
 void CADHistScope::OnMouseMove(UINT nFlags, CPoint point) 
 {
- 	CClientDC dc(this);
+	CClientDC dc(this);
 	if (m_rectPlot.PtInRect(point))
 	{
 		if (!m_bRBtnDown) m_nShowCursor = 0;
@@ -559,7 +559,7 @@ void CADHistScope::OnMouseMove(UINT nFlags, CPoint point)
 		{
 			m_nShowCursor = 3;
 		}
-		
+
 		if (m_bLBtnDown || m_bRBtnDown) 
 		{
 			DrawMoveLine(&dc, point);
@@ -575,7 +575,7 @@ void CADHistScope::OnMouseMove(UINT nFlags, CPoint point)
 	pOffsetEdit->SetWindowText(str);  // 显示文件偏移
 
 	SetStatusBar(); // 设置状态栏的频率等
-	
+
 	CWnd::OnMouseMove(nFlags, point);
 }
 
@@ -615,14 +615,8 @@ void CADHistScope::AppendPoly(int BufferID, int  Offset)
 {
 	m_BufferID = BufferID; // 段缓冲ID
 	m_Offset = Offset;     // 段内偏移
-	static int last_channel_cnt = 0;
-	
-	if(last_channel_cnt != m_channel_cnt)
-	{
-		TransitionData();
-		last_channel_cnt = m_channel_cnt;
-	}
-	
+
+	TransitionData();
 	DrawBkGnd();	// 画背景
 	ProcessData(); // 处理数据
 	DrawPoly(); // 画线
@@ -634,13 +628,27 @@ void CADHistScope::TransitionData()
 {
 	float LsbOfPixel, LsbOfPixelOne;
 	float fScreenVolume = AD_VOLT_RANGE; // 多通道显示时，屏幕是量程是和最大电压值一致的
-	LsbOfPixel = (float)(((fScreenVolume/AD_VOLT_RANGE)*AD_LSB_COUNT)/(PerY)); // 每像素对应的码值    
+	LsbOfPixel = (float)(((AD_LSB_COUNT*g_nVAxisRange/AD_VOLT_RANGE)/(PerY))); // 每像素对应的码值    
 	LsbOfPixelOne = (float)(((gl_ScreenVolume/(AD_VOLT_RANGE*2))*AD_LSB_COUNT)/(m_rectPlot.Height())); // 每像素对应的码值
 
 	for (int Index=0; Index <= (AD_LSB_HALF * 2); Index++) // 将原码转化为屏幕绘图Y坐标
 	{
-		m_nCoordinateY[Index] = (int)((Index - AD_LSB_HALF) / LsbOfPixel);
-		m_nCoordinateOneY[Index] = (int)((Index - AD_LSB_HALF) / LsbOfPixelOne);
+		if(Index < AD_LSB_HALF+AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE &&
+			Index > AD_LSB_HALF-AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE)
+		{
+			m_nCoordinateY[Index] = (int)((Index - AD_LSB_HALF) / LsbOfPixel);
+			m_nCoordinateOneY[Index] = (int)((Index - AD_LSB_HALF) / LsbOfPixelOne);
+		}
+		else if (Index >= AD_LSB_HALF+AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE)
+		{
+			m_nCoordinateY[Index] =(int)((AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE)/ LsbOfPixel);
+			m_nCoordinateOneY[Index] = (int)((AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE) / LsbOfPixelOne);
+		}
+		else if(Index <= AD_LSB_HALF-AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE)
+		{
+			m_nCoordinateY[Index] =0-(int)((AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE)/ LsbOfPixel);
+			m_nCoordinateOneY[Index] = 0-(int)((AD_LSB_HALF*g_nVAxisRange/AD_VOLT_RANGE) / LsbOfPixelOne);
+		}
 	}
 }
 
@@ -652,9 +660,9 @@ void CADHistScope::ProcessData()
 	int Offset = 0, DataY = 0;
 	CADHistDoc* pHistDoc = theApp.m_pADHistDoc;
 	int channe_id_enable = 0;
-	
+
 	StartX = m_rectPlot.left+1; // X方向的起始位置
-	
+
 	if (gl_bTileWave) // 多通道平铺显示
 	{
 		for (Channel=0; Channel<m_channel_cnt; Channel++)
@@ -688,10 +696,10 @@ void CADHistScope::ProcessData()
 			}
 		}
 	}
-	
-	
+
+
 	m_bDrawPoly = TRUE; 
-	
+
 }
 
 void CADHistScope::ProcessDataEx()  
@@ -704,9 +712,9 @@ void CADHistScope::ProcessDataEx()
 	PWORD  ptOffset; // 缓存指针
 	int Offset = 0, DataY = 0;
 	CADHistDoc* pHistDoc = theApp.m_pADHistDoc;
-	
+
 	StartX = m_rectPlot.left+1; // X方向的起始位置
-	
+
 	if (gl_bTileWave) // 多通道平铺显示
 	{
 		for (Channel=0; Channel<m_nChannelCount; Channel++)
@@ -715,7 +723,7 @@ void CADHistScope::ProcessDataEx()
 			pointxy[Channel][0].x = StartX;
 			DataY = (int)((ptOffset[Offset])/LsbOfPixel);
 			pointxy[Channel][0].y = (int)(Center) - DataY;
-			
+
 			for (Index=0; Index<=m_nPlotWidth; Index++) // 初始化1024个点(创建时，位图的大小) 
 			{
 				pointxy[Channel][Index].x = StartX + Index;
@@ -742,10 +750,10 @@ void CADHistScope::ProcessDataEx()
 			}
 		}
 	}
-	
-	
+
+
 	m_bDrawPoly = TRUE; 
-	
+
 }
 
 //##############################################################################
@@ -759,8 +767,8 @@ void CADHistScope::DrawPoly()
 	m_dcPlot.SetBkColor (m_crBackColor);
 	m_dcPlot.FillRect(m_rectClient, &m_brushBack);
 	m_dcPlot.SetTextColor(RGB(255, 158, 0));
-	
-		
+
+
 	//---------------------------------------------------------------------------------
 	if (m_bAllChannel || !gl_bTileWave) // 所有通道显示或叠加显示时
 	{
@@ -794,7 +802,7 @@ void CADHistScope::DrawPoly()
 void CADHistScope::OnLButtonUp(UINT nFlags, CPoint point) 
 {
 	// TODO: Add your message handler code here and/or call default
-// 	m_nLineIndex = 0xFFFF;
+	// 	m_nLineIndex = 0xFFFF;
 	m_bOnlyLine = FALSE;
 	m_bLBtnDown = FALSE; 
 	::ReleaseCapture();
@@ -829,7 +837,7 @@ void CADHistScope::OnLButtonUp(UINT nFlags, CPoint point)
 
 	int nDistanceAB = 0;
 	nFrequency = pDoc->m_Header.ADPara.Frequency; // 从文件头中取得采样频率
-	
+
 	pStaticA->GetWindowText(str);
 	nPositionA = wcstol(str, NULL, 10);
 	pStaticB->GetWindowText(str);
@@ -849,7 +857,7 @@ void CADHistScope::OnLButtonUp(UINT nFlags, CPoint point)
 		pStaticFre->SetWindowText(str);
 	}
 	bFirstPosition = !bFirstPosition;
-	
+
 	CWnd::OnLButtonUp(nFlags, point);
 }
 
@@ -883,7 +891,7 @@ void CADHistScope::SetStatusBar()
 
 	// 测量电压值电压值
 	float LsbOfPixel = (float)((gl_ScreenVolume*1.0)/(m_rectPlot.Height())); // 每像素对应的码值    
-	
+
 	int Center = m_rectPlot.Height()/2 + m_rectPlot.top;
 	int nOffset = Center - m_OldVoltageY;
 	m_VolOffset = nOffset * LsbOfPixel;
@@ -911,7 +919,7 @@ void CADHistScope::DrawAllChannelGrid(CDC* pDC)
 	int X = 0, Channel = 0;
 	int nGridPix = 0; // Y方向的网格线的刻度
 	float hight = (float)(m_rectPlot.Height() / m_channel_cnt); // 每通道的Y宽度
-	
+
 	for (Channel=1; Channel<m_channel_cnt; Channel++) // 画m_channel_cnt-1条网格线
 	{
 		nGridPix = m_rectPlot.top + (int)(m_rectPlot.Height() * Channel) / m_channel_cnt;
@@ -927,7 +935,7 @@ void CADHistScope::DrawAllChannelGrid(CDC* pDC)
 		{
 			pDC->SetPixel(X, (int)(m_rectPlot.top + (hight * Channel) + hight/2.0), RGB(255, 255, 255)); 
 		}
-		
+
 	}
 }
 
@@ -955,11 +963,11 @@ void CADHistScope::DrawAllChannelText(CDC* pDC)
 		//str.Format ("%.*lf V", m_nYDecimals, m_dUpperLimit[Channel]/1000.0); // 正电压值
 		str.Format (_T("%.*lf V"), m_nYDecimals, m_dUpperLimit[Channel]/1000.0); // 正电压值
 		pDC->TextOut (m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+8), str); 
-		
+
 		pDC->SetTextAlign (TA_RIGHT|TA_BASELINE);
 		str.Format (_T("%.*lf V"), m_nYDecimals, m_dLowerLimit[Channel]/1000.0); // 负电压值
 		pDC->TextOut (m_rectPlot.left-4, (int)(m_rectPlot.top+hight*(Channel+1)-5), str);
-		
+
 		signe_id = Drow_text_find_id(Channel+1);
 		if(signe_id > 4)
 			str.Format(_T("Input %d"), signe_id-4);
@@ -967,9 +975,9 @@ void CADHistScope::DrawAllChannelText(CDC* pDC)
 			str.Format(_T("Singal %d"), signe_id);
 		//str.Format(_T("CH %d"), Channel + m_HistFirstChannel);
 		pDC->TextOut(m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+hight/2+5), str);
-		     
+
 	}	
-	
+
 }
 
 void CADHistScope::DrawSingleCHText(CDC* pDC, int nChannelNum)
@@ -984,9 +992,9 @@ void CADHistScope::DrawSingleCHText(CDC* pDC, int nChannelNum)
 	pDC->TextOut (m_rectPlot.left-4, m_rectPlot.top, strInfo); 
 	pDC->SetTextAlign (TA_RIGHT|TA_BASELINE);
 	strInfo.Format (_T("%.*lf mV"), 0, m_dLowerLimit[nChannelNum]); // 负电压值
-	
+
 	pDC->TextOut (m_rectPlot.left-4, m_rectPlot.top+m_nPlotHeight, strInfo);
-	
+
 	if (nChannelNum == 0xFFFF) // 如果是叠加显示时
 		strInfo = "CH";
 	else
@@ -994,7 +1002,7 @@ void CADHistScope::DrawSingleCHText(CDC* pDC, int nChannelNum)
 
 	// 写通道号
 	pDC->TextOut(m_rectPlot.left-4, m_rectPlot.top+m_nPlotHeight/2+5, strInfo);      
-	
+
 }
 
 void CADHistScope::OnRButtonDown(UINT nFlags, CPoint point) 
@@ -1010,11 +1018,11 @@ void CADHistScope::OnRButtonDown(UINT nFlags, CPoint point)
 		m_nShowCursor = 4;
 		hCursor = AfxGetApp()->LoadStandardCursor(IDC_SIZEALL);
 		::SetCursor(hCursor);
-		
+
 		m_RBtnDownPosX = point.x;
 		m_StartOldMoveX1 = m_OldMoveX1; // 保存两线移动时，线条1的起始位置
 		m_StartOldMoveX2 = m_OldMoveX2; // 保存两线移动时，线条2的起始位置
-		
+
 		CRect ClipRect = m_rectPlot;
 		ClientToScreen(&ClipRect);
 		if (m_OldMoveX1 < m_OldMoveX2) // 如果线1在线2的左边
@@ -1038,7 +1046,7 @@ void CADHistScope::OnRButtonUp(UINT nFlags, CPoint point)
 	HCURSOR hCursor;
 	hCursor = AfxGetApp()->LoadStandardCursor(IDC_ARROW);
 	::SetCursor(hCursor);
-	
+
 	m_bRBtnDown = FALSE;
 	m_nLineIndex = 0xFFFF;
 	ClipCursor(NULL);
@@ -1068,7 +1076,7 @@ void CADHistScope::DrawMoveLine(CDC* pDC, CPoint point)
 		pDC->SelectObject(&m_PenLineB);
 		pDC->MoveTo(m_OldMoveX2, m_rectPlot.top); // 消除上一次画的线B
 		pDC->LineTo(m_OldMoveX2, m_rectPlot.Height()+10);	// 画线B
-		
+
 		swprintf_s(str, _T("%s"), _T("A线"));
 		pDC->SetTextColor(RGB(255, 0, 0));
 		pDC->TextOut(m_OldMoveX1, m_rectPlot.top, str);
@@ -1150,6 +1158,6 @@ BOOL CADHistScope::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 		::SetCursor(m_hCursorArrow);
 		break;
 	}
-	
+
 	return CWnd::OnSetCursor(pWnd, nHitTest, message);
 }

@@ -9,6 +9,7 @@ WORD showData[8][10000];// WYL 10000个点表示屏幕上要显示的点
 
 AD_ORG_DATA gt_AD_OrgData[3000]; // WYL 一次读的数据个数
 unsigned int g_nTimeAxisRange = 1000000;
+float g_nVAxisRange = 10000;
 
 ULONG gl_ReadSizeWords;	// 读入的数据长度
 
