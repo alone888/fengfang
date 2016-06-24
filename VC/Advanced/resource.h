@@ -280,6 +280,7 @@
 #define IDC_EDIT_TimeAxisRange          1235
 #define IDC_EDIT_TrigWindow             1236
 #define IDC_SPIN1                       1237
+#define IDC_EDIT_TimeAxisRange2         1237
 #define IDC_SPIN2                       1238
 #define IDC_SCROLLBAR1                  1239
 #define IDC_SPIN3                       1239
@@ -291,8 +292,10 @@
 #define IDC_BUTTON3                     1243
 #define IDC_EDIT5                       1244
 #define IDC_CHECK_INPUT9_P              1244
+#define IDC_BUTTON4                     1244
 #define IDC_SPIN5                       1245
 #define IDC_CHECK_INPUT10_P             1245
+#define IDC_BUTTON5                     1245
 #define IDC_EDIT6                       1246
 #define IDC_CHECK_INPUT11_P             1246
 #define IDC_SPIN6                       1247
@@ -311,11 +314,13 @@
 #define IDC_CHECK_INPUT16_P             1251
 #define IDC_CHECK_INPUT13               1252
 #define IDC_EDIT9                       1252
-#define IDC_BUTTON_TIME_LEGFT           1252
 #define IDC_BUTTON_TIME_L               1252
 #define IDC_CHECK_INPUT14               1253
+#define IDC_EDIT_VAxisRange2            1253
 #define IDC_CHECK_INPUT15               1254
 #define IDC_CHECK_INPUT16               1255
+#define IDC_BUTTON6                     1255
+#define IDC_BUTTON7                     1256
 #define IDC_SPIN9                       1285
 #define IDC_EDIT10                      1286
 #define IDC_SPIN10                      1287
@@ -392,7 +397,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        185
 #define _APS_NEXT_COMMAND_VALUE         32837
-#define _APS_NEXT_CONTROL_VALUE         1253
+#define _APS_NEXT_CONTROL_VALUE         1254
 #define _APS_NEXT_SYMED_VALUE           132
 #endif
 #endif

@@ -139,6 +139,9 @@ public:
 	afx_msg void OnBnClickedButton3();
 	// 屏幕上显示的时间轴量程
 	CEdit m_TimeAxisRange;
+	afx_msg void OnBnClickedButton4();
+	afx_msg void OnBnClickedButton5();
+	CEdit m_VAxisRange;
 };
 
 /////////////////////////////////////////////////////////////////////////////

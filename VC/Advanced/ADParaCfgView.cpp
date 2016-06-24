@@ -73,6 +73,7 @@ void CADParaCfgView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK_INPUT16, m_input_4);
 	DDX_Control(pDX, IDC_EDIT_ChannelSum2, m_TimerCnt);
 	DDX_Control(pDX, IDC_EDIT_TimeAxisRange, m_TimeAxisRange);
+	DDX_Control(pDX, IDC_EDIT_TimeAxisRange2, m_VAxisRange);
 }
 
 
@@ -111,6 +112,8 @@ BEGIN_MESSAGE_MAP(CADParaCfgView, CFormView)
 	ON_BN_CLICKED(IDC_CHECK_INPUT16, &CADParaCfgView::OnBnClickedCheckInput16)
 	ON_BN_CLICKED(IDC_BUTTON1, &CADParaCfgView::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON3, &CADParaCfgView::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON4, &CADParaCfgView::OnBnClickedButton4)
+	ON_BN_CLICKED(IDC_BUTTON5, &CADParaCfgView::OnBnClickedButton5)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -183,6 +186,7 @@ void CADParaCfgView::OnInitialUpdate()
 
 
 	OnBnClickedButton1();
+	OnBnClickedButton5();
 
 
 	// 初始化用户界面视觉参数		
@@ -1042,8 +1046,8 @@ void CADParaCfgView::OnBnClickedCheckInput16()
 	m_Edit_ChannelSum.SetWindowText(str);
 }
 
-int TimeAxisRangeVal[]={10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000,200000,500000};//以ms为单位
-int TimeAxisRangeID=6;//初始为1s钟
+static int TimeAxisRangeVal[]={10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000,200000,500000};//以ms为单位
+static int TimeAxisRangeID=6;//初始为1s钟
 
 
 //时间量程减小
@@ -1127,3 +1131,36 @@ void CADParaCfgView::OnBnClickedButton3()
 }
 
 
+
+
+
+static int VAxisRangeVal[]={10,20,50,100,200,500,1000,2000,5000,10000};//以mv为单位
+static int VAxisRangeID=9;//初始为1s钟
+void CADParaCfgView::OnBnClickedButton4()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(VAxisRangeID > 0)
+		VAxisRangeID--;
+	//else
+	//	return;
+
+	CString tmp;
+	tmp.Format(_T("%d"),VAxisRangeVal[VAxisRangeID]);
+	m_VAxisRange.SetWindowTextW(tmp);
+	g_nVAxisRange = VAxisRangeVal[VAxisRangeID];
+}
+
+void CADParaCfgView::OnBnClickedButton5()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(VAxisRangeID < 9 )
+		VAxisRangeID++;
+	/*else
+		return;
+*/
+	CString tmp;
+	tmp.Format(_T("%d"),VAxisRangeVal[VAxisRangeID]);
+	m_VAxisRange.SetWindowTextW(tmp);
+
+	g_nVAxisRange = VAxisRangeVal[VAxisRangeID];
+}

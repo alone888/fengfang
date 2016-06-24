@@ -58,6 +58,8 @@ BEGIN_MESSAGE_MAP(CADHistFrm, CMDIChildWnd)
 	ON_BN_CLICKED(IDC_CHECK_INPUT16_P, OnBnClickedCheckInput16)
 	ON_BN_CLICKED(IDC_BUTTON_TIME_L, OnBnClickedButton1TimeL)
 	ON_BN_CLICKED(IDC_BUTTON_TIME_R, OnBnClickedButton1TimeR)
+	ON_BN_CLICKED(IDC_BUTTON6, OnBnClickedCheckInput6)
+	ON_BN_CLICKED(IDC_BUTTON7, OnBnClickedCheckInput7)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -145,6 +147,8 @@ int CADHistFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	tmp.Format(_T("%d"),1000);
 	CEdit* pEditPos = (CEdit*)(m_wndSetupBar.GetDlgItem(IDC_STATIC_TIME));
 	m_wndSetupBar.GetDlgItem(IDC_STATIC_TIME)->SetWindowText(tmp);
+
+	OnBnClickedCheckInput7();
 	return 0;
 }
 
@@ -668,4 +672,41 @@ void CADHistFrm::OnBnClickedButton1TimeR()
 	}
 	RedrawDataWindow();
 }
+
+
+static int VAxisRangeVal[]={10,20,50,100,200,500,1000,2000,5000,10000};//以mv为单位
+static int VAxisRangeID=9;//初始为1s钟
+void CADHistFrm::OnBnClickedCheckInput6()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(VAxisRangeID > 0)
+		VAxisRangeID--;
+	//else
+	//	return;
+
+	CString tmp;
+	tmp.Format(_T("%d"),VAxisRangeVal[VAxisRangeID]);
+	CEdit* pEditPos = (CEdit*)(m_wndSetupBar.GetDlgItem(IDC_EDIT_VAxisRange2));
+	m_wndSetupBar.GetDlgItem(IDC_EDIT_VAxisRange2)->SetWindowText(tmp);
+	g_nVAxisRange = VAxisRangeVal[VAxisRangeID];
+	RedrawDataWindow();
+}
+
+void CADHistFrm::OnBnClickedCheckInput7()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if(VAxisRangeID < 9 )
+		VAxisRangeID++;
+	/*else
+		return;
+*/
+	CString tmp;
+	tmp.Format(_T("%d"),VAxisRangeVal[VAxisRangeID]);
+	CEdit* pEditPos = (CEdit*)(m_wndSetupBar.GetDlgItem(IDC_EDIT_VAxisRange2));
+	m_wndSetupBar.GetDlgItem(IDC_EDIT_VAxisRange2)->SetWindowText(tmp);
+
+	g_nVAxisRange = VAxisRangeVal[VAxisRangeID];
+	RedrawDataWindow();
+}
+
 

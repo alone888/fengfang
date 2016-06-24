@@ -20,7 +20,8 @@ typedef struct _AD_OrgData       /* rcl */
 } AD_ORG_DATA;
 
 extern AD_ORG_DATA gt_AD_OrgData[3000]; // WYL 一次读的数据个数
-extern unsigned int g_nTimeAxisRange;
+extern unsigned int g_nTimeAxisRange; // 时间轴量程
+extern float g_nVAxisRange; // xgy 纵轴量程
 
 
 extern ULONG gl_ReadSizeWords;	// 读入的数据长度
