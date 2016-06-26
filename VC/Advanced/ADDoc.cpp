@@ -88,7 +88,16 @@ void CADDoc::Dump(CDumpContext& dc) const
 static int device_start_ok = 0;
 void CADDoc::StartDeviceAD() 
 {
+	if (device_start_ok)
+	{
+		return;
+	}
+	
+	
 	device_start_ok = 0;
+
+
+
 	m_hDevice = theApp.m_hDevice;
 	////////////////////////////////////////////////////////////////////////
 	if (m_hDevice == INVALID_HANDLE_VALUE)
@@ -283,7 +292,7 @@ void CADDoc::StopDeviceAD()
 
 	if(device_start_ok != 1) return;
 
-
+	device_start_ok = 0;
 	// 停止定时器取得触发点位置
 	m_hADParaCfgView->KillTimer(1);
 
