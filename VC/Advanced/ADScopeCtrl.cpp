@@ -549,7 +549,7 @@ void CADScopeCtrl::DrawBkGnd()
 	int nCharacters = 0;
 	CPen* oldPen;
 	CPen solidPen(PS_SOLID, 0, m_crGridColor);
-	CFont axisFont, yUnitFont;
+	CFont axisFont, yUnitFont,xUnitFont;
 	CFont* oldFont;
 	CString strTemp;
 	//---------------------------------------------------------------------------
@@ -605,9 +605,37 @@ oldPen = m_dcGrid.SelectObject (&solidPen3);  //垂直的线
 		if (i<=2)
 		{
 			m_dcGrid.MoveTo (m_rectPlot.left+VLine, m_rectPlot.top + m_rectPlot.Height()+6);
-			m_dcGrid.LineTo(m_rectPlot.left+VLine,m_rectPlot.top + m_rectPlot.Height()+13);
+			m_dcGrid.LineTo(m_rectPlot.left+VLine,m_rectPlot.top + m_rectPlot.Height()+15);
 		}
 	}
+
+//画下边表示一横格的刻度的刻度线和刻度文字
+	
+	m_dcGrid.SetTextAlign (TA_CENTER|TA_TOP); //刻度的文字要设置成居中对齐 对齐方式
+
+	VLine = m_rectPlot.Width()*1/VGridNum;
+	m_dcGrid.MoveTo (m_rectPlot.left+VLine, m_rectPlot.top + m_rectPlot.Height()+10);
+	m_dcGrid.LineTo(m_rectPlot.left+2*VLine,m_rectPlot.top + m_rectPlot.Height()+10);
+
+
+	VLine = m_rectPlot.Width()*1.5/VGridNum;
+
+	int tempRange = g_nTimeAxisRange/1000;// 转换成ms
+	CString str;
+	if (tempRange>=10000)
+	{
+		str.Format (_T("%d s"),tempRange/10000); //时间量程s
+		m_dcGrid.TextOutW(m_rectPlot.left+VLine,m_rectPlot.top + m_rectPlot.Height()+4,str);
+	} 
+	else
+	{
+		str.Format (_T("%d ms"),tempRange/10); // 时间量程ms	
+		m_dcGrid.TextOutW(m_rectPlot.left+VLine,m_rectPlot.top + m_rectPlot.Height()+4,str);
+	}
+	
+	
+
+
 m_dcGrid.SelectObject (oldPen);
 
 	//----------------------------------------------------------------------------
@@ -1133,11 +1161,30 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 			nGridPixS = m_rectPlot.top + (int)(m_rectPlot.Height() * Channel) / gl_nChannelCount;
 			nGridPixE = m_rectPlot.top + (int)(m_rectPlot.Height() * (Channel+1)) / gl_nChannelCount;
 
-			str.Format (_T("%.*lf V"), m_nYDecimals, m_dUpperLimit[Channel]/1000.0); // 正电压值
+			//str.Format (_T("%.*lf V"), m_nYDecimals, m_dUpperLimit[Channel]/1000.0); // 正电压值
+			if (g_nVAxisRange>=1000)
+			{
+				str.Format (_T("%.f V"),g_nVAxisRange/1000.0); // 正电压值
+			}
+			else
+			{
+				str.Format (_T("%.f mV"),g_nVAxisRange); // 正电压值	
+			}
+
+
 			m_dcGrid.TextOut (m_rectPlot.left-4, (int)(nGridPixS), str); 
 			
 			//m_dcGrid.SetTextAlign (TA_RIGHT|TA_BASELINE);
-			str.Format (_T("%.*lf V"), m_nYDecimals, m_dLowerLimit[Channel]/1000.0); // 负电压值
+			//str.Format (_T("%.*lf V"), m_nYDecimals, m_dLowerLimit[Channel]/1000.0); // 负电压值
+			if (g_nVAxisRange>=1000)
+			{
+				str.Format (_T("%.f V"),-1*g_nVAxisRange/1000.0); // 正电压值
+			}
+			else
+			{
+				str.Format (_T("%.f mV"),-1*g_nVAxisRange); // 正电压值	
+			}
+
 			m_dcGrid.TextOut (m_rectPlot.left-4, (int)(nGridPixE-13), str);
 			
 			CFont font;
@@ -1163,10 +1210,6 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 			m_dcGrid.TextOut(m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+5), str); 
 		}
 	}
-
-
-
-
 }
 
 void CADScopeCtrl::DrawSingleCHText(CDC* pDC, int nChannelNum)
