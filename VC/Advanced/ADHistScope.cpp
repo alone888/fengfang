@@ -629,7 +629,7 @@ void CADHistScope::TransitionData()
 	float LsbOfPixel, LsbOfPixelOne;
 	float fScreenVolume = AD_VOLT_RANGE; // 多通道显示时，屏幕是量程是和最大电压值一致的
 	LsbOfPixel = (float)(((AD_LSB_COUNT*g_nVAxisRange/AD_VOLT_RANGE)/(PerY))); // 每像素对应的码值    
-	LsbOfPixelOne = (float)(((gl_ScreenVolume/(AD_VOLT_RANGE*2))*AD_LSB_COUNT)/(m_rectPlot.Height())); // 每像素对应的码值
+	LsbOfPixelOne = (float)(((gl_ScreenVolume*(g_nVAxisRange/AD_VOLT_RANGE)/(AD_VOLT_RANGE*2))*AD_LSB_COUNT)/(m_rectPlot.Height())); // 每像素对应的码值
 
 	for (int Index=0; Index <= (AD_LSB_HALF * 2); Index++) // 将原码转化为屏幕绘图Y坐标
 	{

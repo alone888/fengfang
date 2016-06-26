@@ -21,8 +21,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_15368412AD454E498D2DB6466B397653"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_20BA96BBF9C2FD8085CC905628DB77A4"
         "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2D8DFAF0FE63432996AF80767EA39C38"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -39,14 +51,50 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_56CC68E5C46F4BF5914533EADBF727C1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5BD7569E11DBBE6B5F4B349D6C8DC8BB"
         "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_87B2501254CB04B8031CF98FC00F1062"
-        "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
+        "MsmKey" = "8:_7C78F4ECD76140EEBFD47CB7417D596D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8B264281896044C7852A5BF0919CD9C9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8D1C55BC47424365A39223A7BC9C18AE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8E671049E2BC48A9AB1A474B7C7FD201"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_97BE0A90AF6847B1B997031A9F31A856"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9C839236152F49C29C7EC6C9B7060F32"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -59,6 +107,24 @@
         {
         "MsmKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D12B74FC0947480EBDC29D039AC0F1C5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D9ABA2FD6FCC42BAB0A4723D1603530F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E3B89A57CDC4EE024883E70DE2673F97"
+        "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -122,6 +188,27 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -171,6 +258,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_15368412AD454E498D2DB6466B397653"
+            {
+            "SourcePath" = "8:driver\\drivers\\USB2831.sys"
+            "TargetName" = "8:USB2831.sys"
+            "Tag" = "8:"
+            "Folder" = "8:_6852B7CB534A40F4819B474C6FF0F77D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_20BA96BBF9C2FD8085CC905628DB77A4"
             {
             "SourcePath" = "8:OLEACC.dll"
@@ -189,6 +296,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2D8DFAF0FE63432996AF80767EA39C38"
+            {
+            "SourcePath" = "8:driver\\USB2831_64.dll"
+            "TargetName" = "8:USB2831_64.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_8AA352C8BEF9409AA3BE775AF4F498F5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3419CF781AEE26D29DFA668D3560274C"
@@ -231,6 +358,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_56CC68E5C46F4BF5914533EADBF727C1"
+            {
+            "SourcePath" = "8:driver\\usb2831.inf_amd64_neutral_7759fb9fc47ee42a\\amd64\\USB2831_64.dll"
+            "TargetName" = "8:USB2831_64.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_6C8ECDFDED3B49208F8F8890E045BE49"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5BD7569E11DBBE6B5F4B349D6C8DC8BB"
             {
             "SourcePath" = "8:IMM32.dll"
@@ -251,12 +398,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87B2501254CB04B8031CF98FC00F1062"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7C78F4ECD76140EEBFD47CB7417D596D"
             {
-            "SourcePath" = "8:USB2831_32.dll"
+            "SourcePath" = "8:driver\\USB2831_32.dll"
             "TargetName" = "8:USB2831_32.dll"
             "Tag" = "8:"
-            "Folder" = "8:_07BA1A608A6042028B7002D66D1B60C1"
+            "Folder" = "8:_8AA352C8BEF9409AA3BE775AF4F498F5"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -268,7 +415,107 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8B264281896044C7852A5BF0919CD9C9"
+            {
+            "SourcePath" = "8:driver\\usb2831.inf_amd64_neutral_7759fb9fc47ee42a\\USB2831X64.cat"
+            "TargetName" = "8:USB2831X64.cat"
+            "Tag" = "8:"
+            "Folder" = "8:_5D23993A0E86465DB96DA5D31099431B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D1C55BC47424365A39223A7BC9C18AE"
+            {
+            "SourcePath" = "8:driver\\USB2831.inf"
+            "TargetName" = "8:USB2831.inf"
+            "Tag" = "8:"
+            "Folder" = "8:_8AA352C8BEF9409AA3BE775AF4F498F5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8E671049E2BC48A9AB1A474B7C7FD201"
+            {
+            "SourcePath" = "8:driver\\usb2831.PNF"
+            "TargetName" = "8:usb2831.PNF"
+            "Tag" = "8:"
+            "Folder" = "8:_8AA352C8BEF9409AA3BE775AF4F498F5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_97BE0A90AF6847B1B997031A9F31A856"
+            {
+            "SourcePath" = "8:driver\\usb2831.inf_amd64_neutral_7759fb9fc47ee42a\\USB2831.inf"
+            "TargetName" = "8:USB2831.inf"
+            "Tag" = "8:"
+            "Folder" = "8:_5D23993A0E86465DB96DA5D31099431B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9C839236152F49C29C7EC6C9B7060F32"
+            {
+            "SourcePath" = "8:driver\\usb2831.inf_amd64_neutral_7759fb9fc47ee42a\\amd64\\USB2831_32.dll"
+            "TargetName" = "8:USB2831_32.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_6C8ECDFDED3B49208F8F8890E045BE49"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A3E625E43C3241B2934B1A1FD76683F3"
@@ -289,6 +536,66 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D12B74FC0947480EBDC29D039AC0F1C5"
+            {
+            "SourcePath" = "8:driver\\usb2831.inf_amd64_neutral_7759fb9fc47ee42a\\usb2831.PNF"
+            "TargetName" = "8:usb2831.PNF"
+            "Tag" = "8:"
+            "Folder" = "8:_5D23993A0E86465DB96DA5D31099431B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D9ABA2FD6FCC42BAB0A4723D1603530F"
+            {
+            "SourcePath" = "8:driver\\usb2831.inf_amd64_neutral_7759fb9fc47ee42a\\amd64\\USB2831.sys"
+            "TargetName" = "8:USB2831.sys"
+            "Tag" = "8:"
+            "Folder" = "8:_6C8ECDFDED3B49208F8F8890E045BE49"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E3B89A57CDC4EE024883E70DE2673F97"
+            {
+            "SourcePath" = "8:USB2831_32.dll"
+            "TargetName" = "8:USB2831_32.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_07BA1A608A6042028B7002D66D1B60C1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -320,6 +627,51 @@
                 {
                 }
             }
+            "{994432C3-9487-495D-8656-3E829A8DBDDE}:_8AA352C8BEF9409AA3BE775AF4F498F5"
+            {
+            "DefaultLocation" = "8:C:\\Windows\\System"
+            "Name" = "8:system"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:NEWPROPERTY1"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_5D23993A0E86465DB96DA5D31099431B"
+                    {
+                    "Name" = "8:usb2831.inf_amd64_neutral_7759fb9fc47ee42a"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_A74671C627DC4A08AEAD2521F43DBA12"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_6C8ECDFDED3B49208F8F8890E045BE49"
+                            {
+                            "Name" = "8:amd64"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_CF6A414793444A62A2861D75B2453B1A"
+                                "Folders"
+                                {
+                                }
+                            }
+                        }
+                    }
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_6852B7CB534A40F4819B474C6FF0F77D"
+                    {
+                    "Name" = "8:drivers"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_0DA4B33AD54641AB8054083DEC3FE3F2"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
             "{1525181F-901A-416C-8A58-119130FE478E}:_E0454537DAEA4911B14D318306ADD524"
             {
             "Name" = "8:#1919"
@@ -348,7 +700,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
         "ProductCode" = "8:{97AF50B5-F8E0-440A-BB0F-5192CD26368A}"
-        "PackageCode" = "8:{4755EFC4-BCBD-47DC-BEBF-F9332BF455A1}"
+        "PackageCode" = "8:{F77756A8-F8D6-4620-B5D5-D3B59F5DCC76}"
         "UpgradeCode" = "8:{8B786B4D-A7E0-4C6E-A2B0-E35E7EB1EB39}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
