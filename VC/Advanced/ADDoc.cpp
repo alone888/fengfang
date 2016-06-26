@@ -18,8 +18,8 @@ BEGIN_MESSAGE_MAP(CADDoc, CDocument)
 //{{AFX_MSG_MAP(CADDoc)
 ON_COMMAND(IDM_TileWave, OnTileWave)
 ON_UPDATE_COMMAND_UI(IDM_TileWave, OnUpdateTileWave)
-ON_COMMAND(IDM_SuperPoseWave, OnSuperPoseWave)
-ON_UPDATE_COMMAND_UI(IDM_SuperPoseWave, OnUpdateSuperPoseWave)
+//ON_COMMAND(IDM_SuperPoseWave, OnSuperPoseWave)
+//ON_UPDATE_COMMAND_UI(IDM_SuperPoseWave, OnUpdateSuperPoseWave)
 //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 ///////////////////////////////////////////////

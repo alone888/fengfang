@@ -414,7 +414,7 @@ int CADHistScope::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	m_rectClient = CRect(0, 0, 1400, 1000);   
+	m_rectClient = CRect(0, 0, 1920, 1080);   
 	m_nClientHeight = m_rectClient.Height();
 	m_nClientWidth  = m_rectClient.Width();
 
