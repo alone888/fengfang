@@ -37,8 +37,11 @@ public:
 	int m_Rate;            // 回放速度
     ULONG m_ScreenOffset;  // 屏幕位置
 	int m_nFileNum;        // 文件号
+	unsigned char file_path[512];
 public:
 	void ReadData(void);
+	ULONG ReadDataForExcel(WORD *buf,ULONG size,ULONG offset);
+	 void Retern_FilePath(unsigned char *path);
 // Operations
 public:
 

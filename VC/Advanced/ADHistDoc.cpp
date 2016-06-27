@@ -89,6 +89,7 @@ BOOL CADHistDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	CString str;
 	if (m_File.Open(lpszPathName, USB2831_modeRead)) // 打开文件
 	{
+		strcpy((char*)file_path,CT2CA(lpszPathName));
 		m_File.Seek(0, CFile::begin);
 		m_File.Read((WORD*)&m_Header, sizeof(m_Header)); // 读取文件头
 		nFileHeaderSize = sizeof(m_Header);
@@ -187,4 +188,32 @@ void CADHistDoc::OnCloseDocument()
 	}
 	
 	CDocument::OnCloseDocument();
+}
+
+
+ULONG CADHistDoc::ReadDataForExcel(WORD *buf,ULONG size,ULONG offset)
+{
+	ULONG read_size = 0;
+	m_File.Seek(0,CFile::begin);
+	m_File.Read((WORD*)&m_Header, sizeof(m_Header));
+	//m_File.Seek(sizeof(::_FILE_HEADER)+(m_Offset*2)*8,CFile::begin);
+	try
+	{
+		m_File.Seek(sizeof(::_FILE_HEADER)+offset,CFile::begin);
+		read_size = m_File.Read((WORD*)buf, size);
+		return read_size;
+	}
+	catch(...)
+	{
+		theApp.MsgWarning("警告", "文件访问过程出现异常错误", CPoint(20, 20), 10000);
+		return 0;
+	}
+}
+
+ void CADHistDoc::Retern_FilePath(unsigned char *path)
+{
+	int len = 0;
+	strcpy((char*)path,(char*)file_path);
+	len = strlen((char*)path);
+	path[len-4] = 0;
 }

@@ -60,6 +60,7 @@ BEGIN_MESSAGE_MAP(CADHistFrm, CMDIChildWnd)
 	ON_BN_CLICKED(IDC_BUTTON_TIME_R, OnBnClickedButton1TimeR)
 	ON_BN_CLICKED(IDC_BUTTON6, OnBnClickedCheckInput6)
 	ON_BN_CLICKED(IDC_BUTTON7, OnBnClickedCheckInput7)
+	ON_BN_CLICKED(IDC_EXPORT_EXCEL,OnBnClickedCheckexportexcel)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -709,4 +710,57 @@ void CADHistFrm::OnBnClickedCheckInput7()
 	RedrawDataWindow();
 }
 
+void CADHistFrm::OnBnClickedCheckexportexcel()
+{
+	WORD read_buf[80000] = {0}; // 1M
+	ULONG offset = 0;
+	ULONG read_len = 0;
+	int file_cnt = 1;
+	FILE *df = NULL;
+	CADHistDoc* pDoc = (CADHistDoc*)GetActiveDocument();  // 在Frame中取得当前文档指针
+	unsigned char m_path[512];
+	unsigned char path_use[512];
+	unsigned char write_buf[1024];
+	
+	pDoc->Retern_FilePath(m_path);
+	sprintf((char*)path_use,"%s%d.csv",m_path,file_cnt);
+	df = fopen((char*)path_use,"w+");
+	if(df == NULL) return;
+	sprintf((char*)write_buf,"Signel1,Signel2,Signel3,Signel4,Input1,Input2,Input3,Input4\n");
+	fwrite(write_buf,1,strlen((char*)write_buf),df);
 
+	while (1)
+	{
+		read_len =pDoc->ReadDataForExcel(read_buf,80000,offset);
+		offset += read_len;
+		for ( int i = 0; i < read_len/8; )
+		{
+			sprintf((char*)write_buf,"%d,%d,%d,%d,%d,%d,%d,%d\n",
+				read_buf[i],read_buf[i+1],read_buf[i+2],
+				read_buf[i+3],read_buf[i+4],read_buf[i+5],
+				read_buf[i+6],read_buf[i+7]);
+			i+=8;
+			fwrite(write_buf,1,strlen((char*)write_buf),df);
+		}
+		
+		if (offset*file_cnt >= offset*file_cnt*100 ) // 100M  52428800
+		{
+			file_cnt++;
+			fclose(df);
+			sprintf((char*)path_use,"%s%d.csv",m_path,file_cnt);
+			df = fopen((char*)path_use,"w+");
+			if(df == NULL) break;
+			sprintf((char*)write_buf,"Signel1,Signel2,Signel3,Signel4,Input1,Input2,Input3,Input4\n");
+			fwrite(write_buf,1,strlen((char*)write_buf),df);
+		}
+		if(read_len < 80000)
+		{
+			fclose(df);
+			break;
+		}
+	}
+	sprintf((char*)write_buf,"导出excel成功，共导出%d个文件！\n",file_cnt);
+	LPCTSTR  lpb = (LPCTSTR)(LPTSTR)write_buf;
+	MessageBox(_T("导出excel成功!"),MB_OK);
+	return;
+}

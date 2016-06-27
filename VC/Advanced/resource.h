@@ -248,9 +248,12 @@
 #define IDC_SLIDER_DA1                  1202
 #define IDC_BUTTON_PositionA            1203
 #define IDC_BUTTON_PositionB            1204
+#define IDC_BUTTON_EXPORT_EXCEL         1205
+#define IDC_EXPORT_EXCEL                1205
 #define IDC_BUTTON2                     1206
 #define IDC_BUTTON_TIME_R               1206
 #define IDC_CHECK_VoltRange0            1207
+#define IDC_BUTTON_PositionA3           1207
 #define IDC_CHECK_VoltRange1            1208
 #define IDC_CHECK_VoltRange2            1209
 #define IDC_CHECK_VoltRange3            1210
