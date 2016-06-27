@@ -715,6 +715,8 @@ void CADHistFrm::OnBnClickedCheckexportexcel()
 	WORD read_buf[80000] = {0}; // 1M
 	ULONG offset = 0;
 	ULONG read_len = 0;
+	ULONG last_len = 0;
+	ULONG Mb_len = 1024*1024;
 	int file_cnt = 1;
 	FILE *df = NULL;
 	CADHistDoc* pDoc = (CADHistDoc*)GetActiveDocument();  // 在Frame中取得当前文档指针
@@ -731,9 +733,9 @@ void CADHistFrm::OnBnClickedCheckexportexcel()
 
 	while (1)
 	{
-		read_len =pDoc->ReadDataForExcel(read_buf,80000,offset);
+		read_len =pDoc->ReadDataForExcel(read_buf,80000*2,offset);
 		offset += read_len;
-		for ( int i = 0; i < read_len/8; )
+		for ( int i = 0; i < read_len/2; )
 		{
 			sprintf((char*)write_buf,"%d,%d,%d,%d,%d,%d,%d,%d\n",
 				read_buf[i],read_buf[i+1],read_buf[i+2],
@@ -743,8 +745,9 @@ void CADHistFrm::OnBnClickedCheckexportexcel()
 			fwrite(write_buf,1,strlen((char*)write_buf),df);
 		}
 		
-		if (offset*file_cnt >= offset*file_cnt*100 ) // 100M  52428800
+		if (offset - last_len >= Mb_len*10) // 26m可以，   50M以上无法开完全
 		{
+			last_len = offset;
 			file_cnt++;
 			fclose(df);
 			sprintf((char*)path_use,"%s%d.csv",m_path,file_cnt);
