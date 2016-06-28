@@ -35,6 +35,7 @@ public:
 	afx_msg void OnBnClickedButton1TimeR();
 	afx_msg void OnBnClickedCheckInput6();
 	afx_msg void OnBnClickedCheckInput7();
+	afx_msg void OnBnClickedCheckexportexcel();
 
 public:
 	void RedrawDataWindow(void);
