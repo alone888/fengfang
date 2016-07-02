@@ -27,6 +27,9 @@ public:
 	CEdit	    m_Edit_OverRange;
 	CEdit	    m_Edit_OverRatio;
 	CEdit	    m_Edit_TringgerVolt;
+	
+	CEdit       m_signel[8][2];
+
 	//}}AFX_DATA
 
 // Attributes
@@ -64,6 +67,9 @@ protected:
 	afx_msg void OnDataSave();
 	afx_msg void OnSelchangeComboScreenVolume();
 	afx_msg void OnCHECKStopFirstDigitalShow();
+
+	afx_msg void OnChangeEDIT2();
+
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
