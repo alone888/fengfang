@@ -192,7 +192,7 @@ void CADParaCfgView::OnInitialUpdate()
 	// 初始化用户界面视觉参数		
 	CString str;
 //	OldADPara = ADPara; // 保存旧的硬件参数
-	ADPara.CheckStsMode = 1; // 默认数据查询方式为非空
+	//ADPara.CheckStsMode = 1; // 默认数据查询方式为非空
 	m_Combo_CheckStsMode.SetCurSel(ADPara.CheckStsMode);
 	
 	m_Combo_ADMode.SetCurSel(ADPara.ADMode);

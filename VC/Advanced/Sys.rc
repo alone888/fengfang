@@ -665,7 +665,7 @@ BEGIN
         BLOCK "080404b0"
         BEGIN
             VALUE "Comments", "Hix"
-            VALUE "CompanyName", "Art"
+            VALUE "CompanyName", "NEWDOON"
             VALUE "FileDescription", "Sys Microsoft 基础类应用程序"
             VALUE "FileVersion", "1.00"
             VALUE "InternalName", "Sys"

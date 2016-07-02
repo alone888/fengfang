@@ -57,6 +57,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_596BED34B73F1D9BD3DEDA9E816F22CA"
+        "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5BD7569E11DBBE6B5F4B349D6C8DC8BB"
         "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
         "MsmSig" = "8:_UNDEFINED"
@@ -125,12 +131,6 @@
         {
         "MsmKey" = "8:_D9ABA2FD6FCC42BAB0A4723D1603530F"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E3B89A57CDC4EE024883E70DE2673F97"
-        "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -384,6 +384,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_596BED34B73F1D9BD3DEDA9E816F22CA"
+            {
+            "SourcePath" = "8:USB2831_32.dll"
+            "TargetName" = "8:USB2831_32.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_07BA1A608A6042028B7002D66D1B60C1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5BD7569E11DBBE6B5F4B349D6C8DC8BB"
             {
             "SourcePath" = "8:IMM32.dll"
@@ -604,26 +624,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E3B89A57CDC4EE024883E70DE2673F97"
-            {
-            "SourcePath" = "8:USB2831_32.dll"
-            "TargetName" = "8:USB2831_32.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_07BA1A608A6042028B7002D66D1B60C1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -724,9 +724,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Setup"
+        "ProductName" = "8:SOMA索玛生物电记录系统"
         "ProductCode" = "8:{97AF50B5-F8E0-440A-BB0F-5192CD26368A}"
-        "PackageCode" = "8:{F77756A8-F8D6-4620-B5D5-D3B59F5DCC76}"
+        "PackageCode" = "8:{3EEC9786-1C27-4940-965E-34F02C960A2E}"
         "UpgradeCode" = "8:{8B786B4D-A7E0-4C6E-A2B0-E35E7EB1EB39}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -734,14 +734,14 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:钮顿科技"
+        "Manufacturer" = "8:纽顿科技"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Setup"
+        "Title" = "8:SOMA索玛生物电记录系统"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:钮顿科技"
+        "ARPCONTACT" = "8:纽顿科技"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
+        "ARPCOMMENTS" = "8:纽顿科技"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"

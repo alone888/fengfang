@@ -1178,11 +1178,11 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 			//str.Format (_T("%.*lf V"), m_nYDecimals, m_dLowerLimit[Channel]/1000.0); // 负电压值
 			if (g_nVAxisRange>=1000)
 			{
-				str.Format (_T("%.f V"),-1*g_nVAxisRange/1000.0); // 正电压值
+				str.Format (_T("%.f V"),-1*g_nVAxisRange/1000.0); // 负电压值
 			}
 			else
 			{
-				str.Format (_T("%.f mV"),-1*g_nVAxisRange); // 正电压值	
+				str.Format (_T("%.f mV"),-1*g_nVAxisRange); // 负电压值
 			}
 
 			m_dcGrid.TextOut (m_rectPlot.left-4, (int)(nGridPixE-13), str);
@@ -1220,19 +1220,48 @@ void CADScopeCtrl::DrawSingleCHText(CDC* pDC, int nChannelNum)
 	else
 		pDC->SetTextColor(m_crGridColor);
 
-	strInfo.Format (_T("%.*lf mV"), 0, m_dUpperLimit[nChannelNum]); // 正电压值
-	pDC->TextOut (m_rectPlot.left-4, m_rectPlot.top, strInfo);
 
-	pDC->SetTextAlign (TA_RIGHT|TA_BASELINE);
-	strInfo.Format (_T("%.*lf mV"), 0, m_dLowerLimit[nChannelNum]); // 负电压值
-	pDC->TextOut (m_rectPlot.left-4, m_rectPlot.top+m_nPlotHeight, strInfo);
-	
+	CString str;
+	if (g_nVAxisRange>=1000)
+	{
+		str.Format (_T("%.f V"),g_nVAxisRange/1000.0); // 正电压值
+	}
+	else
+	{
+		str.Format (_T("%.f mV"),g_nVAxisRange); // 正电压值	
+	}
+
+
+	pDC->TextOut (m_rectPlot.left-4,  m_rectPlot.top, str); 
+
+	if (g_nVAxisRange>=1000)
+	{
+		str.Format (_T("%.f V"),-1*g_nVAxisRange/1000.0); // 负电压值
+	}
+	else
+	{
+		str.Format (_T("%.f mV"),-1*g_nVAxisRange); // 负电压值
+	}
+
+	pDC->TextOut (m_rectPlot.left-4, m_rectPlot.top+m_nPlotHeight, str);
+
+
+
+
+
+	//strInfo.Format (_T("%.*lf mV"), 0, m_dUpperLimit[nChannelNum]); // 正电压值
+	//pDC->TextOut (m_rectPlot.left-4, m_rectPlot.top, strInfo);
+
+	//pDC->SetTextAlign (TA_RIGHT|TA_BASELINE);
+	//strInfo.Format (_T("%.*lf mV"), 0, m_dLowerLimit[nChannelNum]); // 负电压值
+	//pDC->TextOut (m_rectPlot.left-4, m_rectPlot.top+m_nPlotHeight, strInfo);
+	//
 	if (nChannelNum == 0xFFFF) // 如果是叠加显示时
 		strInfo = "CH";
 	else
 		strInfo.Format(_T("CH %d"), nChannelNum);
 	// 写通道号
-	pDC->TextOut(m_rectPlot.left-4, m_rectPlot.top+m_nPlotHeight/2+5, strInfo);      
+	//pDC->TextOut(m_rectPlot.left-4, m_rectPlot.top+m_nPlotHeight/2+5, strInfo);      
 }
 
 void CADScopeCtrl::OnRButtonDown(UINT nFlags, CPoint point) 
