@@ -248,7 +248,6 @@
 #define IDC_SLIDER_DA1                  1202
 #define IDC_BUTTON_PositionA            1203
 #define IDC_BUTTON_PositionB            1204
-#define IDC_BUTTON_EXPORT_EXCEL         1205
 #define IDC_EXPORT_EXCEL                1205
 #define IDC_BUTTON2                     1206
 #define IDC_BUTTON_TIME_R               1206
@@ -320,6 +319,7 @@
 #define IDC_BUTTON_TIME_L               1252
 #define IDC_CHECK_INPUT14               1253
 #define IDC_EDIT_VAxisRange2            1253
+#define IDC_EDIT18                      1253
 #define IDC_CHECK_INPUT15               1254
 #define IDC_CHECK_INPUT16               1255
 #define IDC_BUTTON6                     1255

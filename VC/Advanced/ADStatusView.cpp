@@ -36,12 +36,46 @@ void CADStatusView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_AnalyzeCount, m_Edit_AnalyzeCount);
 	DDX_Control(pDX, IDC_EDIT_OverRange, m_Edit_OverRange);
 	DDX_Control(pDX, IDC_EDIT_OverRatio, m_Edit_OverRatio);
+	DDX_Control(pDX, IDC_EDIT3, m_signel[0][0]);
+	DDX_Control(pDX, IDC_EDIT2, m_signel[0][1]);
+	DDX_Control(pDX, IDC_EDIT5, m_signel[1][0]);
+	DDX_Control(pDX, IDC_EDIT4, m_signel[1][1]);
+	DDX_Control(pDX, IDC_EDIT7, m_signel[2][0]);
+	DDX_Control(pDX, IDC_EDIT6, m_signel[2][1]);
+	DDX_Control(pDX, IDC_EDIT9, m_signel[3][0]);
+	DDX_Control(pDX, IDC_EDIT8, m_signel[3][1]);
+	DDX_Control(pDX, IDC_EDIT11, m_signel[4][0]);
+	DDX_Control(pDX, IDC_EDIT10, m_signel[4][1]);
+	DDX_Control(pDX, IDC_EDIT13, m_signel[5][0]);
+	DDX_Control(pDX, IDC_EDIT12, m_signel[5][1]);
+	DDX_Control(pDX, IDC_EDIT15, m_signel[6][0]);
+	DDX_Control(pDX, IDC_EDIT14, m_signel[6][1]);
+	DDX_Control(pDX, IDC_EDIT17, m_signel[7][0]);
+	DDX_Control(pDX, IDC_EDIT16, m_signel[7][1]);
 	DDX_Control(pDX, IDC_EDIT_TriggerVolt, m_Edit_TringgerVolt);
 	//}}AFX_DATA_MAP
 }
 
 BEGIN_MESSAGE_MAP(CADStatusView, CFormView)
 	//{{AFX_MSG_MAP(CADStatusView)
+	ON_EN_KILLFOCUS(IDC_EDIT2, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT3, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT4, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT5, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT6, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT7, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT8, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT9, OnChangeEDIT2)
+
+	ON_EN_KILLFOCUS(IDC_EDIT10, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT11, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT12, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT13, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT14, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT15, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT16, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT17, OnChangeEDIT2)
+	
 	ON_EN_CHANGE(IDC_EDIT_TriggerVolt, OnChangeEDITTriggerVolt)
 	ON_BN_CLICKED(IDM_GraphicShow, OnGraphicShow)
 	ON_BN_CLICKED(IDM_DigitalShow, OnDigitalShow)
@@ -89,6 +123,15 @@ void CADStatusView::OnInitialUpdate()
 	else
 	{
 		pButtonPose->SetCheck(1);
+	}
+
+
+	for (int i = 0; i < 8; i++)
+	{
+		g_filer[i][0] = 0;
+		g_filer[i][1] = 0;
+		m_signel[i][0].SetWindowText(_T("0"));
+		m_signel[i][1].SetWindowText(_T("0"));
 	}
 // 	pButtonTile->EnableWindow(FALSE);
 // 	pButtonPose->EnableWindow(FALSE);
@@ -218,4 +261,141 @@ void CADStatusView::OnCHECKStopFirstDigitalShow()
 	// TODO: Add your control notification handler code here
 	CButton* pCheck = (CButton*)GetDlgItem(IDC_CHECK_StopFirstDigitalShow);
 	gl_FirstScreenStop = pCheck->GetCheck();
+}
+
+
+void read_filter(char *filpath,int dis_frq,int index_s,double *filter)
+{
+	FILE *fd = NULL;
+	unsigned char read_one_byte = 0;
+	unsigned char read_feq[10] = {0};
+	unsigned char read_buf[2048] = {0};
+
+	unsigned int start_id = 0;
+	unsigned int end_id = 0;
+	unsigned int index = 0;
+
+	if(dis_frq == 0)
+	{
+		memset(filter,0,sizeof(double)*FILTER_DEEP);
+	}
+
+	fd = fopen(filpath,"r");
+	if (fd == NULL)
+		return ;
+
+	for (; ;index++)
+	{
+		if(fread(&read_one_byte,1,1,fd) != 1)
+			return;
+		if (read_one_byte == '=')
+		{
+			if(fread(read_feq,1,5,fd) != 5)
+				return;
+			if(atoi((char*)read_feq) == dis_frq)
+			{
+				index+=8;
+				start_id = index;
+				break;
+			}
+			index+=5;
+		}
+	}
+	if(start_id == 0)
+		return;
+	fseek(fd,start_id,0);
+	for (; ;index++)
+	{
+		if(fread(&read_one_byte,1,1,fd) != 1)
+			return;
+
+		if (read_one_byte == '!')
+		{
+			end_id = index;
+			break;
+		}
+	}
+	if(end_id == 0) return;
+
+	fseek(fd,start_id+1,0);
+	
+	index = fread(read_buf,1,end_id-start_id-2,fd);
+	if(index != end_id-start_id-2)
+		return;
+	CString str;
+	CString resToken;
+	int curPos= 0;
+	char *stopstr;
+	char str_tmp[100];
+
+	str = read_buf;
+	index = 0;
+	resToken= str.Tokenize(_T("$"),curPos);
+	//str_tmp = resToken;
+	strcpy((char*)str_tmp,CT2CA(resToken));
+	filter[index++] = strtod(str_tmp,&stopstr);
+	
+	while (resToken != "" && index < FILTER_DEEP)
+	{
+		resToken= str.Tokenize(_T("$"),curPos);
+		strcpy((char*)str_tmp,CT2CA(resToken));
+		filter[index++] = strtod(str_tmp,&stopstr);
+	}
+}
+
+void CADStatusView::OnChangeEDIT2()
+{
+	CString tmp;
+
+	static int filer[8][2] = {0};
+	for (int i = 0; i < 8; i++)
+	{
+		m_signel[i][0].GetWindowText(tmp);
+		g_filer[i][0] = wcstol(tmp, NULL, 10);
+		m_signel[i][1].GetWindowText(tmp);
+		g_filer[i][1] = wcstol(tmp, NULL, 10);
+
+		if(g_filer[i][0] >= ADPara.Frequency/8/2)
+		{
+			m_signel[i][0].SetWindowText(_T("0"));
+		}
+		if(g_filer[i][1] >= ADPara.Frequency/8/2)
+		{
+			m_signel[i][1].SetWindowText(_T("0"));
+		}
+		if (m_signel[i][0].GetWindowTextLengthW() > 6)
+		{
+			m_signel[i][0].SetWindowText(_T("0"));
+		}
+		if (m_signel[i][1].GetWindowTextLengthW() > 6)
+		{
+			m_signel[i][1].SetWindowText(_T("0"));
+		}
+	}
+	char path[100];
+	for(int  i = 0; i < 8 ; i++)
+	{
+		if(filer[i][0] != g_filer[i][0])// ¸ßÍ¨
+		{
+			sprintf(path,"filter_h_%d.txt",ADPara.Frequency);
+			read_filter(path,g_filer[i][0],i,g_filter_data_h[i]);
+			filer[i][0] = g_filer[i][0];
+			if(g_filter_data_h[i][0] == 0)
+			{
+				g_filer[i][0] = 0;
+				m_signel[i][0].SetWindowText(_T("0"));
+			}
+		}
+		if(filer[i][1] != g_filer[i][1])// µÍÍ¨
+		{
+			sprintf(path,"filter_l_%d.txt",ADPara.Frequency);
+			read_filter(path,g_filer[i][1],i,g_filter_data_l[i]);
+			filer[i][1] = g_filer[i][1];
+			if(g_filter_data_l[i][1] == 0)
+			{
+				g_filer[i][1] = 0;
+				m_signel[i][1].SetWindowText(_T("0"));
+			}
+		}
+	}
 }
