@@ -1,6 +1,8 @@
 #include "stdAfx.h"
 #include "math.h"
 
+
+
 int gl_nReadIndex = 0;             // 缓冲段索引
 CWinThread* m_ReadThread;          // 子线程句柄
 ULONGLONG g_TrigPosAD;
@@ -38,6 +40,8 @@ UINT ReadDataThread(PVOID hWnd)
 		AfxMessageBox(_T("不明的初始化错误..."));
 		return -1;
 	}
+
+
 
 	while(gl_bDeviceADRun)  // 循环采集AD数据
 	{	
