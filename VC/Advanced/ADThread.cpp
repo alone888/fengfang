@@ -138,7 +138,6 @@ void AD_Filter_Data(int H_OR_L,int ch,double *filterParam ,signed short * src,si
 	}
 	//memcpy(out+FILTER_DEEP*2,tempOut,1024*2);
 
-
 	//[0][][]低通   [1][][]高通
 	//保存本次数据的最后FILTER_DEEP个数，用于下次滤波
 	for (i = 0; i < FILTER_DEEP; i++) 
