@@ -269,7 +269,7 @@ void read_filter(char *filpath,int dis_frq,int index_s,double *filter)
 	FILE *fd = NULL;
 	unsigned char read_one_byte = 0;
 	unsigned char read_feq[10] = {0};
-	unsigned char read_buf[2048] = {0};
+	unsigned char read_buf[1024*256] = {0};
 
 	unsigned int start_id = 0;
 	unsigned int end_id = 0;

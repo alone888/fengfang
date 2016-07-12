@@ -142,7 +142,6 @@ void AD_Filter_Data(int H_OR_L,int ch,double *filterParam ,signed short * src,si
 	}
 	//memcpy(out+FILTER_DEEP*2,tempOut,1024*2);
 
-
 	//[0][][]低通   [1][][]高通
 	//保存本次数据的最后FILTER_DEEP个数，用于下次滤波
 	for (i = 0; i < FILTER_DEEP; i++) 
@@ -165,11 +164,11 @@ void AD_Filter_Data_All()
 
 	for (ch = 0; ch < 8; ch++)
 	{
-		/*if (g_filer[ch][1] == 0 && g_filer[ch][0] == 0)
-			continue;*/
+		if (g_filer[ch][1] == 0 && g_filer[ch][0] == 0)
+			continue;
 		for ( i = 0; i < 1024; i++)
 		{
-			tmp_signel_data[ch][i+FILTER_DEEP] = ADBufferForFilter[ch+i*8];
+			tmp_signel_data[ch][i+FILTER_DEEP] = ADBufferForFilter[ch+i*8] - 4096;
 		}
 	}
 
@@ -177,7 +176,7 @@ void AD_Filter_Data_All()
 
 	for(ch = 0; ch < 8 ; ch++) //  低通
 	{
-		if (g_filer[ch][1] != 0)//判断是否需要低通
+		if (g_filer[ch][1] != 0 && g_filter_data_l[ch][0] != 0)//判断是否需要低通
 		{
 			AD_Filter_Data(0,ch,g_filter_data_l[ch] ,tmp_signel_data[ch],tmp_signel_data2[ch]);
 		}
@@ -186,9 +185,9 @@ void AD_Filter_Data_All()
 			memcpy(tmp_signel_data2[ch],tmp_signel_data[ch],sizeof(tmp_signel_data[ch]));	
 		}
 
-		if (g_filer[ch][0] != 0)//判断是否需要高通
+		if (g_filer[ch][0] != 0 && g_filter_data_h[ch][0] != 0)//判断是否需要高通
 		{
-			AD_Filter_Data(1,ch,g_filter_data_l[ch] ,tmp_signel_data2[ch],tmp_signel_data3[ch]);
+			AD_Filter_Data(1,ch,g_filter_data_h[ch] ,tmp_signel_data2[ch],tmp_signel_data3[ch]);
 		}
 		else
 		{
@@ -198,11 +197,11 @@ void AD_Filter_Data_All()
 	
 	for( ch = 0; ch < 8; ch++)
 	{
-		/*if (g_filer[ch][1] == 0 && g_filer[ch][0] == 0)
-			continue;*/
+		if (g_filer[ch][1] == 0 && g_filer[ch][0] == 0)
+			continue;
 		for (i = 0; i < 1024; i++) // 回填过滤后的数据
 		{
-			ADBuffer[gl_nReadIndex][i*8+ch] = tmp_signel_data3[ch][i+FILTER_DEEP];
+			ADBuffer[gl_nReadIndex][i*8+ch] = tmp_signel_data3[ch][i+FILTER_DEEP] + 4096;
 		}
 	}
 }

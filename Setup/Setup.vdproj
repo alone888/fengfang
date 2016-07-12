@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0D8892CE6F834F00944ECC762C37CC36"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_15368412AD454E498D2DB6466B397653"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -57,20 +63,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_596BED34B73F1D9BD3DEDA9E816F22CA"
-        "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5BD7569E11DBBE6B5F4B349D6C8DC8BB"
         "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6C9C3FF0BCD4487295E5C07F6F8645B9"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -130,6 +124,12 @@
         "Entry"
         {
         "MsmKey" = "8:_D9ABA2FD6FCC42BAB0A4723D1603530F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FE04FF77CFAC4347A08B8D09941D83F6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -264,6 +264,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0D8892CE6F834F00944ECC762C37CC36"
+            {
+            "SourcePath" = "8:..\\VC\\Advanced\\filter_l_50000.txt"
+            "TargetName" = "8:filter_l_50000.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_07BA1A608A6042028B7002D66D1B60C1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_15368412AD454E498D2DB6466B397653"
             {
             "SourcePath" = "8:driver\\drivers\\USB2831.sys"
@@ -384,26 +404,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_596BED34B73F1D9BD3DEDA9E816F22CA"
-            {
-            "SourcePath" = "8:USB2831_32.dll"
-            "TargetName" = "8:USB2831_32.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_07BA1A608A6042028B7002D66D1B60C1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5BD7569E11DBBE6B5F4B349D6C8DC8BB"
             {
             "SourcePath" = "8:IMM32.dll"
@@ -422,26 +422,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6C9C3FF0BCD4487295E5C07F6F8645B9"
-            {
-            "SourcePath" = "8:..\\VC\\filter_l.txt"
-            "TargetName" = "8:filter_l.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_07BA1A608A6042028B7002D66D1B60C1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7C78F4ECD76140EEBFD47CB7417D596D"
@@ -610,6 +590,26 @@
             "TargetName" = "8:USB2831.sys"
             "Tag" = "8:"
             "Folder" = "8:_6C8ECDFDED3B49208F8F8890E045BE49"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FE04FF77CFAC4347A08B8D09941D83F6"
+            {
+            "SourcePath" = "8:..\\VC\\Advanced\\filter_h_50000.txt"
+            "TargetName" = "8:filter_h_50000.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_07BA1A608A6042028B7002D66D1B60C1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
