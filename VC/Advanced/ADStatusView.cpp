@@ -270,6 +270,7 @@ void read_filter(char *filpath,int dis_frq,int index_s,double *filter)
 	unsigned char read_one_byte = 0;
 	unsigned char read_feq[10] = {0};
 	unsigned char read_buf[1024*256] = {0};
+	unsigned char filter_max[6] = {0};
 
 	unsigned int start_id = 0;
 	unsigned int end_id = 0;
@@ -284,14 +285,34 @@ void read_filter(char *filpath,int dis_frq,int index_s,double *filter)
 	if (fd == NULL)
 		return ;
 
+	if(fread(filter_max,1,5,fd) != 5)
+	{
+		fclose(fd);
+		return;
+	}
+	g_filter_max = atoi((char*)filter_max);
+
+	if(g_filter_max >= 200 || g_filter_max <= 0)
+	{
+		g_filter_max = 0;
+		fclose(fd);
+		return;
+	}
+	fseek(fd,0,0);
 	for (; ;index++)
 	{
 		if(fread(&read_one_byte,1,1,fd) != 1)
+		{
+			fclose(fd);
 			return;
+		}
 		if (read_one_byte == '=')
 		{
 			if(fread(read_feq,1,5,fd) != 5)
+			{
+				fclose(fd);
 				return;
+			}
 			if(atoi((char*)read_feq) == dis_frq)
 			{
 				index+=8;
@@ -302,12 +323,18 @@ void read_filter(char *filpath,int dis_frq,int index_s,double *filter)
 		}
 	}
 	if(start_id == 0)
+	{
+		fclose(fd);
 		return;
+	}
 	fseek(fd,start_id,0);
 	for (; ;index++)
 	{
 		if(fread(&read_one_byte,1,1,fd) != 1)
+		{
+			fclose(fd);
 			return;
+		}
 
 		if (read_one_byte == '!')
 		{
@@ -315,13 +342,21 @@ void read_filter(char *filpath,int dis_frq,int index_s,double *filter)
 			break;
 		}
 	}
-	if(end_id == 0) return;
+	if(end_id == 0)
+	{
+		fclose(fd);
+		return;
+	}
 
 	fseek(fd,start_id+1,0);
 	
 	index = fread(read_buf,1,end_id-start_id-2,fd);
 	if(index != end_id-start_id-2)
+	{
+		fclose(fd);
 		return;
+	}
+
 	CString str;
 	CString resToken;
 	int curPos= 0;
@@ -335,7 +370,7 @@ void read_filter(char *filpath,int dis_frq,int index_s,double *filter)
 	strcpy((char*)str_tmp,CT2CA(resToken));
 	filter[index++] = strtod(str_tmp,&stopstr);
 	
-	while (resToken != "" && index < FILTER_DEEP)
+	while (resToken != "" && index < g_filter_max)
 	{
 		resToken= str.Tokenize(_T("$"),curPos);
 		strcpy((char*)str_tmp,CT2CA(resToken));
