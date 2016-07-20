@@ -126,7 +126,7 @@ void AD_Filter_Data(int H_OR_L,int ch,double *filterParam ,signed short * src,si
 	memcpy(temp,src,sizeof(temp));
 
 	//  将上次的数据拼到这次新的数据前端
-	for (i = 0; i < FILTER_DEEP; i++) 
+	for (i = 0; i < g_filter_max; i++) 
 	{
 		temp[i] = last_Date[H_OR_L][ch][i];
 	}
@@ -135,23 +135,23 @@ void AD_Filter_Data(int H_OR_L,int ch,double *filterParam ,signed short * src,si
 	for (int n = 0; n < 1024; n++) 
 	{
 		tempOut[n] = 0;
-		for ( i = 0; i < FILTER_DEEP; i++)
+		for ( i = 0; i < g_filter_max; i++)
 		{
-			tempOut[n] +=filterParam[i]*temp[n+FILTER_DEEP-i];	
+			tempOut[n] +=filterParam[i]*temp[n+g_filter_max-i];	
 		}
 	}
 	//memcpy(out+FILTER_DEEP*2,tempOut,1024*2);
 
 	//[0][][]低通   [1][][]高通
 	//保存本次数据的最后FILTER_DEEP个数，用于下次滤波
-	for (i = 0; i < FILTER_DEEP; i++) 
+	for (i = 0; i < g_filter_max; i++) 
 	{
 		last_Date[H_OR_L][ch][i] = temp[1024+i];
 	}
 
 	for (i = 1023; i>=0; i--) 
 	{
-		tempOut[i+FILTER_DEEP] = tempOut[i];
+		tempOut[i+g_filter_max] = tempOut[i];
 	}
 	memcpy(out,tempOut,sizeof(tempOut));
 }
@@ -162,19 +162,19 @@ void AD_Filter_Data_All()
 	static signed short tmp_signel_data2[8][1024+FILTER_DEEP];//经过低通后的数据
 	static signed short tmp_signel_data3[8][1024+FILTER_DEEP];//经过高通后的数据
 
-	for (ch = 0; ch < 8; ch++)
+	for (ch = 0; ch < 8 && g_filter_max; ch++)
 	{
 		if (g_filer[ch][1] == 0 && g_filer[ch][0] == 0)
 			continue;
 		for ( i = 0; i < 1024; i++)
 		{
-			tmp_signel_data[ch][i+FILTER_DEEP] = ADBufferForFilter[ch+i*8] - 4096;
+			tmp_signel_data[ch][i+g_filter_max] = ADBufferForFilter[ch+i*8] - 4096;
 		}
 	}
 
 	memcpy(ADBuffer[gl_nReadIndex],ADBufferForFilter,sizeof(ADBufferForFilter));
 
-	for(ch = 0; ch < 8 ; ch++) //  低通
+	for(ch = 0; ch < 8 && g_filter_max; ch++) //  低通
 	{
 		if (g_filer[ch][1] != 0 && g_filter_data_l[ch][0] != 0)//判断是否需要低通
 		{
@@ -195,13 +195,13 @@ void AD_Filter_Data_All()
 		}
 	}
 	
-	for( ch = 0; ch < 8; ch++)
+	for( ch = 0; ch < 8 && g_filter_max; ch++)
 	{
 		if (g_filer[ch][1] == 0 && g_filer[ch][0] == 0)
 			continue;
 		for (i = 0; i < 1024; i++) // 回填过滤后的数据
 		{
-			ADBuffer[gl_nReadIndex][i*8+ch] = tmp_signel_data3[ch][i+FILTER_DEEP] + 4096;
+			ADBuffer[gl_nReadIndex][i*8+ch] = tmp_signel_data3[ch][i+g_filter_max] + 4096;
 		}
 	}
 }
