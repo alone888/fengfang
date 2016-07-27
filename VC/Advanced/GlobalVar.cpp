@@ -6,8 +6,8 @@ CADParaCfgView* gl_pParaCfgView = NULL;
 WORD ADBuffer[MAX_SEGMENT_COUNT][MAX_SEGMENT_SIZE]; // 缓冲队列8192*64
 WORD ADBufferForFilter[MAX_SEGMENT_SIZE]; // 缓冲队列8192
 WORD showData[8][10000];// WYL 10000个点表示屏幕上要显示的点
-UINT g_filer[8][2] = {0}; // 8个通道的 0--高通 1--低通滤波
-int g_filter_max;
+UINT g_filer[8][4] = {0}; // 8个通道的 0--高通 1--低通滤波 2--平滑滤波
+int g_filter_max = 0;
 double g_filter_data_h[8][FILTER_DEEP] = {0};
 double g_filter_data_l[8][FILTER_DEEP] = {0};
 

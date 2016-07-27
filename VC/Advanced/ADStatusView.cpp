@@ -52,6 +52,16 @@ void CADStatusView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT14, m_signel[6][1]);
 	DDX_Control(pDX, IDC_EDIT17, m_signel[7][0]);
 	DDX_Control(pDX, IDC_EDIT16, m_signel[7][1]);
+
+	DDX_Control(pDX, IDC_EDIT18, m_signel[3][2]);
+	DDX_Control(pDX, IDC_EDIT19, m_signel[0][2]);
+	DDX_Control(pDX, IDC_EDIT20, m_signel[1][2]);
+	DDX_Control(pDX, IDC_EDIT21, m_signel[2][2]);
+	DDX_Control(pDX, IDC_EDIT22, m_signel[4][2]);
+	DDX_Control(pDX, IDC_EDIT23, m_signel[5][2]);
+	DDX_Control(pDX, IDC_EDIT24, m_signel[6][2]);
+	DDX_Control(pDX, IDC_EDIT25, m_signel[7][2]);
+
 	DDX_Control(pDX, IDC_EDIT_TriggerVolt, m_Edit_TringgerVolt);
 	//}}AFX_DATA_MAP
 }
@@ -75,6 +85,15 @@ BEGIN_MESSAGE_MAP(CADStatusView, CFormView)
 	ON_EN_KILLFOCUS(IDC_EDIT15, OnChangeEDIT2)
 	ON_EN_KILLFOCUS(IDC_EDIT16, OnChangeEDIT2)
 	ON_EN_KILLFOCUS(IDC_EDIT17, OnChangeEDIT2)
+
+	ON_EN_KILLFOCUS(IDC_EDIT18, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT19, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT20, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT21, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT22, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT23, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT24, OnChangeEDIT2)
+	ON_EN_KILLFOCUS(IDC_EDIT25, OnChangeEDIT2)
 	
 	ON_EN_CHANGE(IDC_EDIT_TriggerVolt, OnChangeEDITTriggerVolt)
 	ON_BN_CLICKED(IDM_GraphicShow, OnGraphicShow)
@@ -130,8 +149,10 @@ void CADStatusView::OnInitialUpdate()
 	{
 		g_filer[i][0] = 0;
 		g_filer[i][1] = 0;
+		g_filer[i][2] = 0;
 		m_signel[i][0].SetWindowText(_T("0"));
 		m_signel[i][1].SetWindowText(_T("0"));
+		m_signel[i][2].SetWindowText(_T("0"));
 	}
 // 	pButtonTile->EnableWindow(FALSE);
 // 	pButtonPose->EnableWindow(FALSE);
@@ -389,6 +410,8 @@ void CADStatusView::OnChangeEDIT2()
 		g_filer[i][0] = wcstol(tmp, NULL, 10);
 		m_signel[i][1].GetWindowText(tmp);
 		g_filer[i][1] = wcstol(tmp, NULL, 10);
+		m_signel[i][2].GetWindowText(tmp);
+		g_filer[i][2] = wcstol(tmp, NULL, 10);
 
 		if(g_filer[i][0] >= ADPara.Frequency/8/2)
 		{
@@ -405,6 +428,15 @@ void CADStatusView::OnChangeEDIT2()
 		if (m_signel[i][1].GetWindowTextLengthW() > 6)
 		{
 			m_signel[i][1].SetWindowText(_T("0"));
+		}
+		if (m_signel[i][2].GetWindowTextLengthW() > 3)
+		{
+			m_signel[i][2].SetWindowText(_T("0"));
+		}
+		if(g_filer[i][2] >= 500 || g_filer[i][2] <= 1)
+		{
+			g_filer[i][2] = 0;
+			m_signel[i][2].SetWindowText(_T("0"));
 		}
 	}
 	char path[100];

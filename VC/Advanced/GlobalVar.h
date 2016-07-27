@@ -12,8 +12,8 @@ extern CADParaCfgView* gl_pParaCfgView;
 extern WORD ADBuffer[MAX_SEGMENT_COUNT][MAX_SEGMENT_SIZE]; // 缓冲队列
 extern WORD ADBufferForFilter[MAX_SEGMENT_SIZE];
 extern WORD showData[8][10000];// WYL 10000个点表示屏幕上要显示的点
-extern UINT g_filer[8][2]; // 8个通道的 0--高通 1--低通滤波
-#define FILTER_DEEP 200
+extern UINT g_filer[8][4]; // 8个通道的 0--高通 1--低通滤波 2--平滑滤波
+#define FILTER_DEEP 500
 extern int g_filter_max;
 extern double g_filter_data_h[8][FILTER_DEEP];
 extern double g_filter_data_l[8][FILTER_DEEP];

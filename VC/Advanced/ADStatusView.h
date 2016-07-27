@@ -28,7 +28,7 @@ public:
 	CEdit	    m_Edit_OverRatio;
 	CEdit	    m_Edit_TringgerVolt;
 	
-	CEdit       m_signel[8][2];
+	CEdit       m_signel[8][4];
 
 	//}}AFX_DATA
 
