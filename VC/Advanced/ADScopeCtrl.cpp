@@ -67,9 +67,9 @@ CADScopeCtrl::CADScopeCtrl()
 	m_clPen[30] = RGB(0, 255, 0);
 	m_clPen[31] = RGB(255, 0, 255);
 	
-	m_crLineAColor = RGB(255, 192, 255);  // A线的颜色
-    m_crLineBColor = RGB(192, 255, 255);  // B线的颜色
-    m_crLineVColor = RGB(255, 255, 128);  // C线的颜色
+	m_crLineAColor = RGB(0, 0, 0);  // A线的颜色
+    m_crLineBColor = RGB(0, 0, 0);  // B线的颜色
+    m_crLineVColor = RGB(0, 0, 0);  // C线的颜色
 	
 	m_penPlot.CreatePen(PS_SOLID, 0, m_crPlotColor);
 	m_brushBack.CreateSolidBrush(m_crBackColor);

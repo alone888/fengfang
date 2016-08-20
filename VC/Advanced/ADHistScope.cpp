@@ -47,9 +47,9 @@ CADHistScope::CADHistScope()
 	m_clPen[14] = RGB(0, 255, 0);
 	m_clPen[15] = RGB(255, 0, 255);
 
-	m_crLineAColor = RGB(255, 192, 255);  // A线的颜色
-	m_crLineBColor = RGB(192, 255, 255);  // B线的颜色
-	m_crLineVColor = RGB(255, 255, 128);  // C线的颜色
+	m_crLineAColor = RGB(0, 0, 0);  // A线的颜色
+	m_crLineBColor = RGB(0, 0, 0);  // B线的颜色
+	m_crLineVColor = RGB(0, 0, 0);  // C线的颜色
 
 	m_penPlot.CreatePen(PS_SOLID, 0, m_crPlotColor);
 	m_brushBack.CreateSolidBrush(m_crBackColor);
@@ -318,16 +318,16 @@ void CADHistScope::OnPaint()
 	dc.LineTo(m_OldMoveX1, m_rectPlot.Height()+10); // 画线A
 
 	WCHAR str[100];
-	swprintf_s(str, _T("%s"), _T("A线"));
-	dc.SetTextColor(RGB(255, 0, 0));
-	dc.TextOut(m_OldMoveX1, m_rectPlot.top, str);
+	//swprintf_s(str, _T("%s"), _T("A线"));
+	//dc.SetTextColor(RGB(255, 0, 0));
+	//dc.TextOut(m_OldMoveX1, m_rectPlot.top, str);
 
 	dc.SelectObject(&m_PenLineB);				    // 选区入线B的画笔
 	dc.MoveTo(m_OldMoveX2, m_rectPlot.top);
 	dc.LineTo(m_OldMoveX2, m_rectPlot.Height()+10); // 画线B
-	swprintf_s(str, _T("%s"), _T("B线"));
-	dc.SetTextColor(RGB(255, 0, 0));
-	dc.TextOut(m_OldMoveX2, m_rectPlot.top, str);
+	//swprintf_s(str, _T("%s"), _T("B线"));
+	//dc.SetTextColor(RGB(255, 0, 0));
+	//dc.TextOut(m_OldMoveX2, m_rectPlot.top, str);
 	if (!m_bAllChannel)
 	{
 		dc.SelectObject(&m_PenLineV);				// 选区入线V的画笔
@@ -1069,17 +1069,17 @@ void CADHistScope::DrawMoveLine(CDC* pDC, CPoint point)
 		pDC->LineTo(m_OldMoveX1, m_rectPlot.Height()+10);	// 画线A
 
 		WCHAR str[100];
-		swprintf_s(str, _T("%s"), _T("A线"));
-		pDC->SetTextColor(RGB(255, 0, 0));
-		pDC->TextOut(m_OldMoveX1, m_rectPlot.top, str);
+		//swprintf_s(str, _T("%s"), _T("A线"));
+		//pDC->SetTextColor(RGB(255, 0, 0));
+		//pDC->TextOut(m_OldMoveX1, m_rectPlot.top, str);
 
 		pDC->SelectObject(&m_PenLineB);
 		pDC->MoveTo(m_OldMoveX2, m_rectPlot.top); // 消除上一次画的线B
 		pDC->LineTo(m_OldMoveX2, m_rectPlot.Height()+10);	// 画线B
 
-		swprintf_s(str, _T("%s"), _T("A线"));
-		pDC->SetTextColor(RGB(255, 0, 0));
-		pDC->TextOut(m_OldMoveX1, m_rectPlot.top, str);
+		//swprintf_s(str, _T("%s"), _T("A线"));
+		//pDC->SetTextColor(RGB(255, 0, 0));
+		//pDC->TextOut(m_OldMoveX1, m_rectPlot.top, str);
 
 		m_OldMoveX1 = m_StartOldMoveX1 + (point.x - m_RBtnDownPosX); 
 		m_OldMoveX2 = m_StartOldMoveX2 + (point.x - m_RBtnDownPosX); 		
@@ -1097,9 +1097,9 @@ void CADHistScope::DrawMoveLine(CDC* pDC, CPoint point)
 		pDC->MoveTo(m_OldMoveX1, m_rectPlot.top); // 消除上一次画的线A
 		pDC->LineTo(m_OldMoveX1, m_rectPlot.Height()+10); // 画线A
 
-		swprintf_s(str, _T("%s"), _T("A线"));
-		pDC->SetTextColor(RGB(255, 0, 0));
-		pDC->TextOut(m_OldMoveX1, m_rectPlot.top, str);
+		//swprintf_s(str, _T("%s"), _T("A线"));
+		//pDC->SetTextColor(RGB(255, 0, 0));
+		//pDC->TextOut(m_OldMoveX1, m_rectPlot.top, str);
 
 		m_OldMoveX1 = point.x;
 		pDC->MoveTo(point.x, m_rectPlot.top);
@@ -1112,9 +1112,9 @@ void CADHistScope::DrawMoveLine(CDC* pDC, CPoint point)
 		pDC->MoveTo(m_OldMoveX2, m_rectPlot.top); // 消除上一次画的线B
 		pDC->LineTo(m_OldMoveX2, m_rectPlot.Height()+10);	// 画线B
 
-		swprintf_s(str, _T("%s"), _T("B线"));
-		pDC->SetTextColor(RGB(255, 0, 0));
-		pDC->TextOut(m_OldMoveX2, m_rectPlot.top, str);
+		//swprintf_s(str, _T("%s"), _T("B线"));
+		//pDC->SetTextColor(RGB(255, 0, 0));
+		//pDC->TextOut(m_OldMoveX2, m_rectPlot.top, str);
 
 		m_OldMoveX2 = point.x;
 		pDC->MoveTo(point.x, m_rectPlot.top);
