@@ -60,6 +60,7 @@
 #define IDR_PLS                         176
 #define IDI_ICON1                       180
 #define IDB_BITMAP_ART                  182
+#define IDR_MENU1                       185
 #define IDC_BUTTON_Read                 1004
 #define IDC_BUTTON_Init                 1004
 #define IDC_BUTTON_READ_CLK             1005
@@ -405,7 +406,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        185
+#define _APS_NEXT_RESOURCE_VALUE        186
 #define _APS_NEXT_COMMAND_VALUE         32837
 #define _APS_NEXT_CONTROL_VALUE         1254
 #define _APS_NEXT_SYMED_VALUE           132

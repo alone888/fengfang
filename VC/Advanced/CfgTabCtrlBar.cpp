@@ -62,13 +62,13 @@ int CCfgTabCtrlBar::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CRect StopButtonRect(10, 40, 180, 70);
 	
 
-	m_Button_StartDevice.Create(_T("开始数据采集"), 
-		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_DEFPUSHBUTTON, 
-		StartButtonRect, this, IDM_StartDeviceAD);
+	/*m_Button_StartDevice.Create(_T("开始数据采集"), 
+	WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_DEFPUSHBUTTON, 
+	StartButtonRect, this, IDM_StartDeviceAD);
 
 	m_Button_StopDevice.Create(_T("停止数据采集"), 
-		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  
-		StopButtonRect, this, IDM_StopDeviceAD);
+	WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,  
+	StopButtonRect, this, IDM_StopDeviceAD);*/
 
 
 

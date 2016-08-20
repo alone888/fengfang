@@ -121,7 +121,7 @@ BOOL CSysApp::InitInstance()
 	
 	// 添加AD采集模板
 	pADTemplate = new CMultiDocTemplate(
-		IDR_AD,
+		IDR_MENU1,//IDR_AD,
 		RUNTIME_CLASS(CADDoc),
 		RUNTIME_CLASS(CADFrm), // custom MDI child frame
 		RUNTIME_CLASS(CADDigitView));
@@ -129,7 +129,7 @@ BOOL CSysApp::InitInstance()
 	
 	// 添加历史数据回放模板
 	pHistDataTemplate = new CMultiDocTemplate(
-		IDR_ADHist,
+		IDR_MENU1,//IDR_ADHist,
 		RUNTIME_CLASS(CADHistDoc),
 		RUNTIME_CLASS(CADHistFrm), // custom MDI child frame
 		RUNTIME_CLASS(CADHistDigitView));
@@ -137,7 +137,7 @@ BOOL CSysApp::InitInstance()
 	
 	// DIO模板
 	pDIOTemplate= new CMultiDocTemplate(
-		IDR_DIO,
+		IDR_MENU1,//IDR_DIO,
 		RUNTIME_CLASS(CDIODoc),
 		RUNTIME_CLASS(CDIOFrm), // custom MDI child frame
 		RUNTIME_CLASS(CDIOView));
@@ -145,7 +145,7 @@ BOOL CSysApp::InitInstance()
 		
 	// DA模板
 	pDATemplate= new CMultiDocTemplate(
-		IDR_DA,
+		IDR_MENU1,//IDR_DA,
 		RUNTIME_CLASS(CDADoc),
 		RUNTIME_CLASS(CDAFrm), // custom MDI child frame
 		RUNTIME_CLASS(CDAView));
