@@ -344,7 +344,7 @@ void CADDoc::OnDataFileNew()
 	HANDLE hDevice = m_hDevice;
 
 	if (!(theApp.DoPromptFileName(strNewFileName, IDS_NEW_FILE, 
-		OFN_HIDEREADONLY | OFN_CREATEPROMPT, TRUE, NULL)))
+		OFN_HIDEREADONLY , TRUE, NULL)))
 		return;
 
 	if (!gl_bCreateFile)
@@ -356,7 +356,7 @@ void CADDoc::OnDataFileNew()
 	int FileNameLength = strNewFileName.GetLength();
 	TempFileName = strNewFileName.Left(FileNameLength-4);
 
-	strNewFileName = TempFileName + ".usb";
+	strNewFileName = TempFileName + ".nd";
 	BOOL bRet = m_File.Open(strNewFileName,USB2831_modeCreate|USB2831_modeWrite);
 
     if (bRet == FALSE)		

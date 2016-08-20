@@ -982,7 +982,7 @@ IDR_MAINFRAME           BITMAP                  "res\\mainfram.bmp"
 STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "纽顿科技系统"
-    IDR_AD                  "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_AD                  "\nSys\nSys\n纽顿科技文件 (*.nd)\n.nd\nSys.Document\nSys Document"
     CG_IDS_TIPOFTHEDAYHELP  "&Help"
     IDI_TABCTRLBAR          "标签切换"
     IDC_MDI_TAB_CTRL_BAR    "多文档切换"
@@ -1139,17 +1139,17 @@ END
 
 STRINGTABLE
 BEGIN
-    IDR_ADHist              "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_ADHist              "\nSys\nSys\n纽顿科技文件 (*.nd)\n.nd\nSys.Document\nSys Document"
 END
 
 STRINGTABLE
 BEGIN
-    IDR_DIO                 "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_DIO                 "\nSys\nSys\n纽顿科技文件 (*.nd)\n.nd\nSys.Document\nSys Document"
 END
 
 STRINGTABLE
 BEGIN
-    IDR_PLS                 "\nSys\nSys\n纽顿科技文件 (*.usb)\n.usb\nSys.Document\nSys Document"
+    IDR_PLS                 "\nSys\nSys\n纽顿科技文件 (*.nd)\n.nd\nSys.Document\nSys Document"
 END
 
 STRINGTABLE
