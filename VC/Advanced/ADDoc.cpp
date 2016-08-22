@@ -322,7 +322,7 @@ void CADDoc::StopDeviceAD()
 		m_File.Seek(0,CFile::begin); // 返回到文件起始位置
 		m_File.Write((WORD*)&m_header, m_header.HeadSizeBytes);
 		OnCloseFile();              // 释放文件对象
-		gl_nProcMode = PROC_MODE_DIGIT; // 置成数字显示方式			
+		gl_nProcMode = PROC_MODE_WAVE; // 置成数字波形方式			
 		CButton* pDataSave = (CButton*)(gl_pADStatusView->GetDlgItem(IDM_DataSave));	
 		pDataSave->EnableWindow(FALSE);  // 使存盘方式单选框有效
 	}
