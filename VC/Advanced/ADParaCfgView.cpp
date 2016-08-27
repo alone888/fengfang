@@ -157,6 +157,34 @@ void SortDes(LONG *data, int left, int right)
 	if(i<right) SortDes(data,i,right);
 }
 
+void save_channel()
+{
+	FILE *pd = NULL;
+
+	pd = fopen("channel_valid.txt","w");
+	if(pd == NULL) return ;
+	fwrite(gl_signal_enable,sizeof(gl_signal_enable),1,pd);
+	fclose(pd);
+}
+
+void read_channel()
+{
+	FILE *pd = NULL;
+
+	pd = fopen("channel_valid.txt","r");
+	if(pd == NULL) return ;
+	fread(gl_signal_enable,sizeof(gl_signal_enable),1,pd);
+	fclose(pd);
+	gl_nChannelCount = 0;
+	for (int i = 0;i < 8;i++)
+	{
+		if (gl_signal_enable[i] == 1)
+		{
+			gl_nChannelCount++;
+		}
+	}
+}
+
 void CADParaCfgView::OnInitialUpdate()
 {
 	CSysApp* pApp = (CSysApp*)AfxGetApp();
@@ -167,14 +195,7 @@ void CADParaCfgView::OnInitialUpdate()
 
 	pDoc->m_hWndADCfg = this->m_hWnd;
 	theApp.m_hParaCfgView = this->m_hWnd;
-	((CButton *)GetDlgItem(IDC_CHECK_INPUT9))->SetCheck(1);
-	((CButton *)GetDlgItem(IDC_CHECK_INPUT10))->SetCheck(1);
-	((CButton *)GetDlgItem(IDC_CHECK_INPUT11))->SetCheck(1);
-	((CButton *)GetDlgItem(IDC_CHECK_INPUT12))->SetCheck(1);
-	((CButton *)GetDlgItem(IDC_CHECK_INPUT13))->SetCheck(1);
-	((CButton *)GetDlgItem(IDC_CHECK_INPUT14))->SetCheck(1);
-	((CButton *)GetDlgItem(IDC_CHECK_INPUT15))->SetCheck(1);
-	((CButton *)GetDlgItem(IDC_CHECK_INPUT16))->SetCheck(1);
+	
 	gl_signal_enable[0] = 1;
 	gl_signal_enable[1] = 1;
 	gl_signal_enable[2] = 1;
@@ -183,6 +204,42 @@ void CADParaCfgView::OnInitialUpdate()
 	gl_signal_enable[5] = 1;
 	gl_signal_enable[6] = 1;
 	gl_signal_enable[7] = 1;
+	gl_nChannelCount = 8;
+
+	read_channel();
+
+	if(gl_signal_enable[0])
+	{
+		((CButton *)GetDlgItem(IDC_CHECK_INPUT9))->SetCheck(1);
+	}
+	if(gl_signal_enable[1])
+	{
+		((CButton *)GetDlgItem(IDC_CHECK_INPUT10))->SetCheck(1);
+	}
+	if(gl_signal_enable[2])
+	{
+		((CButton *)GetDlgItem(IDC_CHECK_INPUT11))->SetCheck(1);
+	}
+	if(gl_signal_enable[3])
+	{
+		((CButton *)GetDlgItem(IDC_CHECK_INPUT12))->SetCheck(1);
+	}
+	if(gl_signal_enable[4])
+	{
+		((CButton *)GetDlgItem(IDC_CHECK_INPUT13))->SetCheck(1);
+	}
+	if(gl_signal_enable[5])
+	{
+		((CButton *)GetDlgItem(IDC_CHECK_INPUT14))->SetCheck(1);
+	}
+	if(gl_signal_enable[6])
+	{
+		((CButton *)GetDlgItem(IDC_CHECK_INPUT15))->SetCheck(1);
+	}
+	if(gl_signal_enable[7])
+	{
+		((CButton *)GetDlgItem(IDC_CHECK_INPUT16))->SetCheck(1);
+	}
 
 
 	OnBnClickedButton1();
@@ -212,17 +269,17 @@ void CADParaCfgView::OnInitialUpdate()
 	CString strMsg;
 	UpdateData(FALSE);
 	
-	pApp->WriteProfileInt(_T("strSectionFre"),_T("Frequency0"),250000);
-	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency1"), 200000);
-	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency2"), 150000);
-	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency3"), 100000);
-	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency4"), 80000);
-	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency5"), 50000);
-	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency6"), 40000);
-	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency7"), 25000);
-	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency8"), 20000);
-	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency9"), 10000);
-	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency10"), 1000);
+	pApp->WriteProfileInt(_T("strSectionFre"),_T("Frequency0"),250000/8);
+	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency1"), 200000/8);
+	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency2"), 150000/8);
+	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency3"), 100000/8);
+	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency4"), 80000/8);
+	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency5"), 50000/8);
+	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency6"), 40000/8);
+	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency7"), 25000/8);
+	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency8"), 20000/8);
+	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency9"), 10000/8);
+	pApp->WriteProfileInt(_T("strSectionFre"), _T("Frequency10"), 1000/8);
 
 
 	LONG FreqCount, arFrequency[256];
@@ -237,7 +294,7 @@ void CADParaCfgView::OnInitialUpdate()
 
 	LONG Frequency = 0;
 	Frequency = pApp->GetProfileInt(_T("strSectionFre"),_T("DefaultFreq"), 0x00);
-	if(Frequency == 0) Frequency = 25000;
+	if(Frequency == 0) Frequency = 25000/8;
 	strMsg.Format(_T("%d"), Frequency);
 	m_Combo_Frequency.SetWindowText(strMsg);
 
@@ -550,7 +607,7 @@ void CADParaCfgView::OnKillfocusCOMBOFrequency()
 		m_Combo_Frequency.SetWindowText(strFrequency);
 		return;
 	}
-	ADPara.Frequency = nFrequency; // 设置频率值
+	ADPara.Frequency = nFrequency*8; // 设置频率值
 	SaveFrequency(nFrequency);
 	SetStatusBar(); // 设置底下的状态栏
 }
@@ -853,7 +910,6 @@ void CADParaCfgView::OnBnClickedCheckInput1()
 	// TODO: 在此添加控件通知处理程序代码
 }
 
-
 void CADParaCfgView::OnBnClickedCheckInput9()
 {
 	// TODO: 在此添加控件通知处理程序代码
@@ -876,6 +932,7 @@ void CADParaCfgView::OnBnClickedCheckInput9()
 	CString str;
 	str.Format(_T("%d"), gl_nChannelCount);
 	m_Edit_ChannelSum.SetWindowText(str);
+	save_channel();
 }
 
 
@@ -900,6 +957,7 @@ void CADParaCfgView::OnBnClickedCheckInput10()
 	CString str;
 	str.Format(_T("%d"), gl_nChannelCount);
 	m_Edit_ChannelSum.SetWindowText(str);
+	save_channel();
 }
 
 
@@ -924,6 +982,7 @@ void CADParaCfgView::OnBnClickedCheckInput11()
 	CString str;
 	str.Format(_T("%d"), gl_nChannelCount);
 	m_Edit_ChannelSum.SetWindowText(str);
+	save_channel();
 }
 
 
@@ -948,6 +1007,7 @@ void CADParaCfgView::OnBnClickedCheckInput12()
 	CString str;
 	str.Format(_T("%d"), gl_nChannelCount);
 	m_Edit_ChannelSum.SetWindowText(str);
+	save_channel();
 }
 
 
@@ -972,6 +1032,7 @@ void CADParaCfgView::OnBnClickedCheckInput13()
 	CString str;
 	str.Format(_T("%d"), gl_nChannelCount);
 	m_Edit_ChannelSum.SetWindowText(str);
+	save_channel();
 }
 
 
@@ -996,6 +1057,7 @@ void CADParaCfgView::OnBnClickedCheckInput14()
 	CString str;
 	str.Format(_T("%d"), gl_nChannelCount);
 	m_Edit_ChannelSum.SetWindowText(str);
+	save_channel();
 }
 
 
@@ -1020,6 +1082,7 @@ void CADParaCfgView::OnBnClickedCheckInput15()
 	CString str;
 	str.Format(_T("%d"), gl_nChannelCount);
 	m_Edit_ChannelSum.SetWindowText(str);
+	save_channel();
 }
 
 
@@ -1044,6 +1107,7 @@ void CADParaCfgView::OnBnClickedCheckInput16()
 	CString str;
 	str.Format(_T("%d"), gl_nChannelCount);
 	m_Edit_ChannelSum.SetWindowText(str);
+	save_channel();
 }
 
 static int TimeAxisRangeVal[]={10,20,50,100,200,500,1000,2000,5000,10000,20000,50000,100000,200000,500000};//以ms为单位
