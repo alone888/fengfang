@@ -59,6 +59,10 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
         TRACE0("Failed to create toolbar\n");   
         return -1;      // fail to create   
     }
+	int i = m_wndToolBar.CommandToIndex( ID_TOOLSBAR_START);
+	m_wndToolBar.SetButtonInfo(i, ID_TOOLSBAR_START, TBBS_GROUP|TBBS_CHECKBOX    , i);
+	m_wndToolBar.SetButtonInfo(i+1, ID_TOOLSBAR_STOP, TBBS_GROUP |TBBS_CHECKBOX  , i+1);
+	m_wndToolBar.IsDlgButtonChecked(ID_TOOLSBAR_STOP);
 
          // Œ™m_wndToolBar∆Ù”√Õ£øø   
     m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);   
