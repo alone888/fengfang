@@ -45,7 +45,7 @@ int CCfgTabCtrlBar::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CCfgCtrlBar::OnCreate(lpCreateStruct) == -1)
 		return -1;
-	
+
 	//Create the Tab Control
 	CRect rect;
 	m_tabctrl.Create(WS_VISIBLE|WS_CHILD,  
@@ -58,8 +58,8 @@ int CCfgTabCtrlBar::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CFont* font = CFont::FromHandle((HFONT)::GetStockObject(DEFAULT_GUI_FONT));
 	m_tabctrl.SetFont(font);
 
-	CRect StartButtonRect(10, 6, 180, 36);
-	CRect StopButtonRect(10, 40, 180, 70);
+	//CRect StartButtonRect(10, 6, 180, 36);
+	//CRect StopButtonRect(10, 40, 180, 70);
 	
 
 	/*m_Button_StartDevice.Create(_T("开始数据采集"), 
@@ -79,12 +79,12 @@ void CCfgTabCtrlBar::OnSize(UINT nType, int cx, int cy)
 {
 	CCfgCtrlBar::OnSize(nType, cx, cy);
 	int bottom = (IsHorz() || IsFloating()) ? cy - 82 : cy - 84;
-	m_tabctrl.MoveWindow(7, 77, cx , bottom); // 在CControlBar在移动Tab控件位置
+	m_tabctrl.MoveWindow(7, 7, cx-14 , cy); // 在CControlBar在移动Tab控件位置
 	CWnd* pWnd;
 	for (POSITION pos=m_views.GetHeadPosition(); pos; m_views.GetNext(pos))
 	{
 		pWnd = m_views.GetAt(pos)->pWnd;
-		pWnd->MoveWindow(9, 99, cx-14, bottom-25); // 在CControlBar在移动视图类的控件位置
+		pWnd->MoveWindow(9, 29, cx-14, cy-35); // 在CControlBar在移动视图类的控件位置
 	}
 }
 

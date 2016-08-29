@@ -346,6 +346,7 @@
 #define IDC_EDIT24                      1297
 #define IDC_EDIT16                      1298
 #define IDC_SPIN16                      1299
+#define IDC_EDIT26                      1299
 #define IDC_EDIT17                      1300
 #define IDC_EDIT25                      1301
 #define ID_VIEW_FULLSCREEN              32772
@@ -396,6 +397,7 @@
 #define ID_BUTTON32834                  32834
 #define ID_WINDOW_1231                  32835
 #define ID_WINDO1231                    32836
+#define ID_NEWDOON                      32837
 #define ID_SHOWMOUSEVOLT                59142
 #define ID_SHOW_MOUSEVOLT               59142
 #define IDS_ADHist                      61447
@@ -407,7 +409,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        186
-#define _APS_NEXT_COMMAND_VALUE         32837
+#define _APS_NEXT_COMMAND_VALUE         32838
 #define _APS_NEXT_CONTROL_VALUE         1254
 #define _APS_NEXT_SYMED_VALUE           132
 #endif
