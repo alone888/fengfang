@@ -122,12 +122,12 @@ int CADFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	
 	m_wndSTCBar.EnableDocking(CBRS_ALIGN_LEFT| CBRS_ALIGN_RIGHT);
 	EnableDocking(CBRS_ALIGN_ANY);
-	DockControlBar(&m_wndSTCBar, AFX_IDW_DOCKBAR_RIGHT);
+	DockControlBar(&m_wndSTCBar, AFX_IDW_DOCKBAR_LEFT);
 	
-	gl_pParaCfgView = (CADParaCfgView*)m_wndSTCBar.AddView(_T("参数配置"), RUNTIME_CLASS(CADParaCfgView)); // CParaCfgView
+	gl_pParaCfgView = (CADParaCfgView*)m_wndSTCBar.AddView(_T("Parameters"), RUNTIME_CLASS(CADParaCfgView)); // CParaCfgView
 	gl_pParaCfgView->m_pADFrm = this;
 	
-	gl_pADStatusView = (CADStatusView*)m_wndSTCBar.AddView(_T("滤波设置"), RUNTIME_CLASS(CADStatusView)); // CADStatusView
+	gl_pADStatusView = (CADStatusView*)m_wndSTCBar.AddView(_T("Filtering"), RUNTIME_CLASS(CADStatusView)); // CADStatusView
 	
 	USB2831_LoadParaAD(NULL, &ADPara);  // 读入系统参数
 	//gl_nChannelCount = ADPara.LastChannel - ADPara.FirstChannel + 1;

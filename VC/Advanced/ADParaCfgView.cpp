@@ -293,7 +293,7 @@ void CADParaCfgView::OnInitialUpdate()
 	}
 
 	LONG Frequency = 0;
-	Frequency = pApp->GetProfileInt(_T("strSectionFre"),_T("DefaultFreq"), 0x00);
+	Frequency = pApp->GetProfileInt(_T("strSectionFre"),_T("Frequency0"), 0x00);
 	if(Frequency == 0) Frequency = 25000/8;
 	strMsg.Format(_T("%d"), Frequency);
 	m_Combo_Frequency.SetWindowText(strMsg);

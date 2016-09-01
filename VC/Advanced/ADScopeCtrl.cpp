@@ -12,6 +12,8 @@ static char THIS_FILE[] = __FILE__;
 #define TIMERID2 9
 ///////////////////////////////////////////////////////////////////////////
 //CADScopeCtrl
+
+CTime g_InitTime;  
 CADScopeCtrl::CADScopeCtrl()
 {
 	m_dPreviousPosition =   0.0;	
@@ -250,6 +252,18 @@ void CADScopeCtrl::OnTimer(UINT_PTR nIDEvent)
 		//i++;
 
 	}
+
+	CTime m_time,time2;  
+	m_time=CTime::GetCurrentTime();             //获取当前时间日期  
+	CTimeSpan timeSpan = m_time - g_InitTime;
+	CString m_strDate=m_time.Format(_T("%x"));          //格式化日期  
+	CString m_strTime=timeSpan.Format(_T("%H:%M:%S"));          //格式化时间 
+	CString m_strDateTime=m_time.Format(_T("%Y-%m-%d   %H:%M:%S   %A"));   //格式化日期时间  
+	
+	CSysApp* pApp = (CSysApp*)AfxGetApp();
+	CADFrm* pADFrm = (CADFrm*)pApp->m_ADFrm;
+	CEdit *pEditFre = (CEdit *)pADFrm->m_wndShowStatus.GetDlgItem(IDC_EDIT_MeasureFreq);
+	pEditFre->SetWindowText(m_strDateTime+"   "+ m_strTime);
 }
 ///////////////////////////////////////////////////////////////////////////
 void CADScopeCtrl::SetXUnits(CString string)
@@ -1041,8 +1055,8 @@ void CADScopeCtrl::SetStatusBar()
 		{
 			strFrequency.Format(_T("%7.2f MHz"), fFrequency/1000000.0);
 		}	
-		CEdit* pEditFre = (CEdit*)pADFrm->m_wndShowStatus.GetDlgItem(IDC_EDIT_MeasureFreq);
-		pEditFre->SetWindowText(strFrequency);		
+		/*		CEdit* pEditFre = (CEdit*)pADFrm->m_wndShowStatus.GetDlgItem(IDC_EDIT_MeasureFreq);
+		pEditFre->SetWindowText(strFrequency);	*/	
 	}
 	else
 	{
@@ -1078,10 +1092,18 @@ void CADScopeCtrl::SetStatusBar()
 		{
 			strFrequency.Format(_T("%7.2f MHz"), fFrequency / 1000000.0);
 		}
-		
-		CEdit *pEditFre = (CEdit *)pADFrm->m_wndShowStatus.GetDlgItem(IDC_EDIT_MeasureFreq);
-		pEditFre->SetWindowText(strFrequency);
+
+
 	}
+
+
+	g_InitTime=CTime::GetCurrentTime();             //获取当前时间日期  
+	//CString m_strDate=g_InitTime.Format(_T("%x"));          //格式化日期  
+	//CString m_strTime=g_InitTime.Format(_T("%X"));          //格式化时间  
+	//CString m_strDateTime=g_InitTime.Format(_T("%Y-%m-%d %H:%M:%S %A"));   //格式化日期时间  
+
+	//CEdit *pEditFre = (CEdit *)pADFrm->m_wndShowStatus.GetDlgItem(IDC_EDIT_MeasureFreq);
+	//pEditFre->SetWindowText(m_strDateTime);
 // 	// 计算两线之间的时间差
 // 	if (fTimePixel < 1000)
 // 	{

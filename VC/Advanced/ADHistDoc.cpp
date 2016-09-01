@@ -139,6 +139,21 @@ BOOL CADHistDoc::OnOpenDocument(LPCTSTR lpszPathName)
 		return TRUE;
 	}
 	this->SetPathName(lpszPathName);
+
+
+	//这段是隐藏显示工具栏用的
+	CMainFrame* pMainFrame = (CMainFrame *)AfxGetMainWnd();
+	//ShowControlBar(&pMainFrame->m_wndToolBar,!pMainFrame->m_wndToolBar.IsWindowVisible(),FALSE);
+	if (pMainFrame->m_wndToolBar.IsWindowVisible()) //如果工具栏是显示着，那么就隐藏，否则就显示。
+	{
+		pMainFrame->m_wndToolBar.ShowWindow(SW_HIDE);
+	}
+	else
+	{
+		pMainFrame->m_wndToolBar.ShowWindow(SW_SHOW);
+	}
+	pMainFrame->RecalcLayout(); //注意如果不写这行，会出现工具栏隐藏，但工具条仍然存在的现象，需要重新计算
+
 	return TRUE;
 }
 
@@ -184,6 +199,19 @@ void CADHistDoc::OnCloseDocument()
 	// TODO: Add your specialized code here and/or call the base class
 	if (m_bFileOpen == TRUE)
 	{
+		//这段是显示显示工具栏用的
+		CMainFrame* pMainFrame = (CMainFrame *)AfxGetMainWnd();
+		//ShowControlBar(&pMainFrame->m_wndToolBar,!pMainFrame->m_wndToolBar.IsWindowVisible(),FALSE);
+		if (pMainFrame->m_wndToolBar.IsWindowVisible()) //如果工具栏是显示着，那么就隐藏，否则就显示。
+		{
+			pMainFrame->m_wndToolBar.ShowWindow(SW_HIDE);
+		}
+		else
+		{
+			pMainFrame->m_wndToolBar.ShowWindow(SW_SHOW);
+		}
+		pMainFrame->RecalcLayout(); //注意如果不写这行，会出现工具栏隐藏，但工具条仍然存在的现象，需要重新计算
+		
 		m_File.Close();
 	}
 	

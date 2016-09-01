@@ -38,7 +38,7 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
-protected:  // control bar embedded memberss
+//protected:  // control bar embedded memberss
 	
 	CToolBar    m_wndToolBar;
 	CReBar      m_wndReBar;

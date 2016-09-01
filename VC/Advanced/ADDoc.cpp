@@ -91,13 +91,8 @@ void CADDoc::StartDeviceAD()
 	if (device_start_ok)
 	{
 		return;
-	}
-	
-	
-	device_start_ok = 0;
-
-
-
+	}	
+	device_start_ok = 0;	
 	m_hDevice = theApp.m_hDevice;
 	////////////////////////////////////////////////////////////////////////
 	if (m_hDevice == INVALID_HANDLE_VALUE)
@@ -105,9 +100,9 @@ void CADDoc::StartDeviceAD()
 		if (m_hDevice == INVALID_HANDLE_VALUE)
 		{
 			CADFrm* pADFrm = (CADFrm*)(theApp.m_ADFrm); // 取得子帧窗口指针
-			CButton* pStart = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StartDeviceAD));
-			CRect rect;
-			pStart->GetWindowRect(&rect);
+			//CButton* pStart = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StartDeviceAD));
+			//CRect rect;
+			//pStart->GetWindowRect(&rect);
 			AfxMessageBox(_T("创建设备出错!"));
 			return;
 		}
@@ -170,11 +165,12 @@ void CADDoc::StartDeviceAD()
 	
 	if (!MyStartDeviceAD(m_hDevice)) // 启动设备, IDM_DataFileNew数据
 	{
-		CADFrm* pADFrm = (CADFrm*)(theApp.m_ADFrm); // 取得子帧窗口指针
-		CButton* pStart = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StartDeviceAD));
-		CRect rect;
-		pStart->GetWindowRect(&rect);
-		theApp.MsgWarning("警告", "设备启动失败!", rect.CenterPoint(), 10000);
+		//CADFrm* pADFrm = (CADFrm*)(theApp.m_ADFrm); // 取得子帧窗口指针
+		//CButton* pStart = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StartDeviceAD));
+		//CRect rect;
+		//pStart->GetWindowRect(&rect);
+		//theApp.MsgWarning("警告", "设备启动失败!", rect.CenterPoint(), 10000);
+		AfxMessageBox(_T("设备启动失败!"));
 		return;
 	}
 
@@ -283,7 +279,11 @@ void CADDoc::Public_ReleaseDevice(void) // 供MDI窗口调用
 }
 
 void CADDoc::StopDeviceAD() 
-{
+{	
+
+
+	//DockControlBar(&m_newToolBar); //这行是为了在工具栏被拖役出边框时，工具栏窗口不能被隐藏。需要重靠。
+
 	CSysApp* pApp = (CSysApp *)AfxGetApp();
 	gl_bDeviceADRun = FALSE; // 停止子线程进行连续数据采集	
 // 	Sleep(20);
@@ -298,11 +298,12 @@ void CADDoc::StopDeviceAD()
 
 	if (!MyStopDeviceAD(m_hDevice)) // 关闭AD设备
 	{
-		CADFrm* pADFrm = (CADFrm*)(theApp.m_ADFrm); // 取得子帧窗口指针
-		CButton* pStop = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StopDeviceAD));
-		CRect rect;
-		pStop->GetWindowRect(&rect);
-		theApp.MsgWarning("警告", "关闭AD设备失败!", rect.CenterPoint(), 10000);
+		//CADFrm* pADFrm = (CADFrm*)(theApp.m_ADFrm); // 取得子帧窗口指针
+		//CButton* pStop = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StopDeviceAD));
+		//CRect rect;
+		/*pStop->GetWindowRect(&rect);*/
+		//theApp.MsgWarning("警告", "关闭AD设备失败!", rect.CenterPoint(), 10000);
+		AfxMessageBox(_T("关闭AD设备失败!"));
 		return;
 	}
 	// 在设备对象释放后，允许操作硬件参数
@@ -335,7 +336,7 @@ void CADDoc::StopDeviceAD()
 	memset(showData,0,sizeof(showData));
 	gl_last_end_id = 0;
 }
-
+//新建文件 录音按钮
 void CADDoc::OnDataFileNew() 
 {
 	// TODO: Add your command handler code here
@@ -423,7 +424,10 @@ void CADDoc::OnDataFileNew()
 	gl_pADStatusView->SetDlgCheck();
 	
 	gl_nProcMode = PROC_MODE_SAVE; // 当打开新文件时，意味着要进行存盘处理
-	gl_pADStatusView->SetDlgCheck();	
+	gl_pADStatusView->SetDlgCheck();
+
+	//打开文件之后直接开始采集
+	StartDeviceAD();
 }
 
 void CADDoc::OnCloseFile() 

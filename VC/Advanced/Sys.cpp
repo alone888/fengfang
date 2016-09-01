@@ -184,7 +184,7 @@ BOOL CSysApp::InitInstance()
 	USB2831_GetDeviceCurrentID(m_hDevice, &DeviceLgcID, &DevicePhysID);
 	swprintf_s(str, _T("USB2831-%d-%d "), m_CurrentDeviceID,DevicePhysID);
 	//MainFrmName = pMainFrame->GetTitle();
-	MainFrmName = "纽顿科技"+MainFrmName;
+	MainFrmName = "NEWDOON"+MainFrmName;
 	pMainFrame->SetTitle(MainFrmName);
 	OnOpenAD();		// 打开AD采集模板
 	m_ADFrm->BringWindowToTop();	// 将AD模板置于屏幕顶端
@@ -284,7 +284,7 @@ void CSysApp::OnOpenAD(void)
 	// 初始化FRAME子帧窗口，并创建文档实例, 且触发FRAME的OnUpdate函数
   	pADTemplate->InitialUpdateFrame(m_ADFrm, m_pADDoc);
 	// 设置默认的文档标题
-	m_pADDoc->SetTitle(_T("SOMA 索玛生物电记录系统"));
+	m_pADDoc->SetTitle(_T("SOMA 2.1"));
 	if (gl_pADStatusView != NULL)
 	{
 		// 将参数配置视图类加入文档列表，以便跟正常视图一样被文档类管理
@@ -388,6 +388,21 @@ CDocument* CSysApp::OpenDocumentFile(LPCTSTR lpszFileName)
 			bFileAvailable = FALSE; // 文件无效
 		}
 		m_pADHistDoc = (CADHistDoc*)pHistDataTemplate->OpenDocumentFile(lpszFileName); // 为NULL时不引发CHistDataFrm::OpenDocumentFile
+		
+		//这段是隐藏显示工具栏用的
+		CMainFrame* pMainFrame = (CMainFrame *)AfxGetMainWnd();
+		//ShowControlBar(&pMainFrame->m_wndToolBar,!pMainFrame->m_wndToolBar.IsWindowVisible(),FALSE);
+		if (pMainFrame->m_wndToolBar.IsWindowVisible()) //如果工具栏是显示着，那么就隐藏，否则就显示。
+		{
+			pMainFrame->m_wndToolBar.ShowWindow(SW_HIDE);
+		}
+		else
+		{
+			pMainFrame->m_wndToolBar.ShowWindow(SW_SHOW);
+		}
+		pMainFrame->RecalcLayout(); //注意如果不写这行，会出现工具栏隐藏，但工具条仍然存在的现象，需要重新计算
+		
+		
 		return m_pADHistDoc; // 返回文档指针
 	}
 	else
@@ -397,6 +412,9 @@ CDocument* CSysApp::OpenDocumentFile(LPCTSTR lpszFileName)
 	}
 
 	EndWaitCursor(); // 停止漏斗鼠标
+
+	
+
 	return NULL;
 }
 

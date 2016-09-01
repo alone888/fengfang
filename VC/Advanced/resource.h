@@ -201,6 +201,7 @@
 #define IDC_EDIT_MeasureFreq            1123
 #define IDC_COMBO_VoltRangeDA2          1123
 #define IDC_COMBO_VoltRangeDA3          1124
+#define IDC_EDIT_MeasureFreq2           1124
 #define IDC_CHECK_bSetTrigLevel         1125
 #define IDC_CHECK_ClockOutput           1126
 #define IDC_SPIN_BufferID               1137
@@ -346,7 +347,6 @@
 #define IDC_EDIT24                      1297
 #define IDC_EDIT16                      1298
 #define IDC_SPIN16                      1299
-#define IDC_EDIT26                      1299
 #define IDC_EDIT17                      1300
 #define IDC_EDIT25                      1301
 #define ID_VIEW_FULLSCREEN              32772
@@ -410,7 +410,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        186
 #define _APS_NEXT_COMMAND_VALUE         32838
-#define _APS_NEXT_CONTROL_VALUE         1254
+#define _APS_NEXT_CONTROL_VALUE         1255
 #define _APS_NEXT_SYMED_VALUE           132
 #endif
 #endif

@@ -87,6 +87,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_596BED34B73F1D9BD3DEDA9E816F22CA"
+        "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5BD7569E11DBBE6B5F4B349D6C8DC8BB"
         "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
         "MsmSig" = "8:_UNDEFINED"
@@ -131,12 +137,6 @@
         {
         "MsmKey" = "8:_8073F2FAD4B44C52ACCC9B5F5DA424E9"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_87B2501254CB04B8031CF98FC00F1062"
-        "OwnerKey" = "8:_C40B040C9BC74C97B9A690FEE543FA94"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -586,6 +586,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_596BED34B73F1D9BD3DEDA9E816F22CA"
+            {
+            "SourcePath" = "8:USB2831_32.dll"
+            "TargetName" = "8:USB2831_32.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_07BA1A608A6042028B7002D66D1B60C1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5BD7569E11DBBE6B5F4B349D6C8DC8BB"
             {
             "SourcePath" = "8:IMM32.dll"
@@ -744,26 +764,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87B2501254CB04B8031CF98FC00F1062"
-            {
-            "SourcePath" = "8:USB2831_32.dll"
-            "TargetName" = "8:USB2831_32.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_07BA1A608A6042028B7002D66D1B60C1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8B264281896044C7852A5BF0919CD9C9"
@@ -1290,7 +1290,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1D900F5884254F11AE54A4BC4256DB72"
             {
-            "Name" = "8:NEWDOOM SOMA 2.1"
+            "Name" = "8:NEWDOON SOMA 2.1"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1304,7 +1304,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7D9C54F279CD419BB7B38B4C1D1599A5"
             {
-            "Name" = "8:NEWDOOM SOMA 2.1"
+            "Name" = "8:NEWDOON SOMA 2.1"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
