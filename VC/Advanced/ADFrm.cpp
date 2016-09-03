@@ -102,6 +102,8 @@ BOOL CADFrm::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 		TRACE0("Failed to create second pane\n");
 		return FALSE;
 	}
+
+	m_wndSplitter.EnableWindow(FALSE); // ½ûÖ¹´°¿Ú±ä»¯
 	return TRUE;	
 }
 
