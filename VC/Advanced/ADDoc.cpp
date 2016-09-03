@@ -328,11 +328,12 @@ void CADDoc::StopDeviceAD()
 		pDataSave->EnableWindow(FALSE);  // 使存盘方式单选框有效
 	}
 
-	CADFrm* pADFrm1 = (CADFrm*)(theApp.m_ADFrm); // 取得子帧窗口指针
-	CButton* pStop1 = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StopDeviceAD));
-	CRect rect;
-	pStop1->GetWindowRect(&rect);
-	theApp.MsgWarning("警告", "采集设备异常断开!", rect.CenterPoint(), 10000);
+	//CADFrm* pADFrm1 = (CADFrm*)(theApp.m_ADFrm); // 取得子帧窗口指针
+	//CButton* pStop1 = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StopDeviceAD));
+	//CRect rect;
+	//pStop1->GetWindowRect(&rect);
+	//theApp.MsgWarning("警告", "采集设备异常断开!", rect.CenterPoint(), 10000);
+	//AfxMessageBox(_T("采集设备异常断开!"));
 	memset(showData,0,sizeof(showData));
 	gl_last_end_id = 0;
 }
