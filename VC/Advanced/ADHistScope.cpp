@@ -8,6 +8,8 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+//#define USE_WHITE
+
 ///////////////////////////////////////////////////////////////////////////
 //CADHistScope
 CADHistScope::CADHistScope()
@@ -25,6 +27,7 @@ CADHistScope::CADHistScope()
 	m_nHalfShiftPixels = m_nShiftPixels/2;                      
 	m_nPlotShiftPixels = m_nShiftPixels + m_nHalfShiftPixels;   
 
+	m_crWhiteColor  = RGB(255,   255,   255);
 	m_crBackColor  = RGB(0,   0,   0);  
 	m_crGridColor  = RGB(255, 0, 0); 
 	m_crGridGreyColor  = RGB(192, 192, 192);
@@ -52,7 +55,12 @@ CADHistScope::CADHistScope()
 	m_crLineVColor = RGB(0, 0, 0);  // C线的颜色
 
 	m_penPlot.CreatePen(PS_SOLID, 0, m_crPlotColor);
+	
+#ifdef USE_WHITE
+	m_brushWhite.CreateSolidBrush(m_crWhiteColor);
+#else
 	m_brushBack.CreateSolidBrush(m_crBackColor);
+#endif
 
 	m_strXUnitsString.Format(_T("Samples"));  
 	m_strYUnitsString.Format(_T("Y units"));  
@@ -199,9 +207,15 @@ void CADHistScope::SetPlotColor(COLORREF color)
 void CADHistScope::SetBackgroundColor(COLORREF color)
 {
 	m_crBackColor = color;
-
+	m_crWhiteColor = color;
+	
+#ifdef USE_WHITE
+	m_brushWhite.DeleteObject();
+	m_brushWhite.CreateSolidBrush(m_crWhiteColor);
+#else
 	m_brushBack.DeleteObject();
 	m_brushBack.CreateSolidBrush(m_crBackColor);
+#endif
 
 	InvalidateCtrl();
 
@@ -356,7 +370,11 @@ void CADHistScope::DrawPoint()
 		rectCleanUp = m_rectPlot;
 		rectCleanUp.left  = rectCleanUp.right - 1;
 
+#ifdef USE_WHITE
+		m_dcPlot.FillRect(rectCleanUp, &m_brushWhite);
+#else
 		m_dcPlot.FillRect(rectCleanUp, &m_brushBack);
+#endif
 		oldPen = m_dcPlot.SelectObject(&m_penPlot);
 
 		prevX = m_rectPlot.right-2; // m_nPlotShiftPixels;
@@ -443,9 +461,15 @@ void CADHistScope::DrawBkGnd()
 	CFont* oldFont;
 	CString strTemp;
 	//---------------------------------------------------------------------------
+#ifdef USE_WHITE
+	m_dcGrid.SetBkColor (m_crWhiteColor);	
+	// fill the grid background
+	m_dcGrid.FillRect(m_rectClient, &m_brushWhite);
+#else
 	m_dcGrid.SetBkColor (m_crBackColor);	
 	// fill the grid background
 	m_dcGrid.FillRect(m_rectClient, &m_brushBack);	
+#endif
 	// 计算量程字串所占用的字符宽度
 	nCharacters = abs((int)log10(fabs(m_dUpperLimit[0])));
 	nCharacters = max(nCharacters, abs((int)log10(fabs(m_dLowerLimit[0]))));
@@ -764,8 +788,13 @@ void CADHistScope::DrawPoly()
 	gl_bDataProcessing = TRUE;
 	CPen* oldPen;
 	int nDrawCount = m_rectPlot.Width() - 1;
+#ifdef USE_WHITE
+	m_dcPlot.SetBkColor (m_crWhiteColor);
+	m_dcPlot.FillRect(m_rectClient, &m_brushWhite);
+#else
 	m_dcPlot.SetBkColor (m_crBackColor);
 	m_dcPlot.FillRect(m_rectClient, &m_brushBack);
+#endif
 	m_dcPlot.SetTextColor(RGB(255, 158, 0));
 
 
