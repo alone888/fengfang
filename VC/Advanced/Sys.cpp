@@ -250,10 +250,10 @@ END_MESSAGE_MAP()
 // App command to run the dialog
 void CSysApp::OnAppAbout()
 {
-	//CAboutDlg aboutDlg;
-	//aboutDlg.DoModal();
-		    CADWaveView* pWaveView = (CADWaveView*)(CWnd::FromHandle(m_pADDoc->m_hWndWave));
-		pWaveView->StartScopeCtrlTimer();//	∆Ù∂Øtimer ≤‚ ‘ª≠Õº”√
+	CAboutDlg aboutDlg;
+	aboutDlg.DoModal();
+		//    CADWaveView* pWaveView = (CADWaveView*)(CWnd::FromHandle(m_pADDoc->m_hWndWave));
+		//pWaveView->StartScopeCtrlTimer();//	∆Ù∂Øtimer ≤‚ ‘ª≠Õº”√
 }
 
 /////////////////////////////////////////////////////////////////////////////
