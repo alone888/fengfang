@@ -103,7 +103,7 @@ void CADDoc::StartDeviceAD()
 			//CButton* pStart = (CButton*)((pADFrm->m_wndSTCBar).GetDlgItem(IDM_StartDeviceAD));
 			//CRect rect;
 			//pStart->GetWindowRect(&rect);
-			AfxMessageBox(_T("创建设备出错!"));
+			AfxMessageBox(_T("尚未连接采集器或采集器连接出错!"));
 			return;
 		}
 	}

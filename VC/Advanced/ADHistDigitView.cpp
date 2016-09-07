@@ -125,7 +125,9 @@ void CADHistDigitView::OnInitialUpdate()
 			str = "BusType:PC104";
 			break;
 		default:
-			ASSERT(FALSE);
+			AfxMessageBox(_T("不是有效数据文件！"));
+			return;
+			//ASSERT(FALSE);
 	} // 板卡类型	
 	pList->AddString(str);
 	str.Format(_T("DeviceNum:%x"), pDoc->m_Header.DeviceNum);
@@ -258,7 +260,7 @@ void CADHistDigitView::OnInitialUpdate()
 		str.Format(_T("%d"), Row);
 		List.InsertItem(Row, str);  // 添加行号, 应一个紧接一个插入	
 	} 
-	str.Format(_T("数据回放:%s"), pDoc->m_File.GetFileName());
+	str.Format(_T("file:%s"), pDoc->m_File.GetFileName());
 	pDoc->SetTitle(str); 
  	SetListView(); // 向列表中添加数据
 	GetListCtrl().SetHotItem(0);

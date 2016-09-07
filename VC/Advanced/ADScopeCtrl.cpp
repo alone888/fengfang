@@ -550,6 +550,7 @@ int CADScopeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		}	
 	}
 	
+	g_InitTime=CTime::GetCurrentTime();             //获取当前时间日期  
 	//SetBackgroundColor(RGB(255,  255,   255));
 	SetGridColor(RGB(0,  0,   0));//设置框架颜色
 	//SetPlotColor(RGB(0,  255,   255));
@@ -579,10 +580,12 @@ void CADScopeCtrl::DrawBkGnd()
 	//-----------------	-----------------------------------------------------------------
 	// 画四周的框架	
 	oldPen = m_dcGrid.SelectObject (&solidPen);  // 画四周的方框
-	m_dcGrid.MoveTo (m_rectPlot.left-1, m_rectPlot.top);
+	m_dcGrid.MoveTo (m_rectPlot.left-80, m_rectPlot.top);
 	m_dcGrid.LineTo (m_rectPlot.right+1, m_rectPlot.top);
 	m_dcGrid.LineTo (m_rectPlot.right+1, m_rectPlot.bottom+1);
-	m_dcGrid.LineTo (m_rectPlot.left-1, m_rectPlot.bottom+1);
+	m_dcGrid.LineTo (m_rectPlot.left-80, m_rectPlot.bottom+1);
+
+	m_dcGrid.MoveTo (m_rectPlot.left-1, m_rectPlot.bottom+1);
 	m_dcGrid.LineTo (m_rectPlot.left-1, m_rectPlot.top);
 	m_dcGrid.SelectObject (oldPen);
 	//COLORREF m_Grid = RGB(200, 200, 200);
@@ -734,7 +737,7 @@ oldPen = m_dcGrid.SelectObject (&solidPen4);  //垂直的线
 	{
 		nGridPix = m_rectPlot.top + (int)(m_rectPlot.Height() * Channel) / m_nChannelCount;
 
-		m_dcGrid.MoveTo (m_rectPlot.left+1, nGridPix);
+		m_dcGrid.MoveTo (m_rectPlot.left-80, nGridPix);//分隔线向左延伸到最左边
 		m_dcGrid.LineTo(m_rectPlot.right,nGridPix);
 
 	}
@@ -1194,7 +1197,7 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 			}
 
 
-			m_dcGrid.TextOut (m_rectPlot.left-4, (int)(nGridPixS), str); 
+			m_dcGrid.TextOut (m_rectPlot.left-4, (int)(nGridPixS+1), str); 
 			
 			//m_dcGrid.SetTextAlign (TA_RIGHT|TA_BASELINE);
 			//str.Format (_T("%.*lf V"), m_nYDecimals, m_dLowerLimit[Channel]/1000.0); // 负电压值
@@ -1207,7 +1210,7 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 				str.Format (_T("%.f mV"),-1*g_nVAxisRange); // 负电压值
 			}
 
-			m_dcGrid.TextOut (m_rectPlot.left-4, (int)(nGridPixE-13), str);
+			m_dcGrid.TextOut (m_rectPlot.left-4, (int)(nGridPixE-13-1), str);
 			
 			CFont font;
 			CFont *oldfont;

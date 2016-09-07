@@ -326,6 +326,7 @@
 #define IDC_EDIT_VAxisRange2            1253
 #define IDC_EDIT18                      1253
 #define IDC_CHECK_INPUT15               1254
+#define IDC_CHECK_INPUT9_P2             1254
 #define IDC_CHECK_INPUT16               1255
 #define IDC_BUTTON6                     1255
 #define IDC_BUTTON7                     1256
