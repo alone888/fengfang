@@ -736,7 +736,7 @@ void CADHistFrm::OnBnClickedCheckexportexcel()
 
 	int len =WideCharToMultiByte(CP_ACP,0,strNewFileName,-1,NULL,0,NULL,NULL);  
 	WideCharToMultiByte(CP_ACP,0,strNewFileName,-1,(LPSTR)path_use,len,NULL,NULL );  
-	sprintf((char*)path_use,"%s%d.csv",path_use,file_cnt);
+	sprintf((char*)path_use,"%s_%d.csv",path_use,file_cnt);
 	df = fopen((char*)path_use,"w+");
 	if(df == NULL) return;
 	sprintf((char*)write_buf,"Time,Signal1,Signal2,Signal3,Signal4,Input1,Input2,Input3,Input4\n");
@@ -762,7 +762,7 @@ void CADHistFrm::OnBnClickedCheckexportexcel()
 			last_len = offset;
 			file_cnt++;
 			fclose(df);
-			sprintf((char*)path_use,"%s%d.csv",m_path,file_cnt);
+			sprintf((char*)path_use,"%s_%d.csv",m_path,file_cnt);
 			df = fopen((char*)path_use,"w+");
 			if(df == NULL) break;
 			sprintf((char*)write_buf,"Signel1,Signel2,Signel3,Signel4,Input1,Input2,Input3,Input4\n");
