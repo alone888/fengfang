@@ -115,3 +115,4 @@ extern int gl_signal_enable[USB2831_MAX_AD_CHANNELS];
 extern int m_channel_cnt;
 extern int m_channel_enable[8];
 extern ULONG read_point_offset[10000];
+extern int device_start_ok;
