@@ -118,3 +118,4 @@ extern int hist_m_channel_cnt;//选择的通道总数
 extern int hist_m_channel_enable[8]; // 通道选择
 extern ULONG read_point_offset[10000];
 extern int device_start_ok;
+extern int g_y_offset[8];

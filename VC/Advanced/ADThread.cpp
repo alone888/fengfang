@@ -78,6 +78,16 @@ UINT ReadDataThread(PVOID hWnd)
  			goto ExitReadThread;
  		}
 
+		for(int i = 0; i < 1024; i++)
+		{
+			for(int j = 0; j < 8; j++)
+			{
+				ADBufferForFilter[i*8+j]-=g_y_offset[j];
+				if(ADBufferForFilter[i*8+j] <= 0)
+					ADBufferForFilter[i*8+j] = 0;
+			}
+		}
+
 		AD_Filter_Data_All();
 		gl_nReadIndex++;
 		if (gl_nReadIndex > MAX_SEGMENT_COUNT-1) gl_nReadIndex = 0;

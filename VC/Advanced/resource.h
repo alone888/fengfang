@@ -333,6 +333,10 @@
 #define IDC_BUTTON7                     1256
 #define IDC_EDIT27                      1256
 #define IDC_EDIT28                      1257
+#define IDC_EDIT29                      1258
+#define IDC_EDIT30                      1259
+#define IDC_EDIT31                      1260
+#define IDC_EDIT32                      1261
 #define IDC_SPIN9                       1285
 #define IDC_EDIT10                      1286
 #define IDC_SPIN10                      1287

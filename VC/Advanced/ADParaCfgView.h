@@ -124,6 +124,9 @@ public:
 	CButton m_input_2;
 	CButton m_input_3;
 	CButton m_input_4;
+
+
+	CEdit	m_singal_offset[8];
 	
 	afx_msg void OnBnClickedCheckInput1();
 	afx_msg void OnBnClickedCheckInput9();
@@ -141,6 +144,7 @@ public:
 	CEdit m_TimeAxisRange;
 	afx_msg void OnBnClickedButton4();
 	afx_msg void OnBnClickedButton5();
+	afx_msg void Change_Offset();
 	CEdit m_VAxisRange;
 };
 
