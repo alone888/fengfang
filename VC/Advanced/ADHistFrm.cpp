@@ -1,6 +1,7 @@
 // HistDataFrm.cpp : implementation file
 
 #include "stdafx.h"
+#include <string.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -78,7 +79,7 @@ BOOL CADHistFrm::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 	// add the first splitter pane - the default view in column 0
 	// 创建第一个格子，在0列中使用默认的视图（由文档模板决定, CADHistDigitView）
 	if (!m_wndSplitter.CreateView(0, 0, 
-		pContext->m_pNewViewClass, CSize(/*450*/120, 50), pContext))
+		pContext->m_pNewViewClass, CSize(/*450*/0, 50), pContext))
 	{
 		TRACE0("Failed to create first pane\n");
 		return FALSE;
@@ -90,7 +91,7 @@ BOOL CADHistFrm::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 		TRACE0("Failed to create first pane\n");
 		return FALSE;
 	} 	
-    
+    m_wndSplitter.EnableWindow(FALSE); // 禁止窗口变化
 	return TRUE;
 	// return CMDIChildWnd::OnCreateClient(lpcs, pContext);
 }
@@ -725,10 +726,20 @@ void CADHistFrm::OnBnClickedCheckexportexcel()
 	unsigned char write_buf[1024];
 	
 	pDoc->Retern_FilePath(m_path);
-	sprintf((char*)path_use,"%s%d.csv",m_path,file_cnt);
+
+	CString strNewFileName;
+	CString TempFileName;
+
+	if (!(theApp.DoPromptFileName(strNewFileName, IDS_NEW_FILE, 
+		OFN_HIDEREADONLY , TRUE, NULL)))
+		return;
+
+	int len =WideCharToMultiByte(CP_ACP,0,strNewFileName,-1,NULL,0,NULL,NULL);  
+	WideCharToMultiByte(CP_ACP,0,strNewFileName,-1,(LPSTR)path_use,len,NULL,NULL );  
+	sprintf((char*)path_use,"%s%d.csv",path_use,file_cnt);
 	df = fopen((char*)path_use,"w+");
 	if(df == NULL) return;
-	sprintf((char*)write_buf,"Signel1,Signel2,Signel3,Signel4,Input1,Input2,Input3,Input4\n");
+	sprintf((char*)write_buf,"Time,Signal1,Signal2,Signal3,Signal4,Input1,Input2,Input3,Input4\n");
 	fwrite(write_buf,1,strlen((char*)write_buf),df);
 
 	while (1)
@@ -737,7 +748,8 @@ void CADHistFrm::OnBnClickedCheckexportexcel()
 		offset += read_len;
 		for ( int i = 0; i < read_len/2; )
 		{
-			sprintf((char*)write_buf,"%d,%d,%d,%d,%d,%d,%d,%d\n",
+			sprintf((char*)write_buf,"%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+				i,//改为HH:MM:SS-ms
 				read_buf[i],read_buf[i+1],read_buf[i+2],
 				read_buf[i+3],read_buf[i+4],read_buf[i+5],
 				read_buf[i+6],read_buf[i+7]);
