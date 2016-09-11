@@ -444,7 +444,7 @@ void CADStatusView::OnChangeEDIT2()
 	{
 		if(filer[i][0] != g_filer[i][0])// ¸ßÍ¨
 		{
-			sprintf(path,"filter_h_%d.txt",ADPara.Frequency);
+			sprintf(path,"filter_h_%d.txt",ADPara.Frequency*8);
 			read_filter(path,g_filer[i][0],i,g_filter_data_h[i]);
 			filer[i][0] = g_filer[i][0];
 			if(g_filter_data_h[i][0] == 0)
@@ -455,7 +455,7 @@ void CADStatusView::OnChangeEDIT2()
 		}
 		if(filer[i][1] != g_filer[i][1])// µÍÍ¨
 		{
-			sprintf(path,"filter_l_%d.txt",ADPara.Frequency);
+			sprintf(path,"filter_l_%d.txt",ADPara.Frequency*8);
 			read_filter(path,g_filer[i][1],i,g_filter_data_l[i]);
 			filer[i][1] = g_filer[i][1];
 			if(g_filter_data_l[i][1] == 0)

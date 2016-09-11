@@ -919,6 +919,12 @@ void CADParaCfgView::OnBnClickedCheckInput9()
 		return;
 	}
 
+	if(device_start_ok)
+	{
+		m_singal_1.SetCheck(gl_signal_enable[0]);
+		return;
+	}
+
 	if(m_singal_1.GetCheck())
 	{
 		gl_nChannelCount += 1;
@@ -942,6 +948,11 @@ void CADParaCfgView::OnBnClickedCheckInput10()
 	if(gl_nChannelCount == 1 && !m_singal_2.GetCheck())
 	{
 		m_singal_2.SetCheck(TRUE);
+		return;
+	}
+	if(device_start_ok)
+	{
+		m_singal_2.SetCheck(gl_signal_enable[1]);
 		return;
 	}
 	if(m_singal_2.GetCheck())
@@ -969,6 +980,11 @@ void CADParaCfgView::OnBnClickedCheckInput11()
 		m_singal_3.SetCheck(TRUE);
 		return;
 	}
+	if(device_start_ok)
+	{
+		m_singal_3.SetCheck(gl_signal_enable[2]);
+		return;
+	}
 	if(m_singal_3.GetCheck())
 	{
 		gl_nChannelCount += 1;
@@ -992,6 +1008,11 @@ void CADParaCfgView::OnBnClickedCheckInput12()
 	if(gl_nChannelCount == 1 && !m_singal_4.GetCheck())
 	{
 		m_singal_4.SetCheck(TRUE);
+		return;
+	}
+	if(device_start_ok)
+	{
+		m_singal_4.SetCheck(gl_signal_enable[3]);
 		return;
 	}
 	if(m_singal_4.GetCheck())
@@ -1019,6 +1040,11 @@ void CADParaCfgView::OnBnClickedCheckInput13()
 		m_input_1.SetCheck(TRUE);
 		return;
 	}
+	if(device_start_ok)
+	{
+		m_input_1.SetCheck(gl_signal_enable[4]);
+		return;
+	}
 	if(m_input_1.GetCheck())
 	{
 		gl_nChannelCount += 1;
@@ -1042,6 +1068,11 @@ void CADParaCfgView::OnBnClickedCheckInput14()
 	if(gl_nChannelCount == 1 && !m_input_2.GetCheck())
 	{
 		m_input_2.SetCheck(TRUE);
+		return;
+	}
+	if(device_start_ok)
+	{
+		m_input_2.SetCheck(gl_signal_enable[5]);
 		return;
 	}
 	if(m_input_2.GetCheck())
@@ -1069,6 +1100,11 @@ void CADParaCfgView::OnBnClickedCheckInput15()
 		m_input_3.SetCheck(TRUE);
 		return;
 	}
+	if(device_start_ok)
+	{
+		m_input_3.SetCheck(gl_signal_enable[6]);
+		return;
+	}
 	if(m_input_3.GetCheck())
 	{
 		gl_nChannelCount += 1;
@@ -1092,6 +1128,11 @@ void CADParaCfgView::OnBnClickedCheckInput16()
 	if(gl_nChannelCount == 1 && !m_input_4.GetCheck()) 
 	{
 		m_input_4.SetCheck(TRUE);
+		return;
+	}
+	if(device_start_ok)
+	{
+		m_input_4.SetCheck(gl_signal_enable[7]);
 		return;
 	}
 	if(m_input_4.GetCheck())
