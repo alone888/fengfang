@@ -36,6 +36,7 @@ public:
 	afx_msg void OnBnClickedCheckInput6();
 	afx_msg void OnBnClickedCheckInput7();
 	afx_msg void OnBnClickedCheckexportexcel();
+	afx_msg void flashwindows_check();
 
 public:
 	void RedrawDataWindow(void);

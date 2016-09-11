@@ -96,6 +96,16 @@ BOOL CADHistDoc::OnOpenDocument(LPCTSTR lpszPathName)
 		m_ReadDataSize = 8192;
 		//m_ChannelCount = m_Header.ADPara.LastChannel - m_Header.ADPara.FirstChannel + 1;
 		m_ChannelCount = 8;
+		m_ChannelCount = 0;
+		for (int i = 0; i < 8 ; i++)
+		{
+			if (m_Header.input[i]==1)
+			{
+				m_ChannelCount++;
+			}
+			hist_m_channel_enable[i] = m_Header.input[i];
+		}
+		hist_m_channel_cnt = m_ChannelCount;
 		// 读出第一批数据，以首屏显示	
 		m_File.Seek(nFileHeaderSize, CFile::begin);  
 

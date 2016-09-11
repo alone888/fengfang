@@ -312,6 +312,19 @@ void CSysApp::OnOpenADHist()
 		MsgWarning("警告", "文件打开错误或无此文件!", CPoint(1000, 200), 10000);
 		return;
 	}
+	FILE_HEADER m_Header;
+	m_File.Seek(0, CFile::begin);
+	m_File.Read((WORD*)&m_Header, sizeof(m_Header)); // 读取文件头
+
+	hist_m_channel_cnt = 0;
+	for (int i = 0; i < 8 ; i++)
+	{
+		if (m_Header.input[i]==1)
+		{
+			hist_m_channel_cnt++;
+		}
+		hist_m_channel_enable[i] = m_Header.input[i];
+	}
 	m_File.Close();	
 	m_strFilePath = strFileName;
 	m_pADHistDoc = (CADHistDoc*)pHistDataTemplate->OpenDocumentFile(strFileName);

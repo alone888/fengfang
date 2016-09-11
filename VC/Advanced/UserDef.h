@@ -69,6 +69,7 @@ typedef struct _FILE_HEADER
 	LONGLONG nTriggerPos;       // 触发点位置
 	LONG BatCode;               // 同批文件识别码
 	LONG HeadEndFlag;			// 文件结束位
+	LONG input[8];               // 哪些通道被记录了数据
 
 } FILE_HEADER, *PFILE_HEADER;
 

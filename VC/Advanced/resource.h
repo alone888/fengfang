@@ -303,6 +303,7 @@
 #define IDC_EDIT19                      1245
 #define IDC_EDIT6                       1246
 #define IDC_CHECK_INPUT11_P             1246
+#define IDC_EDIT26                      1246
 #define IDC_SPIN6                       1247
 #define IDC_CHECK_INPUT12_P             1247
 #define IDC_EDIT20                      1247
@@ -330,6 +331,8 @@
 #define IDC_CHECK_INPUT16               1255
 #define IDC_BUTTON6                     1255
 #define IDC_BUTTON7                     1256
+#define IDC_EDIT27                      1256
+#define IDC_EDIT28                      1257
 #define IDC_SPIN9                       1285
 #define IDC_EDIT10                      1286
 #define IDC_SPIN10                      1287

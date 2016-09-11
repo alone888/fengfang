@@ -119,31 +119,58 @@ int CADHistFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	pRadioA->SetCheck(1);
 	pRadioB->SetCheck(0);
 
+	if(hist_m_channel_cnt <=0 || hist_m_channel_cnt > 8)
+		m_channel_cnt = 8;
+	else
+		m_channel_cnt = hist_m_channel_cnt;
+	for (int i = 0; i < 8 ; i++)
+	{
+		if(m_channel_cnt == 8)
+			m_channel_enable[i] = 1;
+		else
+			m_channel_enable[i] = hist_m_channel_enable[i];
+	}
+
 	CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT9_P);
-	pRadio->SetCheck(1);
+	if(m_channel_enable[0])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
 	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT10_P);
-	pRadio->SetCheck(1);
+	if(m_channel_enable[1])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
 	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT11_P);
-	pRadio->SetCheck(1);
+	if(m_channel_enable[2])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
 	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT12_P);
-	pRadio->SetCheck(1);
+	if(m_channel_enable[3])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
 	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT13_P);
-	pRadio->SetCheck(1);
+	if(m_channel_enable[4])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
 	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT14_P);
-	pRadio->SetCheck(1);
+	if(m_channel_enable[5])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
 	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT15_P);
-	pRadio->SetCheck(1);
+	if(m_channel_enable[6])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
 	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT16_P);
-	pRadio->SetCheck(1);
-	m_channel_cnt = 8;
-	m_channel_enable[0] = 1;
-	m_channel_enable[1] = 1;
-	m_channel_enable[2] = 1;
-	m_channel_enable[3] = 1;
-	m_channel_enable[4] = 1;
-	m_channel_enable[5] = 1;
-	m_channel_enable[6] = 1;
-	m_channel_enable[7] = 1;
+	if(m_channel_enable[7])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
 
 	CString tmp;
 	tmp.Format(_T("%d"),1000);
@@ -152,6 +179,56 @@ int CADHistFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	OnBnClickedCheckInput7();
 	return 0;
+}
+
+void CADHistFrm::flashwindows_check(void)
+{
+	m_channel_cnt = hist_m_channel_cnt;
+	for (int i = 0; i < 8 ; i++)
+	{
+		m_channel_enable[i] = 1;
+	}
+
+	CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT9_P);
+	if(m_channel_enable[0])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT10_P);
+	if(m_channel_enable[1])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT11_P);
+	if(m_channel_enable[2])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT12_P);
+	if(m_channel_enable[3])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT13_P);
+	if(m_channel_enable[4])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT14_P);
+	if(m_channel_enable[5])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT15_P);
+	if(m_channel_enable[6])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
+	pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT16_P);
+	if(m_channel_enable[7])
+		pRadio->SetCheck(1);
+	else
+		pRadio->SetCheck(0);
 }
 
 void CADHistFrm::OnLButtonUp(UINT nFlags, CPoint point) 

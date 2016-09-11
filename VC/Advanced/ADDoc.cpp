@@ -151,6 +151,11 @@ void CADDoc::StartDeviceAD()
 		}		
 
 		// Ð´ÎÄ¼þÍ·
+		for (int i = 0; i < 8; i++)
+		{
+			m_header.input[i] = gl_signal_enable[i];
+		}
+		
 		m_File.Write((WORD*)&m_header, 	m_header.HeadSizeBytes);
 	}
 	
