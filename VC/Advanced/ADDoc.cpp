@@ -85,7 +85,6 @@ void CADDoc::Dump(CDumpContext& dc) const
 }
 #endif //_DEBUG
 
-static int device_start_ok = 0;
 void CADDoc::StartDeviceAD() 
 {
 	if (device_start_ok)
