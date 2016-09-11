@@ -123,14 +123,14 @@ BEGIN_MESSAGE_MAP(CADParaCfgView, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON4, &CADParaCfgView::OnBnClickedButton4)
 	ON_BN_CLICKED(IDC_BUTTON5, &CADParaCfgView::OnBnClickedButton5)
 
-	ON_EN_CHANGE(IDC_EDIT25, Change_Offset)
-	ON_EN_CHANGE(IDC_EDIT26, Change_Offset)
-	ON_EN_CHANGE(IDC_EDIT27, Change_Offset)
-	ON_EN_CHANGE(IDC_EDIT28, Change_Offset)
-	ON_EN_CHANGE(IDC_EDIT29, Change_Offset)
-	ON_EN_CHANGE(IDC_EDIT30, Change_Offset)
-	ON_EN_CHANGE(IDC_EDIT31, Change_Offset)
-	ON_EN_CHANGE(IDC_EDIT32, Change_Offset)
+	ON_EN_KILLFOCUS(IDC_EDIT25, Change_Offset)
+	ON_EN_KILLFOCUS(IDC_EDIT26, Change_Offset)
+	ON_EN_KILLFOCUS(IDC_EDIT27, Change_Offset)
+	ON_EN_KILLFOCUS(IDC_EDIT28, Change_Offset)
+	ON_EN_KILLFOCUS(IDC_EDIT29, Change_Offset)
+	ON_EN_KILLFOCUS(IDC_EDIT30, Change_Offset)
+	ON_EN_KILLFOCUS(IDC_EDIT31, Change_Offset)
+	ON_EN_KILLFOCUS(IDC_EDIT32, Change_Offset)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -1292,6 +1292,7 @@ void CADParaCfgView::Change_Offset(void)
 {
 	CString str;
 	int offset = 0;
+
 	
 	for (int i = 0; i < 8; i++)
 	{
@@ -1300,5 +1301,7 @@ void CADParaCfgView::Change_Offset(void)
 		offset = wcstol(str, NULL, 10);
 		offset =offset*4096/5000;
 		g_y_offset[i] = offset;
+		str.Format(_T("%d"),wcstol(str, NULL, 10));
+		m_singal_offset[i].SetWindowText(str);
 	}
 }
