@@ -2,6 +2,8 @@
 
 #include "stdafx.h"
 #include <string.h>
+#include <string>
+using namespace std;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -131,6 +133,7 @@ int CADHistFrm::OnCreate(LPCREATESTRUCT lpCreateStruct)
 			m_channel_enable[i] = hist_m_channel_enable[i];
 	}
 
+	//根据历史数据确定通道显示
 	CButton* pRadio = (CButton*)m_wndSetupBar.GetDlgItem(IDC_CHECK_INPUT9_P);
 	if(m_channel_enable[0])
 		pRadio->SetCheck(1);
@@ -755,6 +758,8 @@ void CADHistFrm::OnBnClickedButton1TimeR()
 
 static int VAxisRangeVal[]={10,20,50,100,200,500,1000,2000,5000,10000};//以mv为单位
 static int VAxisRangeID=9;//初始为1s钟
+
+//电压量程减小
 void CADHistFrm::OnBnClickedCheckInput6()
 {
 	// TODO: 在此添加控件通知处理程序代码
@@ -762,15 +767,16 @@ void CADHistFrm::OnBnClickedCheckInput6()
 		VAxisRangeID--;
 	//else
 	//	return;
-
+	g_nVHistAxisRange = VAxisRangeVal[VAxisRangeID];
 	CString tmp;
 	tmp.Format(_T("%d"),VAxisRangeVal[VAxisRangeID]);
 	CEdit* pEditPos = (CEdit*)(m_wndSetupBar.GetDlgItem(IDC_EDIT_VAxisRange2));
 	m_wndSetupBar.GetDlgItem(IDC_EDIT_VAxisRange2)->SetWindowText(tmp);
 	g_nVAxisRange = VAxisRangeVal[VAxisRangeID];
 	RedrawDataWindow();
-}
 
+}
+//电压量程增大
 void CADHistFrm::OnBnClickedCheckInput7()
 {
 	// TODO: 在此添加控件通知处理程序代码
@@ -779,6 +785,7 @@ void CADHistFrm::OnBnClickedCheckInput7()
 	/*else
 		return;
 */
+	g_nVHistAxisRange = VAxisRangeVal[VAxisRangeID];
 	CString tmp;
 	tmp.Format(_T("%d"),VAxisRangeVal[VAxisRangeID]);
 	CEdit* pEditPos = (CEdit*)(m_wndSetupBar.GetDlgItem(IDC_EDIT_VAxisRange2));
@@ -787,10 +794,10 @@ void CADHistFrm::OnBnClickedCheckInput7()
 	g_nVAxisRange = VAxisRangeVal[VAxisRangeID];
 	RedrawDataWindow();
 }
-
+//导出excel
+WORD read_buf[1600000] = {0}; // 1M
 void CADHistFrm::OnBnClickedCheckexportexcel()
 {
-	WORD read_buf[80000] = {0}; // 1M
 	ULONG offset = 0;
 	ULONG read_len = 0;
 	ULONG last_len = 0;
@@ -812,47 +819,57 @@ void CADHistFrm::OnBnClickedCheckexportexcel()
 		return;
 
 	int len =WideCharToMultiByte(CP_ACP,0,strNewFileName,-1,NULL,0,NULL,NULL);  
-	WideCharToMultiByte(CP_ACP,0,strNewFileName,-1,(LPSTR)path_use,len,NULL,NULL );  
-	sprintf((char*)path_use,"%s_%d.csv",path_use,file_cnt);
-	df = fopen((char*)path_use,"w+");
+	WideCharToMultiByte(CP_ACP,0,strNewFileName,-1,(LPSTR)path_use,len,NULL,NULL ); 
+	unsigned char path_use1[512];
+	sprintf((char*)path_use1,"%s_%d.csv",path_use,file_cnt);
+	df = fopen((char*)path_use1,"w+");
 	if(df == NULL) return;
 	sprintf((char*)write_buf,"Time,Signal1,Signal2,Signal3,Signal4,Input1,Input2,Input3,Input4\n");
 	fwrite(write_buf,1,strlen((char*)write_buf),df);
 
+	UINT32 interval = 10;
 	while (1)
 	{
-		read_len =pDoc->ReadDataForExcel(read_buf,80000*2,offset);
+		read_len =pDoc->ReadDataForExcel(read_buf,80000*2,offset);//20个输出一个
 		offset += read_len;
+
 		for ( int i = 0; i < read_len/2; )
-		{
+		{			
 			sprintf((char*)write_buf,"%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
 				i,//改为HH:MM:SS-ms
-				read_buf[i],read_buf[i+1],read_buf[i+2],
-				read_buf[i+3],read_buf[i+4],read_buf[i+5],
-				read_buf[i+6],read_buf[i+7]);
-			i+=8;
+				read_buf[i]*m_channel_enable[0],read_buf[i+1]*m_channel_enable[1],read_buf[i+2]*m_channel_enable[2],
+				read_buf[i+3]*m_channel_enable[3],read_buf[i+4]*m_channel_enable[4],read_buf[i+5]*m_channel_enable[5],
+				read_buf[i+6]*m_channel_enable[6],read_buf[i+7]*m_channel_enable[7]);
+			i+=8*interval;
 			fwrite(write_buf,1,strlen((char*)write_buf),df);
 		}
 		
-		if (offset - last_len >= Mb_len*10) // 26m可以，   50M以上无法开完全
+		if (offset - last_len >= Mb_len*10*interval) // 26m可以，   50M以上无法开完全
 		{
 			last_len = offset;
 			file_cnt++;
 			fclose(df);
-			sprintf((char*)path_use,"%s_%d.csv",m_path,file_cnt);
-			df = fopen((char*)path_use,"w+");
+			sprintf((char*)path_use1,"%s_%d.csv",path_use,file_cnt);
+			df = fopen((char*)path_use1,"w+");
 			if(df == NULL) break;
-			sprintf((char*)write_buf,"Signel1,Signel2,Signel3,Signel4,Input1,Input2,Input3,Input4\n");
+			sprintf((char*)write_buf,"Time,Signel1,Signel2,Signel3,Signel4,Input1,Input2,Input3,Input4\n");
 			fwrite(write_buf,1,strlen((char*)write_buf),df);
 		}
-		if(read_len < 80000)
+		if(read_len < 80000*2)
 		{
 			fclose(df);
 			break;
 		}
 	}
 	sprintf((char*)write_buf,"导出excel成功，共导出%d个文件！\n",file_cnt);
-	LPCTSTR  lpb = (LPCTSTR)(LPTSTR)write_buf;
-	MessageBox(_T("导出excel成功!"),MB_OK);
+	//LPCTSTR  lpb = (LPCTSTR)(LPTSTR)write_buf;
+	CString outString,title;
+	outString = write_buf;
+	title = "NEWDOON";
+	//outString.Format("共导出%d个文件！\n",file_cnt); //将变量组装到字符串中
+	MessageBox(outString,title,MB_OK);
+	//MessageBox(lpb,MB_OK);
+	//MessageBox(write_buf,MB_OK);
+	//MessageBox(_T("导出excel成功!"),MB_OK);
 	return;
 }

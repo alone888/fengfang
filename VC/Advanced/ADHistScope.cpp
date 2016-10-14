@@ -988,13 +988,32 @@ void CADHistScope::DrawAllChannelText(CDC* pDC)
 	for (int Channel=0; Channel<m_channel_cnt; Channel++)
 	{		
 		pDC->SetTextColor(m_clPen[Channel]); // 设置文字的颜色
-
+		//电压上限
 		//str.Format ("%.*lf V", m_nYDecimals, m_dUpperLimit[Channel]/1000.0); // 正电压值
 		str.Format (_T("%.*lf V"), m_nYDecimals, m_dUpperLimit[Channel]/1000.0); // 正电压值
+		if (g_nVHistAxisRange>=1000)
+		{
+			str.Format (_T("%.f V"),g_nVHistAxisRange/1000.0); // 正电压值
+		}
+		else
+		{
+			str.Format (_T("%.f mV"),g_nVHistAxisRange); // 正电压值	
+		}
+		
 		pDC->TextOut (m_rectPlot.left-4, (int)(m_rectPlot.top+hight*Channel+8), str); 
 
+		//电压下限
 		pDC->SetTextAlign (TA_RIGHT|TA_BASELINE);
-		str.Format (_T("%.*lf V"), m_nYDecimals, m_dLowerLimit[Channel]/1000.0); // 负电压值
+		//str.Format (_T("%.*lf V"), m_nYDecimals, m_dLowerLimit[Channel]/1000.0); // 负电压值
+		if (g_nVHistAxisRange>=1000)
+		{
+			str.Format (_T("%.f V"),-1*g_nVHistAxisRange/1000.0); // 负电压值
+		}
+		else
+		{
+			str.Format (_T("%.f mV"),-1*g_nVHistAxisRange); // 负电压值
+		}
+		
 		pDC->TextOut (m_rectPlot.left-4, (int)(m_rectPlot.top+hight*(Channel+1)-5), str);
 
 		signe_id = Drow_text_find_id(Channel+1);

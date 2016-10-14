@@ -285,7 +285,7 @@ void CADDoc::Public_ReleaseDevice(void) // 供MDI窗口调用
 void CADDoc::StopDeviceAD() 
 {	
 
-
+	//StartDeviceAD();
 	//DockControlBar(&m_newToolBar); //这行是为了在工具栏被拖役出边框时，工具栏窗口不能被隐藏。需要重靠。
 
 	CSysApp* pApp = (CSysApp *)AfxGetApp();
@@ -359,10 +359,10 @@ void CADDoc::OnDataFileNew()
 	} 
 	
 	// 创建新文件对象
-	int FileNameLength = strNewFileName.GetLength();
-	TempFileName = strNewFileName.Left(FileNameLength-4);
+	//int FileNameLength = strNewFileName.GetLength();
+	//TempFileName = strNewFileName.Left(FileNameLength);
 
-	strNewFileName = TempFileName + ".nd";
+	strNewFileName = strNewFileName + ".nd";
 	BOOL bRet = m_File.Open(strNewFileName,USB2831_modeCreate|USB2831_modeWrite);
 
     if (bRet == FALSE)		
@@ -432,7 +432,7 @@ void CADDoc::OnDataFileNew()
 	gl_pADStatusView->SetDlgCheck();
 
 	//打开文件之后直接开始采集
-	StartDeviceAD();
+	//StartDeviceAD();
 }
 
 void CADDoc::OnCloseFile() 

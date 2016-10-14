@@ -1185,7 +1185,8 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 			
 			nGridPixS = m_rectPlot.top + (int)(m_rectPlot.Height() * Channel) / gl_nChannelCount;
 			nGridPixE = m_rectPlot.top + (int)(m_rectPlot.Height() * (Channel+1)) / gl_nChannelCount;
-
+			
+			//电压上限
 			//str.Format (_T("%.*lf V"), m_nYDecimals, m_dUpperLimit[Channel]/1000.0); // 正电压值
 			if (g_nVAxisRange>=1000)
 			{
@@ -1199,6 +1200,8 @@ void CADScopeCtrl::DrawAllChannelText(CDC* pDC)
 
 			m_dcGrid.TextOut (m_rectPlot.left-4, (int)(nGridPixS+1), str); 
 			
+
+			//电压下限
 			//m_dcGrid.SetTextAlign (TA_RIGHT|TA_BASELINE);
 			//str.Format (_T("%.*lf V"), m_nYDecimals, m_dLowerLimit[Channel]/1000.0); // 负电压值
 			if (g_nVAxisRange>=1000)

@@ -14,6 +14,7 @@ double g_filter_data_l[8][FILTER_DEEP] = {0};
 AD_ORG_DATA gt_AD_OrgData[3000]; // WYL 一次读的数据个数
 unsigned int g_nTimeAxisRange = 1000000;
 float g_nVAxisRange = 10000;
+float g_nVHistAxisRange = 10000;
 
 ULONG gl_ReadSizeWords;	// 读入的数据长度
 
@@ -69,7 +70,7 @@ BOOL gl_bCollected = FALSE;			// 是否已经进行过一次采集
 ULONG gl_TrigCnt = 0;
 
 
-int gl_signal_enable[USB2831_MAX_AD_CHANNELS] ={0};
+int gl_signal_enable[USB2831_MAX_AD_CHANNELS*2] ={0};
 
 
 int gl_last_end_id = 0;// 上一帧数据填充到的showdata的位置，用于下一帧的开始
