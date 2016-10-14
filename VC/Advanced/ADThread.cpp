@@ -46,7 +46,7 @@ UINT ReadDataThread(PVOID hWnd)
 	while(gl_bDeviceADRun)  // 循环采集AD数据
 	{	
 
-		gl_ReadSizeWords = 8192;
+		gl_ReadSizeWords = DATA_READ_MAX_SIZE*8;
 
 // 		if (ADPara.Frequency>100000)
 // 		{
@@ -78,7 +78,7 @@ UINT ReadDataThread(PVOID hWnd)
  			goto ExitReadThread;
  		}
 
-		for(int i = 0; i < 1024; i++)
+		for(int i = 0; i < DATA_READ_MAX_SIZE; i++)
 		{
 			for(int j = 0; j < 8; j++)
 			{
@@ -130,8 +130,8 @@ void AD_Filter_Data(int H_OR_L,int ch,double *filterParam ,signed short * src,si
 	//filterParam  滤波器参数
 	//[0][][]低通   [1][][]高通
 	static signed short last_Date[2][8][FILTER_DEEP];
-	signed short temp[1024+FILTER_DEEP];
-	signed short tempOut[1024+FILTER_DEEP];
+	signed short temp[DATA_READ_MAX_SIZE+FILTER_DEEP];
+	signed short tempOut[DATA_READ_MAX_SIZE+FILTER_DEEP];
 	memcpy(temp,src,sizeof(temp));
 
 	//  将上次的数据拼到这次新的数据前端
@@ -141,7 +141,7 @@ void AD_Filter_Data(int H_OR_L,int ch,double *filterParam ,signed short * src,si
 	}
 
 	//  过滤数据
-	for (int n = 0; n < 1024; n++) 
+	for (int n = 0; n < DATA_READ_MAX_SIZE; n++) 
 	{
 		tempOut[n] = 0;
 		for ( i = 0; i < g_filter_max; i++)
@@ -149,13 +149,13 @@ void AD_Filter_Data(int H_OR_L,int ch,double *filterParam ,signed short * src,si
 			tempOut[n] +=filterParam[i]*temp[n+g_filter_max-i];	
 		}
 	}
-	//memcpy(out+FILTER_DEEP*2,tempOut,1024*2);
+	//memcpy(out+FILTER_DEEP*2,tempOut,DATA_READ_MAX_SIZE*2);
 
 	//[0][][]低通   [1][][]高通
 	//保存本次数据的最后FILTER_DEEP个数，用于下次滤波
 	for (i = 0; i < g_filter_max; i++) 
 	{
-		last_Date[H_OR_L][ch][i] = temp[1024+i];
+		last_Date[H_OR_L][ch][i] = temp[DATA_READ_MAX_SIZE+i];
 	}
 
 	for (i = 1023; i>=0; i--) 
@@ -172,8 +172,8 @@ void AD_Filter_Data_Ex(int ch,signed short * src,signed short * out)
 	//filterParam  滤波器参数
 	//[0][][]低通   [1][][]高通
 	static signed short last_Date[8][FILTER_DEEP];
-	signed short temp[1024+FILTER_DEEP];
-	signed short tempOut[1024+FILTER_DEEP];
+	signed short temp[DATA_READ_MAX_SIZE+FILTER_DEEP];
+	signed short tempOut[DATA_READ_MAX_SIZE+FILTER_DEEP];
 	unsigned long sum = 0;
 
 	memcpy(temp,src,sizeof(temp));
@@ -185,7 +185,7 @@ void AD_Filter_Data_Ex(int ch,signed short * src,signed short * out)
 	}
 
 	//  滑动滤波
-	for (int j = 0; j < 1024; j++)
+	for (int j = 0; j < DATA_READ_MAX_SIZE; j++)
 	{
 		sum = 0;
 		for (int n = 0; n < g_filer[ch][2]; n++) 
@@ -197,7 +197,7 @@ void AD_Filter_Data_Ex(int ch,signed short * src,signed short * out)
 	//保存本次数据的最后FILTER_DEEP个数，用于下次滤波
 	for (i = 0; i < g_filer[ch][2]; i++) 
 	{
-		last_Date[ch][i] = temp[1024+i];
+		last_Date[ch][i] = temp[DATA_READ_MAX_SIZE+i];
 	}
 
 	for (i = 1023; i>=0; i--) 
@@ -210,14 +210,14 @@ void AD_Filter_Data_Ex(int ch,signed short * src,signed short * out)
 void AD_Filter_Data_All_Ex()
 {
 	int i = 0, ch = 0;
-	static signed short tmp_signel_data[8][1024+FILTER_DEEP];//原始数据
-	static signed short tmp_signel_data2[8][1024+FILTER_DEEP];
+	static signed short tmp_signel_data[8][DATA_READ_MAX_SIZE+FILTER_DEEP];//原始数据
+	static signed short tmp_signel_data2[8][DATA_READ_MAX_SIZE+FILTER_DEEP];
 
 	for (ch = 0; ch < 8; ch++)
 	{
 		if (g_filer[ch][2] == 0 )
 			continue;
-		for ( i = 0; i < 1024; i++)
+		for ( i = 0; i < DATA_READ_MAX_SIZE; i++)
 		{
 			tmp_signel_data[ch][i+g_filer[ch][2]] = ADBuffer[gl_nReadIndex][ch+i*8];
 		}
@@ -234,7 +234,7 @@ void AD_Filter_Data_All_Ex()
 	{
 		if (g_filer[ch][2] == 0)
 			continue;
-		for (i = 0; i < 1024; i++) // 回填过滤后的数据
+		for (i = 0; i < DATA_READ_MAX_SIZE; i++) // 回填过滤后的数据
 		{
 			ADBuffer[gl_nReadIndex][i*8+ch] = tmp_signel_data2[ch][i+g_filer[ch][2]];
 		}
@@ -244,15 +244,15 @@ void AD_Filter_Data_All_Ex()
 void AD_Filter_Data_All()
 {
 	int i = 0, ch = 0;
-	static signed short tmp_signel_data[8][1024+FILTER_DEEP];//原始数据
-	static signed short tmp_signel_data2[8][1024+FILTER_DEEP];//经过低通后的数据
-	static signed short tmp_signel_data3[8][1024+FILTER_DEEP];//经过高通后的数据
+	static signed short tmp_signel_data[8][DATA_READ_MAX_SIZE+FILTER_DEEP];//原始数据
+	static signed short tmp_signel_data2[8][DATA_READ_MAX_SIZE+FILTER_DEEP];//经过低通后的数据
+	static signed short tmp_signel_data3[8][DATA_READ_MAX_SIZE+FILTER_DEEP];//经过高通后的数据
 
 	for (ch = 0; ch < 8 && g_filter_max; ch++)
 	{
 		if (g_filer[ch][1] == 0 && g_filer[ch][0] == 0)
 			continue;
-		for ( i = 0; i < 1024; i++)
+		for ( i = 0; i < DATA_READ_MAX_SIZE; i++)
 		{
 			tmp_signel_data[ch][i+g_filter_max] = ADBufferForFilter[ch+i*8] - 4096;
 		}
@@ -285,7 +285,7 @@ void AD_Filter_Data_All()
 	{
 		if (g_filer[ch][1] == 0 && g_filer[ch][0] == 0)
 			continue;
-		for (i = 0; i < 1024; i++) // 回填过滤后的数据
+		for (i = 0; i < DATA_READ_MAX_SIZE; i++) // 回填过滤后的数据
 		{
 			ADBuffer[gl_nReadIndex][i*8+ch] = tmp_signel_data3[ch][i+g_filter_max] + 4096;
 		}

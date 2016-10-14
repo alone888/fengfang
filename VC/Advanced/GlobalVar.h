@@ -8,6 +8,7 @@ extern CADParaCfgView* gl_pParaCfgView;
 #define MAX_SEGMENT_COUNT 64
 #define SHOW_DATA_CNT (10000)//用于显示的数组大小
 
+#define DATA_READ_MAX_SIZE 128
 
 extern WORD ADBuffer[MAX_SEGMENT_COUNT][MAX_SEGMENT_SIZE]; // 缓冲队列
 extern WORD ADBufferForFilter[MAX_SEGMENT_SIZE];
